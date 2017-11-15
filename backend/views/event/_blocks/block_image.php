@@ -6,14 +6,14 @@ use kartik\color\ColorInput;
 <div class="row">
     <div class="col-sm-6">
 		<div class="form-group <?=$model->hasErrors("source") ? 'has-error' : '';?>">
-			<?= Html::activeLabel($model, "[$i]source") ?>
+			<?= Html::activeLabel($model, "[$i]source", ['class' => 'control-label']) ?>
 			<?= Html::activeTextInput($model, "[$i]source", ['class' => 'form-control']) ?>
 			<?= Html::error($model, "[$i]source", ['class' => 'help-block']);?>
 		</div>
 	</div>
     <div class="col-sm-6">
 		<div class="form-group <?=$model->hasErrors("url") ? 'has-error' : '';?>">
-			<?= Html::activeLabel($model, "[$i]url") ?>
+			<?= Html::activeLabel($model, "[$i]url", ['class' => 'control-label']) ?>
 			<?= Html::activeTextInput($model, "[$i]url", ['class' => 'form-control']) ?>
 			<?= Html::error($model, "[$i]url", ['class' => 'help-block']);?>
 		</div>

@@ -3,6 +3,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
+use common\models\Event;
+
 $this->title = 'События';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -35,7 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::img($data->socials_image_url);
                     },
                 ],
-                'value_index',
+                
+                [
+                    'attribute' => 'value_index',
+                    'filter' => Html::activeDropDownList($searchModel, 'value_index', Event::getValueIndexArray(), ['prompt'=>'']),
+                ],
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],

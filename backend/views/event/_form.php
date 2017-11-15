@@ -77,7 +77,7 @@ $this->registerJsFile('/js/jquery-ui.min.js', ['depends' => [\yii\web\JqueryAsse
                     'allowClear' => false,
                     'multiple' => true,
                 ],
-            ])->label($model->attributeLabels()['categories']) ?>
+            ]) ?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'similarIds')->widget(Select2::classname(), [
@@ -87,7 +87,7 @@ $this->registerJsFile('/js/jquery-ui.min.js', ['depends' => [\yii\web\JqueryAsse
                     'allowClear' => true,
                     'multiple' => true,
                 ],
-            ])->label($model->attributeLabels()['similar']) ?>
+            ]) ?>
         </div>
     </div>
 

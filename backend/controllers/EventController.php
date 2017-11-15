@@ -87,7 +87,7 @@ class EventController extends CController
                     if($success) {
                         $transaction->commit();
 
-                        return $this->redirect(['index']);
+                        return $this->redirect(['/event']);
                     } else {
                         $transaction->rollBack();
                     }
@@ -189,7 +189,7 @@ class EventController extends CController
                     if($success) {
                         $transaction->commit();
 
-                        return $this->redirect(['index']);
+                        return $this->redirect(['/event']);
                     } else {
                         $transaction->rollBack();
                     }
@@ -215,7 +215,7 @@ class EventController extends CController
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['/event']);
     }
 
     public function actionAddBlock($blockClass, $i) {

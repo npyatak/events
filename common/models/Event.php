@@ -84,6 +84,8 @@ class Event extends \yii\db\ActiveRecord
             'content' => 'Контент',
             'created_at' => 'Дата/Время создания',
             'updated_at' => 'Время последнего изменения',
+            'categoryIds' => 'Категории',
+            'similarIds' => 'Связанные события',
         ];
     }
 
