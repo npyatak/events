@@ -157,12 +157,9 @@ input[type="checkbox"] {
     display: inline-block;
     vertical-align: top;
 }
-.w150px {
-    width: 150px;
-}
-.w300px {
-    width: 150px;
-}
-.w33pc {
-    width: 33%;
+.remove-gallery-image {
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
 }

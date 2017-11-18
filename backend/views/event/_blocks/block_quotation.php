@@ -8,11 +8,29 @@ use common\components\CKEditor;
 	<?=CKEditor::widget([
 	    'model' => $model,
 	    'attribute' => "[$i]text",
+	    'editorOptions' => [
+	    	'preset' => 'textEditor'
+	    ]
     ]);?>
 	<?= Html::error($model, "[$i]text", ['class' => 'help-block']);?>
 </div>
 
-<div class="form-group">
-	<?= Html::activeLabel($model, "[$i]by_line", ['class' => 'control-label']) ?>
-	<?= Html::activeTextarea($model, "[$i]by_line", ['class' => 'form-control']) ?>
+<div class="row">
+    <div class="col-sm-3">
+		<div class="form-group">
+			<?= Html::activeLabel($model, "[$i]author_image", ['class' => 'control-label']) ?>
+			<?= Html::activeTextInput($model, "[$i]author_image", ['class' => 'form-control']) ?>
+		</div>
+	</div>
+    <div class="col-sm-9">
+		<div class="form-group <?=$model->hasErrors("author_image") ? 'has-error' : '';?>">
+			<?= Html::activeLabel($model, "[$i]author_name") ?>
+			<?= Html::activeTextInput($model, "[$i]author_name", ['class' => 'form-control']) ?>
+			<?= Html::error($model, "[$i]author_name", ['class' => 'help-block']);?>
+		</div>
+		<div class="form-group">
+			<?= Html::activeLabel($model, "[$i]author_text") ?>
+			<?= Html::activeTextInput($model, "[$i]author_text", ['class' => 'form-control']) ?>
+		</div>
+	</div>
 </div>

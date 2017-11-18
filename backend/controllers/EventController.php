@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
 use common\models\Event;
 use common\models\search\EventSearch;
 use common\models\EventBlock;
+use common\models\blocks\items\BlockGalleryImage;
 
 /**
  * EventController implements the CRUD actions for Event model.
@@ -54,6 +55,10 @@ class EventController extends CController
                     foreach ($blockDataArray as $blockData) {
                         $blockModel = new $class;
                         $blockModel->attributes = $blockData;
+
+                        if($blockModel->formName() == 'BlockGallery') {
+                            $blockModel->loadNewGalleryImageModels($post['BlockGalleryImage'][$i]);
+                        }
 
                         $blockModelsArray[$i] = $blockModel;
                         $i++;
@@ -109,8 +114,7 @@ class EventController extends CController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
         $blockIDsOld = [];
         $blockModelsArray = [];
@@ -144,6 +148,10 @@ class EventController extends CController
                         }
                         $blockModel->attributes = $blockData;
 
+                        if($blockModel->formName() == 'BlockGallery') {
+                            $blockModel->loadNewGalleryImageModels($post['BlockGalleryImage'][$i]);
+                        }
+
                         $blockModelsArray[$i] = $blockModel;
                         $i++;
                         $blockModel = null;
@@ -151,12 +159,12 @@ class EventController extends CController
                 }
             }
             
-            $validationArr = ArrayHelper::merge(
+            $validationErrors = ArrayHelper::merge(
                 ActiveForm::validateMultiple($blockModelsArray),
                 ActiveForm::validate($model)
             );
 
-            if(empty($validationArr)) {
+            if(empty($validationErrors)) {
                 try  {
                     $success = $model->save();
                     foreach ($blockModelsArray as $key => $blockModel) {
@@ -205,6 +213,101 @@ class EventController extends CController
         ]);
     }
 
+    public function actionBlocks($id) {
+        $model = $this->findModel($id);
+        $blockIDsOld = [];
+        $blockModelsArray = [];
+
+        foreach ($model->eventBlocks as $eventBlock) {
+            $blockIDsOld[$eventBlock->model][] = $eventBlock->block_id;
+            $block = $eventBlock->block;
+            $block->order = $eventBlock->order;
+            $block->anchor = $eventBlock->anchor;
+            $blockModelsArray[] = $block;
+        }
+
+        $blockIDs = [];
+
+        $post = Yii::$app->request->post();
+
+        if (!empty($post)) {
+            $blockModelsArray = [];
+            $transaction = Yii::$app->db->beginTransaction();
+
+            $i = 0;
+            foreach ($post as $key => $blockDataArray) {
+                $class = 'common\models\blocks\\'.$key;
+                if(class_exists($class)) {
+                    foreach ($blockDataArray as $blockData) {
+                        if(isset($blockData['id'])) {
+                            $blockIDs[$key][] = $blockData['id'];
+                            $blockModel = $class::findOne($blockData['id']);
+                        } else {
+                            $blockModel = new $class;
+                        }
+                        $blockModel->attributes = $blockData;
+
+                        if($blockModel->formName() == 'BlockGallery') {
+                            $blockModel->loadNewGalleryImageModels($post['BlockGalleryImage'][$i]);
+                        }
+
+                        $blockModelsArray[$i] = $blockModel;
+                        $i++;
+                        $blockModel = null;
+                    }
+                }
+            }
+            
+            $validationErrors = ActiveForm::validateMultiple($blockModelsArray);
+
+            if(empty($validationErrors)) {
+                try  {
+                    $success = true;
+                    foreach ($blockModelsArray as $key => $blockModel) {
+                        if($success) {
+                            $success = $blockModel->save();
+
+                            if($blockModel->eventBlock === null) {
+                                $eventBlock = new EventBlock;
+                                $eventBlock->event_id = $model->id;
+                                $eventBlock->model = $blockModel->formName();
+                                $eventBlock->block_id = $blockModel->id;
+                            } else {
+                                $eventBlock = $blockModel->eventBlock;
+                            }
+
+                            $eventBlock->order = $blockModel->order;
+                            $eventBlock->anchor = $blockModel->anchor;
+
+                            $eventBlock->save();
+                        }
+                    }
+
+                    foreach ($this->check_diff_multi($blockIDsOld, $blockIDs) as $key => $ids) {
+                        foreach ($ids as $id) {
+                            $class = 'common\models\blocks\\'.$key;
+                            $class::findOne($id)->delete();
+                        }
+                    }
+
+                    if($success) {
+                        $transaction->commit();
+
+                        return $this->redirect(['/event']);
+                    } else {
+                        $transaction->rollBack();
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        } 
+
+        return $this->render('blocks', [
+            'blockModelsArray' => $blockModelsArray,
+        ]);
+    }
+
     /**
      * Deletes an existing Event model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -226,6 +329,16 @@ class EventController extends CController
                 'model' => $model,
                 'view' => $model->view,
                 'i' => $i,
+            ]);
+        }
+    }
+
+    public function actionAddGalleryImage($i, $key) {
+        if(Yii::$app->request->isAjax) {
+            return $this->renderAjax('_blocks/_block_gallery_image', [
+                'model' => new BlockGalleryImage,
+                'i' => $i,
+                'key' => $key,
             ]);
         }
     }

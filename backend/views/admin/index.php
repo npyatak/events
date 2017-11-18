@@ -6,14 +6,14 @@ use yii\widgets\Pjax;
 
 use backend\models\Admin;
 
-$this->title = 'Администраторы';
+$this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div>
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Добавить администратора', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить пользователя', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>    

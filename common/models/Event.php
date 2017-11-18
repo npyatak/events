@@ -4,35 +4,21 @@ namespace common\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use common\components\ThumbnailImage;
 
-/**
- * This is the model class for table "{{%event}}".
- *
- * @property integer $id
- * @property string $title
- * @property string $leading_text
- * @property string $view_date
- * @property string $timeline_date
- * @property string $socials_image_url
- * @property string $image_url
- * @property string $socials_text
- * @property integer $show_on_main
- * @property integer $value_index
- * @property string $similar
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- *
- * @property EventCategory[] $eventCategories
- */
 class Event extends \yii\db\ActiveRecord
 {
     const STATUS_ACTIVE = 5;
     const STATUS_INACTIVE = 0;
 
+    const DATE_TYPE_DATE = 1;
+    const DATE_TYPE_MONTH_AND_YEAR = 2;
+    const DATE_TYPE_SEASON_AND_YEAR = 3;
+
     public $categoryIds = [];
     public $similarIds = [];
     public $timelineDateFormatted;
+    public $imageDir = 'event';
     /**
      * @inheritdoc
      */
@@ -54,11 +40,11 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'socials_image_url', 'image_url', 'timelineDateFormatted'], 'required'],
-            [['show_on_main', 'value_index', 'status', 'timeline_date', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'leading_text', 'socials_image_url', 'image_url', 'socials_text'], 'string', 'max' => 255],
+            [['title', 'timelineDateFormatted', 'view_date_type'], 'required'],
+            [['show_on_main', 'value_index', 'status', 'timeline_date', 'created_at', 'updated_at', 'view_date_type'], 'integer'],
+            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title'], 'string', 'max' => 255],
             [['view_date'], 'string', 'max' => 100],
-            [['categoryIds', 'similarIds', 'content'], 'safe']
+            [['categoryIds', 'similarIds'], 'safe']
         ];
     }
 
@@ -72,10 +58,14 @@ class Event extends \yii\db\ActiveRecord
             'title' => 'Заголовок',
             'leading_text' => 'Лид',
             'view_date' => 'Отображаемая дата',
+            'view_date_type' => 'Тип даты',
             'timeline_date' => 'Дата привязки к таймлайн',
-            'socials_image_url' => 'Ссылка на изображение для карточки на главной',
+            'socials_image_url' => 'Ссылка на изображение для соц.сетей',
             'image_url' => 'Ссылка на заглавное изображение',
-            'socials_text' => 'Текст для соцсетей',
+            'main_page_image_url' => 'Ссылка на изображение для карточки на главной',
+            'image_copyright' => 'Копирайт к заглавной фотографии',
+            'socials_text' => 'Текст для соц.сетей',
+            'socials_title' => 'Заголовок для соц.сетей',
             'show_on_main' => 'Показать на главной',
             'value_index' => 'Индекс значимости',
             'similar' => 'Связанные события',
@@ -157,9 +147,21 @@ class Event extends \yii\db\ActiveRecord
 
     public function getBlocksArray() {
         return [
-            'common\models\blocks\BlockQuotation' => \common\models\blocks\BlockQuotation::getBlockName(),//'Цитата',
-            'common\models\blocks\BlockImage' => \common\models\blocks\BlockImage::getBlockName(),
+            'common\models\blocks\BlockQuotation',
+            'common\models\blocks\BlockContent',
+            'common\models\blocks\BlockImage',
+            'common\models\blocks\BlockGallery',
+            'common\models\blocks\BlockCode',
         ];
+    }
+
+    public function getBlocksList() {
+        $res = [];
+        foreach (self::getBlocksArray() as $block) {
+            $res[$block] = $block::getBlockName();
+        }
+
+        return $res;
     }
 
     public function getArrayForSimilar() {
@@ -168,5 +170,38 @@ class Event extends \yii\db\ActiveRecord
             $query->andWhere(['not', ['id' => $this->id]]);
         }
         return ArrayHelper::map($query->asArray()->all(), 'id', 'title');
+    }
+
+    public function getDateTypeList() {
+        return [
+            self::DATE_TYPE_DATE => 'Дата',
+            self::DATE_TYPE_MONTH_AND_YEAR => 'Месяц и год',
+            self::DATE_TYPE_SEASON_AND_YEAR => 'Сезон и год',
+        ];
+    }
+
+    public function getImageUrl($thumb_size=false, $image=false, $imageDir=false) {
+        if(!$image) $image = $this->image;
+        if(!$imageDir) $imageDir = $this->imageDir;
+        if($thumb_size) {
+            if(!$image) {
+                $image = __DIR__ . '/../../frontend/web/images/no_image.png';
+                $url = '/images/no_image.png';
+                $dir = false;
+            }
+            if($fp = curl_init($image)) {
+                $sizes = explode('x', $thumb_size);
+                $imageSrc = ThumbnailImage::thumbnailFileUrl(
+                    $image,
+                    $sizes[0],
+                    $sizes[1],
+                    ThumbnailImage::THUMBNAIL_INSET,
+                    $imageDir
+                );
+                return $imageSrc;
+            }
+        } else {
+            return $this->image;
+        }
     }
 }

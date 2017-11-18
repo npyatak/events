@@ -5,11 +5,8 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
-use common\components\CKEditor;
 
 use common\models\Event;
-
-$this->registerJsFile('/js/jquery-ui.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="district-form">
@@ -39,7 +36,10 @@ $this->registerJsFile('/js/jquery-ui.min.js', ['depends' => [\yii\web\JqueryAsse
         <div class="col-sm-6">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-1">
+            <?= $form->field($model, 'view_date_type')->dropDownList($model->dateTypeList)?>
+        </div>
+        <div class="col-sm-2">
             <?= $form->field($model, 'view_date')->textInput() ?>
         </div>
         <div class="col-sm-3">
@@ -59,14 +59,26 @@ $this->registerJsFile('/js/jquery-ui.min.js', ['depends' => [\yii\web\JqueryAsse
 
     <div class="row">
         <div class="col-sm-6">
-            <?= $form->field($model, 'socials_image_url')->textInput() ?>
+            <?= $form->field($model, 'main_page_image_url')->textInput() ?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'image_url')->textInput() ?>
         </div>
     </div>
 
-    <?= $form->field($model, 'socials_text')->textarea(['rows' => 3]) ?>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model, 'socials_title')->textInput() ?>
+            </div>
+
+            <div class="col-sm-6">
+                <?= $form->field($model, 'socials_image_url')->textInput() ?>
+            </div>
+        </div>
+
+        <?= $form->field($model, 'socials_text')->textarea(['rows' => 3]) ?>
+    </div>
 
     <div class="row">
         <div class="col-sm-6">
@@ -104,22 +116,7 @@ $this->registerJsFile('/js/jquery-ui.min.js', ['depends' => [\yii\web\JqueryAsse
         </div>
     </div>
 
-    <?= $form->field($model, 'content')->widget(CKEditor::classname());?>
-
-    <ul id="blocks">
-        <?php if(!empty($blockModelsArray)) {
-            foreach ($blockModelsArray as $i => $blockModel) {
-                echo $this->render('_blocks/template', ['model' => $blockModel, 'i' => $i]);
-            }
-        } ?>
-    </ul>
-
-    <hr>
-
-    <div class="form-group">
-	    <?= Html::dropDownList('blocks', '', $model->blocksArray, ['id' => 'block-select']) ?>
-	    <?= Html::a('Добавить блок', '#', ['id' => 'add-block', 'class' => 'btn btn-primary']) ?>
-	</div>
+    <?=$this->render('_blocks_list', ['blockModelsArray' => $blockModelsArray]);?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -128,46 +125,3 @@ $this->registerJsFile('/js/jquery-ui.min.js', ['depends' => [\yii\web\JqueryAsse
     <?php ActiveForm::end(); ?>
 
 </div>
-
-<?php $script = "
-    $(document).on('click', '#add-block', function() {
-        var blockClass = $('#block-select').find(':selected').val();
-        var i = $('#blocks .block').length;
-
-        $.ajax({
-            type: 'GET',
-            url: '".Url::toRoute(['/event/add-block'])."',
-            data: 'blockClass='+blockClass+'&i='+i,
-            success: function (data) {
-            	$('#blocks').append(data);
-                updateBlocksOrder();
-            }
-        });
-
-        return false;
-    });
-
-    $(document).on('click', '.block .remove', function() {
-    	$(this).closest('.block').remove();
-        updateBlocksOrder();
-    });
-
-    $('#blocks').sortable({
-        cursor: 'move',  
-        classes: {
-            'ui-sortable': 'highlight'
-        },
-        update: function(event, ui) {
-            updateBlocksOrder();
-        }
-    });
-
-    function updateBlocksOrder() {
-        $('.block').each(function() {
-            var order = $(this).index() + 1;
-            $(this).find('.hidden-order').val(order);
-        });
-    }
-";
-
-$this->registerJs($script, yii\web\View::POS_END);?>

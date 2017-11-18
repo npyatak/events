@@ -18,7 +18,7 @@ class m171111_135345_create_table_event_category extends Migration
         ], $tableOptions);
 
         $this->addForeignKey("{event_category}_event_id_fkey", '{{%event_category}}', 'event_id', '{{%event}}', 'id', 'CASCADE', 'CASCADE');
-        $this->addForeignKey("{event_category}_category_id_fkey", '{{%event_category}}', 'category_id', '{{%category}}', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey("{event_category}_category_id_fkey", '{{%event_category}}', 'category_id', '{{%category}}', 'id', 'RESTRICT', 'RESTRICT');
     }
 
     public function safeDown() {

@@ -13,6 +13,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
+use common\models\Event;
 /**
  * Site controller
  */
@@ -73,6 +74,16 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionEvent($id) {
+        $event = $this->findEvent($id);
+        // $event = Event::find()->joinWith('eventBlocks')->where(['event.id' => $id])->one();
+        // print_r($event);exit;
+
+        return $this->render('event', [
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -209,5 +220,13 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    protected function findEvent($id) {
+        if (($model = Event::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

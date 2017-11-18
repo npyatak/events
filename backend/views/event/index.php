@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
+                'id',
                 'title',
                 'view_date',
 
@@ -34,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'socials_image_url',
                     'format' => 'raw',
                     'value' => function($data) {
-                        return Html::img($data->socials_image_url);
+                        return $data->socials_image_url ? Html::img($data->getImageUrl('200x200', $data->socials_image_url)) : '';
                     },
                 ],
                 
@@ -43,7 +44,23 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filter' => Html::activeDropDownList($searchModel, 'value_index', Event::getValueIndexArray(), ['prompt'=>'']),
                 ],
 
-                ['class' => 'yii\grid\ActionColumn'],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{view} {update} {blocks} {delete}',                    
+                    'buttons' => [
+                        'view' => function ($url, $model) {
+                            $url = Yii::$app->urlManagerFrontEnd->createUrl(['site/event/'.$model->id]);
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                                'title' => 'Просмотр'
+                            ]);
+                        },
+                        'blocks' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-th-large"></span>', $url, [
+                                'title' => 'Редактировать блоки'
+                            ]);
+                        },
+                    ],
+                ],
             ],
         ]); ?>
     <?php Pjax::end(); ?>

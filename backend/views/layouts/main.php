@@ -27,7 +27,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
+    <?php $isAdmin = (!Yii::$app->user->isGuest && Yii::$app->user->identity->canAdmin());
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -36,7 +36,8 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Администраторы', 'url' => ['/admin']],
+        ['label' => 'Пользователи', 'url' => ['/admin'], 'visible' => $isAdmin],
+        ['label' => 'Категории', 'url' => ['/category'], 'visible' => $isAdmin],
         ['label' => 'События', 'url' => ['/event']],
     ];
     if (Yii::$app->user->isGuest) {

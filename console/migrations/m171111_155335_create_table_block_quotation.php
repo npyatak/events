@@ -15,7 +15,9 @@ class m171111_155335_create_table_block_quotation extends Migration
         $this->createTable('{{%block_quotation}}', [
             'id' => $this->primaryKey(),
             'text' => $this->text()->notNull(),
-            'by_line' => $this->string(),
+            'author_image' => $this->string(255),
+            'author_name' => $this->string(255)->notNull(),
+            'author_text' => $this->string(255),
         ], $tableOptions);
     }
 

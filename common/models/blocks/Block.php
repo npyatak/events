@@ -19,11 +19,6 @@ class Block extends \yii\db\ActiveRecord
         ];
     }
 
-    public function afterFind() {
-        $this->order = $this->eventBlock->order;
-        $this->anchor = $this->eventBlock->anchor;
-    }
-
     public function afterDelete() {
         if($this->eventBlock !== null) {
             $this->eventBlock->delete();

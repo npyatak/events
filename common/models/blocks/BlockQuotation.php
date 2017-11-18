@@ -20,9 +20,9 @@ class BlockQuotation extends Block
     public function rules()
     {
         return array_merge(parent::rules(), [
-                [['text'], 'required'],
+                [['text', 'author_name'], 'required'],
                 [['text'], 'safe'],
-                [['by_line'], 'string'],
+                [['author_image', 'author_name', 'author_text'], 'string', 'max' => 255],
             ]
         );
     }
@@ -39,15 +39,9 @@ class BlockQuotation extends Block
         return [
             'id' => 'ID',
             'text' => 'Текст',
-            'by_line' => 'Подпись'
-        ];
-    }
-
-    public function getFloatArray() {
-        return [
-            'left',
-            'right',
-            'center',
+            'author_image' => 'Изображение автора',
+            'author_name' => 'Имя автора',
+            'author_text' => 'Подпись автора'
         ];
     }
 }

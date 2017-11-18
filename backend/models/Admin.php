@@ -42,11 +42,17 @@ class Admin extends ActiveRecord implements IdentityInterface
         return [
             [['login'], 'required'],
             //['password', 'required', 'on' => 'create'],
-            [['name', 'surname', 'login'], 'string'],
+            [['name', 'surname', 'login', 'password'], 'string'],
             ['email', 'email'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
+    }
+
+    public function scenarios() {
+        $scenarios = parent::scenarios();
+        $scenarios['reset-password'] = ['password'];
+        return $scenarios;
     }
 
     // public function beforeSave($insert) {

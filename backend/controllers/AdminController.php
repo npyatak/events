@@ -46,11 +46,11 @@ class AdminController extends CController
 
         if ($model->load(Yii::$app->request->post())) {
             $model->setPassword($model->password);
+            $model->generateAuthKey();
             
             if($model->save()) {
                 return $this->redirect(['index']);
             }
-            print_r($model->getErrors());
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -88,6 +88,21 @@ class AdminController extends CController
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionResetPassword($id) {
+        $model = $this->findModel($id);
+        $model->scenario = 'reset-password';
+        if ($model->load(Yii::$app->request->post())) {
+            $model->setPassword($model->password);
+            $model->save(false);
+            return $this->redirect(['index']);
+        } else {
+            $model->password = '';
+            return $this->render('reset-password', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

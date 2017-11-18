@@ -15,11 +15,8 @@ class m171111_155335_create_table_block_image extends Migration
         $this->createTable('{{%block_image}}', [
             'id' => $this->primaryKey(),
             'source' => $this->string()->notNull(),
-            'float' => $this->string(10),
-            'url' => $this->string(),
             'show_fullscreen' => $this->integer(1)->notNull()->defaultValue(0),
             'copyright_text' => $this->string(),
-            'copyright_color' => $this->string(7),
             'text' => $this->string(),
         ], $tableOptions);
     }
