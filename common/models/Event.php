@@ -189,7 +189,8 @@ class Event extends \yii\db\ActiveRecord
                 $url = '/images/no_image.png';
                 $dir = false;
             }
-            if($fp = curl_init($image)) {
+            $file_headers = @get_headers($file);
+            if($file_headers && $file_headers[0] != 'HTTP/1.1 404 Not Found') {
                 $sizes = explode('x', $thumb_size);
                 $imageSrc = ThumbnailImage::thumbnailFileUrl(
                     $image,
