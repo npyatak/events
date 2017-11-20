@@ -76,6 +76,7 @@ class Event extends \yii\db\ActiveRecord
             'updated_at' => 'Время последнего изменения',
             'categoryIds' => 'Категории',
             'similarIds' => 'Связанные события',
+            'timelineDateFormatted' => 'Дата привязки к таймлайн',
         ];
     }
 
@@ -147,12 +148,14 @@ class Event extends \yii\db\ActiveRecord
 
     public function getBlocksArray() {
         return [
-            'common\models\blocks\BlockQuotation',
             'common\models\blocks\BlockContent',
+            'common\models\blocks\BlockQuotation',
             'common\models\blocks\BlockImage',
             'common\models\blocks\BlockGallery',
             'common\models\blocks\BlockFact',
             'common\models\blocks\BlockCut',
+            'common\models\blocks\BlockMap',
+            'common\models\blocks\BlockIframe',
             'common\models\blocks\BlockCode',
         ];
     }

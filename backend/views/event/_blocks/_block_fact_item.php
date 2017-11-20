@@ -34,7 +34,7 @@ use common\models\blocks\items\BlockFactItem;
 				<?= Html::error($model, "[$i][$key]type", ['class' => 'help-block']);?>
 			</div>
 	    </div>
-	    <div class="col-sm-8">
+	    <div class="col-sm-9">
 			<div class="form-group <?=$model->hasErrors("link") ? 'has-error' : '';?>">
 				<?= Html::activeLabel($model, "[$i][$key]link", ['class' => 'control-label']) ?>
 				<?= Html::activeTextInput($model, "[$i][$key]link", ['class' => 'form-control']) ?>

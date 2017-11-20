@@ -66,6 +66,12 @@ class BlockFact extends Block
         return parent::afterSave($insert, $changedAttributes);
     }
 
+    public function attributeLabels() {
+        return array_merge(parent::attributeLabels(), [
+            'title' => 'Заголовок для серой отсечки',
+        ]);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

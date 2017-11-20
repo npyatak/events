@@ -19,6 +19,9 @@ Class CKEditor extends \mihaildev\ckeditor\CKEditor {
                 case 'colorAndAlign':
                     $this->presetColorAndAlign();
                     break;
+                case 'iFrameOnly':
+                    $this->presetIFrameOnly();
+                    break;
                 
                 default:
                     # code...
@@ -82,6 +85,20 @@ Class CKEditor extends \mihaildev\ckeditor\CKEditor {
 
         $options['toolbarGroups'] = [
             ['name' => 'basicstyles', 'groups' => ['align', 'colors']],
+        ];
+
+
+        $this->editorOptions = ArrayHelper::merge($options, $this->editorOptions);
+    }
+
+    private function presetIFrameOnly() {
+        /*
+            Только выбор цвета и выравнивание
+        */
+        $options['height'] = 100;
+
+        $options['toolbar'] = [
+            ['name' => 'links', 'items' => ['Iframe']],
         ];
 
 

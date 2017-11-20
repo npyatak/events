@@ -42,8 +42,8 @@ class BlockFactItem extends \yii\db\ActiveRecord
             'block_fact_id' => 'ID блока фактов',
             'number' => 'Число',
             'capture' => 'Подпись',
-            'link' => 'Ссылка',
-            'text' => 'Текст',
+            'link' => 'Ссылка для ката',
+            'text' => 'Текст под катом',
             'type' => 'Тип',
         ];
     }
