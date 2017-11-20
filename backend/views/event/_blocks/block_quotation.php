@@ -8,9 +8,10 @@ use common\components\CKEditor;
 	<?=CKEditor::widget([
 	    'model' => $model,
 	    'attribute' => "[$i]text",
-	    'editorOptions' => [
+	    'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
+            'allowedContent' => true,
 	    	'preset' => 'textEditor'
-	    ]
+	    ])
     ]);?>
 	<?= Html::error($model, "[$i]text", ['class' => 'help-block']);?>
 </div>

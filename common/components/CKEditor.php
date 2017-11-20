@@ -26,12 +26,6 @@ Class CKEditor extends \mihaildev\ckeditor\CKEditor {
             }
             unset($this->editorOptions['preset']);
         }
-        // $this->editorOptions = [
-        //     ElFinder::ckeditorOptions('elfinder', [
-        //         'preset' => 'custom',
-        //         'allowedContent' => true,
-        //     ]),
-        // ];
 
         parent::init();
     }
@@ -59,7 +53,7 @@ Class CKEditor extends \mihaildev\ckeditor\CKEditor {
             ['name' => 'paragraph', 'groups' => ['templates', 'list', 'align']],
             ['name' => 'styles'],
             ['name' => 'basicstyles', 'groups' => ['basicstyles', 'colors','cleanup']],
-            ['name' => 'links', 'groups' => ['links']],
+            ['name' => 'links', 'groups' => ['links', 'insert']],
         ];
 
 

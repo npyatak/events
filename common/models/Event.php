@@ -151,6 +151,8 @@ class Event extends \yii\db\ActiveRecord
             'common\models\blocks\BlockContent',
             'common\models\blocks\BlockImage',
             'common\models\blocks\BlockGallery',
+            'common\models\blocks\BlockFact',
+            'common\models\blocks\BlockCut',
             'common\models\blocks\BlockCode',
         ];
     }

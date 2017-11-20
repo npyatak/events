@@ -6,19 +6,19 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 
-use common\models\blocks\items\BlockGalleryImage;
+use common\models\blocks\items\BlockFactItem;
 
 
-class BlockGallery extends Block
+class BlockFact extends Block
 {
     public $itemsToSave = [];
-    public $itemsModelName = 'BlockGalleryImage';
+    public $itemsModelName = 'BlockFactItem';
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%block_gallery}}';
+        return '{{%block_fact}}';
     }
 
     /**
@@ -30,14 +30,12 @@ class BlockGallery extends Block
                 [['title'], 'string', 'max' => 255],
                 ['itemsToSave', function($attribute, $params) {
                     if(count($this->itemsToSave) < 1) {
-                        $this->addError($attribute, 'Необходимо добавить хотя бы один слайд');
-                    } elseif(count($this->itemsToSave) > 20) {
-                        $this->addError($attribute, 'Не более 20 слайдов');
+                        $this->addError($attribute, 'Необходимо добавить хотя бы один факт');
                     } else {
                         foreach ($this->itemsToSave as $item) {
                             $item->validate();
                             if($item->hasErrors()) {
-                                $this->addError($attribute, 'Необходимо заполнить все изображения');
+                                $this->addError($attribute, 'Необходимо заполнить все факты');
                             }
                         }
                     }
@@ -47,22 +45,22 @@ class BlockGallery extends Block
     }
 
     public function getBlockName() {
-        return 'Галерея';
+        return 'Цифрофакт';
     }
 
     public function afterSave($insert, $changedAttributes) {
-        $imageIds = [];
-        $oldImagesIds = BlockGalleryImage::find()->select('id')->where(['block_gallery_id' => $this->id])->column();
+        $itemsIds = [];
+        $oldItemsIds = BlockFactItem::find()->select('id')->where(['block_fact_id' => $this->id])->column();
         foreach ($this->itemsToSave as $gI) {
             if($gI->id) {
-                $imageIds[] = $gI->id;
+                $itemsIds[] = $gI->id;
             }
-            $gI->block_gallery_id = $this->id;
+            $gI->block_fact_id = $this->id;
             $gI->save();
         }
 
-        foreach (array_diff($oldImagesIds, $imageIds) as $idToDel) {
-            BlockGalleryImage::findOne($idToDel)->delete();
+        foreach (array_diff($oldItemsIds, $itemsIds) as $idToDel) {
+            BlockFactItem::findOne($idToDel)->delete();
         }
 
         return parent::afterSave($insert, $changedAttributes);
@@ -71,8 +69,8 @@ class BlockGallery extends Block
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBlockGalleryImages()
+    public function getBlockFactItems()
     {
-        return $this->hasMany(BlockGalleryImage::className(), ['block_gallery_id' => 'id']);
+        return $this->hasMany(BlockFactItem::className(), ['block_fact_id' => 'id']);
     }
 }

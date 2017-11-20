@@ -5,12 +5,12 @@ namespace common\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Category;
+use common\models\Share;
 
 /**
- * CategorySearch represents the model behind the search form about `common\models\Category`.
+ * ShareSearch represents the model behind the search form about `common\models\Share`.
  */
-class CategorySearch extends Category
+class ShareSearch extends Share
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['title', 'url'], 'safe'],
+            [['id', 'month'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class CategorySearch extends Category
      */
     public function search($params)
     {
-        $query = Category::find();
+        $query = Share::find();
 
         // add conditions that should always apply here
 
@@ -60,10 +59,8 @@ class CategorySearch extends Category
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'month' => $this->month,
         ]);
-
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
     }

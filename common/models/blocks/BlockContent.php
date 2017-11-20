@@ -29,15 +29,4 @@ class BlockContent extends Block
     public function getBlockName() {
         return 'Контент';
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'text' => 'Текст',
-        ];
-    }
 }

@@ -4,14 +4,14 @@ namespace common\models\blocks;
 
 use Yii;
 
-class BlockQuotation extends Block
+class BlockCut extends Block
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%block_quotation}}';
+        return '{{%block_cut}}';
     }
 
     /**
@@ -20,15 +20,15 @@ class BlockQuotation extends Block
     public function rules()
     {
         return array_merge(parent::rules(), [
-                [['text', 'author_name'], 'required'],
+                [['title', 'preview', 'text'], 'required'],
+                [['title', 'preview'], 'string', 'max' => 255],
                 [['text'], 'safe'],
-                [['author_image', 'author_name', 'author_text'], 'string', 'max' => 255],
             ]
         );
     }
 
     public function getBlockName() {
-        return 'Цитата';
+        return 'Кат';
     }
 
     /**
@@ -37,10 +37,8 @@ class BlockQuotation extends Block
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
-                'author_image' => 'Изображение автора',
-                'author_name' => 'Имя автора',
-                'author_text' => 'Подпись автора'
-            ]
+                'preview' => 'Превью',
+            ]    
         );
     }
 }

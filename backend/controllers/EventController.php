@@ -14,6 +14,7 @@ use common\models\Event;
 use common\models\search\EventSearch;
 use common\models\EventBlock;
 use common\models\blocks\items\BlockGalleryImage;
+use common\models\blocks\items\BlockFactItem;
 
 /**
  * EventController implements the CRUD actions for Event model.
@@ -48,23 +49,8 @@ class EventController extends CController
         if ($model->load($post)) {
             $transaction = Yii::$app->db->beginTransaction();
 
-            $i = 0;
-            foreach ($post as $key => $blockDataArray) {
-                $class = 'common\models\blocks\\'.$key;
-                if(class_exists($class)) {
-                    foreach ($blockDataArray as $blockData) {
-                        $blockModel = new $class;
-                        $blockModel->attributes = $blockData;
-
-                        if($blockModel->formName() == 'BlockGallery') {
-                            $blockModel->loadNewGalleryImageModels($post['BlockGalleryImage'][$i]);
-                        }
-
-                        $blockModelsArray[$i] = $blockModel;
-                        $i++;
-                    }
-                }
-            }
+            $loadBlockModels = $this->loadBlockModels($post);
+            $blockModelsArray = $loadBlockModels['models'];
 
             $validationArr = ArrayHelper::merge(
                 ActiveForm::validateMultiple($blockModelsArray),
@@ -117,7 +103,6 @@ class EventController extends CController
     public function actionUpdate($id) {
         $model = $this->findModel($id);
         $blockIDsOld = [];
-        $blockModelsArray = [];
 
         foreach ($model->eventBlocks as $eventBlock) {
             $blockIDsOld[$eventBlock->model][] = $eventBlock->block_id;
@@ -127,37 +112,14 @@ class EventController extends CController
             $blockModelsArray[] = $block;
         }
 
-        $blockIDs = [];
-
         $post = Yii::$app->request->post();
 
         if ($model->load($post)) {
-            $blockModelsArray = [];
             $transaction = Yii::$app->db->beginTransaction();
 
-            $i = 0;
-            foreach ($post as $key => $blockDataArray) {
-                $class = 'common\models\blocks\\'.$key;
-                if(class_exists($class)) {
-                    foreach ($blockDataArray as $blockData) {
-                        if(isset($blockData['id'])) {
-                            $blockIDs[$key][] = $blockData['id'];
-                            $blockModel = $class::findOne($blockData['id']);
-                        } else {
-                            $blockModel = new $class;
-                        }
-                        $blockModel->attributes = $blockData;
-
-                        if($blockModel->formName() == 'BlockGallery') {
-                            $blockModel->loadNewGalleryImageModels($post['BlockGalleryImage'][$i]);
-                        }
-
-                        $blockModelsArray[$i] = $blockModel;
-                        $i++;
-                        $blockModel = null;
-                    }
-                }
-            }
+            $loadBlockModels = $this->loadBlockModels($post);
+            $blockModelsArray = $loadBlockModels['models'];
+            $blockIDs = $loadBlockModels['blockIDs'];
             
             $validationErrors = ArrayHelper::merge(
                 ActiveForm::validateMultiple($blockModelsArray),
@@ -226,37 +188,14 @@ class EventController extends CController
             $blockModelsArray[] = $block;
         }
 
-        $blockIDs = [];
-
         $post = Yii::$app->request->post();
 
         if (!empty($post)) {
-            $blockModelsArray = [];
             $transaction = Yii::$app->db->beginTransaction();
 
-            $i = 0;
-            foreach ($post as $key => $blockDataArray) {
-                $class = 'common\models\blocks\\'.$key;
-                if(class_exists($class)) {
-                    foreach ($blockDataArray as $blockData) {
-                        if(isset($blockData['id'])) {
-                            $blockIDs[$key][] = $blockData['id'];
-                            $blockModel = $class::findOne($blockData['id']);
-                        } else {
-                            $blockModel = new $class;
-                        }
-                        $blockModel->attributes = $blockData;
-
-                        if($blockModel->formName() == 'BlockGallery') {
-                            $blockModel->loadNewGalleryImageModels($post['BlockGalleryImage'][$i]);
-                        }
-
-                        $blockModelsArray[$i] = $blockModel;
-                        $i++;
-                        $blockModel = null;
-                    }
-                }
-            }
+            $loadBlockModels = $this->loadBlockModels($post);
+            $blockModelsArray = $loadBlockModels['models'];
+            $blockIDs = $loadBlockModels['blockIDs'];
             
             $validationErrors = ActiveForm::validateMultiple($blockModelsArray);
 
@@ -341,6 +280,48 @@ class EventController extends CController
                 'key' => $key,
             ]);
         }
+    }
+
+    public function actionAddFactItem($i, $key) {
+        if(Yii::$app->request->isAjax) {
+            return $this->renderAjax('_blocks/_block_fact_item', [
+                'model' => new BlockFactItem,
+                'i' => $i,
+                'key' => $key,
+            ]);
+        }
+    }
+
+    protected function loadBlockModels($post) {
+        $blockIDs = [];
+        $blockModelsArray = [];
+
+        $i = 0;
+        foreach ($post as $key => $blockDataArray) {
+            $class = 'common\models\blocks\\'.$key;
+            if(class_exists($class)) {
+                foreach ($blockDataArray as $blockData) {
+                    if(isset($blockData['id'])) {
+                        $blockIDs[$key][] = $blockData['id'];
+                        $blockModel = $class::findOne($blockData['id']);
+                    } else {
+                        $blockModel = new $class;
+                    }
+                    $blockModel->attributes = $blockData;
+
+                    //if(in_array($blockModel->formName(), ['BlockGallery', 'BlockFact'])) {
+                    if(isset($blockModel->itemsModelName)) {
+                        $blockModel->loadItems($post[$blockModel->itemsModelName][$i]);
+                    }
+
+                    $blockModelsArray[$i] = $blockModel;
+                    $i++;
+                    $blockModel = null;
+                }
+            }
+        }
+
+        return ['models' => $blockModelsArray, 'blockIDs' => $blockIDs];
     }
 
     /**

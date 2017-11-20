@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-use unclead\multipleinput\TabularInput;
 
 use common\models\blocks\items\BlockGalleryImage;
 ?>
@@ -14,8 +13,8 @@ use common\models\blocks\items\BlockGalleryImage;
     </div>
 
     <div class="form-group">
-        <?php if(!empty($model->galleryImageModelsToSave)) {
-            $imageModels = $model->galleryImageModelsToSave;
+        <?php if(!empty($model->itemsToSave)) {
+            $imageModels = $model->itemsToSave;
         } elseif(!empty($model->blockGalleryImages)) {
             $imageModels = $model->blockGalleryImages;
         } else {

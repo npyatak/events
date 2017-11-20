@@ -5,12 +5,12 @@ namespace common\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Category;
+use common\models\Settings;
 
 /**
- * CategorySearch represents the model behind the search form about `common\models\Category`.
+ * SettingsSearch represents the model behind the search form about `common\models\Settings`.
  */
-class CategorySearch extends Category
+class SettingsSearch extends Settings
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class CategorySearch extends Category
     {
         return [
             [['id'], 'integer'],
-            [['title', 'url'], 'safe'],
+            [['title', 'key'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class CategorySearch extends Category
      */
     public function search($params)
     {
-        $query = Category::find();
+        $query = Settings::find();
 
         // add conditions that should always apply here
 
@@ -63,7 +63,7 @@ class CategorySearch extends Category
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'url', $this->url]);
+            ->andFilterWhere(['like', 'key', $this->key]);
 
         return $dataProvider;
     }

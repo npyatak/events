@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Url;
 use yii\helpers\Html;
 
 $this->title = $event->title;
@@ -6,7 +7,7 @@ $this->title = $event->title;
 $url = Url::canonical();
 $title = $event->socials_title ? $event->socials_title : $this->title;
 $desc = $event->socials_text;
-$image = $event->socials_image;
+$image = $event->socials_image_url;
 
 $this->registerMetaTag(['property' => 'og:description', 'content' => $desc], 'og:description');
 $this->registerMetaTag(['property' => 'og:title', 'content' => $this->title], 'og:title');
@@ -26,5 +27,7 @@ $this->registerMetaTag(['property' => 'fb:app_id', 'content' => '170494981954616
 	<?php print_r($eventBlock->block);?>
 	<br>
 	<hr>
-
+	<?php if($eventBlock->block->formName() == 'BlockFact') {
+		print_r($eventBlock->block->blockFactItems);
+	}?>
 <?php endforeach;?>

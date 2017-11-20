@@ -27,6 +27,23 @@ class Block extends \yii\db\ActiveRecord
         return parent::afterDelete();
     }
 
+    public function loadItems($newModels) {
+        foreach ($newModels as $model) {
+            if(isset($model['id']) && $model['id']) {
+                $itemModel = $this->itemsModelFullName::findOne($model['id']);
+            } else {
+                $itemModel = new $this->itemsModelFullName;
+            }
+            $itemModel->load($model);
+            $itemModel->attributes = $model;
+            $this->itemsToSave[] = $itemModel;
+        }
+    }
+
+    public function getItemsModelFullName() {
+        return '\common\models\blocks\items\\'.$this->itemsModelName;
+    }
+
     public function getEventBlock() {
         return EventBlock::find()->where(['model' => $this->formName(), 'block_id' => $this->id])->one();
     }
@@ -39,8 +56,8 @@ class Block extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'title' => 'Заголовок',
             'text' => 'Текст',
-            'by_line' => 'Подпись'
         ];
     }
 }

@@ -38,12 +38,12 @@ class BlockImage extends Block
      */
     public function attributeLabels()
     {
-        return [
-            'id' => 'ID',
-            'source' => 'Источник',
-            'show_fullscreen' => 'На весь экран',
-            'copyright_text' => 'Текст копирайта',
-            'text' => 'Сопровождающий текст',
-        ];
+        return array_merge(parent::attributeLabels(), [
+                'source' => 'Источник',
+                'show_fullscreen' => 'На весь экран',
+                'copyright_text' => 'Текст копирайта',
+                'text' => 'Сопровождающий текст',
+            ]
+        );
     }
 }

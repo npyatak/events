@@ -29,7 +29,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['title'], 'string', 'max' => 100],
+            [['title', 'url'], 'string', 'max' => 100],
         ];
     }
 
@@ -40,7 +40,8 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => 'Заголовок',
+            'url' => 'Адрес',
         ];
     }
 

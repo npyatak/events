@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m171111_115335_create_table_category extends Migration
+class m171119_155335_create_table_block_fact extends Migration
 {
     public function safeUp()
     {
@@ -12,21 +12,14 @@ class m171111_115335_create_table_category extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%category}}', [
+        $this->createTable('{{%block_fact}}', [
             'id' => $this->primaryKey(),
-            'title' => $this->string(100)->notNull(),
-            'url' => $this->string(100)->notNull(),
+            'title' => $this->string(255),
         ], $tableOptions);
-
-        $this->batchInsert('{{%category}}', ['title', 'url'], [
-            ['Премьеры', 'premiere'],
-            ['Объекты', 'object'],
-            ['События', 'event'],
-        ]);
     }
 
     public function safeDown()
     {
-        $this->dropTable('{{%category}}');
+        $this->dropTable('{{%block_fact}}');
     }
 }

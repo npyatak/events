@@ -6,27 +6,25 @@ use yii\widgets\Pjax;
 
 use backend\models\Admin;
 
-$this->title = 'Категории';
+$this->title = 'Настройки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div>
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        <?= Html::a('Добавить категорию', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php Pjax::begin(); ?>    
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
-                'id',
+                ['class' => 'yii\grid\SerialColumn'],
+                'key',
                 'title',
-                'url',
+                'value',
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{update} {delete}',
+                    'template' => '{update}',
                 ],
             ],
         ]); ?>

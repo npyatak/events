@@ -39,6 +39,8 @@ AppAsset::register($this);
         ['label' => 'Пользователи', 'url' => ['/admin'], 'visible' => $isAdmin],
         ['label' => 'Категории', 'url' => ['/category'], 'visible' => $isAdmin],
         ['label' => 'События', 'url' => ['/event']],
+        ['label' => 'Настройки', 'url' => ['/settings']],
+        ['label' => 'Поделиться', 'url' => ['/share']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
