@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 use common\models\Event;
 
-$this->registerJsFile('js/jquery-ui.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+\backend\assets\UIAsset::register($this);
 ?>
 
 <ul id="blocks">

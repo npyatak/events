@@ -117,7 +117,6 @@ class EventController extends CController
         $post = Yii::$app->request->post();
 
         if ($model->load($post)) {
-            print_r($post);exit;
             $transaction = Yii::$app->db->beginTransaction();
 
             $loadBlockModels = $this->loadBlockModels($post);
@@ -313,7 +312,7 @@ class EventController extends CController
         foreach ($post as $key => $blockDataArray) {
             $class = 'common\models\blocks\\'.$key;
             if(class_exists($class)) {
-                foreach ($blockDataArray as $blockData) {
+                foreach ($blockDataArray as $i => $blockData) {
                     if(isset($blockData['id'])) {
                         $blockIDs[$key][] = $blockData['id'];
                         $blockModel = $class::findOne($blockData['id']);
@@ -324,6 +323,7 @@ class EventController extends CController
 
                     //if(in_array($blockModel->formName(), ['BlockGallery', 'BlockFact'])) {
                     if(isset($blockModel->itemsModelName)) {
+            //exit;
                         $blockModel->loadItems($post[$blockModel->itemsModelName][$i]);
                     }
 

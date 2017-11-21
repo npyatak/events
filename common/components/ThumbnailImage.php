@@ -47,13 +47,12 @@ class ThumbnailImage {
         $image = $image->thumbnail($box, $mode);
 
         $image->save($thumbnailFile);
+
         return $thumbnailFile;
     }
 
     public static function thumbnailFileUrl($filename, $width, $height, $mode = self::THUMBNAIL_OUTBOUND, $imageDir) {
-        //$filename = FileHelper::normalizePath(Yii::getAlias($filename));
         $cacheUrl = self::$cacheAlias;
-        $cachePath = self::$cacheAlias;
         $thumbnailFilePath = self::thumbnailFile($filename, $width, $height, $mode, $imageDir);
 
         preg_match('#[^\\' . DIRECTORY_SEPARATOR . ']+$#', $thumbnailFilePath, $matches);
@@ -64,6 +63,7 @@ class ThumbnailImage {
         } else {
             $path = $cacheUrl . '/' . $fileName;
         }
+
         return Yii::$app->urlManagerFrontEnd->createAbsoluteUrl($path);
     }
 }

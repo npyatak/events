@@ -16,6 +16,8 @@ use Yii;
  */
 class EventBlock extends \yii\db\ActiveRecord
 {
+
+    public $_block;
     /**
      * @inheritdoc
      */
@@ -66,8 +68,12 @@ class EventBlock extends \yii\db\ActiveRecord
     }
 
     public function getBlock() {
-        $model = '\common\models\blocks\\'.$this->model;
-        return $model::findOne($this->block_id);
+        if(!$this->_block) {
+            $model = '\common\models\blocks\\'.$this->model;
+            $this->_block = $model::findOne($this->block_id);
+        }
+
+        return $this->_block;
     }
 
     public function getEvent()

@@ -1,8 +1,11 @@
 <?php
 namespace common\components;
 
-use mihaildev\elfinder\ElFinder;
+use Yii;
+
+use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use mihaildev\elfinder\ElFinder;
 
 Class CKEditor extends \mihaildev\ckeditor\CKEditor {
 
@@ -22,10 +25,6 @@ Class CKEditor extends \mihaildev\ckeditor\CKEditor {
                 case 'iFrameOnly':
                     $this->presetIFrameOnly();
                     break;
-                
-                default:
-                    # code...
-                    break;
             }
             unset($this->editorOptions['preset']);
         }
@@ -34,22 +33,6 @@ Class CKEditor extends \mihaildev\ckeditor\CKEditor {
     }
 
     private function presetTextEditor() {
-        /*
-            Шрифт
-            Размер
-            Bold
-            Курсив
-            Цвет текста
-            Цвет фона
-            Выравнивание по горизонтали
-            Стиль (комбинация параметров)
-            Подстрочный индекс
-            Надстрочный индекс
-            Гиперссылка
-            В списке шрифтов должны быть доступны Proxima Nova и PT Serif.
-            По умолчанию должен быть выбран шрифт Proxima Nova.
-        */
-
         $options['height'] = 200;
 
         $options['toolbarGroups'] = [
@@ -59,6 +42,8 @@ Class CKEditor extends \mihaildev\ckeditor\CKEditor {
             ['name' => 'links', 'groups' => ['links', 'insert']],
         ];
 
+        $options['contentsCss'] = Yii::$app->urlManagerBackEnd->createUrl(['css/fonts.css']);
+        $options['font_names'] = 'ProximaNova/ProximaNova-Regular;PTSerif/PTSerifItalic;Arial/Arial';
 
         $this->editorOptions = ArrayHelper::merge($options, $this->editorOptions);
     }

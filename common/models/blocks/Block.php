@@ -79,7 +79,7 @@ class Block extends \yii\db\ActiveRecord
                     );
                     return $imageSrc;
                 } else {
-                    return $this->image;
+                    return $image;
                 }
             }
         } 

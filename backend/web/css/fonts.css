@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'ProximaNova-Regular';
+    src: url('fonts/ProximaNova/Proxima_nova_Regular.otf') format('opentype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'PTSerifItalic';
+    src: url('fonts/PT_serif/PTSerif.ttc') format('trutype');
+    font-weight: normal;
+}
