@@ -14,11 +14,7 @@ class m171120_145335_create_table_block_card extends Migration {
         $this->createTable('{{%block_card}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string(255),
-            'preview' => $this->string(255),
-            'icon' => $this->string(255),
-
-            'link' => $this->string(255),
-            'text' => $this->text(),     
+            'line_color' => $this->string(7),
         ], $tableOptions);
 
     }
@@ -27,10 +23,3 @@ class m171120_145335_create_table_block_card extends Migration {
         $this->dropTable('{{%block_card}}');
     }
 }
-/*
-1) "Заголовок" - инпут без возможности настраивать стили
-2) "Подзаголовок" - инпут без возможности настраивать стили
-3) "Иконка" - не обязательно для заполнения
-4) "Цвет нижнего разделителя"
-5) "Заголовок к верхнему разделителю" - инпут без возможности настраивать стили - по умолчанию "Важные факты"
-4) Кнопка "Добавить кат" Работает аналогично цифрофакту Шаг 2 создания статьи. Блок "Цифрофакт"*/

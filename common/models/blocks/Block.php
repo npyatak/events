@@ -3,6 +3,8 @@
 namespace common\models\blocks;
 
 use Yii;
+use common\components\ThumbnailImage;
+
 use common\models\EventBlock;
 
 class Block extends \yii\db\ActiveRecord
@@ -59,5 +61,29 @@ class Block extends \yii\db\ActiveRecord
             'title' => 'Заголовок',
             'text' => 'Текст',
         ];
+    }
+
+    public function getImageUrl($image, $thumb_size=false, $imageDir='event') {
+        if($image) {
+            $file_headers = @get_headers($image);
+            if($file_headers && $file_headers[0] != 'HTTP/1.1 404 Not Found') {
+                if(!$imageDir) $imageDir = $this->imageDir;
+                if($thumb_size) {
+                    $sizes = explode('x', $thumb_size);
+                    $imageSrc = ThumbnailImage::thumbnailFileUrl(
+                        $image,
+                        $sizes[0],
+                        $sizes[1],
+                        ThumbnailImage::THUMBNAIL_INSET,
+                        $imageDir
+                    );
+                    return $imageSrc;
+                } else {
+                    return $this->image;
+                }
+            }
+        } 
+
+        return '';
     }
 }

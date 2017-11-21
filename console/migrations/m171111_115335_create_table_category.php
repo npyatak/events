@@ -15,10 +15,10 @@ class m171111_115335_create_table_category extends Migration
         $this->createTable('{{%category}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string(100)->notNull(),
-            'url' => $this->string(100)->notNull(),
+            'alias' => $this->string(100)->notNull(),
         ], $tableOptions);
 
-        $this->batchInsert('{{%category}}', ['title', 'url'], [
+        $this->batchInsert('{{%category}}', ['title', 'alias'], [
             ['Премьеры', 'premiere'],
             ['Объекты', 'object'],
             ['События', 'event'],

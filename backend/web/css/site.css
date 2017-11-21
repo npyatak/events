@@ -163,13 +163,13 @@ input[type="checkbox"] {
     font-size: 20px;
     cursor: pointer;
 }
-.block-fact-item {
+.block-fact-item, .block-card-item {
     position: relative;
     border: 1px solid #c3c3c3;
     border-radius: 5px;
     padding: 20px;
 }
-.remove-fact-item {
+.remove-fact-item, .remove-card-item {
     position: absolute;
     top: 3px;
     right: 10px;

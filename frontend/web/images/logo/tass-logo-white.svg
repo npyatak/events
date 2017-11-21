@@ -1,0 +1,30 @@
+<svg width="60" height="60" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>tass-logo-white</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-1790 3398)">
+<g id="tass-logo-white">
+<g id="Rectangle-path">
+<use xlink:href="#path0_fill" transform="translate(1790 -3398)" fill="#FFFFFF"/>
+</g>
+<g id="Shape">
+<use xlink:href="#path1_fill" transform="translate(1793.6 -3360.8)" fill="#232372"/>
+</g>
+<g id="Shape">
+<use xlink:href="#path2_fill" transform="translate(1822.4 -3360.8)" fill="#232372"/>
+</g>
+<g id="Shape">
+<use xlink:href="#path3_fill" transform="translate(1808 -3360.8)" fill="#232372"/>
+</g>
+<g id="Shape">
+<use xlink:href="#path4_fill" transform="translate(1835.6 -3360.8)" fill="#232372"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 0 0L 60 0L 60 60L 0 60L 0 0Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 0 0L 13.2 0L 11.3907 3.06789L 7.93645 3.06789L 7.93645 13.2L 4.60561 13.2L 4.60561 3.06789L 0 3.06789L 0 0Z"/>
+<path id="path2_fill" fill-rule="evenodd" d="M 4.07067 3.03681C 3.68905 3.03681 3.39223 3.27975 3.39223 3.64417L 3.39223 9.51534C 3.39223 9.92025 3.68905 10.1227 4.07067 10.1227L 11.1519 10.1227L 11.1519 13.2L 4.07067 13.2C 1.61131 13.2 0 11.7828 0 9.51534L 0 3.68466C 0 1.45767 1.61131 0 4.07067 0L 12 0L 10.1343 3.0773L 4.07067 3.0773L 4.07067 3.03681Z"/>
+<path id="path3_fill" fill-rule="evenodd" d="M 8.24756 0L 2.38436 0L 0.664495 3.0773L 8.24756 3.0773C 8.63844 3.0773 8.83388 3.32025 8.83388 3.68466L 8.83388 5.10184L 3.90879 5.10184C 1.64169 5.10184 0 6.84294 0 9.15092C 0 11.4994 1.68078 13.2 3.90879 13.2L 12 13.2L 12 3.72515C 12 1.45767 10.5147 0 8.24756 0ZM 8.83389 10.2847L 4.29969 10.2847C 3.63519 10.2847 3.16614 9.79886 3.16614 9.11051C 3.16614 8.42217 3.63519 7.93628 4.29969 7.93628L 8.83389 7.93628L 8.83389 10.2847Z"/>
+<path id="path4_fill" fill-rule="evenodd" d="M 4.11307 3.03681C 3.73145 3.03681 3.43463 3.27975 3.43463 3.64417L 3.43463 9.51534C 3.43463 9.92025 3.73145 10.1227 4.11307 10.1227L 11.1519 10.1227L 11.1519 13.2L 4.07067 13.2C 1.61131 13.2 0 11.7828 0 9.51534L 0 3.68466C 0 1.45767 1.61131 0 4.07067 0L 12 0L 10.1343 3.0773L 4.11307 3.0773L 4.11307 3.03681Z"/>
+</defs>
+</svg>

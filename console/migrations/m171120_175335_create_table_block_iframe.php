@@ -13,6 +13,7 @@ class m171120_175335_create_table_block_iframe extends Migration {
 
         $this->createTable('{{%block_iframe}}', [
             'id' => $this->primaryKey(),
+            'title' => $this->string(255),
             'code' => $this->text(),          
         ], $tableOptions);
 

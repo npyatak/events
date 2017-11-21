@@ -1,1 +1,7 @@
-<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A80abb6fe9b2e2bd820ec5a6c7c631cdd032c1a1eaf7f1a70d27933f402302b63&amp;width=500&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+<?php if($events):?>
+	<?php foreach ($events as $event):?>
+		<?=$event->title;?>
+		<br>
+		<hr>
+	<?php endforeach;?>
+<?php endif;?>

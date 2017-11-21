@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 
+use yii\helpers\Url;
 /**
  * This is the model class for table "{{%category}}".
  *
@@ -29,7 +30,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['title', 'url'], 'string', 'max' => 100],
+            [['title', 'alias'], 'string', 'max' => 100],
         ];
     }
 
@@ -41,7 +42,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
-            'url' => 'Адрес',
+            'alias' => 'Алиас',
         ];
     }
 
@@ -56,5 +57,9 @@ class Category extends \yii\db\ActiveRecord
     public function getCategories()
     {
         return $this->hasMany(Event::className(), ['id' => 'event_id'])->viaTable(EventCategory::tableName(), ['category_id' => 'id']);
+    }
+
+    public function getUrl() {
+        return Url::toRoute(['site/index', 'alias' => $this->alias]);
     }
 }

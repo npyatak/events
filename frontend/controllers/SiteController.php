@@ -72,9 +72,22 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($year = null, $alias = null)
     {
-        return $this->render('index');
+        $dateNow = new \DateTime();
+        $year = $year ? $year : Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
+
+        $query = Event::find()
+            ->where(['between', 'timeline_date', \DateTime::createFromFormat('!Y', $year)->format('U'), \DateTime::createFromFormat('!Y', $year + 1)->format('U')]);
+        if($alias) {
+            $query->joinWith('categories');
+            $query->andWhere(['category.alias' => $alias]);
+        }
+        $events = $query->all();
+
+        return $this->render('index', [
+            'events' => $events,
+        ]);
     }
 
     public function actionEvent($id) {

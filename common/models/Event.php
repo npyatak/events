@@ -127,7 +127,7 @@ class Event extends \yii\db\ActiveRecord
 
     public function getCategories()
     {
-        return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable(EventCategory::tableName(), ['event_id' => 'id'])->all();
+        return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable(EventCategory::tableName(), ['event_id' => 'id']);
     }
 
     public function getValueIndexArray() {
@@ -153,6 +153,7 @@ class Event extends \yii\db\ActiveRecord
             'common\models\blocks\BlockImage',
             'common\models\blocks\BlockGallery',
             'common\models\blocks\BlockFact',
+            'common\models\blocks\BlockCard',
             'common\models\blocks\BlockCut',
             'common\models\blocks\BlockMap',
             'common\models\blocks\BlockIframe',
@@ -185,29 +186,28 @@ class Event extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getImageUrl($thumb_size=false, $image=false, $imageDir=false) {
-        if(!$image) $image = $this->image;
-        if(!$imageDir) $imageDir = $this->imageDir;
-        if($thumb_size) {
-            if(!$image) {
-                $image = __DIR__ . '/../../frontend/web/images/no_image.png';
-                $url = '/images/no_image.png';
-                $dir = false;
-            }
-            $file_headers = @get_headers($file);
+    public function getImageUrl($image, $thumb_size=false, $imageDir=false) {
+        if($image) {
+            $file_headers = @get_headers($image);
+            
             if($file_headers && $file_headers[0] != 'HTTP/1.1 404 Not Found') {
-                $sizes = explode('x', $thumb_size);
-                $imageSrc = ThumbnailImage::thumbnailFileUrl(
-                    $image,
-                    $sizes[0],
-                    $sizes[1],
-                    ThumbnailImage::THUMBNAIL_INSET,
-                    $imageDir
-                );
-                return $imageSrc;
+                if(!$imageDir) $imageDir = $this->imageDir;
+                if($thumb_size) {
+                    $sizes = explode('x', $thumb_size);
+                    $imageSrc = ThumbnailImage::thumbnailFileUrl(
+                        $image,
+                        $sizes[0],
+                        $sizes[1],
+                        ThumbnailImage::THUMBNAIL_INSET,
+                        $imageDir
+                    );
+                    return $imageSrc;
+                } else {
+                    return $this->image;
+                }
             }
-        } else {
-            return $this->image;
-        }
+        } 
+
+        return '';
     }
 }

@@ -2,6 +2,8 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+use common\models\Event;
+
 $this->title = $event->title;
 
 $url = Url::canonical();
@@ -17,17 +19,134 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 $this->registerMetaTag(['property' => 'fb:app_id', 'content' => '1704949819546160'], 'fb:app_id');/*TODO узнать id*/
 ?>
 
-<?=$event->title;?>
-<?//=$event->image_url;?>
-<?=Html::img($event->getImageUrl('200x200', $event->image_url));?>
+<div class="main-menu"></div>
+<div class="event-detail">
+    <div class="event-background" style="background-image:url(<?=$event->image_url;?>)">
+        <div class="event-background_caption">
+            <div class="container">
+                <div class="row justify-content-end">
+                    <div class="event-background_caption-inner">
+                        Фотография<br>
+                        Пресс-служба правительства РФ/ТАСС<br>
+                        Александр Астафьев
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="event-content">
+                <div class="container_inner">
+                    <div class="event-header">
+                        <div class="row m-0 justify-content-between">
+                            <div class="event-title">
+                                <h2><?=$event->title?></h2>
+                            </div>
+                            <div class="event-date">
+                            	<?php if($event->view_date_type == Event::DATE_TYPE_DATE):?>
 
-<?php foreach ($event->eventBlocks as $eventBlock):?>
-	<?=$eventBlock->order;?>
-	<br>
-	<?php print_r($eventBlock->block);?>
-	<br>
-	<hr>
-	<?php if($eventBlock->block->formName() == 'BlockFact') {
-		print_r($eventBlock->block->blockFactItems);
-	}?>
-<?php endforeach;?>
+                                <?php elseif($event->view_date_type == Event::DATE_TYPE_MONTH_AND_YEAR):?>
+
+                                <?php else:?>
+                            		<?php $exp = explode(' ', $event->view_date);?>
+                                    <div class="season">
+                                        <div>
+                                            <span><?=$exp[0];?></span>
+                                            <span><?=isset($exp[1]) ? $exp[1] : '';?></span>
+                                        </div>
+                                    </div>
+                            	<?php endif;?>
+
+                                <div class="add-to-calendar">
+                                    <a href="">добавить в календарь</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-cat">
+                        	<?php if($event->categories) {
+                            	foreach ($event->categories as $cat) {
+                            		echo Html::a($cat->title, $cat->url);
+                            	}
+                            }?>
+                        </div>
+                    </div>
+
+                    <?php if($event->eventBlocks) {
+                        foreach ($event->eventBlocks as $eventBlock) {
+                            echo $this->render('_blocks/template', ['eventBlock' => $eventBlock]);
+                        }
+                    }?>
+                </div>
+
+                
+                <div class="container_inner">
+                    <div class="footer">
+                        <div class="row justify-content-end m-0">
+                            <div class="footer-inner m-r-40">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="share-block">
+                                            <div class="share-wrap">
+                                                <a href="" class="share-btn btn-facebook"><i class="fa fa-facebook"></i></a>
+                                            </div>
+                                            <div class="share-wrap">
+                                                <a href="" class="share-btn btn-twitter"><i class="fa fa-twitter"></i></a>
+                                            </div>
+                                            <div class="share-wrap">
+                                                <a href="" class="share-btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
+                                            </div>
+                                            <div class="share-wrap">
+                                                <a href="" class="share-btn btn-vk"><i class="fa fa-vk"></i></a>
+                                            </div>
+                                            <div class="share-wrap">
+                                                <a href="" class="share-btn btn-telegram"><i class="fa fa-telegram"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="footer-arrow">
+                                            <a href=""><i class="fa fa-chevron-left"></i></a>
+                                        </div>
+                                        <div class="footer-title">предыдущее</div>
+                                        <div class="footer-text"><a href="">Орбитальный телескоп Hubble сменит мощный James Webb октябрь</a></div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="footer-arrow">
+                                            <a href=""><i class="fa fa-chevron-right"></i></a>
+                                        </div>
+                                        <div class="footer-title">следующее</div>
+                                        <div class="footer-text"><a href="">Орбитальный телескоп Hubble сменит мощный James Webb октябрь</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="more-events">
+                <div class="more-events_title">похожие события</div>
+                <a href="" class="item">
+                    <div class="item-image" style="background-image:url('images/more_events/Layer_86.jpg')"></div>
+                    <div class="item-content">
+                        <div class="item-title">
+                            <h5>Запуск телескопа James Webb отложили до 2019 года</h5>
+                        </div>
+                        <div class="item-date">12 апреля</div>
+                    </div>
+                </a>
+                <a href="" class="item">
+                    <div class="item-image" style="background-image:url('images/more_events/Layer_86.jpg')"></div>
+                    <div class="item-content">
+                        <div class="item-title">
+                            <h5>Запуск телескопа James Webb отложили до 2019 года</h5>
+                        </div>
+                        <div class="item-date">12 апреля</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

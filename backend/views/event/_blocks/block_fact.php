@@ -20,14 +20,10 @@ use common\models\blocks\items\BlockFactItem;
         } else {
             $itemModels = [new BlockFactItem];
         }?>
-        <?php 
-        // echo '<pre>';
-        // print_r($itemModels);
-        // echo '</pre>';
-        // exit;?>
+        
         <div class="fact-items">
-            <?php foreach ($itemModels as $key => $slide) {
-                echo $this->render('_block_fact_item', ['model' => $slide, 'i' => $i, 'key' => $key]);
+            <?php foreach ($itemModels as $key => $item) {
+                echo $this->render('_block_fact_item', ['model' => $item, 'i' => $i, 'key' => $key]);
             } ?>
         </div>
 

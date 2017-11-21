@@ -15,6 +15,7 @@ use common\models\search\EventSearch;
 use common\models\EventBlock;
 use common\models\blocks\items\BlockGalleryImage;
 use common\models\blocks\items\BlockFactItem;
+use common\models\blocks\items\BlockCardItem;
 
 /**
  * EventController implements the CRUD actions for Event model.
@@ -103,6 +104,7 @@ class EventController extends CController
     public function actionUpdate($id) {
         $model = $this->findModel($id);
         $blockIDsOld = [];
+        $blockModelsArray = [];
 
         foreach ($model->eventBlocks as $eventBlock) {
             $blockIDsOld[$eventBlock->model][] = $eventBlock->block_id;
@@ -115,6 +117,7 @@ class EventController extends CController
         $post = Yii::$app->request->post();
 
         if ($model->load($post)) {
+            print_r($post);exit;
             $transaction = Yii::$app->db->beginTransaction();
 
             $loadBlockModels = $this->loadBlockModels($post);
@@ -286,6 +289,16 @@ class EventController extends CController
         if(Yii::$app->request->isAjax) {
             return $this->renderAjax('_blocks/_block_fact_item', [
                 'model' => new BlockFactItem,
+                'i' => $i,
+                'key' => $key,
+            ]);
+        }
+    }
+
+    public function actionAddCardItem($i, $key) {
+        if(Yii::$app->request->isAjax) {
+            return $this->renderAjax('_blocks/_block_card_item', [
+                'model' => new BlockCardItem,
                 'i' => $i,
                 'key' => $key,
             ]);

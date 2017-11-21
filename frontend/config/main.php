@@ -15,6 +15,17 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'js' => ['/js/jquery-3.2.1.min.js'],
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'js' => ['/js/bootstrap.min.js'],
+                    'css' => ['/css/bootstrap.min.css']
+                ],
+            ]
+        ],
         'request' => [
             'baseUrl' => '/',
             'csrfParam' => '_csrf-frontend',
@@ -47,6 +58,11 @@ return [
             'baseUrl' => '/',
             'rules' => [
                 '' => 'site/index',
+                
+                '<year:\d+>' => 'site/index',
+                '<year:\d+>/category/<alias:\w+>' => 'site/index',
+
+                'event/<id:\d+>' => 'site/event',
                 
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
                 '<controller:\w+>/<action>/<id:\d+>' => '<controller>/<action>',

@@ -1,0 +1,22 @@
+<svg width="32" height="32" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>&#209;&#131;&#208;&#178;&#208;&#181;&#208;&#187;&#208;&#184;&#209;&#135;&#209;&#130;&#209;&#130;&#209;&#140;</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-2539 -8515)">
+<g id="&#209;&#131;&#208;&#178;&#208;&#181;&#208;&#187;&#208;&#184;&#209;&#135;&#209;&#130;&#209;&#130;&#209;&#140;">
+<g id="Oval 5">
+<use xlink:href="#path0_stroke" transform="translate(2540 8516)" fill="#FFFFFF"/>
+</g>
+<g id="Combined Shape">
+<use xlink:href="#path1_fill" transform="translate(2547 8523)" fill="#FFFFFF"/>
+</g>
+<g id="Rectangle 13">
+<use xlink:href="#path2_fill" transform="translate(2550 8526)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 15 30.5C 23.5604 30.5 30.5 23.5604 30.5 15L 29.5 15C 29.5 23.0081 23.0081 29.5 15 29.5L 15 30.5ZM 30.5 15C 30.5 6.43959 23.5604 -0.5 15 -0.5L 15 0.5C 23.0081 0.5 29.5 6.99187 29.5 15L 30.5 15ZM 15 -0.5C 6.43959 -0.5 -0.5 6.43959 -0.5 15L 0.5 15C 0.5 6.99187 6.99187 0.5 15 0.5L 15 -0.5ZM -0.5 15C -0.5 23.5604 6.43959 30.5 15 30.5L 15 29.5C 6.99187 29.5 0.5 23.0081 0.5 15L -0.5 15Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 5 0L 0 0L 0 1L 0 5L 1 5L 1 1L 5 1L 5 0ZM 16 0L 11 0L 11 1L 15 1L 15 5L 16 5L 16 1L 16 0ZM 11 16L 16 16L 16 15L 16 11L 15 11L 15 15L 11 15L 11 16ZM 5 16L 0 16L 0 15L 0 11L 1 11L 1 15L 5 15L 5 16Z"/>
+<path id="path2_fill" fill-rule="evenodd" d="M 0 0L 10 0L 10 10L 0 10L 0 0Z"/>
+</defs>
+</svg>

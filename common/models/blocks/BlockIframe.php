@@ -22,6 +22,7 @@ class BlockIframe extends Block
         return array_merge(parent::rules(), [
                 [['code'], 'required'],
                 [['code'], 'safe'],
+                ['title', 'string', 'max' => 255],
             ]
         );
     }

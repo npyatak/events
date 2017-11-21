@@ -19,10 +19,6 @@ class ThumbnailImage {
     public static $cacheExpire = 0;
 
 	public static function thumbnailFile($filename, $width, $height, $mode = self::THUMBNAIL_OUTBOUND, $imageDir = false) {
-        // $filename = FileHelper::normalizePath(Yii::getAlias($filename));
-        // if (!is_file($filename)) {
-        //     throw new FileNotFoundException("File $filename doesn't exist");
-        // }
         $cachePath = __DIR__ . '/../../frontend/web/'.self::$cacheAlias;
 
         $explode = explode('/', $filename);
@@ -34,7 +30,6 @@ class ThumbnailImage {
         $thumbnailFilePath = $cachePath . DIRECTORY_SEPARATOR . $imageDir;
         $thumbnailFileName = $thumbnailFileName .'_'. $width .'x'. $height;
         $thumbnailFile = $thumbnailFilePath . DIRECTORY_SEPARATOR . $thumbnailFileName . $thumbnailFileExt;
-        echo $thumbnailFile;
 
         if (file_exists($thumbnailFile)) {
             if (self::$cacheExpire !== 0 && (time() - filemtime($thumbnailFile)) > self::$cacheExpire) {

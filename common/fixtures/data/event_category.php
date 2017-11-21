@@ -1,0 +1,19 @@
+<?php 
+return [
+	[
+		'event_id'=>1,
+		'category_id'=>1,
+	],
+	[
+		'event_id'=>2,
+		'category_id'=>1,
+	],
+	[
+		'event_id'=>1,
+		'category_id'=>3,
+	],
+	[
+		'event_id'=>2,
+		'category_id'=>2,
+	],	
+];
