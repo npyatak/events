@@ -36,7 +36,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Пользователи', 'url' => ['/admin'], 'visible' => $isAdmin],
+        ['label' => 'Редакторы', 'url' => ['/editor'], 'visible' => $isAdmin],
         ['label' => 'Категории', 'url' => ['/category'], 'visible' => $isAdmin],
         ['label' => 'События', 'url' => ['/event']],
         ['label' => 'Настройки', 'url' => ['/settings']],

@@ -4,16 +4,16 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-use backend\models\Admin;
+use backend\models\Editor;
 
-$this->title = 'Пользователи';
+$this->title = 'Редакторы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div>
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Добавить пользователя', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить редактора', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>    
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function($data) {
                         return $data->roleLabel;
                     },
-                    'filter' => Html::activeDropDownList($searchModel, 'role', Admin::getRolesArray(), ['prompt'=>'']),
+                    'filter' => Html::activeDropDownList($searchModel, 'role', Editor::getRolesArray(), ['prompt'=>'']),
                 ],
                 'email:email',
                 'name',
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => '{update} {delete} {reset-password}',
                     'buttons' => [
                         'reset-password' => function ($url, $model) {
-                            $url = Url::toRoute(['/admin/reset-password', 'id'=>$model->id]);
+                            $url = Url::toRoute(['/editor/reset-password', 'id'=>$model->id]);
                             return Html::a('<span class="glyphicon glyphicon-lock"></span>', $url, [
                                 'title' => 'Сменить пароль'
                             ]);

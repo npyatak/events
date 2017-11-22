@@ -16,7 +16,6 @@ $this->registerMetaTag(['property' => 'og:title', 'content' => $this->title], 'o
 $this->registerMetaTag(['property' => 'og:image', 'content' => $image], 'og:image');
 $this->registerMetaTag(['property' => 'og:url', 'content' => $url], 'og:url');
 $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
-$this->registerMetaTag(['property' => 'fb:app_id', 'content' => '1704949819546160'], 'fb:app_id');/*TODO узнать id*/
 ?>
 
 <div class="main-menu"></div>
@@ -49,17 +48,20 @@ $this->registerMetaTag(['property' => 'fb:app_id', 'content' => '170494981954616
                                 <?php elseif($event->view_date_type == Event::DATE_TYPE_MONTH_AND_YEAR):?>
 
                                 <?php else:?>
-                            		<?php $exp = explode(' ', $event->view_date);?>
                                     <div class="season">
                                         <div>
-                                            <span><?=$exp[0];?></span>
-                                            <span><?=isset($exp[1]) ? $exp[1] : '';?></span>
+                                            <span><?=$event->viewDate[0];?></span>
+                                            <span><?=$event->viewDate[1];?></span>
                                         </div>
                                     </div>
                             	<?php endif;?>
 
                                 <div class="add-to-calendar">
-                                    <a href="">добавить в календарь</a>
+                                    <a class="add-to-calendar-a" href="">добавить в календарь</a>
+                                    <div class="hidden">
+                                        <a class="calendar" href="<?=Url::toRoute(['site/ics', 'id' => $event->id]);?>" target="_blank">сохранить ics-файл</a>
+                                        <a class="calendar" href="<?=Url::toRoute(['site/gc', 'id' => $event->id]);?>" target="_blank">сохранить в google Календарь</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -149,4 +151,18 @@ $this->registerMetaTag(['property' => 'fb:app_id', 'content' => '170494981954616
         </div>
     </div>
 </div>
-</div>
+
+
+<?php $script = "
+    $(document).on('click', '.add-to-calendar-a', function() {
+        $(this).parent().find('div').show();
+
+        return false;
+    });
+
+    $(document).on('click', 'body', function() {
+        $('.add-to-calendar div').hide();
+    });
+";
+
+$this->registerJs($script, yii\web\View::POS_END);?>

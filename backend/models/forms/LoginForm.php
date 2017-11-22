@@ -4,7 +4,7 @@ namespace backend\models\forms;
 use Yii;
 use yii\base\Model;
 
-use backend\models\Admin;
+use backend\models\Editor;
 /**
  * Login form
  */
@@ -51,7 +51,7 @@ class LoginForm extends Model
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $admin = $this->getAdmin();
+            $admin = $this->getEditor();
             if (!$admin || !$admin->validatePassword($this->password)) {
                 $this->addError($attribute, 'Неверный логин или пароль.');
             }
@@ -66,7 +66,7 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getAdmin(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            return Yii::$app->user->login($this->getEditor(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         } else {
             return false;
         }
@@ -75,12 +75,12 @@ class LoginForm extends Model
     /**
      * Finds admin by [[login]]
      *
-     * @return Admin|null
+     * @return Editor|null
      */
-    protected function getAdmin()
+    protected function getEditor()
     {
         if ($this->_admin === null) {
-            $this->_admin = Admin::findByLogin($this->login);
+            $this->_admin = Editor::findByLogin($this->login);
         }
 
         return $this->_admin;

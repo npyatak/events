@@ -23,12 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'id',
                 'title',
-                'view_date',
-
                 [
-                    'attribute' => 'timeline_date',
+                    'attribute' => 'viewDate',
                     'value' => function($data) {
-                        return date('m.Y', $data->timeline_date);
+                        return implode(' ', $data->viewDate);
                     }
                 ],
                 [

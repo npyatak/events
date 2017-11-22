@@ -308,7 +308,6 @@ class EventController extends CController
         $blockIDs = [];
         $blockModelsArray = [];
 
-        $i = 0;
         foreach ($post as $key => $blockDataArray) {
             $class = 'common\models\blocks\\'.$key;
             if(class_exists($class)) {
@@ -321,14 +320,11 @@ class EventController extends CController
                     }
                     $blockModel->attributes = $blockData;
 
-                    //if(in_array($blockModel->formName(), ['BlockGallery', 'BlockFact'])) {
                     if(isset($blockModel->itemsModelName)) {
-            //exit;
                         $blockModel->loadItems($post[$blockModel->itemsModelName][$i]);
                     }
 
                     $blockModelsArray[$i] = $blockModel;
-                    $i++;
                     $blockModel = null;
                 }
             }

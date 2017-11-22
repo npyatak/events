@@ -33,25 +33,22 @@ use common\models\Event;
     <?php endif;?>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-2">
             <?= $form->field($model, 'view_date_type')->dropDownList($model->dateTypeList)?>
         </div>
-        <div class="col-sm-2">
-            <?= $form->field($model, 'view_date')->textInput() ?>
-        </div>
         <div class="col-sm-3">
-            <?= $form->field($model, 'timelineDateFormatted')->widget(
+            <?= $form->field($model, 'dateFormatted')->widget(
                 DatePicker::className(), [
                     'pluginOptions' => [
-                        'startView'=>'year',
-                        'minViewMode'=>'months',
-                        'format' => 'mm.yyyy',
+                        // 'startView'=>'year',
+                        // 'minViewMode'=>'months',
+                        'format' => 'dd.mm.yyyy',
                     ]
                 ]
-            )->label($model->attributeLabels()['timeline_date']);?>
+            );?>
         </div>
     </div>
 

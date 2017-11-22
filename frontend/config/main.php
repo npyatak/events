@@ -20,10 +20,10 @@ return [
                 'yii\web\JqueryAsset' => [
                     'js' => ['/js/jquery-3.2.1.min.js'],
                 ],
-                'yii\bootstrap\BootstrapAsset' => [
-                    'js' => ['/js/bootstrap.min.js'],
-                    'css' => ['/css/bootstrap.min.css']
-                ],
+                // 'yii\bootstrap\BootstrapAsset' => [
+                //     'js' => ['/js/bootstrap.min.js'],
+                //     'css' => ['/css/bootstrap.min.css']
+                // ],
             ]
         ],
         'request' => [
@@ -32,14 +32,14 @@ return [
             'cookieValidationKey' => '23465687409',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'backend\models\Editor',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
-        'session' => [
-            // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
-        ],
+        // 'session' => [
+        //     // this is the name of the session cookie used for login on the frontend
+        //     'name' => 'advanced-frontend',
+        // ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -62,10 +62,12 @@ return [
                 '<year:\d+>' => 'site/index',
                 '<year:\d+>/category/<alias:\w+>' => 'site/index',
 
-                'event/<id:\d+>' => 'site/event',
+                //'event/<id:\d+>' => 'site/event',
+                '<action:\w+>' => 'site/<action>',
+                '<action:\w+>/<id:\d+>' => 'site/<action>',
                 
-                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-                '<controller:\w+>/<action>/<id:\d+>' => '<controller>/<action>',
+                //'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+                //'<controller:\w+>/<action>/<id:\d+>' => '<controller>/<action>',
             ],
         ],
     ],

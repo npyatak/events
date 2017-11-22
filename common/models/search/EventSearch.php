@@ -18,8 +18,8 @@ class EventSearch extends Event
     public function rules()
     {
         return [
-            [['id', 'timeline_date', 'value_index'], 'integer'],
-            [['title', 'view_date'], 'safe'],
+            [['id', 'date', 'value_index'], 'integer'],
+            [['title'], 'safe'],
         ];
     }
 
@@ -60,12 +60,11 @@ class EventSearch extends Event
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'timeline_date' => $this->timeline_date,
+            'date' => $this->date,
             'value_index' => $this->value_index,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'view_date', $this->view_date]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }

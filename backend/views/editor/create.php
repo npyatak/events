@@ -1,8 +1,8 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = 'Добавить пользователя';
-$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
+$this->title = 'Добавить редактора';
+$this->params['breadcrumbs'][] = ['label' => 'Редакторы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

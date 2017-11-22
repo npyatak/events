@@ -32,5 +32,13 @@ return [
         'settings' => [
             'class' => 'common\components\Settings',
         ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'dateFormat' => 'php:d.m.Y',
+            'datetimeFormat' => 'php:j F, H:i',
+            'timeFormat' => 'php:H:i:s',
+            'defaultTimeZone' => 'Europe/Moscow',
+            'locale' => 'ru-RU'
+        ],
     ],
 ];

@@ -5,12 +5,12 @@ namespace backend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Admin;
+use backend\models\Editor;
 
 /**
- * AdminSearch represents the model behind the search form about `backend\models\Admin`.
+ * EditorSearch represents the model behind the search form about `backend\models\Editor`.
  */
-class AdminSearch extends Admin
+class EditorSearch extends Editor
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class AdminSearch extends Admin
      */
     public function search($params)
     {
-        $query = Admin::find();
+        $query = Editor::find();
 
         // add conditions that should always apply here
 

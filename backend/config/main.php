@@ -21,12 +21,12 @@ return [
             'csrfParam' => '_csrf-backend',
             'cookieValidationKey' => '2923534000',
         ],
-        'session' => [
-            // this is the name of the session cookie used for login on the backend
-            'name' => 'backend-sess-id',
-        ],
+        // 'session' => [
+        //     // this is the name of the session cookie used for login on the backend
+        //     'name' => 'backend-sess-id',
+        // ],
         'user' => [
-            'identityClass' => 'backend\models\Admin',
+            'identityClass' => 'backend\models\Editor',
             'enableAutoLogin' => true,
             'identityCookie' => [
                 'name' => '_backendUser',

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'Сменить пароль - '.$model->login;
-$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Редакторы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->login;
 ?>
 

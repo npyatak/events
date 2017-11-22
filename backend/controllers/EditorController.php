@@ -7,13 +7,13 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
-use backend\models\Admin;
-use backend\models\search\AdminSearch;
+use backend\models\Editor;
+use backend\models\search\EditorSearch;
 
 /**
- * AdminController implements the CRUD actions for Admin model.
+ * EditorController implements the CRUD actions for Editor model.
  */
-class AdminController extends CController
+class EditorController extends CController
 {  
     public function beforeAction($action) {
         if(!Yii::$app->user->identity->canAdmin()) {
@@ -25,7 +25,7 @@ class AdminController extends CController
 
     public function actionIndex()
     {
-        $searchModel = new AdminSearch();
+        $searchModel = new EditorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -35,13 +35,13 @@ class AdminController extends CController
     }
 
     /**
-     * Creates a new Admin model.
+     * Creates a new Editor model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Admin();
+        $model = new Editor();
         //$model->scenario = 'create';
 
         if ($model->load(Yii::$app->request->post())) {
@@ -59,7 +59,7 @@ class AdminController extends CController
     }
 
     /**
-     * Updates an existing Admin model.
+     * Updates an existing Editor model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -78,7 +78,7 @@ class AdminController extends CController
     }
 
     /**
-     * Deletes an existing Admin model.
+     * Deletes an existing Editor model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -106,15 +106,15 @@ class AdminController extends CController
     }
 
     /**
-     * Finds the Admin model based on its primary key value.
+     * Finds the Editor model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Admin the loaded model
+     * @return Editor the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Admin::findOne($id)) !== null) {
+        if (($model = Editor::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

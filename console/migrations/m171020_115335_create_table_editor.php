@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m171020_115335_create_table_admin extends Migration
+class m171020_115335_create_table_editor extends Migration
 {
     public function safeUp()
     {
@@ -12,7 +12,7 @@ class m171020_115335_create_table_admin extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%admin}}', [
+        $this->createTable('{{%editor}}', [
             'id' => $this->primaryKey(),
             'login' => $this->string()->notNull()->unique(),
             'name' => $this->string(255),
@@ -29,13 +29,13 @@ class m171020_115335_create_table_admin extends Migration
         ], $tableOptions);
 
         //email/login: tass@tass.ru, имя: Администратор, пароль: qwerty
-        $this->batchInsert('{{%admin}}', ['login', 'name', 'password_hash', 'auth_key', 'email', 'role', 'created_at', 'updated_at'], [
+        $this->batchInsert('{{%editor}}', ['login', 'name', 'password_hash', 'auth_key', 'email', 'role', 'created_at', 'updated_at'], [
             ['tass@tass.ru', 'Администратор', '$2y$13$sOp6yzJtXKp6JcxX4Wpoy.t2HhpjUPDpr0nG9lD3JtKqCoXkCwDZ6', 'sdsadasd', 'tass@tass.ru', 5, time(), time()],
         ]);
     }
 
     public function safeDown()
     {
-        $this->dropTable('{{%admin}}');
+        $this->dropTable('{{%editor}}');
     }
 }

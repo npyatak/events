@@ -7,7 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
-class Admin extends ActiveRecord implements IdentityInterface
+class Editor extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
@@ -21,7 +21,7 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%admin}}';
+        return '{{%editor}}';
     }
 
     /**
@@ -91,7 +91,7 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds admin by login
+     * Finds editor by login
      *
      * @param string $login
      * @return static|null
@@ -102,7 +102,7 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds admin by password reset token
+     * Finds editor by password reset token
      *
      * @param string $token password reset token
      * @return static|null
@@ -132,7 +132,7 @@ class Admin extends ActiveRecord implements IdentityInterface
         }
 
         $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['admin.passwordResetTokenExpire'];
+        $expire = Yii::$app->params['editor.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
 
@@ -164,7 +164,7 @@ class Admin extends ActiveRecord implements IdentityInterface
      * Validates password
      *
      * @param string $password password to validate
-     * @return bool if password provided is valid for current admin
+     * @return bool if password provided is valid for current editor
      */
     public function validatePassword($password)
     {

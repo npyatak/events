@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+
+use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use common\components\ThumbnailImage;
 
@@ -17,7 +19,7 @@ class Event extends \yii\db\ActiveRecord
 
     public $categoryIds = [];
     public $similarIds = [];
-    public $timelineDateFormatted;
+    public $dateFormatted;
     public $imageDir = 'event';
     /**
      * @inheritdoc
@@ -40,10 +42,9 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'timelineDateFormatted', 'view_date_type'], 'required'],
-            [['show_on_main', 'value_index', 'status', 'timeline_date', 'created_at', 'updated_at', 'view_date_type'], 'integer'],
+            [['title', 'view_date_type', 'dateFormatted'], 'required'],
+            [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'date'], 'integer'],
             [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title'], 'string', 'max' => 255],
-            [['view_date'], 'string', 'max' => 100],
             [['categoryIds', 'similarIds'], 'safe']
         ];
     }
@@ -57,9 +58,9 @@ class Event extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Заголовок',
             'leading_text' => 'Лид',
-            'view_date' => 'Отображаемая дата',
+            'viewDate' => 'Отображаемая дата',
+            'date' => 'Дата',
             'view_date_type' => 'Тип даты',
-            'timeline_date' => 'Дата привязки к таймлайн',
             'socials_image_url' => 'Ссылка на изображение для соц.сетей',
             'image_url' => 'Ссылка на заглавное изображение',
             'main_page_image_url' => 'Ссылка на изображение для карточки на главной',
@@ -76,12 +77,12 @@ class Event extends \yii\db\ActiveRecord
             'updated_at' => 'Время последнего изменения',
             'categoryIds' => 'Категории',
             'similarIds' => 'Связанные события',
-            'timelineDateFormatted' => 'Дата привязки к таймлайн',
+            'dateFormatted' => 'Дата',
         ];
     }
 
     public function beforeSave($insert) {
-        $this->timeline_date = \DateTime::createFromFormat('m.Y', $this->timelineDateFormatted)->format('U');
+        $this->date = \DateTime::createFromFormat('!d.m.Y', $this->dateFormatted)->format('U');
         $this->similar = json_encode($this->similarIds);
 
         return parent::beforeSave($insert);
@@ -107,7 +108,7 @@ class Event extends \yii\db\ActiveRecord
     }
 
     public function afterFind() {
-        $this->timelineDateFormatted = date('m.Y', $this->timeline_date);
+        $this->dateFormatted = date('d.m.Y', $this->date);
         $this->categoryIds = EventCategory::find()->select(['category_id'])->where(['event_id' => $this->id])->column();
         $this->similarIds = json_decode($this->similar);
     }
@@ -180,10 +181,14 @@ class Event extends \yii\db\ActiveRecord
 
     public function getDateTypeList() {
         return [
-            self::DATE_TYPE_DATE => 'Дата',
+            self::DATE_TYPE_DATE => 'Число и месяц',
             self::DATE_TYPE_MONTH_AND_YEAR => 'Месяц и год',
             self::DATE_TYPE_SEASON_AND_YEAR => 'Сезон и год',
         ];
+    }
+
+    public function getUrl($absolute=false) {
+        return Url::toRoute(['site/event', 'id' => $this->id], $absolute);
     }
 
     public function getImageUrl($image, $thumb_size=false, $imageDir=false) {
@@ -209,5 +214,61 @@ class Event extends \yii\db\ActiveRecord
         } 
 
         return '';
+    }
+
+    public function getViewDate() {
+        $date = [];
+        $dateTime = new \DateTime;
+        $dateTime->setTimestamp($this->date);
+        $monthId = $dateTime->format('n');
+        switch ($this->view_date_type) {
+            case self::DATE_TYPE_DATE:
+                $date = [$dateTime->format('j'), $this->getMonth($monthId, true)];
+                break;
+            case self::DATE_TYPE_MONTH_AND_YEAR:
+                $date = [$this->getMonth($monthId), $dateTime->format('Y')];
+                break;
+            case self::DATE_TYPE_SEASON_AND_YEAR:
+                $date = [$this->season, $dateTime->format('Y')];
+                break;
+        }
+
+        return $date;
+    }
+
+    public function getSeason() {
+        $seasonsMonths = ['01' => 1, '02' => 1, '03' => 2, '04' => 2, '05' => 2, '06' => 3, '07' => 3, '08' => 3, '09' => 4, '10' => 4, '11' => 4, '12' => 1];
+        
+        return $this->seasonsArray[$seasonsMonths[date('m', $this->date)]];
+    }
+
+    public function getSeasonsArray() {
+        return [
+            1 => 'зима',
+            2 => 'весна',
+            3 => 'лето',
+            4 => 'осень',
+        ];
+    }
+
+    public function getMonth($monthId, $secondForm=false) {
+        return $secondForm ? $this->monthsArray[$monthId][1] : $this->monthsArray[$monthId][0];
+    }
+
+    public function getMonthsArray() {
+        return [
+            1 => ['январь', 'января'],
+            2 => ['февраль', 'февраля'],
+            3 => ['март', 'марта'],
+            4 => ['апрель', 'апреля'],
+            5 => ['май', 'мая'],
+            6 => ['июнь', 'июня'],
+            7 => ['июль', 'июля'],
+            8 => ['август', 'августа'],
+            9 => ['сентябрь', 'сентября'],
+            10 => ['октябрь', 'октября'],
+            11 => ['ноябрь', 'ноября'],
+            12 => ['декабрь', 'декабря'],
+        ];
     }
 }
