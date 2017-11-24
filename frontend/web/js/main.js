@@ -32,7 +32,21 @@ $(document).ready(function () {
         })
         .on('click','.turn',function () {
             $('.panel').toggleClass('flip');
-        })
+        });
+
+    var table = $('.event-content').find('table');
+    if(table){
+        $(table).wrapAll('<div class="table-wrap"><div class="container_inner"><div class="ckeditor"></div></div></div>');
+    }
+
+    $(window).resize(function () {
+        var event_content = $('.event-content').width();
+        var block_content = $('.block_content').position().left;
+        if($(this).width() < 1279 && $(this).width() > 768){
+            $('.table-wrap').css({width: event_content + 120,'margin-left':-block_content})
+        }
+    });
+    $(window).trigger('resize');
 
     // $('.turn').click(function(){
     //     $(this).addClass('flip');
