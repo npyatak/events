@@ -63,7 +63,7 @@ return [
                 '<year:\d+>/category/<alias:\w+>' => 'site/index',
 
                 //'event/<id:\d+>' => 'site/event',
-                '<action:\w+>' => 'site/<action>',
+                '<action>' => 'site/<action>',
                 '<action:\w+>/<id:\d+>' => 'site/<action>',
                 
                 //'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

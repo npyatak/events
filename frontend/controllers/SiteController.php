@@ -336,6 +336,33 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionShareCounts($url) {
+        //$url = 'https://www.youtube.com/watch?v=Ao5jRFaHDO8';
+        $data = [];
+
+        //VK
+        $str = @file_get_contents("http://vk.com/share.php?act=count&index=1&url=".urlencode($url));
+        preg_match('#VK.Share.count\(1, ([0-9]+)\);#', $str, $matches);
+        if(count($matches) > 1) {
+            $data[] = ['soc' => 'vk', 'count' => intval($matches[1])];
+        }
+        //FB
+        $str = @file_get_contents("http://graph.facebook.com/?id=".urlencode($url));
+        $str = json_decode($str);
+        $data[] = ['soc' => 'fb', 'count' => $str->share->share_count];
+
+        //OK
+        $str = @file_get_contents("https://connect.ok.ru/dk?st.cmd=extLike&uid=odklocs0&ref=".urlencode($url));
+        //preg_match("#ODKL.updateCount('odklocs0','([0-9]+)\)');#", $str, $matches);
+        $exp = explode(',', $str);
+        if(count($exp) > 1) {
+            $data[] = ['soc' => 'ok', 'count' => intval($exp[1])];
+        }
+
+        return json_encode($data);
+
+    }
+
     protected function findEvent($id) {
         $model = Event::findOne($id);
         if ($model === null || ($model->status === Event::STATUS_INACTIVE && Yii::$app->user->isGuest)) {

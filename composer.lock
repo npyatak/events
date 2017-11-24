@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "955e2a2aa6c5d2b62a366217d32e68a3",
-    "content-hash": "8cc33a5ee1b26bdab1d2d6a61e2eda59",
+    "hash": "47c56aeed9c1c5b929eb1893500bd007",
+    "content-hash": "9b1ec83ffa361736f042fcd37236938a",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -297,6 +297,42 @@
                 "validator"
             ],
             "time": "2017-11-15 23:40:40"
+        },
+        {
+            "name": "elgorm/yii2-yandex-sharebuttons",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Elgorm/yii2-yandex-sharebuttons.git",
+                "reference": "9c312ab275885bef0403c4bc0b06f4821ffd2797"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Elgorm/yii2-yandex-sharebuttons/zipball/9c312ab275885bef0403c4bc0b06f4821ffd2797",
+                "reference": "9c312ab275885bef0403c4bc0b06f4821ffd2797",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": ">=2.0.7"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "elgorm\\sharebuttons\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Elgorm",
+                    "email": "yii2widget@4ml.su"
+                }
+            ],
+            "description": "Yandex share buttons for Yii2",
+            "time": "2016-04-14 04:21:20"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -4032,7 +4068,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "kartik-v/yii2-widget-depdrop": 20,
-        "kartik-v/yii2-widget-datepicker": 20
+        "kartik-v/yii2-widget-datepicker": 20,
+        "elgorm/yii2-yandex-sharebuttons": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,

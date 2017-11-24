@@ -135,6 +135,9 @@
     float: left;
     width: 40px;
 }
+.share-block ul {
+    
+}
 .share-wrap {
     margin-bottom: 30px;
     text-align: center;
@@ -162,19 +165,20 @@
     -o-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 }
-.btn-facebook {
+
+.wrap-fb .share-btn {
     background: rgb(10, 87, 169);
 }
-.btn-twitter {
+.wrap-tw .share-btn {
     background: rgb(0, 179, 234);
 }
-.btn-odnoklassniki {
+.wrap-ok .share-btn {
     background: rgb(255, 106, 0);
 }
-.btn-vk {
+.wrap-vk .share-btn {
     background: rgb(68, 118, 165);
 }
-.btn-telegram {
+.wrap-tg .share-btn {
     background: rgb(78, 168, 227);
 }
 .share-counter {

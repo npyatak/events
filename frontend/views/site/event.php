@@ -85,25 +85,53 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                     </div>
                     <div class="event-inner">
                         <div class="share-block">
-                            <div class="share-wrap">
-                                <a href="" class="share-btn btn-facebook"><i class="fa fa-facebook"></i></a>
-                                <span class="share-counter">40</span>
+                            <div class="share-wrap wrap-fb">
+                                <?=Html::a('<i class="fa fa-facebook"></i>', '', [
+                                    'class' => 'share-btn',
+                                    'data-type' => 'fb',
+                                    'data-url' => $url,
+                                    'data-title' => $title,
+                                    'data-image' => $image,
+                                    'data-desc' => $desc,
+                                ]);?>
+                                <span class="share-counter"></span>
                             </div>
-                            <div class="share-wrap">
-                                <a href="" class="share-btn btn-twitter"><i class="fa fa-twitter"></i></a>
-                                <span class="share-counter">31</span>
+                            <div class="share-wrap wrap-vk">
+                                <?=Html::a('<i class="fa fa-vk"></i>', '', [
+                                    'class' => 'share-btn',
+                                    'data-type' => 'vk',
+                                    'data-url' => $url,
+                                    'data-title' => $title,
+                                    'data-image' => $image,
+                                    'data-desc' => $desc,
+                                ]);?>
+                                <span class="share-counter"></span>
                             </div>
-                            <div class="share-wrap">
-                                <a href="" class="share-btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
-                                <span class="share-counter">5</span>
+                            <div class="share-wrap wrap-tw">
+                                <?=Html::a('<i class="fa fa-twitter"></i>', '', [
+                                    'class' => 'share-btn',
+                                    'data-type' => 'tw',
+                                    'data-url' => $url,
+                                    'data-title' => $title,
+                                ]);?>
                             </div>
-                            <div class="share-wrap">
-                                <a href="" class="share-btn btn-vk"><i class="fa fa-vk"></i></a>
-                                <span class="share-counter">24</span>
+                            <div class="share-wrap wrap-ok">
+                                <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
+                                    'class' => 'share-btn',
+                                    'data-type' => 'ok',
+                                    'data-url' => $url,
+                                    'data-desc' => $desc,
+                                ]);?>
+                                <span class="share-counter"></span>
                             </div>
-                            <div class="share-wrap">
-                                <a href="" class="share-btn btn-telegram"><i class="fa fa-telegram"></i></a>
-                                <span class="share-counter">1</span>
+                            <div class="share-wrap wrap-tg">
+                            <div class="share-wrap wrap-ok">
+                                <?=Html::a('<i class="fa fa-telegram"></i>', '', [
+                                    'class' => 'share-btn',
+                                    'data-type' => 'ok',
+                                    'data-url' => $url,
+                                    'data-desc' => $desc,
+                                ]);?>
                             </div>
                         </div>
                         <?php if($event->eventBlocks) {
@@ -129,7 +157,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                                 <a href="" class="share-btn btn-twitter"><i class="fa fa-twitter"></i></a>
                                             </div>
                                             <div class="share-wrap">
-                                                <a href="" class="share-btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
+                                                <a href="" class="share-btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a
                                             </div>
                                             <div class="share-wrap">
                                                 <a href="" class="share-btn btn-vk"><i class="fa fa-vk"></i></a>
@@ -195,6 +223,19 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 
     $(document).on('click', 'body', function() {
         $('.add-to-calendar div').hide();
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: '".Url::toRoute(['site/share-counts', 'url' => $url])."',
+            success: function (data) {
+                data = eval('(' + data + ')');
+                $.each(data, function() {
+                    $('.wrap-'+this.soc).find('.share-counter').html(this.count)
+                })
+            },
+        });
     });
 ";
 
