@@ -125,7 +125,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                 <span class="share-counter"></span>
                             </div>
                             <div class="share-wrap wrap-tg">
-                            <div class="share-wrap wrap-ok">
                                 <?=Html::a('<i class="fa fa-telegram"></i>', '', [
                                     'class' => 'share-btn',
                                     'data-type' => 'ok',
