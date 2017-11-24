@@ -31,6 +31,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['title', 'alias'], 'string', 'max' => 100],
+            ['color', 'string', 'max' => 7],
         ];
     }
 
@@ -43,6 +44,7 @@ class Category extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Заголовок',
             'alias' => 'Алиас',
+            'color' => 'Цвет',
         ];
     }
 

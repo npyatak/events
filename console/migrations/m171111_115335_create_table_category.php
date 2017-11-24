@@ -16,6 +16,7 @@ class m171111_115335_create_table_category extends Migration
             'id' => $this->primaryKey(),
             'title' => $this->string(100)->notNull(),
             'alias' => $this->string(100)->notNull(),
+            'color' => $this->string(7),
         ], $tableOptions);
 
         $this->batchInsert('{{%category}}', ['title', 'alias'], [

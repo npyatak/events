@@ -73,12 +73,35 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                             }?>
                         </div>
                     </div>
-
-                    <?php if($event->eventBlocks) {
-                        foreach ($event->eventBlocks as $eventBlock) {
-                            echo $this->render('_blocks/template', ['eventBlock' => $eventBlock]);
-                        }
-                    }?>
+                    <div class="event-inner">
+                        <div class="share-block">
+                            <div class="share-wrap">
+                                <a href="" class="share-btn btn-facebook"><i class="fa fa-facebook"></i></a>
+                                <span class="share-counter">40</span>
+                            </div>
+                            <div class="share-wrap">
+                                <a href="" class="share-btn btn-twitter"><i class="fa fa-twitter"></i></a>
+                                <span class="share-counter">31</span>
+                            </div>
+                            <div class="share-wrap">
+                                <a href="" class="share-btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
+                                <span class="share-counter">5</span>
+                            </div>
+                            <div class="share-wrap">
+                                <a href="" class="share-btn btn-vk"><i class="fa fa-vk"></i></a>
+                                <span class="share-counter">24</span>
+                            </div>
+                            <div class="share-wrap">
+                                <a href="" class="share-btn btn-telegram"><i class="fa fa-telegram"></i></a>
+                                <span class="share-counter">1</span>
+                            </div>
+                        </div>
+                        <?php if($event->eventBlocks) {
+                            foreach ($event->eventBlocks as $eventBlock) {
+                                echo $this->render('_blocks/template', ['eventBlock' => $eventBlock]);
+                            }
+                        }?>
+                    </div>
                 </div>
 
                 

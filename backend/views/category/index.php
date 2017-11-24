@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id',
                 'title',
                 'alias',
+                'color',
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{update} {delete}',
