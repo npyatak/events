@@ -501,7 +501,13 @@
     position: relative;
     /*max-width: 670px;*/
 }
-.fact-many_inner .title {
+.grey-line {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: #EBEBEB;
+}
+.grey-line .title, .fact-many_inner .title {
     position: absolute;
     top: 0;
     left: 0;
@@ -743,6 +749,9 @@
     content: '';
     display: block;
     clear: both;
+}
+.ckeditor {
+    position: relative;
 }
 .table-wrap .ckeditor {
     width: 670px;

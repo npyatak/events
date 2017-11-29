@@ -80,7 +80,7 @@ class SiteController extends Controller
         $year = $year ? $year : Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
 
         $query = Event::find()
-            ->where(['between', 'timeline_date', \DateTime::createFromFormat('!Y', $year)->format('U'), \DateTime::createFromFormat('!Y', $year + 1)->format('U')])
+            ->where(['between', 'date', \DateTime::createFromFormat('!Y', $year)->format('U'), \DateTime::createFromFormat('!Y', $year + 1)->format('U')])
             ->andWhere(['status' => Event::STATUS_ACTIVE]);
         if($alias) {
             $query->joinWith('categories');
@@ -97,9 +97,13 @@ class SiteController extends Controller
         $event = $this->findEvent($id);
         // $event = Event::find()->joinWith('eventBlocks')->where(['event.id' => $id])->one();
         // print_r($event);exit;
+        $nextEvent = Event::find()->where(['>', 'date', $event->date])->orderBy('value_index DESC')->one();
+        $prevEvent = Event::find()->where(['<', 'date', $event->date])->orderBy('value_index DESC')->one();
 
         return $this->render('event', [
             'event' => $event,
+            'nextEvent' => $nextEvent,
+            'prevEvent' => $prevEvent,
         ]);
     }
 

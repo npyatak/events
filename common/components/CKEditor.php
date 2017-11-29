@@ -7,7 +7,7 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use mihaildev\elfinder\ElFinder;
 
-Class CKEditor extends \mihaildev\ckeditor\CKEditor {
+Class CKEditor extends \sadovojav\ckeditor\CKEditor {
 
     public function init()
     {
@@ -28,18 +28,26 @@ Class CKEditor extends \mihaildev\ckeditor\CKEditor {
             }
             unset($this->editorOptions['preset']);
         }
+        $this->editorOptions['language'] = 'ru';
 
         parent::init();
     }
 
     private function presetTextEditor() {
         $options['height'] = 200;
+        
+        $this->extraPlugins = [
+            ['BlueHr', '@backend/web/js/plugins/blue-hr/', 'plugin.js'],
+            ['TitleWithLine', '@backend/web/js/plugins/title-with-line/', 'plugin.js']
+        ];
+        $options['extraPlugins'] = 'BlueHr,TitleWithLine';
 
-        $options['toolbarGroups'] = [
-            ['name' => 'paragraph', 'groups' => ['templates', 'list', 'align']],
-            ['name' => 'styles'],
-            ['name' => 'basicstyles', 'groups' => ['basicstyles', 'colors','cleanup']],
-            ['name' => 'links', 'groups' => ['links', 'insert']],
+        $options['toolbar'] = [
+            ['Format', 'FontSize', 'Font'],
+            ['Bold', 'Italic', 'Underline', 'TextColor', 'StrikeThrough', 'HorizontalRule', 'BlueHr', 'TitleWithLine'],
+            ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Image', 'Video', 'Iframe', 'Table', 'SpecialChar'],
+            ['Link', 'Unlink'],
         ];
 
         $options['contentsCss'] = Yii::$app->urlManagerBackEnd->createUrl(['css/fonts.css']);

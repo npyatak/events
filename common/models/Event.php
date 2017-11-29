@@ -271,4 +271,8 @@ class Event extends \yii\db\ActiveRecord
             12 => ['декабрь', 'декабря'],
         ];
     }
+
+    public function getSimilarEvents() {
+        return self::find()->where(['in', 'id', $this->similarIds])->orderBy('date')->all();
+    }
 }

@@ -54,6 +54,13 @@ h3 {
 p {
     line-height: 25px;
 }
+hr {
+    background-color: #E2E0E0;
+} 
+hr.blue {
+    height: 3px;
+    background-color: #221FAA;
+}
 .m-r-40 {
     margin-right: 40px !important;
 }

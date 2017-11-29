@@ -31,7 +31,15 @@ use common\components\CKEditor;
 		</div>
 		<div class="form-group">
 			<?= Html::activeLabel($model, "[$i]author_text") ?>
-			<?= Html::activeTextInput($model, "[$i]author_text", ['class' => 'form-control']) ?>
+			<?=CKEditor::widget([
+			    'model' => $model,
+			    'attribute' => "[$i]author_text",
+			    'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
+		            'allowedContent' => true,
+			    	'preset' => 'textEditor',
+			    	'height' => 100,
+			    ])
+		    ]);?>
 		</div>
 	</div>
 </div>

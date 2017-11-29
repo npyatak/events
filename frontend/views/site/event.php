@@ -20,19 +20,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 
 <div class="main-menu"></div>
 <div class="event-detail">
-    <div class="event-background" style="background-image:url(<?=$event->image_url;?>)">
-        <div class="event-background_caption">
-            <div class="container">
-                <div class="row justify-content-end">
-                    <div class="event-background_caption-inner">
-                        Фотография<br>
-                        Пресс-служба правительства РФ/ТАСС<br>
-                        Александр Астафьев
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="event-background" style="background-image:url(<?=$event->image_url;?>)"></div>
     <div class="container">
         <div class="row justify-content-between">
             <div class="event-content">
@@ -141,7 +129,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                     </div>
                 </div>
 
-                
                 <div class="container_inner">
                     <div class="footer">
                         <div class="row justify-content-end m-0">
@@ -156,7 +143,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                                 <a href="" class="share-btn btn-twitter"><i class="fa fa-twitter"></i></a>
                                             </div>
                                             <div class="share-wrap">
-                                                <a href="" class="share-btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a
+                                                <a href="" class="share-btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
                                             </div>
                                             <div class="share-wrap">
                                                 <a href="" class="share-btn btn-vk"><i class="fa fa-vk"></i></a>
@@ -166,20 +153,26 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="footer-arrow">
-                                            <a href=""><i class="fa fa-chevron-left"></i></a>
+                                    <?php if($prevEvent || $nextEvent):?>
+                                        <?php if($prevEvent):?>
+                                        <div class="col-6">
+                                            <div class="footer-arrow">
+                                                <a href=""><i class="fa fa-chevron-left"></i></a>
+                                            </div>
+                                            <div class="footer-title">предыдущее</div>
+                                            <div class="footer-text"><a href="<?=$prevEvent->url;?>"><?=$prevEvent->title;?></a></div>
                                         </div>
-                                        <div class="footer-title">предыдущее</div>
-                                        <div class="footer-text"><a href="">Орбитальный телескоп Hubble сменит мощный James Webb октябрь</a></div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="footer-arrow">
-                                            <a href=""><i class="fa fa-chevron-right"></i></a>
+                                        <?php endif;?>
+                                        <?php if($nextEvent):?>
+                                        <div class="col-6">
+                                            <div class="footer-arrow">
+                                                <a href=""><i class="fa fa-chevron-right"></i></a>
+                                            </div>
+                                            <div class="footer-title">следующее</div>
+                                            <div class="footer-text"><a href="<?=$nextEvent->url;?>"><?=$nextEvent->title;?></a></div>
                                         </div>
-                                        <div class="footer-title">следующее</div>
-                                        <div class="footer-text"><a href="">Орбитальный телескоп Hubble сменит мощный James Webb октябрь</a></div>
-                                    </div>
+                                        <?php endif;?>
+                                    <?php endif;?>
                                 </div>
                             </div>
                         </div>
@@ -187,27 +180,24 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                 </div>
             </div>
 
+            <?php if(!empty($event->similarIds)):?>
             <div class="more-events">
                 <div class="more-events_title">похожие события</div>
-                <a href="" class="item">
-                    <div class="item-image" style="background-image:url('images/more_events/Layer_86.jpg')"></div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            <h5>Запуск телескопа James Webb отложили до 2019 года</h5>
+                <?php foreach ($event->similarEvents as $similar):?>
+                    <a href="" class="item">
+                        <?php if($similar->image_url):?>
+                        <div class="item-image" style="background-image:url(<?=$similar->getImageUrl($similar->image_url, '249x140');?>)"></div>
+                        <?php endif;?>
+                        <div class="item-content">
+                            <div class="item-title">
+                                <h5><?=$similar->title;?></h5>
+                            </div>
+                            <div class="item-date"><?=$similar->viewDate[0];?> <?=$similar->viewDate[1];?></div>
                         </div>
-                        <div class="item-date">12 апреля</div>
-                    </div>
-                </a>
-                <a href="" class="item">
-                    <div class="item-image" style="background-image:url('images/more_events/Layer_86.jpg')"></div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            <h5>Запуск телескопа James Webb отложили до 2019 года</h5>
-                        </div>
-                        <div class="item-date">12 апреля</div>
-                    </div>
-                </a>
+                    </a>
+                <?php endforeach;?>
             </div>
+            <?php endif;?>
         </div>
     </div>
 </div>

@@ -5,7 +5,9 @@ use common\models\blocks\items\BlockFactItem;
 <?php if($block->blockFactItems):?>
 <div class="facts-many">
     <div class="fact-many_inner">
-        <div class="title"><?=$block->title;?></div>
+        <?php if($block->title):?>
+            <div class="title"><?=$block->title;?></div>
+        <?php endif;?>
         <?php foreach ($block->blockFactItems as $item):?>
             <div class="item sm">
                 <div class="row m-0">
