@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
     public $js = [
         'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js',
         'js/bootstrap.min.js',
+        'js/masonry.pkgd.min.js',
         'js/owl.carousel.min.js',
         'js/main.js',
     ];

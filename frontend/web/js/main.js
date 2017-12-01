@@ -39,14 +39,32 @@ $(document).ready(function () {
         $(table).wrapAll('<div class="table-wrap"><div class="container_inner"><div class="ckeditor"></div></div></div>');
     }
 
-    $(window).resize(function () {
-        var event_content = $('.event-content').width();
-        var block_content = $('.block_content').position().left;
-        if($(this).width() < 1279 && $(this).width() > 768){
-            $('.table-wrap').css({width: event_content + 120,'margin-left':-block_content})
+    // $(window).resize(function () {
+    //     var event_content = $('.event-content').width();
+    //     var block_content = $('.block_content').position().left;
+    //     if($(this).width() < 1279 && $(this).width() > 768){
+    //         $('.table-wrap').css({width: event_content + 120,'margin-left':-block_content})
+    //     }
+    // });
+    // $(window).trigger('resize');
+
+    var $container = $('.masonry-items');
+    var columnWidth = 300;
+    $('.grid-item').each(function () {
+        if ($(this).width() < columnWidth) {
+            columnWidth = $(this).width();
         }
     });
-    $(window).trigger('resize');
+    // Инициализация Масонри, после загрузки изображений
+    $container.masonry({
+        itemSelector: '.grid-item',
+        percentPosition: true,
+        columnWidth: columnWidth,
+        gutter: 40
+    });
+    $container.on('layoutComplete', function (event, items) {
+        console.log(items.length);
+    });
 
     // $('.turn').click(function(){
     //     $(this).addClass('flip');
