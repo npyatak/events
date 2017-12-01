@@ -26,7 +26,9 @@ class SettingsController extends CController
     public function actionIndex()
     {
         $searchModel = new SettingsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $params = Yii::$app->request->queryParams;
+        $params['SettingsSearch']['type'] = Settings::TYPE_FOOTER;
+        $dataProvider = $searchModel->search($params);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -44,7 +46,7 @@ class SettingsController extends CController
         $model = new Settings();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(Yii::$app->request->referrer);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -63,7 +65,7 @@ class SettingsController extends CController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(Yii::$app->request->referrer);
         } else {
             return $this->render('update', [
                 'model' => $model,

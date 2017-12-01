@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 
 use backend\models\Admin;
 
-$this->title = 'Настройки';
+$this->title = 'Настройки футера';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -21,7 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
                 'key',
                 'title',
-                'value',
+                [
+                    'attribute' => 'value',
+                    'contentOptions' => [
+                        'style' => 'max-width: 300px; overflow: hidden;'
+                    ]
+                ],
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{update}',

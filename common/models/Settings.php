@@ -7,6 +7,7 @@ use yii\helpers\ArrayHelper;
 
 class Settings extends \yii\db\ActiveRecord
 {
+    const TYPE_FOOTER = 1;
     /**
      * @inheritdoc
      */

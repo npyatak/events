@@ -18,7 +18,7 @@ class SettingsSearch extends Settings
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'type'], 'integer'],
             [['title', 'key'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class SettingsSearch extends Settings
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'type' => $this->type,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

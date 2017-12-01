@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 
 $this->title = 'Добавить настройку';
-$this->params['breadcrumbs'][] = ['label' => 'Настройки', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Настройки футера', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

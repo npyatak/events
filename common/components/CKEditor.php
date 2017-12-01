@@ -26,7 +26,6 @@ Class CKEditor extends \sadovojav\ckeditor\CKEditor {
                     $this->presetIFrameOnly();
                     break;
             }
-            unset($this->editorOptions['preset']);
         }
         $this->editorOptions['language'] = 'ru';
 

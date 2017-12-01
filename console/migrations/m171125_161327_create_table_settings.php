@@ -15,16 +15,18 @@ class m171125_161327_create_table_settings extends Migration {
             'id' => $this->primaryKey(),
             'key' => $this->string(100)->notNull(),
             'value' => $this->text(),
-            'title' => $this->string(100)->notNull(),           
+            'title' => $this->string(100)->notNull(),
+            'type' => $this->integer(1)->notNull()->defaultValue(0),
         ], $tableOptions);
 
-        $this->batchInsert('{{%settings}}', ['key', 'value', 'title'], [
-            ['currentYear', 2017, 'Текущий год'],
-            ['workedOnProject', '', 'Над проектом работали'],
-            ['usedMultimedia', '', 'В материале использованы фотографии/видео'],
-            ['sources', '', 'Источники'],
-            ['gratitude', '', 'Благодарности'],
-            ['additional', '', 'Дополнительно'],
+        $this->batchInsert('{{%settings}}', ['key', 'value', 'title', 'type'], [
+            ['currentYear', 2017, 'Текущий год', 0],
+            ['workedOnProject', '', 'Перечень работавших над проектом', 1],
+            ['usedMultimedia', '', 'В материале использованы фотографии/видео', 1],
+            ['sources', '', 'Источники', 1],
+            ['gratitude', '', 'Блок благодарностей экспертам и организациям', 1],
+            ['additional', '', 'Дополнительный текстовый блок', 1],
+            ['proviso', 'ТАСС информационное агентство (св-во о регистрации СМИ № 03247 выдано 02 апреля 1999 г. Государственным комитетом Российской Федерации по печати). Отдельные публикации могут содержать информацию, не предназначенную для пользователей до 16 лет.', 'Текст оговорки', 1]
         ]);
     }
 
