@@ -114,8 +114,9 @@ use yii\widgets\LinkPager;
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>XXII Зимние Олимпийские игры 2018 в Южной Корее, в столице Пхёнчхан</h2>
+								<h2><a href="">XXII Зимние Олимпийские игры 2018 в Южной Корее, в столице Пхёнчхан</a></h2>
 								<span class="date">9-25 февраля</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<div class="grid-item w250-h290">
@@ -123,8 +124,9 @@ use yii\widgets\LinkPager;
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap2.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Запуск телескопов James Webb отложили до 2019 года</h2>
+								<h2><a href="">Запуск телескопов James Webb отложили до 2019 года</a></h2>
 								<span class="date">12 апреля</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<div class="grid-item w250-h290">
@@ -132,8 +134,9 @@ use yii\widgets\LinkPager;
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap3.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Презентация флагманской модели Samsung Galaxy S9</h2>
+								<h2><a href="">Презентация флагманской модели Samsung Galaxy S9</a></h2>
 								<span class="date">12 апреля</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<div class="grid-item w250-h290">
@@ -141,8 +144,9 @@ use yii\widgets\LinkPager;
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap4.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Электронный паспорт гражданина РФ в 2018 году</h2>
+								<h2><a href="">Электронный паспорт гражданина РФ в 2018 году</a></h2>
 								<span class="date">апрель 2018</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<div class="grid-item w250-h290">
@@ -150,8 +154,9 @@ use yii\widgets\LinkPager;
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap5.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Чемпионат мира по хоккею в Дании</h2>
+								<h2><a href="">Чемпионат мира по хоккею в Дании</a></h2>
 								<span class="date">12 апреля</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<div class="grid-item w250-h290">
@@ -159,8 +164,9 @@ use yii\widgets\LinkPager;
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap6.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Евровидение 2018 пройдет в столице Португалии</h2>
+								<h2><a href="">Евровидение 2018 пройдет в столице Португалии</a></h2>
 								<span class="date">3-6 апреля</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -171,22 +177,14 @@ use yii\widgets\LinkPager;
 						<span class="share-inline_btn"><i class="fa fa-share-alt"></i></span>
 					</div>
 					<div class="masonry-items">
-						<div class="grid-item w540-h620">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2>XXII Зимние Олимпийские игры 2018 в Южной Корее, в столице Пхёнчхан</h2>
-								<span class="date">9-25 февраля</span>
-							</div>
-						</div>
 						<div class="grid-item w250-h290">
 							<div class="grid-item_image">
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap2.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Запуск телескопов James Webb отложили до 2019 года</h2>
+								<h2><a href="">Запуск телескопов James Webb отложили до 2019 года</a></h2>
 								<span class="date">12 апреля</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<div class="grid-item w250-h290">
@@ -194,8 +192,9 @@ use yii\widgets\LinkPager;
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap3.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Презентация флагманской модели Samsung Galaxy S9</h2>
+								<h2><a href="">Презентация флагманской модели Samsung Galaxy S9</a></h2>
 								<span class="date">12 апреля</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<div class="grid-item w250-h290">
@@ -203,17 +202,19 @@ use yii\widgets\LinkPager;
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap4.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Электронный паспорт гражданина РФ в 2018 году</h2>
+								<h2><a href="">Электронный паспорт гражданина РФ в 2018 году</a></h2>
 								<span class="date">апрель 2018</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
-						<div class="grid-item w250-h290">
+						<div class="grid-item w540-h290">
 							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap5.png');?>')"></a>
+								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap7.jpg');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Чемпионат мира по хоккею в Дании</h2>
-								<span class="date">12 апреля</span>
+								<h2><a href="">Первая очередь переселения по программе реновации</a></h2>
+								<span class="date">осень 2018</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<div class="grid-item w250-h290">
@@ -221,8 +222,29 @@ use yii\widgets\LinkPager;
 								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap6.png');?>')"></a>
 							</div>
 							<div class="grid-item_desc">
-								<h2>Евровидение 2018 пройдет в столице Португалии</h2>
+								<h2><a href="">Евровидение 2018 пройдет в столице Португалии</a></h2>
 								<span class="date">3-6 апреля</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
+							</div>
+						</div>
+						<div class="grid-item w250-h290">
+							<div class="grid-item_image">
+								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap6.png');?>')"></a>
+							</div>
+							<div class="grid-item_desc">
+								<h2><a href="">Евровидение 2018 пройдет в столице Португалии</a></h2>
+								<span class="date">3-6 апреля</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
+							</div>
+						</div>
+						<div class="grid-item w540-h290">
+							<div class="grid-item_image">
+								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap8.jpg');?>')"></a>
+							</div>
+							<div class="grid-item_desc">
+								<h2><a href="">Единный день голосования в Российской Федерации</a></h2>
+								<span class="date">осень 2018</span>
+								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 					</div>
