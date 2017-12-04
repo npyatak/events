@@ -337,3 +337,42 @@ table tbody tr {
     font-weight: bold;
     z-index: 1;
 }
+.btn-share {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 14px;
+}
+.btn-share i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+.btn-share:hover {
+    color: #fff;
+}
+.btn-facebook {
+    background-color: #1D58A2;
+}
+.btn-twitter {
+    background-color: #00B0E4;
+}
+.btn-odnoklassniki {
+    background-color: #F1720C;
+}
+.btn-vk {
+    background-color: #4D76A1;
+}
+.btn-telegram {
+    background-color: #61A8DE;
+}

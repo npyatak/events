@@ -2,30 +2,39 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+
+$this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="main-menu">
 	<div class="container">
-		<div class="row">
+		<div class="container_inner">
 			<div class="logo"><a href=""><img src="<?=Url::to('images/logo/tass-logo-white.svg');?>" alt="Logo TASS"></a></div>
+			<div class="main-slogan"><h2>События 2018</h2></div>
+			<div class="main-menu_share">
+				<span class="main-share_btn"><i class="fa fa-share-alt"></i></span>
+			</div>
+
 		</div>
 	</div>
 </div>
 <header>
-	<div class="container">
-		<div class="slogan">
-			<h1>События 2018</h1>
-		</div>
-		<div class="desc">
-			<span>Из сотни событий, которые могут произойти</span>
-		</div>
-		<div class="general_share">
-			<ul>
-				<li><a href="" class="g-share-btn"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="" class="g-share-btn"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="" class="g-share-btn"><i class="fa fa-odnoklassniki"></i></a></li>
-				<li><a href="" class="g-share-btn"><i class="fa fa-vk"></i></a></li>
-				<li><a href="" class="g-share-btn"><i class="fa fa-telegram"></i></a></li>
-			</ul>
+	<div class="header_inner">
+		<div class="container">
+			<div class="slogan">
+				<h1>События 2018</h1>
+			</div>
+			<div class="desc">
+				<span>Из сотни событий, которые могут произойти</span>
+			</div>
+			<div class="general_share">
+				<ul>
+					<li><a href="" class="g-share-btn"><i class="fa fa-facebook"></i></a></li>
+					<li><a href="" class="g-share-btn"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="" class="g-share-btn"><i class="fa fa-odnoklassniki"></i></a></li>
+					<li><a href="" class="g-share-btn"><i class="fa fa-vk"></i></a></li>
+					<li><a href="" class="g-share-btn"><i class="fa fa-telegram"></i></a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </header>
@@ -104,9 +113,16 @@ use yii\widgets\LinkPager;
 			</div>
 			<div class="content">
 				<div class="month-items">
-					<div class="month-title"><h2>Сентябрь</h2></div>
-					<div class="share-inline">
-						<span class="share-inline_btn"><i class="fa fa-share-alt"></i></span>
+					<div class="month-title">
+						<h2>Сентябрь</h2>
+						<div class="share-inline">
+							<span class="share-inline_btn"><i class="fa fa-share-alt"></i></span>
+							<a href="" class="btn-share btn-facebook"><i class="fa fa-facebook"></i></a>
+							<a href="" class="btn-share btn-twitter"><i class="fa fa-twitter"></i></a>
+							<a href="" class="btn-share btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
+							<a href="" class="btn-share btn-vk"><i class="fa fa-vk"></i></a>
+							<a href="" class="btn-share btn-telegram"><i class="fa fa-telegram"></i></a>
+						</div>
 					</div>
 					<div class="masonry-items">
 						<div class="grid-item w540-h620">
@@ -172,9 +188,16 @@ use yii\widgets\LinkPager;
 					</div>
 				</div>
 				<div class="month-items">
-					<div class="month-title"><h2>Октябрь</h2></div>
-					<div class="share-inline">
-						<span class="share-inline_btn"><i class="fa fa-share-alt"></i></span>
+					<div class="month-title">
+						<h2>Октябрь</h2>
+						<div class="share-inline">
+							<span class="share-inline_btn"><i class="fa fa-share-alt"></i></span>
+							<a href="" class="btn-share btn-facebook"><i class="fa fa-facebook"></i></a>
+							<a href="" class="btn-share btn-twitter"><i class="fa fa-twitter"></i></a>
+							<a href="" class="btn-share btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
+							<a href="" class="btn-share btn-vk"><i class="fa fa-vk"></i></a>
+							<a href="" class="btn-share btn-telegram"><i class="fa fa-telegram"></i></a>
+						</div>
 					</div>
 					<div class="masonry-items">
 						<div class="grid-item w250-h290">
