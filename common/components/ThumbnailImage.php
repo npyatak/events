@@ -18,14 +18,57 @@ class ThumbnailImage {
 
     public static $cacheExpire = 0;
 
+    public static function getExternalImageUrl($image, $thumb_size = false, $imageDir = false) {        
+        if($image) {
+            $file_headers = @get_headers($image);
+            if($file_headers && $file_headers[0] != 'HTTP/1.1 404 Not Found') {
+                if($thumb_size) {
+                    $sizes = explode('x', $thumb_size);
+                    $imageSrc = ThumbnailImage::thumbnailFileUrl(
+                        $image,
+                        $sizes[0],
+                        $sizes[1],
+                        ThumbnailImage::THUMBNAIL_INSET,
+                        $imageDir
+                    );
+                    return $imageSrc;
+                } else {
+                    return $image;
+                }
+            }
+        } 
+
+        return '';
+    }
+
+    public static function getLocalImageUrl($image, $thumb_size = false, $imageDir = false) { 
+        if (is_file($image)) {
+            if($thumb_size) {
+                $sizes = explode('x', $thumb_size);
+                $imageSrc = ThumbnailImage::thumbnailFileUrl(
+                    $image,
+                    $sizes[0],
+                    $sizes[1],
+                    ThumbnailImage::THUMBNAIL_INSET,
+                    $imageDir
+                );
+                return $imageSrc;
+            } else {
+                return $image;
+            }
+        } 
+
+        return '';
+    }
+
 	public static function thumbnailFile($filename, $width, $height, $mode = self::THUMBNAIL_OUTBOUND, $imageDir = false) {
         $cachePath = __DIR__ . '/../../frontend/web/'.self::$cacheAlias;
-
+        
         $explode = explode('/', $filename);
         $file = end($explode);
         $explode = explode('.', $file);
         $thumbnailFileExt = '.'.end($explode);
-        unset($explode[end($explode)]);
+        array_pop($explode);
         $thumbnailFileName = implode('.', $explode);
         $thumbnailFilePath = $cachePath . DIRECTORY_SEPARATOR . $imageDir;
         $thumbnailFileName = $thumbnailFileName .'_'. $width .'x'. $height;

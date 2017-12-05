@@ -27,6 +27,7 @@ class m171111_125335_create_table_event extends Migration
             'show_on_main' => $this->integer(1)->notNull()->defaultValue(0),
             'value_index' => $this->integer(2)->notNull()->defaultValue(9),
             'similar' => $this->string(),
+            'size' => $this->integer(1)->notNull()->defaultValue(1),
 
             'status' => $this->integer(1)->notNull()->defaultValue(5),
 

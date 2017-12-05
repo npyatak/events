@@ -17,42 +17,13 @@ use frontend\models\ContactForm;
 use jmartinez\yii\ics\ICS;
 
 use common\models\Event;
+use common\models\Category;
+use common\models\Share;
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * @inheritdoc
      */
@@ -62,10 +33,6 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
         ];
     }
 
@@ -74,22 +41,43 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex($year = null, $alias = null)
+    public function actionIndex($month = null, $category = null)
     {
         $dateNow = new \DateTime();
-        $year = $year ? $year : Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
+        $year = Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
 
         $query = Event::find()
             ->where(['between', 'date', \DateTime::createFromFormat('!Y', $year)->format('U'), \DateTime::createFromFormat('!Y', $year + 1)->format('U')])
             ->andWhere(['status' => Event::STATUS_ACTIVE]);
-        if($alias) {
+        if($category) {
             $query->joinWith('categories');
-            $query->andWhere(['category.alias' => $alias]);
+            $query->andWhere(['category.alias' => $category]);
         }
-        $events = $query->all();
+
+        $events = [];
+
+        foreach ($query->orderBy('value_index DESC')->all() as $e) {
+            $events[date('n', $e->date)][] = $e;
+        }
+
+        if(Yii::$app->request->isAjax) {
+            return $this->renderAjax('_months', [
+                'events' => $events,
+            ]);
+        }
+
+        if(!Yii::$app->cacheFrontend->get('shares')) {
+            Yii::$app->cacheFrontend->set('shares', Share::find()->all(), 3600*3);
+        }
+
 
         return $this->render('index', [
             'events' => $events,
+            'month' => $month,
+            'category' => $category,
+            'year' => $year,
+            'categories' => Category::find()->all(),
+            'shares' => Yii::$app->cacheFrontend->get('shares') ? Yii::$app->cacheFrontend->get('shares') : Share::find()->all(),
         ]);
     }
 

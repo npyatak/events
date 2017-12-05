@@ -1,53 +1,45 @@
 <?php
+use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\widgets\Pjax;
 
-/* @var $this yii\web\View */
+use backend\models\Admin;
 
-$this->title = 'My Yii Application';
+$this->title = 'Общие настройки';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+<div>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
+    <?php Pjax::begin(); ?>    
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+                'key',
+                'title',
+                [
+                    'attribute' => 'value',
+                    'contentOptions' => [
+                        'style' => 'max-width: 300px; overflow: hidden;'
+                    ]
+                ],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{update}',
+                    'buttons' => [
+                        'update' => function ($url, $model) {
+                            $url = Url::toRoute(['/settings/update', 'id' => $model->id, 'ref' => '/']);
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                'title' => 'Изменить'
+                            ]);
+                        },
+                    ]
+                ],
+            ],
+        ]); ?>
+    <?php Pjax::end(); ?>
 </div>

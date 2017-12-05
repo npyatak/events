@@ -7,7 +7,11 @@ use yii\helpers\ArrayHelper;
 
 class Settings extends \yii\db\ActiveRecord
 {
-    const TYPE_FOOTER = 1;
+    const TYPE_MAIN = 1;
+    const TYPE_FOOTER = 2;
+    const TYPE_IMAGE = 5;
+
+    public $imageFile;
     /**
      * @inheritdoc
      */
@@ -22,9 +26,10 @@ class Settings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['value'], 'required'],
+            //[['value'], 'required'],
             [['key', 'title'], 'string', 'max' => 100],
             [['value'], 'safe'],
+            [['imageFile'], 'file', 'extensions'=>'jpg, jpeg, png', 'maxSize'=>1024 * 1024 * 5, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
         ];
     }
 
@@ -35,6 +40,7 @@ class Settings extends \yii\db\ActiveRecord
         return [
             'value' => 'Значение',
             'title' => 'Заголовок',
+            'imageFile' => 'Изображение',
         ];
     }
 
@@ -56,5 +62,9 @@ class Settings extends \yii\db\ActiveRecord
 
     public function findSetting($key) {
         return $this->find()->where(['key' => $key])->one();
+    }
+
+    public function getImageSrcPath() {
+        return __DIR__ . '/../../frontend/web/uploads/';
     }
 }

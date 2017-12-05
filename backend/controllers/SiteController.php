@@ -7,6 +7,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\forms\LoginForm;
 
+use common\models\Settings;
+use common\models\search\SettingsSearch;
 /**
  * Site controller
  */
@@ -47,14 +49,17 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new SettingsSearch();
+        $params = Yii::$app->request->queryParams;
+        $params['SettingsSearch']['type'] = [Settings::TYPE_MAIN, Settings::TYPE_IMAGE];
+        $dataProvider = $searchModel->search($params);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

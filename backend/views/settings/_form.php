@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\components\CKEditor;
+
+use common\models\Settings;
 ?>
 
 <div class="admin-form">
@@ -14,12 +16,19 @@ use common\components\CKEditor;
 
     <?= $form->field($model, 'title')->textInput() ?>
 
-    <?= $form->field($model, 'value')->widget(CKEditor::classname(), [
-        'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
-            'allowedContent' => true,
-            'preset' => 'basic'
-        ])
-    ]);?>
+    <?php if($model->type == Settings::TYPE_FOOTER) {
+        echo $form->field($model, 'value')->widget(CKEditor::classname(), [
+            'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
+                'allowedContent' => true,
+                'preset' => 'basic'
+            ])
+        ]);
+    } elseif($model->type == Settings::TYPE_IMAGE) {
+        echo $form->field($model, 'imageFile')->fileInput();
+    } else {
+        echo $form->field($model, 'value')->textInput();
+    }
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

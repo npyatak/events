@@ -6,6 +6,7 @@ use Yii;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 use common\models\Settings;
 use common\models\search\SettingsSearch;
@@ -27,7 +28,7 @@ class SettingsController extends CController
     {
         $searchModel = new SettingsSearch();
         $params = Yii::$app->request->queryParams;
-        $params['SettingsSearch']['type'] = Settings::TYPE_FOOTER;
+        $params['SettingsSearch']['type'] = [Settings::TYPE_FOOTER];
         $dataProvider = $searchModel->search($params);
 
         return $this->render('index', [
@@ -60,17 +61,36 @@ class SettingsController extends CController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $ref = null)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(Yii::$app->request->referrer);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+            if($model->imageFile) {
+                $path = $model->imageSrcPath;
+                if(!file_exists($path)) {
+                    mkdir($path, 0775, true);
+                }
+                if($model->value && file_exists($path.$model->value)) {
+                    unlink($path.$model->value);
+                }
+
+                $model->value = md5(time()).'.'.$model->imageFile->extension;
+                
+                $model->imageFile->saveAs($path.$model->value);
+                $model->save(false, ['value']);
+
+                Yii::$app->settings->clearCache();
+            }
+
+            return $this->redirect([$ref ? $ref : 'index']);
+        } 
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**

@@ -5,9 +5,9 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'components' => [/*
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
+    'components' => [
+        /*'cache' => [
+            'class' => YII_ENV_DEV ? 'yii\caching\DummyCache' : 'yii\caching\FileCache',
         ],*/
         'cacheBackend' => [
             'class' => 'yii\caching\FileCache',

@@ -63,27 +63,7 @@ class Block extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getImageUrl($image, $thumb_size=false, $imageDir='event') {
-        if($image) {
-            $file_headers = @get_headers($image);
-            if($file_headers && $file_headers[0] != 'HTTP/1.1 404 Not Found') {
-                if(!$imageDir) $imageDir = $this->imageDir;
-                if($thumb_size) {
-                    $sizes = explode('x', $thumb_size);
-                    $imageSrc = ThumbnailImage::thumbnailFileUrl(
-                        $image,
-                        $sizes[0],
-                        $sizes[1],
-                        ThumbnailImage::THUMBNAIL_INSET,
-                        $imageDir
-                    );
-                    return $imageSrc;
-                } else {
-                    return $image;
-                }
-            }
-        } 
-
-        return '';
+    public function getImageUrl($image, $thumb_size = false) {
+        return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
     }
 }

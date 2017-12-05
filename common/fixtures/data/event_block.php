@@ -2,6 +2,7 @@
 /*
 BlockContent
 BlockContent
+BlockFlipCard
 BlockQuotation
 BlockImage
 BlockGallery
@@ -71,9 +72,27 @@ return [
 	],
 	[
 	    'event_id' => 1,
-	    'model' => 'BlockQuotation',
+	    'model' => 'BlockFlipCard',
 	    'block_id' => 1,
 	    'order' => 3,
+	    'anchor' => '',
+	    'block' => [
+	    	'width' => 660,
+			'height' => 400,
+			'text_front' => '<p><span style="color:#FFFF00">Минюст РФ признал девять СМИ иностранными агентами</span></p>',
+			'text_back' => '<p>Российский эксперт не исключил провала миссии Волкера</p>',
+			'image_front' => 'https://phototass1.cdnvideo.ru/width/744_b12f2926/tass/m2/uploads/i/20171205/4611837.jpg',
+			'image_back' => 'https://phototass1.cdnvideo.ru/width/744_b12f2926/tass/m2/uploads/i/20171203/4610919.jpg',
+			'control_text' => 'Переверни',
+			'capture_front' => 'подпись фронт',
+			'capture_back' => 'подпись бэк',
+		]
+	],
+	[
+	    'event_id' => 1,
+	    'model' => 'BlockQuotation',
+	    'block_id' => 1,
+	    'order' => 4,
 	    'anchor' => '',
 	    'block' => [
 	    	'text' => '<span>Есть идея сделать станцию открытой конфигурации, которая была бы готова принимать всех партнеров. Мы понимаем, что следующая станция должна быть международным проектом &mdash; количество участников и, соответственно, инвестиций увеличивает эффективность работы</span>',
@@ -86,7 +105,7 @@ return [
 	    'event_id' => 1,
 	    'model' => 'BlockImage',
 	    'block_id' => 1,
-	    'order' => 4,
+	    'order' => 5,
 	    'anchor' => '',
 	    'block' => [
 	    	'text' => 'Есть идея сделать станцию открытой конфигурации, которая была бы готова принимать всех партнеров.',
@@ -99,7 +118,7 @@ return [
 	    'event_id' => 1,
 	    'model' => 'BlockGallery',
 	    'block_id' => 1,
-	    'order' => 5,
+	    'order' => 6,
 	    'anchor' => '',
 	    'block' => [
 	    	'title' => 'Тестовая галерея',
@@ -119,7 +138,7 @@ return [
 	    'event_id' => 1,
 	    'model' => 'BlockFact',
 	    'block_id' => 1,
-	    'order' => 6,
+	    'order' => 7,
 	    'anchor' => '',
 	    'block' => [
 	    	'title' => 'Заголовок для серой отсечки',
@@ -145,7 +164,7 @@ return [
 	    'event_id' => 1,
 	    'model' => 'BlockCard',
 	    'block_id' => 1,
-	    'order' => 7,
+	    'order' => 8,
 	    'anchor' => '',
 	    'block' => [
 	    	'title' => 'Заголовок к верхнему разделителю',
@@ -171,7 +190,7 @@ return [
 	    'event_id' => 1,
 	    'model' => 'BlockCut',
 	    'block_id' => 1,
-	    'order' => 8,
+	    'order' => 9,
 	    'anchor' => 'cut',
 	    'block' => [
 	    	'title' => 'Заголовок',
@@ -184,7 +203,7 @@ return [
 	    'event_id' => 1,
 	    'model' => 'BlockMap',
 	    'block_id' => 1,
-	    'order' => 9,
+	    'order' => 10,
 	    'anchor' => 'map',
 	    'block' => [
 	    	'code' => '<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ac744626dd944c9f23d1aac72409f87299177f42219e371b67deeb9a7ce714bd0&amp;width=100%25&amp;height=100%&amp;lang=ru_RU&amp;scroll=false"></script>',
@@ -195,7 +214,7 @@ return [
 	    'event_id' => 1,
 	    'model' => 'BlockIframe',
 	    'block_id' => 1,
-	    'order' => 10,
+	    'order' => 11,
 	    'anchor' => 'iframe',
 	    'block' => [
 	    	'title' => 'Состыковка Dragon с бортом МКС',

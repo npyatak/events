@@ -2,7 +2,12 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+use common\components\ThumbnailImage;
 
+use common\models\Event;
+use common\models\Settings;
+
+//echo ThumbnailImage::getLocalImageUrl(Settings::getImageSrcPath().Yii::$app->settings->get("mainPageImage"), "1280x380");exit;
 $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="main-menu">
@@ -18,21 +23,60 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
 	</div>
 </div>
 <header>
-	<div class="header_inner">
+	<div class="header_inner" <?=Yii::$app->settings->get('mainPageImage') ? 'style="background-image: url('.ThumbnailImage::getLocalImageUrl(Settings::getImageSrcPath().Yii::$app->settings->get("mainPageImage"), "1280x380").');"' : '';?>>
 		<div class="container">
 			<div class="slogan">
-				<h1>События 2018</h1>
+				<h1>События <?=$year;?></h1>
 			</div>
 			<div class="desc">
 				<span>Из сотни событий, которые могут произойти</span>
 			</div>
 			<div class="general_share">
 				<ul>
-					<li><a href="" class="g-share-btn"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="" class="g-share-btn"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="" class="g-share-btn"><i class="fa fa-odnoklassniki"></i></a></li>
-					<li><a href="" class="g-share-btn"><i class="fa fa-vk"></i></a></li>
-					<li><a href="" class="g-share-btn"><i class="fa fa-telegram"></i></a></li>
+					<li>
+                        <?=Html::a('<i class="fa fa-facebook"></i>', '', [
+                            'class' => 'g-share-btn',
+                            'data-type' => 'fb',
+                            'data-url' => Url::canonical(),
+                            'data-title' => $shares[0]->title,
+                            'data-image' => $shares[0]->image,
+                            'data-desc' => $shares[0]->text,
+                        ]);?>
+                    </li>
+                    <li>
+                        <?=Html::a('<i class="fa fa-vk"></i>', '', [
+                            'class' => 'g-share-btn',
+                            'data-type' => 'vk',
+                            'data-url' => Url::canonical(),
+                            'data-title' => $shares[0]->title,
+                            'data-image' => $shares[0]->image,
+                            'data-desc' => $shares[0]->text,
+                        ]);?>
+                    </li>
+                    <li>
+                        <?=Html::a('<i class="fa fa-twitter"></i>', '', [
+                            'class' => 'g-share-btn',
+                            'data-type' => 'tw',
+                            'data-url' => Url::canonical(),
+                            'data-title' => $shares[0]->title,
+                        ]);?>
+                    </li>
+                    <li>
+                        <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
+                            'class' => 'g-share-btn',
+                            'data-type' => 'ok',
+                            'data-url' => Url::canonical(),
+                            'data-desc' => $shares[0]->text,
+                        ]);?>
+                    </li>
+                    <li>
+                        <?=Html::a('<i class="fa fa-telegram"></i>', '', [
+                            'class' => 'g-share-btn',
+                            'data-type' => 'ok',
+                            'data-url' => Url::canonical(),
+                            'data-desc' => $shares[0]->text,
+                        ]);?>
+                    </li>
 				</ul>
 			</div>
 		</div>
@@ -43,253 +87,50 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
 		<div class="general_content-inner">
 			<div class="navigation">
 				<ul>
-					<li class="active">
-						<a href="">
+					<?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
+					<li <?=(isset($month) && $month == $m[0]) ? 'class="active"' : '';?>>
+						<a href="<?=Url::current(['month' => $monthNumber]);?>">
 							<span></span>
-							<span class="month">январь</span>
+							<span class="month"><?=$m[0];?></span>
 						</a>
 					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">февраль</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">март</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">апрель</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">май</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">июнь</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">июль</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">авнуст</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">сентябрь</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">ноябрь</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span></span>
-							<span class="month">декабрь</span>
-						</a>
-					</li>
+					<?php endforeach;?>
 				</ul>
 			</div>
-			<div class="content">
-				<div class="month-items">
-					<div class="month-title">
-						<h2>Сентябрь</h2>
-						<div class="share-inline">
-							<span class="share-inline_btn"><i class="fa fa-share-alt"></i></span>
-							<a href="" class="btn-share btn-facebook"><i class="fa fa-facebook"></i></a>
-							<a href="" class="btn-share btn-twitter"><i class="fa fa-twitter"></i></a>
-							<a href="" class="btn-share btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
-							<a href="" class="btn-share btn-vk"><i class="fa fa-vk"></i></a>
-							<a href="" class="btn-share btn-telegram"><i class="fa fa-telegram"></i></a>
-						</div>
-					</div>
-					<div class="masonry-items">
-						<div class="grid-item w540-h620">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">XXII Зимние Олимпийские игры 2018 в Южной Корее, в столице Пхёнчхан</a></h2>
-								<span class="date">9-25 февраля</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap2.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Запуск телескопов James Webb отложили до 2019 года</a></h2>
-								<span class="date">12 апреля</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap3.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Презентация флагманской модели Samsung Galaxy S9</a></h2>
-								<span class="date">12 апреля</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap4.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Электронный паспорт гражданина РФ в 2018 году</a></h2>
-								<span class="date">апрель 2018</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap5.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Чемпионат мира по хоккею в Дании</a></h2>
-								<span class="date">12 апреля</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap6.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Евровидение 2018 пройдет в столице Португалии</a></h2>
-								<span class="date">3-6 апреля</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="month-items">
-					<div class="month-title">
-						<h2>Октябрь</h2>
-						<div class="share-inline">
-							<span class="share-inline_btn"><i class="fa fa-share-alt"></i></span>
-							<a href="" class="btn-share btn-facebook"><i class="fa fa-facebook"></i></a>
-							<a href="" class="btn-share btn-twitter"><i class="fa fa-twitter"></i></a>
-							<a href="" class="btn-share btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
-							<a href="" class="btn-share btn-vk"><i class="fa fa-vk"></i></a>
-							<a href="" class="btn-share btn-telegram"><i class="fa fa-telegram"></i></a>
-						</div>
-					</div>
-					<div class="masonry-items">
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap2.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Запуск телескопов James Webb отложили до 2019 года</a></h2>
-								<span class="date">12 апреля</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap3.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Презентация флагманской модели Samsung Galaxy S9</a></h2>
-								<span class="date">12 апреля</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap4.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Электронный паспорт гражданина РФ в 2018 году</a></h2>
-								<span class="date">апрель 2018</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w540-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap7.jpg');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Первая очередь переселения по программе реновации</a></h2>
-								<span class="date">осень 2018</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap6.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Евровидение 2018 пройдет в столице Португалии</a></h2>
-								<span class="date">3-6 апреля</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w250-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap6.png');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Евровидение 2018 пройдет в столице Португалии</a></h2>
-								<span class="date">3-6 апреля</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="grid-item w540-h290">
-							<div class="grid-item_image">
-								<a href="" style="background-image:url('<?=Url::to('images/general_page/events/Bitmap8.jpg');?>')"></a>
-							</div>
-							<div class="grid-item_desc">
-								<h2><a href="">Единный день голосования в Российской Федерации</a></h2>
-								<span class="date">осень 2018</span>
-								<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="content" id="events">
+				<?=$this->render('_months', ['events' => $events]);?>
 			</div>
 			<aside>
-				<ul>
-					<li><a href="" class="active">Все события</a></li>
-					<li><a href="">Примьеры</a></li>
-					<li><a href="">Объекты</a></li>
-					<li><a href="">События</a></li>
+				<ul class="categories">
+					<li><a href="<?=Url::current(['category' => null]);?>" <?=$category ? '' : 'class="active"';?>>Все события</a></li>
+					<?php foreach ($categories as $cat):?>
+					<li><a href="<?=Url::current(['category' => $cat->alias]);?>" <?=$category == $cat->alias ? 'class="active"' : '';?>><?=$cat->title;?></a></li>
+					<?php endforeach;?>
 				</ul>
 			</aside>
 		</div>
 	</div>
 </div>
-<div>
-<?php if($events):?>
-	<?php foreach ($events as $event):?>
-		<?=$event->title;?>
-		<br>
-		<hr>
-	<?php endforeach;?>
-<?php endif;?>
-</div>
+
+<?php $script = "
+    $('.categories a').on('click', function() {
+    	var elem = $(this);
+        $.ajax({
+            url: elem.attr('href'),
+            success: function(data) {
+                var html = $(data);
+                $('#events').html(data);
+                
+                history.pushState(null, '', elem .attr('href'));
+
+                masonryInit();
+
+                $('.categories a').removeClass('active');
+                elem.addClass('active');
+            }
+        });
+
+        return false;
+    });
+";?>
+<?php $this->registerJs($script, yii\web\View::POS_END);?>

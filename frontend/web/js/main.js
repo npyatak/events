@@ -48,23 +48,7 @@ $(document).ready(function () {
     // });
     // $(window).trigger('resize');
 
-    var $container = $('.masonry-items');
-    var columnWidth = 300;
-    $('.grid-item').each(function () {
-        if ($(this).width() < columnWidth) {
-            columnWidth = $(this).width();
-        }
-    });
-    // Инициализация Масонри, после загрузки изображений
-    $container.masonry({
-        itemSelector: '.grid-item',
-        percentPosition: true,
-        columnWidth: columnWidth,
-        gutter: 40
-    });
-    $container.on('layoutComplete', function (event, items) {
-        console.log(items.length);
-    });
+    masonryInit();
 
     // $('.turn').click(function(){
     //     $(this).addClass('flip');
@@ -80,6 +64,23 @@ $('a.share-btn').click(function(e) {
 
     return false;
 });
+
+function masonryInit() {    
+    var $container = $('.masonry-items');
+    var columnWidth = 300;
+    $('.grid-item').each(function () {
+        if ($(this).width() < columnWidth) {
+            columnWidth = $(this).width();
+        }
+    });
+    // Инициализация Масонри, после загрузки изображений
+    $container.masonry({
+        itemSelector: '.grid-item',
+        percentPosition: true,
+        columnWidth: columnWidth,
+        gutter: 40
+    });
+}
 
 function getShareUrl(obj) {
     if(obj.data('type') == 'vk') {

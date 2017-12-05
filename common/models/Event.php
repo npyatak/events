@@ -17,10 +17,15 @@ class Event extends \yii\db\ActiveRecord
     const DATE_TYPE_MONTH_AND_YEAR = 2;
     const DATE_TYPE_SEASON_AND_YEAR = 3;
 
+    const SIZE_SMALL = 1;
+    const SIZE_MEDIUM = 2;
+    const SIZE_LARGE = 3;
+
     public $categoryIds = [];
     public $similarIds = [];
     public $dateFormatted;
     public $imageDir = 'event';
+    public $month;
     /**
      * @inheritdoc
      */
@@ -42,8 +47,8 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'view_date_type', 'dateFormatted'], 'required'],
-            [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'date'], 'integer'],
+            [['title', 'view_date_type', 'dateFormatted', 'size'], 'required'],
+            [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
             [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title'], 'string', 'max' => 255],
             [['categoryIds', 'similarIds'], 'safe']
         ];
@@ -78,6 +83,7 @@ class Event extends \yii\db\ActiveRecord
             'categoryIds' => 'Категории',
             'similarIds' => 'Связанные события',
             'dateFormatted' => 'Дата',
+            'size' => 'Тип карточки',
         ];
     }
 
@@ -156,6 +162,7 @@ class Event extends \yii\db\ActiveRecord
             'common\models\blocks\BlockFact',
             'common\models\blocks\BlockCard',
             'common\models\blocks\BlockCut',
+            'common\models\blocks\BlockFlipCard',
             'common\models\blocks\BlockMap',
             'common\models\blocks\BlockIframe',
             'common\models\blocks\BlockCode',
@@ -187,33 +194,20 @@ class Event extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getSizeArray() {
+        return [
+            self::SIZE_SMALL => 'Маленькая',
+            self::SIZE_MEDIUM => 'Средняя',
+            self::SIZE_LARGE => 'Большая',
+        ];
+    }
+
     public function getUrl($absolute=false) {
         return Url::toRoute(['site/event', 'id' => $this->id], $absolute);
     }
 
-    public function getImageUrl($image, $thumb_size=false, $imageDir=false) {
-        if($image) {
-            $file_headers = @get_headers($image);
-            
-            if($file_headers && $file_headers[0] != 'HTTP/1.1 404 Not Found') {
-                if(!$imageDir) $imageDir = $this->imageDir;
-                if($thumb_size) {
-                    $sizes = explode('x', $thumb_size);
-                    $imageSrc = ThumbnailImage::thumbnailFileUrl(
-                        $image,
-                        $sizes[0],
-                        $sizes[1],
-                        ThumbnailImage::THUMBNAIL_INSET,
-                        $imageDir
-                    );
-                    return $imageSrc;
-                } else {
-                    return $this->image;
-                }
-            }
-        } 
-
-        return '';
+    public function getImageUrl($image, $thumb_size = false) {
+        return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
     }
 
     public function getViewDate() {
