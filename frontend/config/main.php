@@ -62,7 +62,7 @@ return [
                 '<year:\d+>' => 'site/index',
                 '<year:\d+>/category/<alias:\w+>' => 'site/index',
 
-                //'event/<id:\d+>' => 'site/event',
+                'event/<id:\d+>' => 'site/event',
                 '<action>' => 'site/<action>',
                 '<action:\w+>/<id:\d+>' => 'site/<action>',
                 

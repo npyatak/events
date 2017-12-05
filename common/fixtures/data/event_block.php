@@ -220,6 +220,19 @@ return [
 	    	'title' => 'Состыковка Dragon с бортом МКС',
 	    	'code' => '<p><iframe frameborder="0" height="315" scrolling="no" src="https://www.youtube.com/embed/Xpuq4QI3M7k" width="500"></iframe></p>'
 	    ],
-	]
+	],
+	[
+	    'event_id' => 1,
+	    'model' => 'BlockTassVideo',
+	    'block_id' => 1,
+	    'order' => 12,
+	    'anchor' => 'tass-video',
+	    'block' => [
+	    	'title' => 'Состыковка Dragon с бортом МКС',
+	    	'list_1' => 'https://renovation-vod.tass.ru/renovation-vod/smil:slideshow1.smil/playlist.smil',
+	    	'list_2' => 'https://renovation-vod.tass.ru/renovation-vod/smil:slideshow1.smil/playlist.m3u8',
+			'image' => 'https://phototass1.cdnvideo.ru/width/744_b12f2926/tass/m2/uploads/i/20171203/4610919.jpg',
+	    ],
+	],
 ];
 ?>

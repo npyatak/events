@@ -164,6 +164,7 @@ class Event extends \yii\db\ActiveRecord
             'common\models\blocks\BlockCut',
             'common\models\blocks\BlockFlipCard',
             'common\models\blocks\BlockMap',
+            'common\models\blocks\BlockTassVideo',
             'common\models\blocks\BlockIframe',
             'common\models\blocks\BlockCode',
         ];
