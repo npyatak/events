@@ -52,8 +52,8 @@ class Settings extends Component {
     }
 
     public function set($key, $value) {
+        $this->clearCache();
         if ($this->model->setSetting($key, $value)) {
-            $this->clearCache();
             return true;
         }
         return false;

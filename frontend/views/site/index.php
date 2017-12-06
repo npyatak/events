@@ -7,14 +7,14 @@ use common\components\ThumbnailImage;
 use common\models\Event;
 use common\models\Settings;
 
-//echo ThumbnailImage::getLocalImageUrl(Settings::getImageSrcPath().Yii::$app->settings->get("mainPageImage"), "1280x380");exit;
 $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
+
 <div class="main-menu">
 	<div class="container">
 		<div class="container_inner">
 			<div class="logo"><a href=""><img src="<?=Url::to('images/logo/tass-logo-white.svg');?>" alt="Logo TASS"></a></div>
-			<div class="main-slogan"><h2>События 2018</h2></div>
+			<div class="main-slogan"><h2><?=Yii::$app->settings->get('projectTitle');?></h2></div>
 			<div class="main-menu_share">
 				<span class="main-share_btn"><i class="fa fa-share-alt"></i></span>
 			</div>
@@ -26,7 +26,7 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
 	<div class="header_inner" <?=Yii::$app->settings->get('mainPageImage') ? 'style="background-image: url('.ThumbnailImage::getLocalImageUrl(Settings::getImageSrcPath().Yii::$app->settings->get("mainPageImage"), "1280x380").');"' : '';?>>
 		<div class="container">
 			<div class="slogan">
-				<h1>События <?=$year;?></h1>
+				<h1><?=Yii::$app->settings->get('projectTitle');?></h1>
 			</div>
 			<div class="desc">
 				<span>Из сотни событий, которые могут произойти</span>

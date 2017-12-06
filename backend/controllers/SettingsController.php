@@ -81,9 +81,9 @@ class SettingsController extends CController
                 
                 $model->imageFile->saveAs($path.$model->value);
                 $model->save(false, ['value']);
-
-                Yii::$app->settings->clearCache();
             }
+
+            Yii::$app->settings->clearCache();
 
             return $this->redirect([$ref ? $ref : 'index']);
         } 
