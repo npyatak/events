@@ -12,7 +12,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/font-awesome.min.css',
+        'css/icons.css',
         'css/bootstrap.min.css',
         'css/owl.carousel.min.css',
         'css/owl.theme.default.min.css',

@@ -3,16 +3,12 @@ $(document).ready(function () {
 
     $('html, body').animate({scrollTop:0}, 200);
 
-    body.on('mousewheel', function (e) {
+    $(window).on('scroll', function () {
         var win_scr_top = $(window).scrollTop();
-        if(e.originalEvent.wheelDelta > 0){
-            if(win_scr_top <= 30){
-                $('header, .general_content, .main-menu').removeClass('transform');
-            }
-        }else{
-            if(win_scr_top >= 0){
-                $('header, .general_content, .main-menu').addClass('transform');
-            }
+        if(win_scr_top <= 30){
+            $('header, .general_content, .main-menu').removeClass('transform');
+        }else if(win_scr_top >= 0){
+            $('header, .general_content, .main-menu').addClass('transform');
         }
     });
 
@@ -37,7 +33,23 @@ $(document).ready(function () {
     
     $('.share-inline_btn').click(function () {
         $(this).toggleClass('rotate');    
-        $(this).find('i').toggleClass('fa-share-alt fa-times');
+        $(this).find('i').toggleClass('ion-android-share ion-android-close');
         $(this).parent().toggleClass('visible');
     });
+
+    $('aside a').click(function (e) {
+        e.preventDefault();
+        $('aside').removeClass('active')
+        $('aside a').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $('.main-menu_btn').click(function () {
+        $('body').addClass('overflow');
+        $('aside').addClass('active');
+    });
+    $('.close_aside').click(function () {
+        $('body').removeClass('overflow');
+        $('aside').removeClass('active')
+    })
 });

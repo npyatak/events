@@ -12,9 +12,16 @@ $sizes = [
 
 <div class="month-items">
 	<?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
-	<div class="month-title"><h2><?=StringHelper::ucfirst($m[0]);?></h2></div>
-	<div class="share-inline">
-		<span class="share-inline_btn"><i class="fa fa-share-alt"></i></span>
+	<div class="month-title">
+		<h2><?=StringHelper::ucfirst($m[0]);?></h2>
+		<div class="share-inline">
+			<span class="share-inline_btn"><i class="ion-android-share"></i></span>
+			<a href="" class="btn-share btn-facebook"><i class="fa fa-facebook"></i></a>
+			<a href="" class="btn-share btn-twitter"><i class="fa fa-twitter"></i></a>
+			<a href="" class="btn-share btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
+			<a href="" class="btn-share btn-vk"><i class="fa fa-vk"></i></a>
+			<a href="" class="btn-share btn-telegram"><i class="fa fa-telegram"></i></a>
+		</div>
 	</div>
 	<div class="masonry-items">
 		<?php if(isset($events[$monthNumber])):?>

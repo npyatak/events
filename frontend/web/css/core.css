@@ -38,6 +38,9 @@ body {
     font: 18px 'ProximaNova-Regular', sans-serif;
     color: #3c3c3c;
 }
+body.overflow {
+    overflow: hidden;
+}
 a:hover {
     text-decoration: none;
 }

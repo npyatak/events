@@ -801,12 +801,19 @@
 .main-menu .logo {
     float: left;
 }
-.main-menu .logo img {
+.main-menu .logo a {
     display: block;
     width: 60px;
+    height: 60px;
+    background: url('../images/logo/tass-logo-white.svg') no-repeat center;
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+.main-menu .right {
+    float: right;
 }
 .main-menu .main-menu_share {
-    float: right;
+    float: left;
     height: 60px;
 }
 .main-share_btn {
@@ -1046,6 +1053,11 @@ header .desc {
     -moz-border-radius: 6px;
     border-radius: 6px;
     background-color: #999;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
 }
 .navigation li .month {
     position: relative;
@@ -1396,7 +1408,101 @@ aside li a.active, aside li a:hover {
     right: 18px;
     bottom: 18px;
 }
-
+.grid-item.inactive::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(155,155,155,.5);
+}
+.grid-item.inactive .grid-item_image a {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+.grid-item.inactive .grid-item_desc h2 a,
+.grid-item.inactive .grid-item_desc .date {
+    color: rgba(155,155,155,.5);
+}
+.main-menu_btn {
+    position: relative;
+    display: none;
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.main-menu_btn::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: url('../images/icons/burger.svg') no-repeat center;
+    -webkit-background-size: contain;
+    background-size: contain;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+.close_aside {
+    display: none;
+}
+.error-menu {
+    height: 100px;
+    background-color: #341B91;
+    color: #fff;
+}
+.error-menu .container {
+    height: 60px;
+}
+.error-menu .container::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.error-menu .container .left {
+    float: left;
+}
+.error-menu .container .left:nth-child(2) {
+    padding-top: 40px;
+    position: relative;
+}
+.error-menu .container .left:first-child {
+    margin-right: 60px;
+}
+.error-menu .container .left h2 {
+    margin-bottom: 0;
+    font: 20px 'ProximaNova-Bold', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 20px;
+    color: #fff;
+}
+.error-menu .logo {
+    display: block;
+    width: 60px;
+    height: 60px;
+    background: url('../images/logo/tass-logo-white.svg') no-repeat center;
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+.error-content {
+    padding-top: 150px;
+    padding-bottom: 300px;
+}
+.error-content img {
+    display: block;
+    max-width: 90%;
+    margin: 0 auto;
+}
 
 @media (max-width:1279px){
     .main-menu .container,
@@ -1404,9 +1510,15 @@ aside li a.active, aside li a:hover {
     .general_content .container {
         width: calc(100% - 100px);
     }
-    header .slogan,
+    header .slogan {
+        padding-left: 0;
+        margin-left: -20px;
+    }
     header .desc {
         padding-left: 0;
+    }
+    .content {
+        margin-left: 0;
     }
     .general_content-inner {
         justify-content: center;
@@ -1477,6 +1589,100 @@ aside li a.active, aside li a:hover {
 @media (max-width: 999px){
     .general_share {
         display: none;
+    }
+    .main-menu {
+        height: 50px;
+        background-color: #fff;
+    }
+    .main-menu .container {
+        width: 100%;
+        padding: 0;
+    }
+    .main-menu .container_inner {
+        width: 100%;
+        margin: 0;
+    }
+    .main-menu .logo a {
+        width: 50px;
+        height: 50px;
+        background: url('../images/logo/tass-logo-blue.svg') no-repeat center;
+        -webkit-background-size: contain;
+        background-size: contain;
+    }
+    .main-menu .main-menu_share {
+        height: 50px;
+    }
+    .main-menu_btn {
+        display: block;
+    }
+    .main-share_btn {
+        height: 50px;
+        width: 50px;
+        margin: 0;
+        opacity: 1;
+        z-index: 1;
+    }
+    .main-menu .main-slogan {
+        padding-top: 18px;
+        padding-left: 20px;
+        opacity: 1;
+        z-index: 0;
+    }
+    .main-menu .main-slogan h2 {
+        font-size: 12px;
+        color: #191919;
+    }
+    aside {
+        display: none !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0 !important;
+        bottom: 0;
+        z-index: 999;
+        background-color: #221FAA;
+        margin: 0;
+        width: 100%;
+        padding-top: 80px;
+    }
+    aside.active {
+        display: block !important;
+    }
+    aside li {
+        margin-bottom: 20px;
+    }
+    aside li a {
+        font-size: 18px;
+        text-align: center;
+        color: #fff !important;
+    }
+    aside li a.active {
+        background-color: #221FAA;
+    }
+    .close_aside {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #fff;
+    }
+    .close_aside i {
+        font-size: 22px;
+    }
+    header, header.transform {
+        position: relative;
+        height: auto;
+    }
+    header .slogan, header.transform .slogan {
+        display: none !important;
+    }
+    header .desc {
+        position: static;
+        padding-top: 100px;
+        opacity: 1 !important;
+    }
+    .general_content, .general_content.transform {
+        margin-top: 0px;
     }
 }
 @media (max-width: 930px){
@@ -1599,7 +1805,6 @@ aside li a.active, aside li a:hover {
     }
 }
 @media (max-width: 767px) {
-    .main-menu .container,
     header .container,
     .general_content .container {
         width: calc(100% - 30px);
@@ -1925,5 +2130,10 @@ aside li a.active, aside li a:hover {
     }
     .event-date {
         margin-left: -15px;
+    }
+}
+@media (max-height:700px) {
+    .navigation li {
+        margin-bottom: 30px;
     }
 }
