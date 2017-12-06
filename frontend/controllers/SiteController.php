@@ -48,11 +48,8 @@ class SiteController extends Controller
 
         $query = Event::find()
             ->where(['between', 'date', \DateTime::createFromFormat('!Y', $year)->format('U'), \DateTime::createFromFormat('!Y', $year + 1)->format('U')])
-            ->andWhere(['status' => Event::STATUS_ACTIVE]);
-        if($category) {
-            $query->joinWith('categories');
-            $query->andWhere(['category.alias' => $category]);
-        }
+            ->andWhere(['status' => Event::STATUS_ACTIVE])
+            ->joinWith('categories');
 
         $events = [];
 
@@ -83,8 +80,7 @@ class SiteController extends Controller
 
     public function actionEvent($id) {
         $event = $this->findEvent($id);
-        // $event = Event::find()->joinWith('eventBlocks')->where(['event.id' => $id])->one();
-        // print_r($event);exit;
+        
         $nextEvent = Event::find()->where(['>', 'date', $event->date])->orderBy('value_index DESC')->one();
         $prevEvent = Event::find()->where(['<', 'date', $event->date])->orderBy('value_index DESC')->one();
 
@@ -116,8 +112,8 @@ class SiteController extends Controller
             &sf=true
             &output=xml*/
 
-        $dateStart = date('Ymd', time()).'T090000';
-        $dateEnd   = date('Ymd', time()).'T190000';
+        $dateStart = date('Ymd', $event->date).'T090000';
+        $dateEnd   = date('Ymd', $event->date).'T190000';
 
         $url = 'https://calendar.google.com/calendar/render?'.http_build_query([
             'action' => 'TEMPLATE',
@@ -133,11 +129,6 @@ class SiteController extends Controller
 
     public function actionIcs($id) {
         $event = $this->findEvent($id);
-        $year = date('Y', $event->timeline_date);
-        // print_r($year);
-        // echo '<br>';
-        // echo $event->view_date_1.'.'.$event->view_date_2;
-        // exit;
 
         // switch ($event->view_date_type) {
         //     case Event::DATE_TYPE_DATE:
@@ -178,8 +169,8 @@ class SiteController extends Controller
         END:VEVENT
         END:VCALENDAR*/
 
-        $dateStart = date('Ymd', time()).'T090000';
-        $dateEnd   = date('Ymd', time()).'T190000';
+        $dateStart = date('Ymd', $event->date).'T090000';
+        $dateEnd   = date('Ymd', $event->date).'T190000';
 
         $ics = new ICS([
             'dtstart' => $dateStart,

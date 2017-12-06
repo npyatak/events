@@ -35,7 +35,7 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
 				<ul>
 					<li>
                         <?=Html::a('<i class="fa fa-facebook"></i>', '', [
-                            'class' => 'g-share-btn',
+                            'class' => 'g-share-btn share',
                             'data-type' => 'fb',
                             'data-url' => Url::canonical(),
                             'data-title' => $shares[0]->title,
@@ -45,7 +45,7 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
                     </li>
                     <li>
                         <?=Html::a('<i class="fa fa-vk"></i>', '', [
-                            'class' => 'g-share-btn',
+                            'class' => 'g-share-btn share',
                             'data-type' => 'vk',
                             'data-url' => Url::canonical(),
                             'data-title' => $shares[0]->title,
@@ -55,7 +55,7 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
                     </li>
                     <li>
                         <?=Html::a('<i class="fa fa-twitter"></i>', '', [
-                            'class' => 'g-share-btn',
+                            'class' => 'g-share-btn share',
                             'data-type' => 'tw',
                             'data-url' => Url::canonical(),
                             'data-title' => $shares[0]->title,
@@ -63,7 +63,7 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
                     </li>
                     <li>
                         <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
-                            'class' => 'g-share-btn',
+                            'class' => 'g-share-btn share',
                             'data-type' => 'ok',
                             'data-url' => Url::canonical(),
                             'data-desc' => $shares[0]->text,
@@ -71,7 +71,7 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
                     </li>
                     <li>
                         <?=Html::a('<i class="fa fa-telegram"></i>', '', [
-                            'class' => 'g-share-btn',
+                            'class' => 'g-share-btn share',
                             'data-type' => 'ok',
                             'data-url' => Url::canonical(),
                             'data-desc' => $shares[0]->text,
@@ -98,13 +98,13 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
 				</ul>
 			</div>
 			<div class="content" id="events">
-				<?=$this->render('_months', ['events' => $events]);?>
+				<?=$this->render('_months', ['events' => $events, 'category' => $category]);?>
 			</div>
 			<aside>
 				<ul class="categories">
 					<li><a href="<?=Url::current(['category' => null]);?>" <?=$category ? '' : 'class="active"';?>>Все события</a></li>
 					<?php foreach ($categories as $cat):?>
-					<li><a href="<?=Url::current(['category' => $cat->alias]);?>" <?=$category == $cat->alias ? 'class="active"' : '';?>><?=$cat->title;?></a></li>
+					<li><a href="<?=$cat->url;?>" <?=$category == $cat->alias ? 'class="active"' : '';?> data-category="<?=$cat->alias;?>"><?=$cat->title;?></a></li>
 					<?php endforeach;?>
 				</ul>
 			</aside>
@@ -115,20 +115,29 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
 <?php $script = "
     $('.categories a').on('click', function() {
     	var elem = $(this);
-        $.ajax({
-            url: elem.attr('href'),
-            success: function(data) {
-                var html = $(data);
-                $('#events').html(data);
+
+        $('.grid-item').addClass('inactive');
+        $('.grid-item.cat_'+elem.data('category')).removeClass('inactive');
+
+        history.pushState(null, '', elem .attr('href'));
+        
+        $('.categories a').removeClass('active');
+        elem.addClass('active');
+
+        // $.ajax({
+        //     url: elem.attr('href'),
+        //     success: function(data) {
+        //         var html = $(data);
+        //         $('#events').html(data);
                 
-                history.pushState(null, '', elem .attr('href'));
+        //         history.pushState(null, '', elem .attr('href'));
 
-                masonryInit();
+        //         masonryInit();
 
-                $('.categories a').removeClass('active');
-                elem.addClass('active');
-            }
-        });
+        //         $('.categories a').removeClass('active');
+        //         elem.addClass('active');
+        //     }
+        // });
 
         return false;
     });

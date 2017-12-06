@@ -62,6 +62,6 @@ class Category extends \yii\db\ActiveRecord
     }
 
     public function getUrl() {
-        return Url::toRoute(['site/index', 'alias' => $this->alias]);
+        return Url::toRoute(['site/index', 'category' => $this->alias]);
     }
 }

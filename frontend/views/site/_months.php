@@ -20,7 +20,15 @@ $sizes = [
 		<?php if(isset($events[$monthNumber])):?>
 			<?php foreach ($events[$monthNumber] as $event):?>
 				<?php $size = $sizes[$event->size];?>
-				<div class="grid-item w<?=$size[0];?>-h<?=$size[1];?>">
+				<?php $classes = [];
+				foreach ($event->categories as $cat) {
+					$classes[] = 'cat_'.$cat->alias;
+				}
+				if($category && !in_array($category, $classes)) {
+					$classes[] = 'incative';
+				}
+				?>
+				<div class="grid-item w<?=$size[0];?>-h<?=$size[1];?> <?=implode(' ', $classes);?>">
 					<div class="grid-item_image">
 						<a href="<?=$event->url;?>" style="background-image:url('<?=$event->getImageUrl($event->main_page_image_url, $size[0].'x'.$size[1]);?>')"></a>
 					</div>

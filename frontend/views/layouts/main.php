@@ -21,7 +21,12 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?= Html::csrfMetaTags() ?>
     <title>
-        <?=Yii::$app->settings->get('currentYear');?> год. Краткое содержание. <?= $this->title ? '- '.Html::encode($this->title) : ''?>
+        <?php if(Yii::$app->settings->get('projectTitle')) {
+            echo Yii::$app->settings->get('projectTitle');
+        } elseif(Yii::$app->settings->get('currentYear')) {
+            echo Yii::$app->settings->get('currentYear').' год. Краткое содержание. ';
+        } ?>
+        <?=$this->title ? '- '.Html::encode($this->title) : ''?>
     </title>
     <?php $this->head() ?>
 

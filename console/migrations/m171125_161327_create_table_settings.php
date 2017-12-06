@@ -21,6 +21,7 @@ class m171125_161327_create_table_settings extends Migration {
 
         $this->batchInsert('{{%settings}}', ['key', 'value', 'title', 'type'], [
             ['currentYear', 2017, 'Текущий год', 1],
+            ['projectTitle', 'События 2018', 'Заголовок проекта', 1],
             ['logoUrl', 'http://tass.ru', 'Ссылка с логотипа', 1],
             ['mainPageImage', '', 'Заглавное изображение', 5],
             ['workedOnProject', '', 'Перечень работавших над проектом', 2],
