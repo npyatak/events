@@ -63,6 +63,8 @@ class ShareController extends CController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->cacheFrontend->delete('shares');
+            
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [

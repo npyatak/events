@@ -41,7 +41,7 @@ use common\models\Event;
         ]);?>
         <?=Html::a('<i class="fa fa-telegram"></i>', '', [
             'class' => 'btn-share btn-telegram',
-            'data-type' => 'ok',
+            'data-type' => 'tg',
             'data-url' => Url::current(['month' => $monthNumber]),
             'data-desc' => $shares[$monthNumber]->text,
         ]);?>
