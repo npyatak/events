@@ -733,7 +733,8 @@
 .block_quotation,
 .block_fact,
 .block_card,
-.block_cut {
+.block_cut,
+.block_flip_card {
     float: right;
     width: 670px;
     margin-right: 40px;

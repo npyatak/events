@@ -6,6 +6,8 @@ use Yii;
 
 class BlockFlipCard extends Block
 {
+    const DEFAULT_WIDTH = 660;
+    const DEFAULT_HEIGHT = 400;
     /**
      * @inheritdoc
      */
@@ -29,6 +31,17 @@ class BlockFlipCard extends Block
 
     public function getBlockName() {
         return 'Флип-карта';
+    }
+
+    public function beforeSave($insert) {
+        if(!$this->width) {
+            $this->width = self::DEFAULT_WIDTH;
+        }
+        if(!$this->height) {
+            $this->height = self::DEFAULT_HEIGHT;
+        }
+
+        return parent::beforeSave($insert);
     }
 
     /**

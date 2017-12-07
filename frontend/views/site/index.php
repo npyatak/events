@@ -13,7 +13,7 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
 <div class="main-menu">
 	<div class="container">
 		<div class="container_inner">
-			<div class="logo"><a href=""></a></div>
+			<div class="logo"><a href="<?=Url::home();?>"></a></div>
 			<div class="main-slogan"><h2>События 2018</h2></div>
 			<div class="right">
 				<div class="main-menu_share">
@@ -101,7 +101,7 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
 				</ul>
 			</div>
 			<div class="content" id="events">
-				<?=$this->render('_months', ['events' => $events, 'category' => $category]);?>
+				<?=$this->render('_months', ['events' => $events, 'category' => $category, 'shares' => $shares]);?>
 			</div>
 			<aside>
 				<ul class="categories">

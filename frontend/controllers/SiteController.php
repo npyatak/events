@@ -44,7 +44,7 @@ class SiteController extends Controller
     public function actionIndex($month = null, $category = null)
     {
         $dateNow = new \DateTime();
-        $year = Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
+        $year = (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
 
         $query = Event::find()
             ->where(['between', 'date', \DateTime::createFromFormat('!Y', $year)->format('U'), \DateTime::createFromFormat('!Y', $year + 1)->format('U')])
@@ -75,6 +75,28 @@ class SiteController extends Controller
             'year' => $year,
             'categories' => Category::find()->all(),
             'shares' => Yii::$app->cacheFrontend->get('shares') ? Yii::$app->cacheFrontend->get('shares') : Share::find()->all(),
+        ]);
+    }
+
+    public function actionMonth($month, $category = null)
+    {
+        $dateNow = new \DateTime();
+        $year = (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
+
+        $query = Event::find()
+            ->where(['between', 'date', \DateTime::createFromFormat('!Y.n', $year.'.'.$month)->format('U'), 
+                \DateTime::createFromFormat('!Y.n', ($year + 1).'.'.$month)->format('U')])
+            ->andWhere(['status' => Event::STATUS_ACTIVE])
+            ->joinWith('categories');
+
+        $events = $query->orderBy('value_index DESC')->all();
+
+        return $this->render('month', [
+            'events' => $events,
+            'share' => Share::find()->where(['month' => $month])->one(),
+            'category' => $category,
+            'year' => $year,
+            'month' => $month,
         ]);
     }
 

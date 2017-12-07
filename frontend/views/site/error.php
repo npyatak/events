@@ -13,9 +13,9 @@ $this->title = $name;
     <div class="error-menu">
         <div class="container">
             <div class="left">
-                <a href="" class="logo"></a>
+                <a href="<?=Url::home();?>" class="logo"></a>
             </div>
-            <div class="left"><h2>2018. Краткое содержание</h2></div>
+            <div class="left"><h2><?=Yii::$app->settings->get('projectTitle');?> - <?=$this->title;?></h2></div>
         </div>
     </div>
     <div class="error-content">
