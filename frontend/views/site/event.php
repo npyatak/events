@@ -30,7 +30,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                             <div class="event-title">
                                 <h2><?=$event->title?></h2>
                             </div>
-                            <div class="event-date">
+                            <div class="event-date <?php if($event->view_date_type == Event::DATE_TYPE_DATE):?>day<?php endif;?>">
                             	<?php if($event->view_date_type == Event::DATE_TYPE_DATE):?>
                                     <div class="season">
                                         <div>
@@ -56,9 +56,11 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 
                                 <div class="add-to-calendar">
                                     <a class="add-to-calendar-a" href="">добавить в календарь</a>
-                                    <div class="hidden">
-                                        <a class="calendar" href="<?=Url::toRoute(['site/ics', 'id' => $event->id]);?>" target="_blank">сохранить ics-файл</a>
-                                        <a class="calendar" href="<?=Url::toRoute(['site/gc', 'id' => $event->id]);?>" target="_blank">сохранить в google Календарь</a>
+                                    <div class="hidden dropdown">
+                                        <ul>
+                                            <li><a class="calendar" href="<?=Url::toRoute(['site/gc', 'id' => $event->id]);?>" target="_blank">сохранить в google Календарь</a></li>
+                                            <li><a class="calendar" href="<?=Url::toRoute(['site/ics', 'id' => $event->id]);?>" target="_blank">сохранить ics-файл</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

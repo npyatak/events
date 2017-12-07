@@ -54,11 +54,57 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+<footer>
+    <div class="container">
+        <div class="top">
+            <div class="pull-left">
+                <a href="" class="footer-logo"></a>
+            </div>
+            <div class="pull-left">
+                <div class="row justify-content-between">
+                    <div class="col-8">
+                        <div class="block">
+                            <h6>Над проектом работали:</h6>
+                            <p><i>редактор:</i>  <b>Сабина Вахитова</b>, <b>Тимур Фехретдинов</b>.  <i>бильд-редактор:</i>  <b>Илона Грибовская</b>, <b>Павел Куколев</b>.  <i>продюсер:</i>  <b>Ольга Махмутова</b>. <i>редактор:</i>  <b>Сабина Вахитова</b>, <b>Тимур Фехретдинов</b>.  <i>бильд-редактор:</i>  <b>Илона Грибовская</b>, <b>Павел Куколев</b>.  <i>продюсер:</i>  <b>Ольга Махмутова</b>.</p>
+                        </div>
+                        <div class="block">
+                            <h6>В проекте использованы фотографии и видео:</h6>
+                            <p>ТАСС, Государственный архив Российской Федерации, Государственный центральный музей современной истории России, Фонд Государственного музея политической истории России/Сергей Смольский/ТАСС, Фонд Государственного музея революции СССР/ТАСС, FineArtImages/HeritageImages/GettyImages, UniversalHistoryArchive/UIGviaGettyImages, Sovfoto/UIGviaGettyImages, Photo12/UIG/GettyImages, SeM/UIG via Getty Images, HultonArchive/GettyImages, LibraryofCongress/Corbis/VCGviaGettyImages. GeorgeRinhart/CorbisviaGettyImages, CORBIS/CorbisviaGettyImages, Hulton-Deutsch Collection/Corbis via Getty Images, ullsteinbildviaGettyImages, Archiv Gerstenberg/ullstein bild via Getty Images, ThreeLions/GettyImages, SlavaKatamidzeCollection/GettyImages, The Print Collector/ Getty Images, Keystone/Getty Images, Roger Viollet/Getty Images, Mondadori Portfolio via Getty Images, wikimedia.org/Publicdomain,  Фото М. М. Филоненко для главы «Корниловское выступление» предоставлено информационно-правовым порталом «Закония».</p>
+                        </div>
+                        <div class="block">
+                            <h6>Источники:</h6>
+                            <p><a href="" target="_blank">ТАСС-Досье</a>, <a href="" target="_blank">gctc.ru</a>, <a href="" target="_blank">РОСКОСМОС</a>,
+                                <a href="" target="_blank">NASA</a>, <a href="" target="_blank">astronaut.ru</a>, <a
+                                    href="" target="_blank">asc-csa.gc.ca</a>, <a href="" target="_blank">iss.jaxa.jp</a>,
+                                <a href="" target="_blank">esa.int</a>, <a href="" target="_blank">Государственный центральный музей современной истории России</a>,
+                                <a href="" target="_blank">Фонд Государственного музея политической истории России</a>.</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="block">
+                            <h6>ТАСС благодарит за помощь в подготовке проекта Государственный архив Российской Федерации и профессора НИУ ВШЭ, д. и. н. Будницкого О. В, а также Управление Пресс-службы и информации Президента Российской Федерации и Службу коменданта Московского Кремля ФСО России, а также сотрудника НИУ ВШЭ А. В. Латышева</h6>
+                        </div>
+                        <div class="block">
+                            <h6>Книги, фильмы и сериалы, представленные в проекте, нам помогли выбрать пользователи социальной сети "Одноклассники"</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="pull-left">
+
+            </div>
+            <div class="pull-left">
+                <div class="row justify-content-between">
+                    <div class="col-8">
+                        <p>ТАСС информационное агентство (св-во о регистрации СМИ №03247 выдано 02 апреля 1999 г. Государственным комитетом Российской Федерации по печати). Отдельные публикации могут содержать информацию, не предназначенную для пользователей до 16 лет.</p>
+                    </div>
+                    <div class="col-2">ТАСС 2017</div>
+                </div>
+            </div>
+        </div>
     </div>
 </footer>
 

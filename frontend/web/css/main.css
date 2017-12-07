@@ -68,13 +68,45 @@
 .event-date .season span:last-child {
     font: 36px 'ProximaNova-Bold', sans-serif;
 }
+.event-date.day .season span:first-child {
+    font: 36px 'ProximaNova-Bold', sans-serif;
+}
+.event-date.day .season span:last-child {
+    font: 24px 'ProximaNova-Bold', sans-serif;
+}
 .add-to-calendar {
+    position: relative;
     width: 123px;
     margin-left: -1px;
     font-size: 12px;
 }
 .add-to-calendar a {
     color: #3c3c3c;
+}
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 5;
+    margin-top: 5px;
+}
+.dropdown ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #BBBBBB;
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,.15);
+}
+.dropdown a {
+    display: block;
+    padding: 5px 15px;
+    background-color: #fff;
+    white-space: nowrap;
+    color: #3c3c3c !important;
+}
+.dropdown a:hover {
+    background-color: #E4E4E4;
 }
 .event-cat {
     max-width: 590px;
@@ -1409,19 +1441,12 @@ aside li a.active, aside li a:hover {
     right: 18px;
     bottom: 18px;
 }
-.grid-item.inactive::after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(155,155,155,.5);
-}
 .grid-item.inactive .grid-item_image a {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
+}
+.grid-item.inactive .grid-item_desc {
+    background-color: #CDCDCD;
 }
 .grid-item.inactive .grid-item_desc h2 a,
 .grid-item.inactive .grid-item_desc .date {
@@ -1503,6 +1528,57 @@ aside li a.active, aside li a:hover {
     display: block;
     max-width: 90%;
     margin: 0 auto;
+}
+
+footer .container {
+    padding: 0;
+}
+footer {
+    position: relative;
+    padding: 55px 0 150px;
+    background-color: #E7E7E7;
+    z-index: 2;
+}
+footer .top::after,
+footer .bottom::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+footer .bottom .pull-left:last-child {
+    padding-top: 45px;
+    border-top: 1px solid #CBCBCB;
+}
+footer .pull-left:first-child {
+    width: 100px;
+    height: 60px;
+}
+footer .pull-left:last-child {
+    width: calc(100% - 100px);
+}
+footer .footer-logo {
+    display: block;
+    width: 60px;
+    height: 60px;
+    background: url('../images/logo/tass-logo-blue.svg') no-repeat center;
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+footer .block {
+    margin-bottom: 40px;
+}
+footer p {
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 18px;
+}
+footer h6 {
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+footer p a {
+    font-family: 'ProximaNova-Regular', sans-serif;
+    color: #190199;
 }
 
 @media (max-width:1279px){
@@ -1684,6 +1760,10 @@ aside li a.active, aside li a:hover {
     }
     .general_content, .general_content.transform {
         margin-top: 0px;
+    }
+    .dropdown {
+        right: 0;
+        left: auto;
     }
 }
 @media (max-width: 930px){
@@ -1966,6 +2046,10 @@ aside li a.active, aside li a:hover {
     }
     .event-background_caption {
         display: none;
+    }
+    .dropdown {
+        margin-top: 21px;
+        right: -21px;
     }
 }
 @media (max-width: 600px) {
