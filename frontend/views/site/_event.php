@@ -9,7 +9,11 @@ $sizes = [
 $size = $sizes[$event->size];
 
 $classes = [];
+$color = null;
 foreach ($event->categories as $cat) {
+	if(!$color) {
+		$color = $cat->color;
+	}
 	$classes[] = 'cat_'.$cat->alias;
 }
 if($category && !in_array($category, $classes)) {
@@ -17,7 +21,7 @@ if($category && !in_array($category, $classes)) {
 }
 ?>
 
-<div class="grid-item w<?=$size[0];?>-h<?=$size[1];?> <?=implode(' ', $classes);?>">
+<div class="grid-item w<?=$size[0];?>-h<?=$size[1];?> <?=implode(' ', $classes);?>" data-color="<?=$color ? $color : '';?>">
 	<div class="grid-item_image">
 		<a href="<?=$event->url;?>" style="background-image:url('<?=$event->getImageUrl($event->main_page_image_url, $size[0].'x'.$size[1]);?>')"></a>
 	</div>
