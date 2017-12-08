@@ -16,21 +16,6 @@ $this->registerMetaTag(['property' => 'og:image', 'content' => $shares[0]->image
 $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()], 'og:url');
 $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
 ?>
-<div class="main-menu">
-	<div class="container">
-		<div class="container_inner">
-			<div class="logo"><a href="<?=Url::home();?>"></a></div>
-			<div class="main-slogan"><h2>События 2018</h2></div>
-			<div class="right">
-				<div class="main-menu_share">
-					<span class="main-share_btn"><i class="ion-android-share"></i></span>
-				</div>
-				<div class="main-menu_btn"></div>
-			</div>
-
-		</div>
-	</div>
-</div>
 <header>
 	<div class="header_inner" <?=Yii::$app->settings->get('mainPageImage') ? 'style="background-image: url('.ThumbnailImage::getLocalImageUrl(Settings::getImageSrcPath().Yii::$app->settings->get("mainPageImage"), "1280x380").');"' : '';?>>
 		<div class="container">

@@ -21,9 +21,9 @@ if($category && !in_array($category, $classes)) {
 }
 ?>
 
-<div class="grid-item w<?=$size[0];?>-h<?=$size[1];?> <?=implode(' ', $classes);?>" data-color="<?=$color ? $color : '';?>">
-	<div class="grid-item_image">
-		<a href="<?=$event->url;?>" style="background-image:url('<?=$event->getImageUrl($event->main_page_image_url, $size[0].'x'.$size[1]);?>')"></a>
+<div class="grid-item w<?=$size[0];?>-h<?=$size[1];?> <?=implode(' ', $classes);?>">
+	<div class="grid-item_image" style="background-image:url('<?=$event->getImageUrl($event->main_page_image_url, $size[0].'x'.$size[1]);?>')">
+		<a href="<?=$event->url;?>" style="background-color:<?=$color ? $color : '';?>"></a>
 	</div>
 	<div class="grid-item_desc">
 		<h2><a href="<?=$event->url;?>"><?=$event->title;?></a></h2>

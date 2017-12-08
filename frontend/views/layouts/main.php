@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -47,9 +48,22 @@ AppAsset::register($this);
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 <?php endif;?>
-
 <?php $this->beginBody() ?>
-
+    <div class="main-menu">
+        <div class="container">
+            <div class="container_inner">
+                <div class="logo"><a href="<?=Url::home();?>"></a></div>
+                <div class="main-slogan"><h2>События 2018</h2></div>
+                <div class="right">
+                    <div class="main-menu_share">
+                        <span class="main-share_btn"><i class="ion-android-share"></i></span>
+                    </div>
+                    <div class="main-menu_btn"></div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
     <div class="wrapper">
         <?= $content ?>
     </div>
@@ -59,7 +73,7 @@ AppAsset::register($this);
     <div class="container">
         <div class="top">
             <div class="pull-left">
-                <a href="" class="footer-logo"></a>
+                <a href="<?=Url::home();?>" class="footer-logo"></a>
             </div>
             <div class="pull-left">
                 <div class="row justify-content-between">

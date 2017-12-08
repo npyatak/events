@@ -18,7 +18,21 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => $url], 'og:url');
 $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
 ?>
 
-<div class="main-menu"></div>
+<!--<div class="main-menu event-detail_menu">-->
+<!--    <div class="container">-->
+<!--        <div class="container_inner">-->
+<!--            <div class="logo"><a href="--><?//=Url::home();?><!--"></a></div>-->
+<!--            <div class="main-slogan"><h2>События 2018</h2></div>-->
+<!--            <div class="right">-->
+<!--                <div class="main-menu_share">-->
+<!--                    <span class="main-share_btn"><i class="ion-android-share"></i></span>-->
+<!--                </div>-->
+<!--                <div class="main-menu_btn"></div>-->
+<!--            </div>-->
+<!---->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <div class="event-detail">
     <div class="event-background" style="background-image:url(<?=$event->image_url;?>)"></div>
     <div class="container">
@@ -29,6 +43,13 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                         <div class="row m-0 justify-content-between">
                             <div class="event-title">
                                 <h2><?=$event->title?></h2>
+                                <div class="event-cat">
+                                    <?php if($event->categories) {
+                                        foreach ($event->categories as $cat) {
+                                            echo Html::a($cat->title, $cat->url);
+                                        }
+                                    }?>
+                                </div>
                             </div>
                             <div class="event-date <?php if($event->view_date_type == Event::DATE_TYPE_DATE):?>day<?php endif;?>">
                             	<?php if($event->view_date_type == Event::DATE_TYPE_DATE):?>
@@ -64,13 +85,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="event-cat">
-                        	<?php if($event->categories) {
-                            	foreach ($event->categories as $cat) {
-                            		echo Html::a($cat->title, $cat->url);
-                            	}
-                            }?>
                         </div>
                     </div>
                     <div class="event-inner">
@@ -203,7 +217,13 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
         </div>
     </div>
 </div>
-
+<style>
+    .main-menu .logo a {
+        background: url('<?=Url::to('/images/logo/tass-logo-blue.svg', true)?>') no-repeat center;
+        -webkit-background-size: contain;
+        background-size: contain;
+    }
+</style>
 
 <?php $script = "
     $(document).on('click', '.add-to-calendar-a', function() {

@@ -20,7 +20,7 @@ $this->title = $name;
     </div>
     <div class="error-content">
         <div class="container">
-            <img src="<?=Url::to('images/error/404-infinite.svg');?>" alt="404">
+            <img src="<?=Url::to('/images/error/404-infinite.svg');?>" alt="404">
         </div>
     </div>
 </div>
