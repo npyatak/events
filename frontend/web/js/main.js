@@ -19,13 +19,13 @@ $(document).ready(function () {
             $(this).parent().parent().find('.visible').fadeOut(50);
             $(this).parent().parent().find('.hidden').fadeIn(200);
             $(this).toggleClass('show hide');
-            $(this).find('.more-text').text('свернуть');
+            $(this).find('.more-text').text($(this).parent().data('text-hide'));
         })
         .on('click','.hide',function () {
             $(this).parent().parent().find('.visible').fadeIn(200);
             $(this).parent().parent().find('.hidden').fadeOut(50);
             $(this).toggleClass('show hide');
-            $(this).find('.more-text').text('показать');
+            $(this).find('.more-text').text($(this).parent().data('text-show'));
         })
         .on('click','.more-btn-other',function () {
             $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')

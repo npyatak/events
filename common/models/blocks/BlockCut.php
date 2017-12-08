@@ -21,7 +21,7 @@ class BlockCut extends Block
     {
         return array_merge(parent::rules(), [
                 [['title', 'preview', 'text'], 'required'],
-                [['title', 'preview'], 'string', 'max' => 255],
+                [['title', 'preview', 'text_show', 'text_hide'], 'string', 'max' => 255],
                 [['text'], 'safe'],
             ]
         );
@@ -38,6 +38,8 @@ class BlockCut extends Block
     {
         return array_merge(parent::attributeLabels(), [
                 'preview' => 'Превью',
+                'text_show' => 'Текст контрола для разворачивания',
+                'text_hide' => 'Текст контрола для сворачивания',
             ]    
         );
     }

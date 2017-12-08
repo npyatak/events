@@ -15,7 +15,9 @@ class m171120_135335_create_table_block_cut extends Migration {
             'id' => $this->primaryKey(),
             'title' => $this->string(255),
             'preview' => $this->string(255),
-            'text' => $this->text(),          
+            'text' => $this->text(),
+            'text_show' => $this->string(255),
+            'text_hide' => $this->string(255),
         ], $tableOptions);
 
     }

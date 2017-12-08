@@ -17,6 +17,8 @@ class m171205_185435_create_table_block_tass_video extends Migration {
             'image' => $this->string(255),
             'list_1' => $this->string(255),
             'list_2' => $this->string(255),
+            'width' => $this->integer(),
+            'height' => $this->integer(),
         ], $tableOptions);
 
     }

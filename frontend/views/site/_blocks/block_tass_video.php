@@ -6,13 +6,20 @@ PlayerAsset::register($this);
 
 <div id="block-video-<?=$block->id;?>"></div>
 
-<?php $script = "
+<?php
+$str = "'width': ".($block->width ? $block->width : "'100%'").",";
+if($block->height) {
+	$str .= "'height': ".$block->height;
+} else {
+	$str .= "'aspectratio': '16:9'";
+}
+
+$script = "
 	$(document).ready(function () {
 	    jwplayer.key='btTjXiuYZsRbqAVggNOhFFVcP3mvO2KkI2kx4w==';
 
 	    jwplayer('block-video-".$block->id."').setup({
-	        'width': '100%',
-	        'aspectratio': '16:9',
+	        ".$str.",
 	        'bufferlength': '3',
 	        'stretching': 'uniform',
 	        'primary': 'flash',

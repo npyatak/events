@@ -21,6 +21,24 @@ use common\components\CKEditor;
 	</div>
 </div>
 
+<div class="row">
+	<div class="col-sm-6">
+	    <div class="form-group <?=$model->hasErrors("text_show") ? 'has-error' : '';?>">
+	        <?= Html::activeLabel($model, "[$i]text_show", ['class' => 'control-label']) ?>
+	        <?= Html::activeTextInput($model, "[$i]text_show", ['class' => 'form-control']) ?>
+	        <?= Html::error($model, "[$i]text_show", ['class' => 'help-block']);?>
+	    </div>
+	</div>
+
+	<div class="col-sm-6">
+	    <div class="form-group <?=$model->hasErrors("text_hide") ? 'has-error' : '';?>">
+	        <?= Html::activeLabel($model, "[$i]text_hide", ['class' => 'control-label']) ?>
+	        <?= Html::activeTextInput($model, "[$i]text_hide", ['class' => 'form-control']) ?>
+	        <?= Html::error($model, "[$i]text_hide", ['class' => 'help-block']);?>
+	    </div>
+	</div>
+</div>
+
 <div class="form-group <?=$model->hasErrors("text") ? 'has-error' : '';?>">
 	<?= Html::activeLabel($model, "[$i]text", ['class' => 'control-label']) ?>
 	<?=CKEditor::widget([

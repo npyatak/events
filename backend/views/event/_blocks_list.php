@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 use common\models\Event;
 
-\backend\assets\UIAsset::register($this);
+//\backend\assets\UIAsset::register($this);
 ?>
 
 <ul id="blocks">
@@ -46,15 +46,30 @@ use common\models\Event;
         updateBlocksOrder();
     });
 
-    $('#blocks').sortable({
-        cursor: 'move',  
-        classes: {
-            'ui-sortable': 'highlight'
-        },
-        update: function(event, ui) {
-            updateBlocksOrder();
-        }
-    });
+    // $('#blocks').sortable({
+    //     cursor: 'move',
+    //     handle: '.header',
+    //     classes: {
+    //         'ui-sortable': 'highlight'
+    //     },
+    //     update: function(event, ui) {
+    //         updateBlocksOrder();
+    //     },
+    //     start: function(event, ui){
+    //         var textareaId = ui.item.find('textarea').attr('id');
+    //         if (typeof textareaId != 'undefined') {
+    //             var editorInstance = CKEDITOR.instances[textareaId];
+    //             editorInstance.destroy();
+    //             CKEDITOR.remove(textareaId);
+    //         }
+    //     },
+    //     stop: function(event, ui){
+    //         var textareaId = ui.item.find('textarea').attr('id');
+    //         if (typeof textareaId != 'undefined') {
+    //             CKEDITOR.replace(textareaId, CKEDITOR.instances[textareaId].config);
+    //         }
+    //     }
+    // });
 
     function updateBlocksOrder() {
         $('.block').each(function() {
