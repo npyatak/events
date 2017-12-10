@@ -57,7 +57,8 @@ $(document).ready(function () {
     // });
 
 
-    $('.big-image_btn').click(function () {
+    $('.big-image_btn').click(function (e) {
+        e.preventDefault();
         var parent_block = $(this).parent().parent();
         var big_modal = $('.big-image_modal');
         var image = parent_block.find('img').attr('src');
