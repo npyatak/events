@@ -57,10 +57,16 @@ AppAsset::register($this);
                 <div class="right">
                     <div class="main-menu_share">
                         <span class="main-share_btn"><i class="ion-android-share"></i></span>
+                        <div class="main-menu_share-wrap">
+                            <a class="btn-share btn-facebook" href=""><i class="fa fa-facebook"></i></a>
+                            <a class="btn-share btn-twitter" href=""><i class="fa fa-twitter"></i></a>
+                            <a class="btn-share btn-odnoklassniki" href=""><i class="fa fa-odnoklassniki"></i></a>
+                            <a class="btn-share btn-vk" href=""><i class="fa fa-vk"></i></a>
+                            <a class="btn-share btn-telegram" href=""><i class="fa fa-telegram"></i></a>
+                        </div>
                     </div>
                     <div class="main-menu_btn"></div>
                 </div>
-    
             </div>
         </div>
     </div>

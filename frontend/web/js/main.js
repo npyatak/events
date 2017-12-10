@@ -78,6 +78,11 @@ $(document).ready(function () {
             big_modal.find('.caption').remove();
         });
 
+    $('.main-share_btn').click(function () {
+        $(this).toggleClass('rotate');
+        $(this).find('i').toggleClass('ion-android-share ion-android-close');
+        $(this).parent().toggleClass('visible');
+    });
 });
 
 $('a.share, a.btn-share').click(function(e) {

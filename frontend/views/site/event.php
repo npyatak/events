@@ -4,6 +4,8 @@ use yii\helpers\Html;
 
 use common\models\Event;
 
+$this->registerJsFile(Url::toRoute('js/event.js'), ['depends' => [\yii\web\JqueryAsset::className()]]);
+
 $this->title = $event->title;
 
 $url = Url::canonical();
@@ -233,10 +235,9 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
     </div>
 </div>
 <style>
-    .main-menu .logo a {
-        background: url('<?=Url::to('/images/logo/tass-logo-blue.svg', true)?>') no-repeat center;
-        -webkit-background-size: contain;
-        background-size: contain;
+    .main-menu .main-slogan {
+        padding-left: 30px;
+        opacity: 1;
     }
 </style>
 

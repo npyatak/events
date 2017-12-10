@@ -95,6 +95,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 				<?=$this->render('_months', ['events' => $events, 'category' => $category, 'shares' => $shares]);?>
 			</div>
 			<aside>
+				<span class="close_aside"><i class="ion-android-close"></i></span>
 				<ul class="categories">
 					<li><a href="<?=Url::current(['category' => null]);?>" <?=$category ? '' : 'class="active"';?>>Все события</a></li>
 					<?php foreach ($categories as $cat):?>
