@@ -6,7 +6,7 @@
             <?=$block->copyright_text;?>
         </div>
         <?php if($block->show_fullscreen):?>
-        <a href="<?=$block->getImageUrl($block->source);?>" class="big-image_btn"></a>
+        <a href="" class="big-image_btn"></a>
         <?php endif;?>
     </div>
     <div class="title-wrap">

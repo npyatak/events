@@ -379,3 +379,8 @@ table tbody tr {
 .btn-telegram {
     background-color: #61A8DE;
 }
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+}

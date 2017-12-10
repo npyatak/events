@@ -118,6 +118,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'data-url' => $url,
                                     'data-title' => $title,
                                 ]);?>
+                                <span class="share-counter"></span>
                             </div>
                             <div class="share-wrap wrap-ok">
                                 <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
@@ -135,6 +136,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'data-url' => $url,
                                     'data-desc' => $desc,
                                 ]);?>
+                                <span class="share-counter"></span>
                             </div>
                         </div>
                         <?php if($event->eventBlocks) {
@@ -214,6 +216,22 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                 <?php endforeach;?>
             </div>
             <?php endif;?>
+        </div>
+    </div>
+</div>
+<div class="big-image_modal">
+    <div class="big-image_modal-inner">
+        <div class="big-image_modal-content">
+            <div class="big-image_inner">
+                <img class="img-responsive" src="" alt="Title">
+                <div class="caption">
+                    
+                </div>
+                <span class="big-image_modal-close"><i class="ion-android-close"></i></span>
+            </div>
+            <div class="big-image_title">
+                <h5></h5>
+            </div>
         </div>
     </div>
 </div>
