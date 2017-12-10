@@ -28,6 +28,10 @@ if($category && !in_array($category, $classes)) {
 	<div class="grid-item_desc">
 		<h2><a href="<?=$event->url;?>"><?=$event->title;?></a></h2>
 		<span class="date"><?=$event->viewDate[0];?> <?=$event->viewDate[1];?></span>
-		<a href="" class="link-arrow"><i class="fa fa-angle-right"></i></a>
+		<a href="" class="link-arrow">
+			<i class="fa fa-angle-right"></i>
+			<span class="hover" style="background-color:<?=$color ? $color : '';?>"></span>
+			<span class="default"></span>
+		</a>
 	</div>
 </div>

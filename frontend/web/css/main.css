@@ -1167,7 +1167,7 @@ aside li a.active, aside li a:hover {
     margin-left: 100px;
 }
 .month-items {
-    margin-top: 60px;
+    margin-top: 50px;
 }
 .month-items::after {
     content: '';
@@ -1230,11 +1230,11 @@ aside li a.active, aside li a:hover {
     font-size: 14px;
 }
 .share-inline_btn.rotate {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 .share-inline .btn-share {
     position: relative;
@@ -1400,7 +1400,7 @@ aside li a.active, aside li a:hover {
     z-index: 3;
 }
 .grid-item.w540-h290 .grid-item_desc h2 {
-    height: 83px;
+    height: 88px;
     overflow: hidden;
     margin-bottom: 0;
     font: 25px 'ProximaNova-Semibold', sans-serif;
@@ -1437,20 +1437,55 @@ aside li a.active, aside li a:hover {
     height: 32px;
     line-height: 32px;
     text-align: center;
+}
+.grid-item_desc .link-arrow i {
+    position: relative;
+    z-index: 1;
+    color: #190199;
+}
+.grid-item_desc .link-arrow .default {
+    display: block;
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
     background: #ECECEC;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    color: #190199;
     -webkit-transition: .2s;
     -moz-transition: .2s;
     -ms-transition: .2s;
     -o-transition: .2s;
     transition: .2s;
 }
-.grid-item_desc .link-arrow:hover {
-    background-color: #190199;
+.grid-item_desc .link-arrow .hover {
+    display: block;
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: #ECECEC;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
+    opacity: 0;
+}
+.grid-item_desc .link-arrow:hover i {
     color: #fff;
+}
+.grid-item_desc .link-arrow:hover .default {
+    opacity: 0;
+}
+.grid-item_desc .link-arrow:hover .hover {
+    opacity: 1;
 }
 .grid-item.w540-h620 .link-arrow,
 .grid-item.w540-h290 .link-arrow {
@@ -1466,7 +1501,7 @@ aside li a.active, aside li a:hover {
     right: 18px;
     bottom: 18px;
 }
-.grid-item.inactive .grid-item_image a {
+.grid-item.inactive .grid-item_image {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }

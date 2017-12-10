@@ -105,7 +105,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 		</div>
 	</div>
 </div>
-
 <?php $script = "
     $('.categories a').on('click', function() {
     	var elem = $(this);
@@ -117,7 +116,11 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
         
         $('.categories a').removeClass('active');
         elem.addClass('active');
-
+		
+		if($(this).hasClass('all')){
+			$('.grid-item').removeClass('inactive');
+		}
+		
         // $.ajax({
         //     url: elem.attr('href'),
         //     success: function(data) {

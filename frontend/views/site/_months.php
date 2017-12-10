@@ -6,12 +6,12 @@ use common\helpers\StringHelper;
 use common\models\Event;
 ?>
 
+<?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
 <div class="month-items">
-	<?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
 	<div class="month-title">
 		<h2><?=StringHelper::ucfirst($m[0]);?></h2>
 		<div class="share-inline">
-			<span class="share-inline_btn"><i class="fa fa-share-alt"></i></span>
+			<span class="share-inline_btn"><i class="ion-android-share"></i></span>
 			<?=Html::a('<i class="fa fa-facebook"></i>', '', [
 				'class' => 'btn-share btn-facebook',
 				'data-type' => 'fb',
@@ -55,5 +55,5 @@ use common\models\Event;
 			}?>
 		<?php endif;?>
 	</div>
-	<?php endforeach;?>
 </div>
+<?php endforeach;?>

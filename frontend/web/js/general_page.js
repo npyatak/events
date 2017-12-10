@@ -39,7 +39,7 @@ $(document).ready(function () {
 
     $('aside a').click(function (e) {
         e.preventDefault();
-        $('aside').removeClass('active')
+        $('aside').removeClass('active');
         $('aside a').removeClass('active');
         $(this).addClass('active');
     });
@@ -51,5 +51,7 @@ $(document).ready(function () {
     $('.close_aside').click(function () {
         $('body').removeClass('overflow');
         $('aside').removeClass('active')
-    })
+    });
+
+    $('.categories li').first().find('a').addClass('all');
 });

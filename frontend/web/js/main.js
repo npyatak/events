@@ -55,6 +55,7 @@ $(document).ready(function () {
     // },function(){
     //     $(this).removeClass('flip');
     // });
+    
 });
 
 $('a.share, a.btn-share').click(function(e) {
