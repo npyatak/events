@@ -229,9 +229,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                 </div>
                 <span class="big-image_modal-close"><i class="ion-android-close"></i></span>
             </div>
-            <div class="big-image_title">
-                <h5></h5>
-            </div>
         </div>
     </div>
 </div>

@@ -63,15 +63,18 @@ $(document).ready(function () {
         var big_modal = $('.big-image_modal');
         var image = parent_block.find('img').attr('src');
         var cap = parent_block.find('.caption').clone();
+        var title = parent_block.find('.big-image_title').clone();
         big_modal.addClass('visible');
         big_modal.find('img').attr({'src':image});
-        big_modal.find('.big-image_inner').append(cap)
+        big_modal.find('.big-image_inner').append(cap);
+        big_modal.append(title)
     });
 
     $(this)
         .on('click', '.big-image_modal-close', function () {
             var big_modal = $('.big-image_modal');
             big_modal.removeClass('visible');
+            big_modal.find('.big-image_title').remove();
             big_modal.find('.caption').remove();
         });
 
