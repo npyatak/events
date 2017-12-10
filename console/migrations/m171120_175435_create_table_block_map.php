@@ -13,7 +13,8 @@ class m171120_175435_create_table_block_map extends Migration {
 
         $this->createTable('{{%block_map}}', [
             'id' => $this->primaryKey(),
-            'code' => $this->text(),          
+            'code' => $this->text(),
+            'caption' => $this->string(255),
         ], $tableOptions);
 
     }

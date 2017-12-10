@@ -22,6 +22,7 @@ class BlockMap extends Block
         return array_merge(parent::rules(), [
                 [['code'], 'required'],
                 [['code'], 'safe'],
+                ['caption', 'string', 'max' => 255],
             ]
         );
     }
@@ -38,6 +39,7 @@ class BlockMap extends Block
         return [
             'id' => 'ID',
             'code' => 'Код',
+            'caption' => 'Подпись',
         ];
     }
 }

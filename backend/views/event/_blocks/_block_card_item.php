@@ -9,7 +9,7 @@ use common\models\blocks\items\BlockCardItem;
 	<div class="remove-card-item">x</div>
 	<div class="row">
 		<?= Html::activeHiddenInput($model, "[$i][$key]id") ?>
-	    <div class="col-sm-6">
+	    <div class="col-sm-9">
 			<div class="form-group <?=$model->hasErrors("title") ? 'has-error' : '';?>">
 				<?= Html::activeLabel($model, "[$i][$key]title", ['class' => 'control-label']) ?>
 				<?= Html::activeTextInput($model, "[$i][$key]title", ['class' => 'form-control']) ?>
@@ -17,16 +17,6 @@ use common\models\blocks\items\BlockCardItem;
 			</div>
 		</div>
 
-	    <div class="col-sm-6">
-			<div class="form-group <?=$model->hasErrors("capture") ? 'has-error' : '';?>">
-				<?= Html::activeLabel($model, "[$i][$key]capture", ['class' => 'control-label']) ?>
-				<?= Html::activeTextInput($model, "[$i][$key]capture", ['class' => 'form-control']) ?>
-				<?= Html::error($model, "[$i][$key]capture", ['class' => 'help-block']);?>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
 	    <div class="col-sm-3">
 			<div class="form-group <?=$model->hasErrors("icon") ? 'has-error' : '';?>">
 				<?= Html::activeLabel($model, "[$i][$key]icon", ['class' => 'control-label']) ?>
@@ -34,13 +24,6 @@ use common\models\blocks\items\BlockCardItem;
 				<?= Html::error($model, "[$i][$key]icon", ['class' => 'help-block']);?>
 			</div>
 	    </div>
-	    <div class="col-sm-9">
-			<div class="form-group <?=$model->hasErrors("link") ? 'has-error' : '';?>">
-				<?= Html::activeLabel($model, "[$i][$key]link", ['class' => 'control-label']) ?>
-				<?= Html::activeTextInput($model, "[$i][$key]link", ['class' => 'form-control']) ?>
-				<?= Html::error($model, "[$i][$key]link", ['class' => 'help-block']);?>
-			</div>
-		</div>
 	</div>
 
 	<div class="form-group <?=$model->hasErrors("text") ? 'has-error' : '';?>">

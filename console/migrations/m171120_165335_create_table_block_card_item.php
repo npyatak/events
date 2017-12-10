@@ -17,8 +17,6 @@ class m171120_165335_create_table_block_card_item extends Migration
             'block_card_id' => $this->integer()->notNull(),
             'icon' => $this->integer(1),
             'title' => $this->string(255),
-            'capture' => $this->string(255),
-            'link' => $this->string(255),
             'text' => $this->text(),
         ], $tableOptions);
 

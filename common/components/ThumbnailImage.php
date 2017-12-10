@@ -24,17 +24,17 @@ class ThumbnailImage {
             if($file_headers && $file_headers[0] != 'HTTP/1.1 404 Not Found') {
                 if($thumb_size) {
                     $sizes = explode('x', $thumb_size);
-                    $imageSrc = ThumbnailImage::thumbnailFileUrl(
-                        $image,
-                        $sizes[0],
-                        $sizes[1],
-                        ThumbnailImage::THUMBNAIL_INSET,
-                        $imageDir
-                    );
-                    return $imageSrc;
                 } else {
-                    return $image;
+                    $sizes = getimagesize($image);
                 }
+                $imageSrc = ThumbnailImage::thumbnailFileUrl(
+                    $image,
+                    $sizes[0],
+                    $sizes[1],
+                    ThumbnailImage::THUMBNAIL_INSET,
+                    $imageDir
+                );
+                return $imageSrc;
             }
         } 
 

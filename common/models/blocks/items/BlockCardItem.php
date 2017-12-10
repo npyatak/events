@@ -5,7 +5,6 @@ namespace common\models\blocks\items;
 use Yii;
 use common\models\blocks\BlockCard;
 
-
 class BlockCardItem extends \yii\db\ActiveRecord
 {
     const ICON_QUESTION = 1;
@@ -26,7 +25,7 @@ class BlockCardItem extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['block_card_id', 'icon'], 'integer'],
-            [['title', 'capture', 'link'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
             ['text', 'safe'],
             [['block_card_id'], 'exist', 'skipOnError' => true, 'targetClass' => BlockCard::className(), 'targetAttribute' => ['block_card_id' => 'id']],
         ];
@@ -41,9 +40,7 @@ class BlockCardItem extends \yii\db\ActiveRecord
             'id' => 'ID',
             'block_card_id' => 'ID блока карточка',
             'title' => 'Заголовок',
-            'capture' => 'Подзаголовок',
-            'link' => 'Ссылка для ката',
-            'text' => 'Текст под катом',
+            'text' => 'Текст',
             'icon' => 'Иконка',
         ];
     }

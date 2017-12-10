@@ -115,8 +115,6 @@ class SiteController extends Controller
 
     public function actionGc($id) {
         $event = $this->findEvent($id);
-        //$dateStart = date(\DateTime::ATOM, time());
-        //$dateEnd   = date(\DateTime::ATOM, time());
 
         /*https://www.google.com/calendar/render?action=TEMPLATE
             &text=Your+Event+Name
@@ -152,52 +150,13 @@ class SiteController extends Controller
     public function actionIcs($id) {
         $event = $this->findEvent($id);
 
-        // switch ($event->view_date_type) {
-        //     case Event::DATE_TYPE_DATE:
-        //         $dateStart = \DateTime::createFromFormat('!d.mm.Y', $event->view_date_1.'.'.$event->view_date_2.'.'.$year)->format('U');
-        //         $dateEnd = $dateStart;
-        //         break;
-        //     case Event::DATE_TYPE_MONTH_AND_YEAR:
-        //         $dateTime = \DateTime::createFromFormat('!mm.Y', $event->view_date_1.'.'.$event->view_date_2);
-        //         $dateStart = $dateTime->format('U');
-        //         print_r($date->format('Y-m-t'));
-        //         $dateEnd = $dateStart;
-        //         break;
-        //     case Event::DATE_TYPE_SEASON_AND_YEAR:
-        //         $dateStart = \DateTime::createFromFormat('!d.mm.Y', $event->view_date_1.'.'.$event->view_date_2.'.'.$year)->format('U');
-        //         $dateEnd = $dateStart;
-        //         break;
-            
-        //     default:
-        //         # code...
-        //         break;
-        // }
-        /*BEGIN:VCALENDAR
-        PRODID:-//%LONG_GLOBAL_NAME%//NONSGML %SHORT_GLOBAL_NAME%//RU
-        VERSION:2.0
-        METHOD:PUBLISH
-        BEGIN:VEVENT
-        UID:%EVENT_ID%
-        DTSTART:%EVENT_START_DATE%T090000
-        DTEND:%EVENT_END_DATE%T0190000
-        DTSTAMP: %текущие дата и время в формате 20171113T134721%
-        SUMMARY: %название события, см. пп.1.1.1%
-        DESCRIPTION:%уточняется%
-        BEGIN:VALARM
-        TRIGGER:-PT1440M
-        ACTION:DISPLAY
-        DESCRIPTION:Напоминание о %название события, см. пп.1.1.1%
-        END:VALARM
-        END:VEVENT
-        END:VCALENDAR*/
-
         $dateStart = date('Ymd', $event->date).'T090000';
         $dateEnd   = date('Ymd', $event->date).'T190000';
 
         $ics = new ICS([
             'dtstart' => $dateStart,
             'dtend' => $dateEnd,
-            'description' => 'Напоминание о '.$event->title,
+            'description' => $event->socials_text.' '.$event->getUrl(true),
             'summary' => $event->title,
             'url' => $event->getUrl(true),
         ]);

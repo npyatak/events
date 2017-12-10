@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
+use common\components\ThumbnailImage;
 
 use common\models\Event;
 
@@ -11,7 +12,7 @@ $this->title = $event->title;
 $url = Url::canonical();
 $title = $event->socials_title ? $event->socials_title : $this->title;
 $desc = $event->socials_text;
-$image = $event->socials_image_url;
+$image = ThumbnailImage::getExternalImageUrl($event->socials_image_url);
 
 $this->registerMetaTag(['property' => 'og:description', 'content' => $desc], 'og:description');
 $this->registerMetaTag(['property' => 'og:title', 'content' => $this->title], 'og:title');
@@ -141,6 +142,9 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                 <span class="share-counter"></span>
                             </div>
                         </div>
+
+                        <h4 class="lid"><?=$event->leading_text;?></h4>
+
                         <?php if($event->eventBlocks) {
                             foreach ($event->eventBlocks as $eventBlock) {
                                 echo $this->render('_blocks/template', ['eventBlock' => $eventBlock]);
@@ -204,7 +208,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
             <div class="more-events">
                 <div class="more-events_title">похожие события</div>
                 <?php foreach ($event->similarEvents as $similar):?>
-                    <a href="" class="item">
+                    <a href="<?=$similar->url;?>" class="item">
                         <?php if($similar->image_url):?>
                         <div class="item-image" style="background-image:url(<?=$similar->getImageUrl($similar->image_url, '249x140');?>)"></div>
                         <?php endif;?>

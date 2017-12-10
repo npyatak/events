@@ -39,7 +39,7 @@ Class CKEditor extends \sadovojav\ckeditor\CKEditor {
             ['BlueHr', '@backend/web/js/plugins/blue-hr/', 'plugin.js'],
             ['TitleWithLine', '@backend/web/js/plugins/title-with-line/', 'plugin.js']
         ];
-        $options['extraPlugins'] = 'BlueHr,TitleWithLine';
+        $options['extraPlugins'] = 'BlueHr,TitleWithLine,image2';
 
         $options['toolbar'] = [
             ['Format', 'FontSize', 'Font'],

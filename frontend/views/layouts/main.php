@@ -53,7 +53,7 @@ AppAsset::register($this);
         <div class="container">
             <div class="container_inner">
                 <div class="logo"><a href="<?=Url::home();?>"></a></div>
-                <div class="main-slogan"><h2>События 2018</h2></div>
+                <div class="main-slogan"><h2>События <?=Yii::$app->settings->get('currentYear');?></h2></div>
                 <div class="right">
                     <div class="main-menu_share">
                         <span class="main-share_btn"><i class="ion-android-share"></i></span>
