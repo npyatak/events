@@ -223,7 +223,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
     <div class="big-image_modal-inner">
         <div class="big-image_modal-content">
             <div class="big-image_inner">
-                <img class="img-responsive" src="" alt="Title">
+                <img class="img-block" src="" alt="Title">
                 <div class="caption">
                     
                 </div>

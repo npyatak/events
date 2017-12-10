@@ -65,14 +65,15 @@ $(document).ready(function () {
         var cap = parent_block.find('.caption').clone();
         big_modal.addClass('visible');
         big_modal.find('img').attr({'src':image});
-        big_modal.find('.caption').html(cap)
+        big_modal.find('.big-image_inner').append(cap)
     });
 
-    $('.big-image_modal-close').click(function () {
-        var big_modal = $('.big-image_modal');
-        big_modal.removeClass('visible');
-        big_modal.find('.caption').empty()
-    });
+    $(this)
+        .on('click', '.big-image_modal-close', function () {
+            var big_modal = $('.big-image_modal');
+            big_modal.removeClass('visible');
+            big_modal.find('.caption').remove();
+        });
 
 });
 
