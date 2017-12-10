@@ -141,16 +141,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                 <span class="share-counter"></span>
                             </div>
                         </div>
-                        <div class="facts">
-                            <div class="row justify-content-end">
-                                <div class="fact_inner m-r-40">
-                                    <div class="fact_inner-icon">i</div>
-                                    <div class="title">Важные факты</div>
-                                    <h3>В чем обвиняют Серебренникова?</h3>
-                                    <p>По мнению Следственного комитета РФ, Серебренников похитил деньги, выделенные в 2011-2014 годах на реализацию проекта "Платформа". СК оценил сумму ущерба в 68 млн рублей.</p>
-                                </div>
-                            </div>
-                        </div>
                         <?php if($event->eventBlocks) {
                             foreach ($event->eventBlocks as $eventBlock) {
                                 echo $this->render('_blocks/template', ['eventBlock' => $eventBlock]);
