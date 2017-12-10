@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use common\helpers\StringHelper;
+use common\components\ThumbnailImage;
 
 use common\models\Event;
 ?>
@@ -17,7 +18,7 @@ use common\models\Event;
 				'data-type' => 'fb',
 				'data-url' => Url::toRoute(['site/month', 'id' => $monthNumber]),
 				'data-title' => $shares[$monthNumber]->title,
-				'data-image' => $shares[$monthNumber]->image,
+				'data-image' => ThumbnailImage::getExternalImageUrl($shares[$monthNumber]->image),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
 			<?=Html::a('<i class="fa fa-vk"></i>', '', [
@@ -25,14 +26,14 @@ use common\models\Event;
 				'data-type' => 'vk',
 				'data-url' => Url::current(['month' => $monthNumber]),
 				'data-title' => $shares[$monthNumber]->title,
-				'data-image' => $shares[$monthNumber]->image,
+				'data-image' => ThumbnailImage::getExternalImageUrl($shares[$monthNumber]->image),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
 			<?=Html::a('<i class="fa fa-twitter"></i>', '', [
 				'class' => 'btn-share btn-odnoklassniki',
 				'data-type' => 'tw',
 				'data-url' => Url::current(['month' => $monthNumber]),
-				'data-title' => $shares[$monthNumber]->title,
+				'data-title' => $shares[$monthNumber]->twitter,
 			]);?>
 			<?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
 				'class' => 'btn-share btn-vk',
