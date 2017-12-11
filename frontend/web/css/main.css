@@ -895,6 +895,7 @@
     position: relative;
     float: left;
     height: 60px;
+    margin-top: 15px;
 }
 .main-menu .main-menu_share-wrap {
     position: absolute;
@@ -1061,7 +1062,7 @@ header .container {
 }
 header .slogan {
     position: relative;
-    padding-top: 180px;
+    padding-top: 100px;
     padding-left: 75px;
     -webkit-transition: all .4s;
     -moz-transition: all .4s;
@@ -1090,7 +1091,7 @@ header .desc {
 .main-menu .main-slogan {
     float: left;
     position: relative;
-    padding-top: 40px;
+    padding-top: 35px;
     padding-left: 60px;
     opacity: 0;
     z-index: -2;
@@ -1938,6 +1939,7 @@ footer p a {
     }
     .main-menu .main-menu_share {
         height: 50px;
+        margin-top: 0;
     }
     .main-menu_btn {
         display: block;
