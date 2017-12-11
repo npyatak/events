@@ -329,7 +329,7 @@
 .slider-container {
     margin: 0 -60px;
 }
-.slider-container h3 {
+.block_gallery h3 {
     margin-bottom: 30px;
     padding-left: 70px;
 }
@@ -2111,7 +2111,7 @@ footer p a {
     header .slogan h1 {
         font-size: 65px;
     }
-    .slider-container h3 {
+    .block_gallery h3 {
         padding-left: 0;
     }
 }
