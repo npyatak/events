@@ -286,12 +286,14 @@ table tbody tr {
     -ms-transform: translate(-50%,-50%);
     -o-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+    z-index: 1;
+}
+.box1 .question p {
     color: #fff;
     font: 35px 'PTSerifItalic', serif;
     line-height: 45px;
     font-style: italic;
     font-weight: bold;
-    z-index: 1;
 }
 .box1 .caption {
     position: absolute;
@@ -334,12 +336,14 @@ table tbody tr {
     -ms-transform: translate(-50%,-50%);
     -o-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+    z-index: 1;
+}
+.box2 .answer p {
     color: #535353;
     font: 35px 'PTSerifItalic', serif;
     line-height: 45px;
     font-style: italic;
     font-weight: bold;
-    z-index: 1;
 }
 .box2 .bottom {
     position: absolute;
