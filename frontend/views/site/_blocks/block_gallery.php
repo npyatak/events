@@ -1,6 +1,6 @@
 <?php if($block->blockGalleryImages):?>
-<?=$block->title;?>
 <div class="slider-container">
+    <h3><?=$block->title;?></h3>
     <div id="owl-events" class="owl-carousel owl-theme">
         <?php foreach ($block->blockGalleryImages as $item):?>
         <div class="item">

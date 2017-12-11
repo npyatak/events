@@ -323,8 +323,15 @@
     bottom: 25px;
     left: 30px;
 }
+.block_gallery {
+    margin: 70px 0;
+}
 .slider-container {
-    margin: 70px -60px;
+    margin: 0 -60px;
+}
+.slider-container h3 {
+    margin-bottom: 30px;
+    padding-left: 70px;
 }
 #owl-events .image {
     position: relative;
@@ -423,8 +430,20 @@
 }
 .more-btn i {
     margin-left: 15px;
+    -webkit-transition: .4s;
+    -moz-transition: .4s;
+    -ms-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s;
 }
-.yandex-map {
+.more-btn.rotate i {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+.block-map {
     margin: 60px -60px;
 }
 .facts {
@@ -732,7 +751,7 @@
     display: none;
 }
 .footer-inner {
-    max-width: 670px;
+    width: 670px;
     border-top: 1px solid #E2E0E0;
     padding-top: 40px;
 }
@@ -2090,6 +2109,9 @@ footer p a {
     header .slogan h1 {
         font-size: 65px;
     }
+    .slider-container h3 {
+        padding-left: 0;
+    }
 }
 @media (max-width: 900px){
     .container_inner {
@@ -2366,8 +2388,11 @@ footer p a {
         margin: 40px -35px;
         height: 230px;
     }
+    .block_gallery {
+        margin: 40px 0;
+    }
     .slider-container {
-        margin: 40px -35px;
+        margin: 0 -35px;
     }
     .event-header {
         border-bottom: none;

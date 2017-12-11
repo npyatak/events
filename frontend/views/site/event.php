@@ -146,7 +146,39 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                         <div class="block_content">
                             <h4 class="lid"><?=$event->leading_text;?></h4>
                         </div>
+                        <div class="block_cut">
+                            <div class="why-block">
+                                <div class="why-block_inner">
+                                    <h3>Зачем мне об этом знать</h3>
+                                    <div class="change-block">
+                                        <div class="">
+                                            <p>Качество обслуживания в центрах посетители могут оценить с помощью устройств «нравится — не нравится». Текущие результаты транслируются на специальных табло. В настоящее время 96 процентов посетителей центров госуслуг удовлетворены обслуживанием</p>
+                                        </div>
+                                        <div class="hidden" style="display: none;">
+                                            <p>Качество обслуживания в центрах посетители могут оценить с помощью устройств «нравится — не нравится». Текущие результаты транслируются на специальных табло. В настоящее время 96 процентов посетителей центров госуслуг удовлетворены обслуживанием. Инициатором первого фестиваля, который прошел в Праге в 1947 году, стала Всемирная федерация демократической молодежи — своего рода комсомольского интернационала, объединявшего молодежные организации левого толка со всего мира.</p>
 
+                                            <p>Советский Союз активнее других стран поддерживал это мероприятие, которое должно было, среди прочего, усилить поддержку социалистических идей в разных странах мира. Тем не менее первые фестивали проводились не в СССР, а в дружественных ему странах Восточной Европы — Чехии, Венгрии, Польше, ГДР.</p>
+                                        </div>
+                                        <div class="more" data-text-show="развернуть" data-text-hide="свернуть">
+                <span class="more-btn tt-up show">
+                    <span class="more-text">развернуть</span><i class="fa fa-chevron-right"></i>
+                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div></div>
+                        <div class="block-map">
+                            <div class="yandex-map">
+                                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ac744626dd944c9f23d1aac72409f87299177f42219e371b67deeb9a7ce714bd0&amp;width=100%25&amp;height=100%&amp;lang=ru_RU&amp;scroll=false"></script>
+                            </div>
+                            <div class="title-wrap">
+                                <div class="container_inner">
+                                    <div class="row justify-content-end m-0">
+                                        <div class="big-image_title m-r-40"><h5>Состыковка Dragon с бортом МКС</h5></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <?php if($event->eventBlocks) {
                             foreach ($event->eventBlocks as $eventBlock) {
                                 echo $this->render('_blocks/template', ['eventBlock' => $eventBlock]);

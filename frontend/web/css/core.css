@@ -340,6 +340,16 @@ table tbody tr {
     font-weight: bold;
     z-index: 1;
 }
+.box2 .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    padding-top: 10px;
+    z-index: 1;
+    background-color: #221FAA;
+}
 .btn-share {
     position: relative;
     display: inline-block;
