@@ -444,6 +444,7 @@
     transform: rotate(-90deg);
 }
 .block-map {
+    float: left;
     margin: 60px -60px;
 }
 .facts {

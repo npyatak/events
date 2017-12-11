@@ -314,6 +314,7 @@ table tbody tr {
     color: #fff;
     font: 14px 'ProximaNova-Bold', sans-serif;
     text-align: center;
+    cursor: pointer;
 }
 .box2 {
     background-color: #D8D8D8;
@@ -349,6 +350,7 @@ table tbody tr {
     padding-top: 10px;
     z-index: 1;
     background-color: #221FAA;
+    cursor: pointer;
 }
 .btn-share {
     position: relative;
