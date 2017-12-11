@@ -384,7 +384,7 @@
     transform: translateY(-50%);
     margin-top: -50px;
 }
-#owl-events .owl-prev:hover, #owl-events .owl-next:hover {
+#owl-events:hover .owl-prev, #owl-events:hover .owl-next {
     color: #fff;
 }
 #owl-events .title {
@@ -396,7 +396,6 @@
 #owl-events .title h5, #owl-events .title p {
     margin-bottom: 0 !important;
     font: 16px 'PTSerifItalic' !important;
-    font-style: italic !important;
 }
 #owl-events .owl-dots {
     margin-top: 25px;
@@ -1763,6 +1762,11 @@ footer p a {
     font-family: 'ProximaNova-Regular', sans-serif;
     color: #190199;
 }
+.footer-tass {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 13px;
+}
 
 .big-image_modal {
     position: fixed;
@@ -1773,18 +1777,16 @@ footer p a {
     -ms-transform: translate(-50%,-50%) scale(0);
     -o-transform: translate(-50%,-50%) scale(0);
     transform: translate(-50%,-50%) scale(0);
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
     background-color: #313131;
     padding: 55px 55px 25px;
     overflow-y: auto;
     z-index: 99;
-    -webkit-transition: border-radius .5s, transform .8s;
-    -moz-transition: border-radius .5s, transform .8s;
-    -ms-transition: border-radius .5s, transform .8s;
-    -o-transition: border-radius .5s, transform .8s;
-    transition: border-radius .5s, transform .8s;
+    -webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    -ms-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
+    opacity: 0;
 }
 .big-image_modal.visible {
     -webkit-transform: translate(-50%,-50%) scale(1);
@@ -1792,11 +1794,9 @@ footer p a {
     -ms-transform: translate(-50%,-50%) scale(1);
     -o-transform: translate(-50%,-50%) scale(1);
     transform: translate(-50%,-50%) scale(1);
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
     width: 100%;
     height: 100%;
+    opacity: 1;
 }
 .big-image_modal .img-responsive {
     width: auto;
@@ -1917,6 +1917,11 @@ footer p a {
     }
     footer .container {
         padding: 0 50px;
+    }
+}
+@media (max-width: 1024px){
+    .header_inner {
+        background-attachment: scroll;
     }
 }
 @media (max-width: 999px){
@@ -2212,7 +2217,7 @@ footer p a {
     }
     .event-title {
         width: 100%;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
     }
     .event-cat {
         margin-top: 0;
@@ -2283,6 +2288,9 @@ footer p a {
     .add-to-calendar a {
         white-space: normal;
         color: #fff;
+    }
+    .add-to-calendar a span {
+        text-transform: uppercase;
     }
     .share-block {
         display: none;

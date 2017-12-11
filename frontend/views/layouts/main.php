@@ -112,7 +112,7 @@ AppAsset::register($this);
                     <div class="col-8">
                         <?=Yii::$app->settings->get('proviso');?>
                     </div>
-                    <div class="col-2">&copy; ТАСС <?=Yii::$app->settings->get('currentYear');?></div>
+                    <div class="col-2"><span class="footer-tass">&copy; ТАСС <?=Yii::$app->settings->get('currentYear');?></span></div>
                 </div>
             </div>
         </div>

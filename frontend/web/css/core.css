@@ -130,6 +130,26 @@ hr.blue {
     text-align: center;
     color: #190199;
 }
+.ckeditor figure {
+    position: relative !important;
+}
+.ckeditor figcaption {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    font: 12px Arial, sans-serif !important;
+    color: rgba(255,255,255,.7) !important;
+}
+.ckeditor figcaption p {
+    margin-bottom: 0 !important;
+}
+.ckeditor figcaption p:first-child {
+    margin-bottom: 4px !important;
+}
+.ckeditor figcaption span:first-child {
+    display: block !important;
+    margin-bottom: 4px !important;
+}
 .caption {
     font: 12px Arial, sans-serif;
     color: rgba(255,255,255,.7);
@@ -292,7 +312,6 @@ table tbody tr {
     color: #fff;
     font: 35px 'PTSerifItalic', serif;
     line-height: 45px;
-    font-style: italic;
     font-weight: bold;
 }
 .box1 .caption {
@@ -342,7 +361,6 @@ table tbody tr {
     color: #535353;
     font: 35px 'PTSerifItalic', serif;
     line-height: 45px;
-    font-style: italic;
     font-weight: bold;
 }
 .box2 .bottom {
