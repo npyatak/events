@@ -79,7 +79,9 @@ class EventController extends CController
                     if($success) {
                         $transaction->commit();
 
-                        return $this->redirect(['/event']);
+                        Yii::$app->session->setFlash("success", 'Данные успешно обновлены');
+
+                        return $this->redirect(['update', 'id' => $model->id]);
                     } else {
                         $transaction->rollBack();
                     }
@@ -161,7 +163,9 @@ class EventController extends CController
                     if($success) {
                         $transaction->commit();
 
-                        return $this->redirect(['/event']);
+                        Yii::$app->session->setFlash("success", 'Данные успешно обновлены');
+
+                        return $this->redirect(['update', 'id' => $model->id]);
                     } else {
                         $transaction->rollBack();
                     }

@@ -10,6 +10,9 @@ $this->params['breadcrumbs'][] = 'Изменить';
 <div class="district-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <p>
+        <?= Html::a('Посмотреть на сайте', Yii::$app->urlManagerFrontEnd->createUrl(['event/'.$model->id]), ['class' => 'btn btn-success', 'target' => '_blank']) ?>
+    </p>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -143,7 +143,9 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                             </div>
                         </div>
 
-                        <h4 class="lid"><?=$event->leading_text;?></h4>
+                        <div class="block_content">
+                            <h4 class="lid"><?=$event->leading_text;?></h4>
+                        </div>
 
                         <?php if($event->eventBlocks) {
                             foreach ($event->eventBlocks as $eventBlock) {

@@ -1,5 +1,14 @@
 CKEDITOR.plugins.add('BlueHr',
 {
+    onLoad: function() {
+        CKEDITOR.addCss(
+            'hr.blue {' +
+                'height: 3px;' +
+                'background-color: #221FAA;' +
+            '}'
+        );
+    },
+
     init: function (editor) {
         var pluginName = 'BlueHr';
         editor.ui.addButton('BlueHr',
