@@ -40,6 +40,7 @@ $(document).ready(function () {
     $('aside a').click(function (e) {
         e.preventDefault();
         $('aside').removeClass('active');
+        $('body').removeClass('overflow');
         $('aside a').removeClass('active');
         $(this).addClass('active');
     });

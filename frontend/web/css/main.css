@@ -72,10 +72,11 @@
     font: 36px 'ProximaNova-Bold', sans-serif;
 }
 .event-date.day .season span:first-child {
-    font: 36px 'ProximaNova-Bold', sans-serif;
+    margin-top: 0;
+    font: 60px 'ProximaNova-Bold', sans-serif;
 }
 .event-date.day .season span:last-child {
-    font: 24px 'ProximaNova-Bold', sans-serif;
+    font: 18px 'ProximaNova-Bold', sans-serif;
 }
 .add-to-calendar {
     position: relative;
@@ -84,6 +85,7 @@
     font-size: 12px;
 }
 .add-to-calendar a {
+    white-space: nowrap;
     color: #3c3c3c;
 }
 .dropdown {
@@ -1618,6 +1620,9 @@ aside li a.active, aside li a:hover {
 }
 .grid-item.inactive .grid-item_image {
     -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
     filter: grayscale(100%);
 }
 .grid-item.inactive .grid-item_desc {
@@ -2220,7 +2225,7 @@ footer p a {
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
-        width: 280px;
+        width: 100%;
         height: 67px;
         padding: 0 22px;
         background: #221FAA;
@@ -2230,10 +2235,11 @@ footer p a {
         box-shadow: 0 10px 20px rgba(26, 35, 126, 0.2);
     }
     .event-date>div:first-child {
-        width: auto;
+        width: calc(100% - 85px);
         height: auto;
         margin: 0;
         border: none;
+        text-align: center;
     }
     .event-date>div:first-child>div {
         position: static;
@@ -2242,10 +2248,7 @@ footer p a {
         -ms-transform: translate(0);
         -o-transform: translate(0);
         transform: translate(0);
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
+        white-space: nowrap;
     }
     .event-date>div:first-child>div span {
         display: inline-block !important;
