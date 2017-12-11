@@ -2281,6 +2281,7 @@ footer p a {
         transform: translateY(-50%);
     }
     .add-to-calendar a {
+        white-space: normal;
         color: #fff;
     }
     .share-block {
