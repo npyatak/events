@@ -100,8 +100,8 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionEvent($id) {
-        $event = $this->findEvent($id);
+    public function actionEvent($alias) {
+        $event = $this->findEvent($alias);
         
         $nextEvent = Event::find()->where(['>', 'date', $event->date])->orderBy('value_index DESC')->one();
         $prevEvent = Event::find()->where(['<', 'date', $event->date])->orderBy('value_index DESC')->one();
@@ -113,8 +113,8 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionGc($id) {
-        $event = $this->findEvent($id);
+    public function actionGc($alias) {
+        $event = $this->findEvent($alias);
 
         /*https://www.google.com/calendar/render?action=TEMPLATE
             &text=Your+Event+Name
@@ -147,8 +147,8 @@ class SiteController extends Controller
         return $this->redirect($url);
     }
 
-    public function actionIcs($id) {
-        $event = $this->findEvent($id);
+    public function actionIcs($alias) {
+        $event = $this->findEvent($alias);
 
         $dateStart = date('Ymd', $event->date).'T090000';
         $dateEnd   = date('Ymd', $event->date).'T190000';
@@ -327,8 +327,8 @@ class SiteController extends Controller
 
     }
 
-    protected function findEvent($id) {
-        $model = Event::findOne($id);
+    protected function findEvent($alias) {
+        $model = Event::find()->where(['alias' => $alias])->one();
         if ($model === null || ($model->status === Event::STATUS_INACTIVE && Yii::$app->user->isGuest)) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }

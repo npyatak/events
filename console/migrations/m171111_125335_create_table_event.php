@@ -15,6 +15,7 @@ class m171111_125335_create_table_event extends Migration
         $this->createTable('{{%event}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string(255)->notNull(),
+            'alias' => $this->string(255)->notNull()->unique(),
             'leading_text' => $this->string(),
             'view_date_type' => $this->integer(1)->notNull()->defaultValue(1),
             'date' => $this->integer()->notNull(),
@@ -28,6 +29,7 @@ class m171111_125335_create_table_event extends Migration
             'value_index' => $this->integer(2)->notNull()->defaultValue(9),
             'similar' => $this->string(),
             'size' => $this->integer(1)->notNull()->defaultValue(1),
+            'twitter_text' => $this->string(),
 
             'status' => $this->integer(1)->notNull()->defaultValue(5),
 

@@ -33,15 +33,19 @@ use common\models\Event;
     <?php endif;?>
 
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-sm-5">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-2">
             <?= $form->field($model, 'view_date_type')->dropDownList($model->dateTypeList)?>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <?= $form->field($model, 'dateFormatted')->widget(
                 DatePicker::className(), [
+                    'removeButton' => false,
                     'pluginOptions' => [
                         // 'startView'=>'year',
                         // 'minViewMode'=>'months',
@@ -74,7 +78,15 @@ use common\models\Event;
             </div>
         </div>
 
-        <?= $form->field($model, 'socials_text')->textarea(['rows' => 3]) ?>
+        <div class="row">
+            <div class="col-sm-8">
+                <?= $form->field($model, 'socials_text')->textarea(['rows' => 3]) ?>
+            </div>
+
+            <div class="col-sm-4">
+                <?= $form->field($model, 'twitter_text')->textarea(['rows' => 3]) ?>
+            </div>
+        </div>
     </div>
 
     <div class="row">

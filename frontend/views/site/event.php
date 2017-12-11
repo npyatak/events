@@ -82,8 +82,8 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     <a class="add-to-calendar-a" href="">добавить в календарь</a>
                                     <div class="hidden dropdown">
                                         <ul>
-                                            <li><a class="calendar" href="<?=Url::toRoute(['site/gc', 'id' => $event->id]);?>" target="_blank">сохранить в google Календарь</a></li>
-                                            <li><a class="calendar" href="<?=Url::toRoute(['site/ics', 'id' => $event->id]);?>" target="_blank">сохранить ics-файл</a></li>
+                                            <li><a class="calendar" href="<?=Url::toRoute(['site/gc', 'alias' => $event->alias]);?>" target="_blank">сохранить в google Календарь</a></li>
+                                            <li><a class="calendar" href="<?=Url::toRoute(['site/ics', 'alias' => $event->alias]);?>" target="_blank">сохранить ics-файл</a></li>
                                         </ul>
                                     </div>
                                 </div>

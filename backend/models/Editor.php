@@ -68,6 +68,7 @@ class Editor extends ActiveRecord implements IdentityInterface
             'name' => 'Имя',
             'surname' => 'Фамилия',
             'status' => 'Статус',
+            'role' => 'Роль',
             'password' => 'Пароль',
             'created_at' => 'Дата/Время создания',
             'updated_at' => 'Время последнего изменения',

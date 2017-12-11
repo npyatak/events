@@ -7,6 +7,7 @@ use Yii;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use common\components\ThumbnailImage;
+use common\helpers\TransliteratorHelper;
 
 class Event extends \yii\db\ActiveRecord
 {
@@ -49,8 +50,9 @@ class Event extends \yii\db\ActiveRecord
         return [
             [['title', 'view_date_type', 'dateFormatted', 'size'], 'required'],
             [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
-            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title'], 'string', 'max' => 255],
-            [['categoryIds', 'similarIds'], 'safe']
+            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text'], 'string', 'max' => 255],
+            [['categoryIds', 'similarIds'], 'safe'],
+            [['alias'], 'unique'],
         ];
     }
 
@@ -84,12 +86,18 @@ class Event extends \yii\db\ActiveRecord
             'similarIds' => 'Связанные события',
             'dateFormatted' => 'Дата',
             'size' => 'Тип карточки',
+            'twitter_text' => 'Текст для Twitter',
+            'alias' => 'Алиас',
         ];
     }
 
     public function beforeSave($insert) {
         $this->date = \DateTime::createFromFormat('!d.m.Y', $this->dateFormatted)->format('U');
         $this->similar = json_encode($this->similarIds);
+
+        if(!$this->alias) {
+            $this->alias = TransliteratorHelper::process($this->title);
+        }
 
         return parent::beforeSave($insert);
     }
@@ -204,7 +212,16 @@ class Event extends \yii\db\ActiveRecord
     }
 
     public function getUrl($absolute=false) {
-        return Url::toRoute(['site/event', 'id' => $this->id], $absolute);
+        $dateTime = new \DateTime;
+        $dateTime->setTimestamp($this->date);
+        $year = $dateTime->format('Y');
+
+        if($absolute) {
+            Yii::$app->urlManagerFrontEnd->createAbsoluteUrl(['/site/event', 'alias' => $this->alias, 'year' => $year]);
+        } else {
+            return Yii::$app->urlManagerFrontEnd->createUrl(['/site/event', 'alias' => $this->alias, 'year' => $year]);
+        }
+        //return Url::toRoute(['/site/event', 'alias' => $this->alias], $absolute);
     }
 
     public function getImageUrl($image, $thumb_size = false) {

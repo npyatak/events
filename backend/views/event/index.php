@@ -47,8 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => '{view} {update} {blocks} {delete}',                    
                     'buttons' => [
                         'view' => function ($url, $model) {
-                            $url = Yii::$app->urlManagerFrontEnd->createUrl(['event/'.$model->id]);
-                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $model->url, [
                                 'title' => 'Просмотр'
                             ]);
                         },

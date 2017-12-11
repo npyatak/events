@@ -67,7 +67,13 @@ class ThumbnailImage {
         $explode = explode('/', $filename);
         $file = end($explode);
         $explode = explode('.', $file);
+        
         $thumbnailFileExt = '.'.end($explode);
+        $exp = explode('?', $thumbnailFileExt);
+        if(isset($exp[1])) {
+            $thumbnailFileExt = $exp[0];
+        }
+
         array_pop($explode);
         $thumbnailFileName = implode('.', $explode);
         $thumbnailFilePath = $cachePath . DIRECTORY_SEPARATOR . $imageDir;

@@ -22,6 +22,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'baseUrl' => '/',
+            'rules' => [
+                '<year:\d+>/event/<alias>' => 'site/event',
+            ],
         ],
         'urlManagerBackEnd' => [
             'class' => 'yii\web\urlManager',
