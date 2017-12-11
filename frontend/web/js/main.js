@@ -16,14 +16,12 @@ $(document).ready(function () {
 
     $(this)
         .on('click','.show',function () {
-            $(this).parent().parent().find('.visible').fadeOut(50);
-            $(this).parent().parent().find('.hidden').fadeIn(200);
+            $(this).parent().parent().find('.hidden').slideDown(500);
             $(this).toggleClass('show hide');
             $(this).find('.more-text').text($(this).parent().data('text-hide'));
         })
         .on('click','.hide',function () {
-            $(this).parent().parent().find('.visible').fadeIn(200);
-            $(this).parent().parent().find('.hidden').fadeOut(50);
+            $(this).parent().parent().find('.hidden').slideUp(500);
             $(this).toggleClass('show hide');
             $(this).find('.more-text').text($(this).parent().data('text-show'));
         })
