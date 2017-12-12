@@ -208,9 +208,17 @@ return [
 	],
 	[
 	    'event_id' => 1,
-	    'model' => 'BlockIframe',
+	    'model' => 'BlockCutEnd',
 	    'block_id' => 1,
 	    'order' => 11,
+	    'anchor' => 'cut',
+	    'block' => [],
+	],
+	[
+	    'event_id' => 1,
+	    'model' => 'BlockIframe',
+	    'block_id' => 1,
+	    'order' => 12,
 	    'anchor' => 'iframe',
 	    'block' => [
 	    	'title' => 'Состыковка Dragon с бортом МКС',
@@ -221,7 +229,7 @@ return [
 	    'event_id' => 1,
 	    'model' => 'BlockTassVideo',
 	    'block_id' => 1,
-	    'order' => 12,
+	    'order' => 13,
 	    'anchor' => 'tass-video',
 	    'block' => [
 	    	'title' => 'Состыковка Dragon с бортом МКС',

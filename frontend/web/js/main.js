@@ -15,16 +15,6 @@ $(document).ready(function () {
     });
 
     $(this)
-        .on('click','.show',function () {
-            $(this).parent().parent().find('.hidden').slideDown(500);
-            $(this).toggleClass('show hide rotate');
-            $(this).find('.more-text').text($(this).parent().data('text-hide'));
-        })
-        .on('click','.hide',function () {
-            $(this).parent().parent().find('.hidden').slideUp(500);
-            $(this).toggleClass('show hide rotate');
-            $(this).find('.more-text').text($(this).parent().data('text-show'));
-        })
         .on('click','.more-btn-other',function () {
             $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
         })
