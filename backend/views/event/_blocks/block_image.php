@@ -1,13 +1,17 @@
 <?php
 use yii\helpers\Html;
 use common\components\CKEditor;
+use common\components\ElfinderInput;
 ?>
 
 <div class="row">
     <div class="col-sm-10">
 		<div class="form-group <?=$model->hasErrors("source") ? 'has-error' : '';?>">
 			<?= Html::activeLabel($model, "[$i]source", ['class' => 'control-label']) ?>
-			<?= Html::activeTextInput($model, "[$i]source", ['class' => 'form-control']) ?>
+			<?= ElfinderInput::widget([
+			    'model' => $model,
+			    'attribute' => "[$i]source",
+			]);?>
 			<?= Html::error($model, "[$i]source", ['class' => 'help-block']);?>
 		</div>
 	</div>

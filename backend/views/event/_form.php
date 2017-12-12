@@ -5,6 +5,7 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
+use common\components\ElfinderInput;
 
 use common\models\Event;
 ?>
@@ -60,10 +61,10 @@ use common\models\Event;
 
     <div class="row">
         <div class="col-sm-6">
-            <?= $form->field($model, 'main_page_image_url')->textInput() ?>
+            <?=$form->field($model, 'main_page_image_url')->widget(ElfinderInput::className());?>
         </div>
         <div class="col-sm-6">
-            <?= $form->field($model, 'image_url')->textInput() ?>
+            <?= $form->field($model, 'image_url')->widget(ElfinderInput::className());?>
         </div>
     </div>
 
@@ -74,7 +75,7 @@ use common\models\Event;
             </div>
 
             <div class="col-sm-6">
-                <?= $form->field($model, 'socials_image_url')->textInput() ?>
+                <?= $form->field($model, 'socials_image_url')->widget(ElfinderInput::className());?>
             </div>
         </div>
 

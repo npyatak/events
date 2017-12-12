@@ -63,7 +63,15 @@ class Block extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getImageSrcPath() {
+        return __DIR__ . '/../../../frontend/web';
+    }
+
     public function getImageUrl($image, $thumb_size = false) {
-        return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
+        if(is_file($this->imageSrcPath.$image)) {
+            return $image;
+        } else {
+            return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
+        }
     }
 }

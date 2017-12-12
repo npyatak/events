@@ -81,8 +81,8 @@ return [
 			'height' => 400,
 			'text_front' => '<p><span style="color:#FFFF00">Минюст РФ признал девять СМИ иностранными агентами</span></p>',
 			'text_back' => '<p>Российский эксперт не исключил провала миссии Волкера</p>',
-			'image_front' => 'https://phototass1.cdnvideo.ru/width/744_b12f2926/tass/m2/uploads/i/20171205/4611837.jpg',
-			'image_back' => 'https://phototass1.cdnvideo.ru/width/744_b12f2926/tass/m2/uploads/i/20171203/4610919.jpg',
+			'image_front' => '/images/turn/Bitmap.jpg',
+			'image_back' => '/images/turn/Bitmap2.jpg',
 			'control_text' => 'Переверни',
 			'capture_front' => 'подпись фронт',
 			'capture_back' => 'подпись бэк',
@@ -96,7 +96,7 @@ return [
 	    'anchor' => '',
 	    'block' => [
 	    	'text' => '<span>Есть идея сделать станцию открытой конфигурации, которая была бы готова принимать всех партнеров. Мы понимаем, что следующая станция должна быть международным проектом &mdash; количество участников и, соответственно, инвестиций увеличивает эффективность работы</span>',
-            'author_image' => 'https://phototass1.cdnvideo.ru/width/333_3412a45b/tass/m2/uploads/i/20140116/2330229.jpg',
+            'author_image' => '/images/icons/author.jpg',
             'author_name' => 'Игорь Комаров',
             'author_text' => 'Гендиректор государственной корпорации «Роскосмос» из интервью для портала Чердак: наука, технологии, будущее',
 		]
@@ -110,7 +110,7 @@ return [
 	    'block' => [
 	    	'text' => 'Есть идея сделать станцию открытой конфигурации, которая была бы готова принимать всех партнеров.',
 	    	'copyright_text' => 'Есть идея сделать станцию открытой конфигурации, которая была бы готова принимать всех партнеров.',
-            'source' => 'https://phototass1.cdnvideo.ru/width/333_3412a45b/tass/m2/uploads/i/20140116/2330229.jpg',
+            'source' => '/images/slider/image-1.jpg',
             'show_fullscreen' => 1,
 		]
 	],
@@ -124,11 +124,11 @@ return [
 	    	'title' => 'Тестовая галерея',
 	    	'items' => [
                 [
-                	'image' => 'https://phototass1.cdnvideo.ru/width/333_3412a45b/tass/m2/uploads/i/20140116/2330229.jpg',
+                	'image' => '/images/slider/image-1.jpg',
                 	'title' => 'Заголовок 1',
                 ],
                 [
-                	'image' => 'https://phototass4.cdnvideo.ru/crop/240x163_47061cc3/tass/m2/uploads/i/20171121/4602952.jpg',
+                	'image' => '/images/slider/image-1.jpg',
                 	'title' => 'Заголовок 2',
                 ],
 	    	]

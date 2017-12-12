@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use common\components\CKEditor;
+use common\components\ElfinderInput;
 ?>
 
 <div class="form-group <?=$model->hasErrors("text") ? 'has-error' : '';?>">
@@ -20,7 +21,10 @@ use common\components\CKEditor;
     <div class="col-sm-3">
 		<div class="form-group">
 			<?= Html::activeLabel($model, "[$i]author_image", ['class' => 'control-label']) ?>
-			<?= Html::activeTextInput($model, "[$i]author_image", ['class' => 'form-control']) ?>
+			<?= ElfinderInput::widget([
+			    'model' => $model,
+			    'attribute' => "[$i]author_image",
+			]);?>
 		</div>
 	</div>
     <div class="col-sm-9">

@@ -225,8 +225,16 @@ class Event extends \yii\db\ActiveRecord
         //return Url::toRoute(['/site/event', 'alias' => $this->alias], $absolute);
     }
 
+    public function getImageSrcPath() {
+        return __DIR__ . '/../../frontend/web';
+    }
+
     public function getImageUrl($image, $thumb_size = false) {
-        return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
+        if(is_file($this->imageSrcPath.$image)) {
+            return $image;
+        } else {
+            return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
+        }
     }
 
     public function getViewDate() {

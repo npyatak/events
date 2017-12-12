@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use common\components\CKEditor;
+use common\components\ElfinderInput;
 ?>
 
 <div class="row">
@@ -42,7 +43,10 @@ use common\components\CKEditor;
     <div class="col-sm-6">
 		<div class="form-group <?=$model->hasErrors("image_front") ? 'has-error' : '';?>">
 			<?= Html::activeLabel($model, "[$i]image_front", ['class' => 'control-label']) ?>
-			<?= Html::activeTextInput($model, "[$i]image_front", ['class' => 'form-control']) ?>
+			<?= ElfinderInput::widget([
+			    'model' => $model,
+			    'attribute' => "[$i]image_front",
+			]);?>
 			<?= Html::error($model, "[$i]image_front", ['class' => 'help-block']);?>
 		</div>
 	</div>
@@ -70,7 +74,10 @@ use common\components\CKEditor;
     <div class="col-sm-6">
 		<div class="form-group <?=$model->hasErrors("image_back") ? 'has-error' : '';?>">
 			<?= Html::activeLabel($model, "[$i]image_back", ['class' => 'control-label']) ?>
-			<?= Html::activeTextInput($model, "[$i]image_back", ['class' => 'form-control']) ?>
+			<?= ElfinderInput::widget([
+			    'model' => $model,
+			    'attribute' => "[$i]image_back",
+			]);?>
 			<?= Html::error($model, "[$i]image_back", ['class' => 'help-block']);?>
 		</div>
 	</div>

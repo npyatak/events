@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use common\components\ElfinderInput;
 ?>
 
 <div class="row block-gallery-image">
@@ -7,7 +8,10 @@ use yii\helpers\Html;
     <div class="col-sm-4">
 		<div class="form-group <?=$model->hasErrors("image") ? 'has-error' : '';?>">
 			<?= Html::activeLabel($model, "[$i][$key]image", ['class' => 'control-label']) ?>
-			<?= Html::activeTextInput($model, "[$i][$key]image", ['class' => 'form-control']) ?>
+			<?= ElfinderInput::widget([
+			    'model' => $model,
+			    'attribute' => "[$i][$key]image",
+			]);?>
 			<?= Html::error($model, "[$i][$key]image", ['class' => 'help-block']);?>
 		</div>
 	</div>

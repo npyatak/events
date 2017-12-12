@@ -44,4 +44,17 @@ return [
             'locale' => 'ru-RU'
         ],
     ],
+
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\PathController',
+            'access' => ['@'],
+            'root' => [
+                'baseUrl'=>'',
+                'basePath'=>'@frontend/web',
+                'path' => 'images',
+                'name' => 'Images'
+            ]
+        ]
+    ],
 ];

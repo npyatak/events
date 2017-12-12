@@ -1,15 +1,16 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\components\ElfinderInput;
 ?>
 
 <div class="admin-form">
 
     <?php $form = ActiveForm::begin(['enableClientValidation' => true]); ?>
 
-    <?= $form->field($model, 'title')->textarea() ?>
+    <?= $form->field($model, 'title')->textInput() ?>
 
-    <?= $form->field($model, 'image')->textarea() ?>
+    <?= $form->field($model, 'image')->widget(ElfinderInput::className());?>
 
     <?= $form->field($model, 'text')->textarea() ?>
 
