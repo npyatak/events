@@ -19,13 +19,16 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 ?>
 <header>
 	<div class="header_inner" <?=Yii::$app->settings->get('mainPageImage') ? 'style="background-image: url('.ThumbnailImage::getLocalImageUrl(Settings::getImageSrcPath().Yii::$app->settings->get("mainPageImage"), "1280x380").');"' : '';?>>
+		<div class="image">
+			<img src="<?=Url::to('images/general_page/2018-2.svg');?>" alt="Events 2018">
+		</div>
 		<div class="container">
 			<div class="slogan">
-				<h1><?=Yii::$app->settings->get('projectTitle');?></h1>
+				<h1><!--?=Yii::$app->settings->get('projectTitle');?--></h1>
 			</div>
-			<div class="desc">
-				<span>Из сотни событий, которые могут произойти</span>
-			</div>
+<!--			<div class="desc">-->
+<!--				<span>Из сотни событий, которые могут произойти</span>-->
+<!--			</div>-->
 			<div class="general_share">
 				<ul>
 					<li>
@@ -79,12 +82,12 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 </header>
 <div class="general_content">
 	<div class="container">
-		<div class="general_content-inner">
+		<div class="general_content-inner scrollSpy_wrap">
 			<div class="navigation">
 				<ul>
 					<?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
 					<li <?=(isset($month) && $month == $m[0]) ? 'class="active"' : '';?>>
-						<a href="<?=Url::current(['month' => $monthNumber]);?>">
+						<a href="#m_<?=$monthNumber;?>">
 							<span></span>
 							<span class="month"><?=$m[0];?></span>
 						</a>
@@ -95,7 +98,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 			<div class="content" id="events">
 				<?=$this->render('_months', ['events' => $events, 'category' => $category, 'shares' => $shares]);?>
 			</div>
-			<aside>
+			<aside class="scrollSpy">
 				<span class="close_aside"><i class="ion-android-close"></i></span>
 				<ul class="categories">
 					<li><a href="<?=Url::current(['category' => null]);?>" <?=$category ? '' : 'class="active"';?>>Все события</a></li>

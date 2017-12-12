@@ -8,7 +8,7 @@
             <div class="hidden">
                 <?=$block->text;?>
             </div>
-            <div class="more" data-text-show="<?=$block->text_show ? $block->text_show : 'Показать';?>"  data-text-hide="<?=$block->text_show ? $block->text_hide : 'Свернуть';?>">
+            <div class="more block_cut_more" data-text-show="<?=$block->text_show ? $block->text_show : 'Показать';?>"  data-text-hide="<?=$block->text_show ? $block->text_hide : 'Свернуть';?>">
                 <span class="more-btn show tt-up">
                     <span class="more-text"><?=$block->text_show;?></span><i class="fa fa-chevron-right"></i>
                 </span>
@@ -24,19 +24,20 @@ $script = "
         var elems;
         if($('.block_cut_end').length) {
             elems = $('.block_cut').nextUntil('.block_cut_end', '.block');
+            $('.more').insertAfter(elems)
         } else {
             elems = $('.block_cut').nextAll('.block');
         }
         elems.hide();
 
         $(document)
-            .on('click','.block_cut .show',function () {
+            .on('click','.block_cut_more .show',function () {
                 $(this).parent().parent().find('.hidden').slideDown(500);
                 $(this).toggleClass('show hide rotate');
                 $(this).find('.more-text').text($(this).parent().data('text-hide'));
                 elems.show();
             })
-            .on('click','.block_cut .hide',function () {
+            .on('click','.block_cut_more .hide',function () {
                 $(this).parent().parent().find('.hidden').slideUp(500);
                 $(this).toggleClass('show hide rotate');
                 $(this).find('.more-text').text($(this).parent().data('text-show'));

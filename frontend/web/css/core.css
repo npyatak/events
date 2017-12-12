@@ -67,6 +67,9 @@ hr.blue {
 .m-r-40 {
     margin-right: 40px !important;
 }
+.m-r-20 {
+    margin-right: 20px !important;
+}
 .container_inner {
     width: 780px;
     margin: 0 auto;
@@ -92,6 +95,7 @@ hr.blue {
 .ckeditor li {
     position: relative;
     margin-bottom: 20px;
+    vertical-align: top;
 }
 .ckeditor li:last-child {
     margin-bottom: 0;
@@ -110,6 +114,9 @@ hr.blue {
     list-style: none !important;
     margin: 50px 0 !important;
     padding-left: 40px;
+}
+.ckeditor ol li {
+    vertical-align: top;
 }
 .ckeditor ol li::before {
     display: none;
