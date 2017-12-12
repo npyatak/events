@@ -72,9 +72,9 @@ a.desc:after {
     content: "\e156";
 }
 
-.grid-view td {
+/*.grid-view td {
     white-space: nowrap;
-}
+}*/
 
 .grid-view .filters input,
 .grid-view .filters select {
@@ -176,4 +176,8 @@ input[type="checkbox"] {
     font-weight: bold;
     font-size: 20px;
     cursor: pointer;
+}
+ul.sortable li {
+    cursor: move;
+    white-space: nowrap;
 }

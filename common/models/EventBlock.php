@@ -67,9 +67,13 @@ class EventBlock extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getModelPath() {
+        return '\common\models\blocks\\';
+    }
+
     public function getBlock() {
         if(!$this->_block) {
-            $model = '\common\models\blocks\\'.$this->model;
+            $model = $this->modelPath.$this->model;
             $this->_block = $model::findOne($this->block_id);
         }
 

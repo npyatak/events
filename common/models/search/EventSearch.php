@@ -18,8 +18,8 @@ class EventSearch extends Event
     public function rules()
     {
         return [
-            [['id', 'date', 'value_index'], 'integer'],
-            [['title'], 'safe'],
+            [['id', 'date', 'value_index', 'status'], 'integer'],
+            [['title', 'alias'], 'safe'],
         ];
     }
 
@@ -62,9 +62,11 @@ class EventSearch extends Event
             'id' => $this->id,
             'date' => $this->date,
             'value_index' => $this->value_index,
+            'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'alias', $this->alias]);
 
         return $dataProvider;
     }

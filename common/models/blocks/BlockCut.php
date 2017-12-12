@@ -20,7 +20,7 @@ class BlockCut extends Block
     public function rules()
     {
         return array_merge(parent::rules(), [
-                [['title', 'preview', 'text'], 'required'],
+                //[['title', 'preview', 'text'], 'required'],
                 [['title', 'preview', 'text_show', 'text_hide'], 'string', 'max' => 255],
                 [['text'], 'safe'],
             ]

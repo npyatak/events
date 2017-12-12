@@ -1,7 +1,11 @@
 <?php
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use backend\assets\UIAsset;
+
+UIAsset::register($this);
 
 use common\models\Event;
 
@@ -23,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'id',
                 'title',
+                'alias',
                 [
                     'attribute' => 'viewDate',
                     'value' => function($data) {
@@ -30,16 +35,44 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ],
                 [
-                    'attribute' => 'socials_image_url',
+                    'attribute' => 'main_page_image_url',
+                    'header' => 'Изображение на главной',
                     'format' => 'raw',
                     'value' => function($data) {
-                        return $data->socials_image_url ? Html::img($data->getImageUrl('200x200', $data->socials_image_url)) : '';
+                        return $data->main_page_image_url ? Html::img($data->getImageUrl($data->main_page_image_url, '200x200')) : '';
                     },
                 ],
                 
                 [
                     'attribute' => 'value_index',
                     'filter' => Html::activeDropDownList($searchModel, 'value_index', Event::getValueIndexArray(), ['prompt'=>'']),
+                ],
+                [
+                    'attribute' => 'status',
+                    'format' => 'raw',
+                    'value' => function($data) {
+                        return $data->getStatusArray()[$data->status];
+                    },
+                    'filter' => Html::activeDropDownList($searchModel, 'status', Event::getStatusArray(), ['prompt'=>''])
+                ],
+                [
+                    'header' => 'Блоки (можно менять порядок)',
+                    'format' => 'raw',
+                    'value' => function($data) {
+                        $blockList = Event::getBlocksList();
+                        $str = '<ul class="sortable">';
+                        if($data->eventBlocks) {
+                            foreach ($data->eventBlocks as $eb) {
+                                $str .= '<li>'
+                                    .$blockList[$eb->modelPath.$eb->model]
+                                    .Html::activeHiddenInput($eb, "[$eb->id]order", ['class' => 'hidden-order'])
+                                .'</li>';
+                            }
+                        }
+                        $str .= '</ul>';
+
+                        return $str;
+                    }
                 ],
 
                 [
@@ -62,3 +95,35 @@ $this->params['breadcrumbs'][] = $this->title;
         ]); ?>
     <?php Pjax::end(); ?>
 </div>
+
+<?php $script = "
+    $('.sortable').sortable({
+        cursor: 'move',
+        classes: {
+            'ui-sortable': 'highlight'
+        },
+        update: function(event, ui) {
+            updateBlocksOrder(ui);
+        },
+    });
+
+    function updateBlocksOrder(ui) {
+        var ul = ui.item.closest('ul');
+        
+        ul.find('li').each(function() {
+            var order = $(this).index() + 1;
+            $(this).find('.hidden-order').val(order);
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '".Url::toRoute('/event/order')."',
+            data: ul.find('input').serialize(),
+            success: function (data) {
+
+            }
+        });
+    }
+";
+
+$this->registerJs($script, yii\web\View::POS_END);?>

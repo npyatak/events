@@ -337,6 +337,19 @@ class EventController extends CController
         return ['models' => $blockModelsArray, 'blockIDs' => $blockIDs];
     }
 
+    public function actionOrder() {
+        $post = Yii::$app->request->post();
+        if(Yii::$app->request->isAjax && isset($post) && !empty($post['EventBlock'])) {
+            foreach ($post['EventBlock'] as $id => $eventBlock) {
+                $eventBlock = EventBlock::findOne($id);
+                $eventBlock->order = $post['EventBlock'][$id]['order'];
+                $eventBlock->save(false, ['order']);
+            }
+
+            return 'success';
+        }
+    }
+
     /**
      * Finds the Event model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
