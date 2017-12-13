@@ -25,16 +25,20 @@ $(document).ready(function () {
     });
     $(window).trigger('resize');
 
-    $('.navigation li').click(function (e) {
+    $('.scroll-month').click(function (e) {
         e.preventDefault();
-        var target = $(this).find('a').attr('href');
-        if($(window).scrollTop() == 0){
-            $('html, body').animate({scrollTop:($(target).offset().top - 410)},500);
+        var target = $(this).attr('href');
+        if($(this).hasClass('month_1')){
+            $('html, body').animate({scrollTop:($(target).offset().top - 430)},500);
         }else{
-            $('html, body').animate({scrollTop:($(target).offset().top - 120)},500);
+            if($(window).scrollTop() <= 0){
+                $('html, body').animate({scrollTop:($(target).offset().top - 430)},500);
+            }else{
+                $('html, body').animate({scrollTop:($(target).offset().top - 130)},500);
+            }
         }
         $('.navigation li').removeClass('active');
-        $(this).addClass('active');
+        $(this).parent().addClass('active');
     });
     
     $('.share-inline_btn').click(function () {

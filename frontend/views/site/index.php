@@ -87,7 +87,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 				<ul>
 					<?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
 					<li <?=(isset($month) && $month == $m[0]) ? 'class="active"' : '';?>>
-						<a href="#m_<?=$monthNumber;?>">
+						<a href="#m_<?=$monthNumber;?>" class="scroll-month month_<?=$monthNumber;?>">
 							<span></span>
 							<span class="month"><?=$m[0];?></span>
 						</a>
