@@ -50,7 +50,7 @@ class Event extends \yii\db\ActiveRecord
         return [
             [['title', 'view_date_type', 'dateFormatted', 'size'], 'required'],
             [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
-            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text'], 'string', 'max' => 255],
+            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url'], 'string', 'max' => 255],
             [['categoryIds', 'similarIds'], 'safe'],
             [['alias'], 'unique'],
         ];
@@ -88,6 +88,7 @@ class Event extends \yii\db\ActiveRecord
             'size' => 'Тип карточки',
             'twitter_text' => 'Текст для Twitter',
             'alias' => 'Алиас',
+            'mobile_image_url' => 'Изображение для мобильных',
         ];
     }
 
