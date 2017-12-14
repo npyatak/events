@@ -183,7 +183,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                         <?php if($prevEvent):?>
                                         <div class="col-6">
                                             <div class="footer-arrow">
-                                                <a href=""><i class="fa fa-chevron-left"></i></a>
+                                                <a href="<?=$prevEvent->url;?>"><i class="fa fa-chevron-left"></i></a>
                                             </div>
                                             <div class="footer-title">предыдущее</div>
                                             <div class="footer-text"><a href="<?=$prevEvent->url;?>"><?=$prevEvent->title;?></a></div>
@@ -192,7 +192,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                         <?php if($nextEvent):?>
                                         <div class="col-6">
                                             <div class="footer-arrow">
-                                                <a href=""><i class="fa fa-chevron-right"></i></a>
+                                                <a href="<?=$nextEvent->url;?>"><i class="fa fa-chevron-right"></i></a>
                                             </div>
                                             <div class="footer-title">следующее</div>
                                             <div class="footer-text"><a href="<?=$nextEvent->url;?>"><?=$nextEvent->title;?></a></div>
