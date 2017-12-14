@@ -30,6 +30,10 @@ use common\models\Settings;
     }
     ?>
 
+    <?php if($model->isNewRecord) {
+        echo $form->field($model, 'type')->textInput();
+    }?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

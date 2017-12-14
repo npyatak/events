@@ -25,7 +25,7 @@ class BlockFactItem extends \yii\db\ActiveRecord
     {
         return [
             [['number', 'capture', 'type'], 'required'],
-            [['block_fact_id', 'type'], 'integer'],
+            [['block_fact_id', 'type', 'border_top', 'border_bottom'], 'integer'],
             [['number', 'capture', 'link'], 'string', 'max' => 255],
             ['text', 'safe'],
             [['block_fact_id'], 'exist', 'skipOnError' => true, 'targetClass' => BlockFact::className(), 'targetAttribute' => ['block_fact_id' => 'id']],
@@ -45,6 +45,8 @@ class BlockFactItem extends \yii\db\ActiveRecord
             'link' => 'Ссылка для ката',
             'text' => 'Текст под катом',
             'type' => 'Тип',
+            'border_top' => 'Граница сверху',
+            'border_bottom' => 'Граница снизу',
         ];
     }
 
