@@ -7,13 +7,13 @@ use common\components\ThumbnailImage;
 use common\models\Event;
 use common\models\Settings;
 
-//echo ThumbnailImage::getLocalImageUrl(Settings::getImageSrcPath().Yii::$app->settings->get("mainPageImage"), "1280x380");exit;
 $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\web\JqueryAsset::className()]]);
 
+$image = $shares[0]->getImageUrl($shares[0]->image);
 
 $this->registerMetaTag(['property' => 'og:description', 'content' => $shares[0]->text], 'og:description');
 $this->registerMetaTag(['property' => 'og:title', 'content' => $shares[0]->title], 'og:title');
-$this->registerMetaTag(['property' => 'og:image', 'content' => ThumbnailImage::getExternalImageUrl($shares[0]->image)], 'og:image');
+$this->registerMetaTag(['property' => 'og:image', 'content' => $image], 'og:image');
 $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()], 'og:url');
 $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
 ?>
@@ -37,7 +37,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                             'data-type' => 'fb',
                             'data-url' => Url::canonical(),
                             'data-title' => $shares[0]->title,
-                            'data-image' => ThumbnailImage::getExternalImageUrl($shares[0]->image),
+                            'data-image' => $image,
                             'data-desc' => $shares[0]->text,
                         ]);?>
                     </li>
@@ -47,7 +47,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                             'data-type' => 'vk',
                             'data-url' => Url::canonical(),
                             'data-title' => $shares[0]->title,
-                            'data-image' => ThumbnailImage::getExternalImageUrl($shares[0]->image),
+                            'data-image' => $image,
                             'data-desc' => $shares[0]->text,
                         ]);?>
                     </li>

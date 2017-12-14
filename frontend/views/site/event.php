@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-use common\components\ThumbnailImage;
 
 use common\models\Event;
 
@@ -12,7 +11,7 @@ $this->title = $event->title;
 $url = Url::canonical();
 $title = $event->socials_title ? $event->socials_title : $this->title;
 $desc = $event->socials_text;
-$image = ThumbnailImage::getExternalImageUrl($event->socials_image_url);
+$image = $event->getImageUrl($event->socials_image_url);
 
 $this->registerMetaTag(['property' => 'og:description', 'content' => $desc], 'og:description');
 $this->registerMetaTag(['property' => 'og:title', 'content' => $this->title], 'og:title');

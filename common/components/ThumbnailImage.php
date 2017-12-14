@@ -21,7 +21,8 @@ class ThumbnailImage {
     public static function getExternalImageUrl($image, $thumb_size = false, $imageDir = false) {        
         if($image) {
             $file_headers = @get_headers($image);
-            if($file_headers && $file_headers[0] != 'HTTP/1.1 404 Not Found') {
+            //if($file_headers && $file_headers[0] != 'HTTP/1.1 404 Not Found') {
+            if($file_headers && $file_headers[0] == 'HTTP/1.1 200 OK') {
                 if($thumb_size) {
                     $sizes = explode('x', $thumb_size);
                 } else {

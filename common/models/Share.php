@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use common\components\ThumbnailImage;
 
 /**
  * This is the model class for table "{{%share}}".
@@ -46,5 +47,17 @@ class Share extends \yii\db\ActiveRecord
             'twitter' => 'Текст для Twitter',
             'image' => 'Изображение',
         ];
+    }
+
+    public function getImageSrcPath() {
+        return __DIR__ . '/../../frontend/web';
+    }
+
+    public function getImageUrl($image, $thumb_size = false) {
+        if(is_file($this->imageSrcPath.$image)) {
+            return $image;
+        } else {
+            return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
+        }
     }
 }
