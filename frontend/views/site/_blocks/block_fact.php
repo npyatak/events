@@ -9,12 +9,12 @@ use common\models\blocks\items\BlockFactItem;
             <div class="title"><?=$block->title;?></div>
         <?php endif;?>
         <?php foreach ($block->blockFactItems as $item):?>
-            <?php $style = '';
+            <?php $style = ''; $class = '';
             if(!$item->border_top) {
-                $style .= 'border-top: none;';
-            } 
+                $style .= 'border-top: none; padding-top: 0;';
+            }
             if(!$item->border_bottom) {
-                $style .= 'border-bottom: none;';
+                $style .= 'border-bottom: none; padding-bottom: 0;';
             } ?>
             <div class="item sm" <?=$style != '' ? 'style="'.$style.'"' : '';?>>
                 <div class="row m-0">
