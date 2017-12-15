@@ -136,7 +136,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'class' => 'share-btn share',
                                     'data-type' => 'tg',
                                     'data-url' => $url,
-                                    'data-desc' => $desc,
+                                    'data-desc' => $title,
                                 ]);?>
                                 <span class="share-counter"></span>
                             </div>
@@ -210,8 +210,8 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                 <div class="more-events_title">похожие события</div>
                 <?php foreach ($event->similarEvents as $similar):?>
                     <a href="<?=$similar->url;?>" class="item">
-                        <?php if($similar->image_url):?>
-                        <div class="item-image" style="background-image:url(<?=$similar->getImageUrl($similar->image_url, '249x140');?>)"></div>
+                        <?php if($similar->small_image_url):?>
+                        <div class="item-image" style="background-image:url(<?=$similar->getImageUrl($similar->small_image_url, '249x140');?>)"></div>
                         <?php endif;?>
                         <div class="item-content">
                             <div class="item-title">

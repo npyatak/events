@@ -23,11 +23,11 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title>
         <?php if(Yii::$app->settings->get('projectTitle')) {
-            echo Yii::$app->settings->get('projectTitle');
+            $title = Yii::$app->settings->get('projectTitle');
         } elseif(Yii::$app->settings->get('currentYear')) {
-            echo Yii::$app->settings->get('currentYear').' год. Краткое содержание. ';
+            $title = Yii::$app->settings->get('currentYear').' год. Краткое содержание. ';
         } ?>
-        <?=$this->title ? '- '.Html::encode($this->title) : ''?>
+        <?=$title;?> <?=$this->title ? '- '.Html::encode($this->title) : ''?>
     </title>
     <?php $this->head() ?>
 
@@ -53,7 +53,7 @@ AppAsset::register($this);
         <div class="container">
             <div class="container_inner">
                 <div class="logo"><a href="<?=Url::home();?>"></a></div>
-                <div class="main-slogan"><h2>События <?=Yii::$app->settings->get('currentYear');?></h2></div>
+                <div class="main-slogan"><h2><?=$title;?></h2></div>
                 <div class="right">
                     <div class="main-menu_share">
                         <span class="main-share_btn"><i class="ion-android-share"></i></span>

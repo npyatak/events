@@ -1,9 +1,15 @@
 <div class="facts">
     <div class="row justify-content-end">
         <div class="fact_inner m-r-20">
-            <div class="title">Важные факты</div>
-            <h3>В чем обвиняют Серебренникова?</h3>
-            <p>По мнению Следственного комитета РФ, Серебренников похитил деньги, выделенные в 2011-2014 годах на реализацию проекта "Платформа". СК оценил сумму ущерба в 68 млн рублей.</p>
+            <div class="title"><?=$block->title;?></div>
+
+            <?php if($block->blockCardItems):?>
+            	<?php foreach ($block->blockCardItems as $item):?>
+            		<span class="icon_<?=$item->icon;?>"></span>
+		            <h3><?=$item->title;?></h3>
+		            <?=$item->text;?>
+		        <?php endforeach;?>
+		    <?php endif;?>
         </div>
     </div>
 </div>

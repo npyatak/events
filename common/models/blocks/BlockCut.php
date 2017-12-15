@@ -38,8 +38,8 @@ class BlockCut extends Block
     {
         return array_merge(parent::attributeLabels(), [
                 'preview' => 'Превью',
-                'text_show' => 'Текст контрола для разворачивания',
-                'text_hide' => 'Текст контрола для сворачивания',
+                'text_show' => 'Текст ссылки для разворачивания',
+                'text_hide' => 'Текст ссылки для сворачивания',
             ]    
         );
     }

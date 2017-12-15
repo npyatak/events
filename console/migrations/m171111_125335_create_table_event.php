@@ -31,6 +31,7 @@ class m171111_125335_create_table_event extends Migration
             'size' => $this->integer(1)->notNull()->defaultValue(1),
             'twitter_text' => $this->string(),
             'mobile_image_url' => $this->string(255),
+            'small_image_url' => $this->string(255),
 
             'status' => $this->integer(1)->notNull()->defaultValue(5),
 

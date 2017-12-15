@@ -60,14 +60,20 @@ use common\models\Event;
     <?= $form->field($model, 'leading_text')->textarea(['rows' => 3]) ?>
 
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <?=$form->field($model, 'main_page_image_url')->widget(ElfinderInput::className());?>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <?=$form->field($model, 'mobile_image_url')->widget(ElfinderInput::className());?>
         </div>
-        <div class="col-sm-4">
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-6">
             <?= $form->field($model, 'image_url')->widget(ElfinderInput::className());?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'small_image_url')->widget(ElfinderInput::className());?>
         </div>
     </div>
 
