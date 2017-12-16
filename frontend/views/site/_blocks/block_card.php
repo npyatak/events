@@ -5,9 +5,11 @@
 
             <?php if($block->blockCardItems):?>
             	<?php foreach ($block->blockCardItems as $item):?>
-            		<span class="icon_<?=$item->icon;?>"></span>
-		            <h3><?=$item->title;?></h3>
-		            <?=$item->text;?>
+            		<div class="fact">
+                        <span class="fact_icon icon_<?=$item->icon;?>"></span>
+                        <h3><?=$item->title;?></h3>
+                        <?=$item->text;?>
+                    </div>
 		        <?php endforeach;?>
 		    <?php endif;?>
         </div>

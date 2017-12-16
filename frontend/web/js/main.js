@@ -19,7 +19,7 @@ $(document).ready(function () {
             $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
         })
         .on('click','.turn-btn',function () {
-            $('.panel').toggleClass('flip');
+            $(this).parent().parent().parent().toggleClass('flip');
         });
 
     var table = $('.event-content').find('table');

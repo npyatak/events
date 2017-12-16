@@ -90,7 +90,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 				<ul>
 					<?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
 					<li <?=(isset($month) && $month == $m[0]) ? 'class="active"' : '';?>>
-						<a href="#m_<?=$monthNumber;?>" class="scroll-month month_<?=$monthNumber;?>">
+						<a href="#month_<?=$monthNumber;?>" class="scroll-month month_<?=$monthNumber;?>">
 							<span></span>
 							<span class="month"><?=$m[0];?></span>
 						</a>
@@ -99,6 +99,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 				</ul>
 			</div>
 			<div class="content" id="events">
+				<h3 class="general-lid">Из сотни событий, которые могут произойти в 2018 году, мы отобрали десятки самых ожидаемых и обсуждаемых.</h3>
 				<?=$this->render('_months', ['events' => $events, 'category' => $category, 'shares' => $shares]);?>
 			</div>
 			<aside class="scrollSpy">

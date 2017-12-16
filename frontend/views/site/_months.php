@@ -8,7 +8,7 @@ use common\models\Event;
 ?>
 
 <?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
-<div class="month-items" id="m_<?=$monthNumber;?>">
+<div class="month-items" id="month_<?=$monthNumber;?>">
 	<div class="month-title">
 		<h2><?=StringHelper::ucfirst($m[0]);?></h2>
 		<div class="share-inline">

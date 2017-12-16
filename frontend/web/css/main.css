@@ -406,6 +406,9 @@
 .why-block_inner h3 {
     margin-bottom: 30px;
 }
+.change-block .block_cut_more {
+    float: none;
+}
 .block_cut_more {
     float: right;
     margin-right: 40px !important;
@@ -461,13 +464,16 @@
 .fact_inner {
     position: relative;
     max-width: 670px;
+    border-top: 1px solid #E2E0E0;
+}
+.fact_inner .fact {
+    position: relative;
     padding-left: 100px;
     padding-top: 60px;
     padding-bottom: 40px;
-    border-top: 1px solid #E2E0E0;
     border-bottom: 3px solid #221FAA;
 }
-.fact_inner-icon {
+.fact_icon {
     display: block;
     position: absolute;
     top: 40px;
@@ -475,15 +481,33 @@
     width: 60px;
     height: 60px;
     text-align: center;
-    font: 30px 'PTSerifItalic';
-    font-weight: bold;
-    font-style: italic;
-    line-height: 58px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
     background-color: #E5E5E5;
+}
+.fact_icon::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
     color: #221FAA;
+    font: 30px 'PTSerifItalic';
+    font-weight: bold;
+    font-style: italic;
+    line-height: 58px;
+}
+.fact_icon.icon_1::after {
+    content: '?';
+}
+.fact_icon.icon_2::after {
+    content: 'i';
 }
 .fact_inner .title {
     position: absolute;
@@ -1225,9 +1249,6 @@ header .desc {
     width: 6px;
     height: 6px;
     margin: 0 auto;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
     background-color: #999;
     -webkit-transition: .2s;
     -moz-transition: .2s;
@@ -1307,8 +1328,8 @@ aside li a.active, aside li a:hover {
     width: 830px;
     margin-left: 100px;
 }
-.month-items {
-    margin-top: 50px;
+.month-items:not(:last-child) {
+    margin-bottom: 50px;
 }
 .month-items::after {
     content: '';
@@ -1742,6 +1763,25 @@ aside li a.active, aside li a:hover {
 }
 .event-detail {
     margin-bottom: 50px;
+}
+
+.general-lid {
+    margin-top: 60px;
+    margin-bottom: 25px;
+    font: 24px 'ProximaNova-Bold', sans-serif;
+    line-height: 35px;
+    color: #878787;
+}
+
+.block_code::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.block_code_inner {
+    width: 670px;
+    float: right;
+    margin-right: 40px;
 }
 
 footer .container {
@@ -2402,6 +2442,10 @@ footer p a {
     }
     footer .container {
         padding: 0 30px;
+    }
+    .block_code_inner {
+        margin-right: 0;
+        width: 100%;
     }
 }
 @media (max-width: 600px) {

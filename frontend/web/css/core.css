@@ -307,7 +307,6 @@ table tbody tr {
     top: 50%;
     left: 50%;
     width: 65%;
-    margin-top: -40px;
     -webkit-transform: translate(-50%,-50%);
     -moz-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
@@ -365,7 +364,7 @@ table tbody tr {
     z-index: 1;
 }
 .box2 .answer p {
-    color: #535353;
+    color: #fff;
     font: 35px 'PTSerifItalic', serif;
     line-height: 45px;
     font-weight: bold;
@@ -424,4 +423,11 @@ table tbody tr {
     display: block;
     max-width: 100%;
     margin: 0 auto;
+}
+
+@media (max-width:768px) {
+    .ckeditor img {
+        width: 100% !important;
+        height: auto !important;
+    }
 }
