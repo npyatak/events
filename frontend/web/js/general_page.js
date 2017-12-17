@@ -107,7 +107,7 @@ $(document).ready(function () {
         for (var i = 0; i < sections.length; i++) {
             var rect = sections[i].getBoundingClientRect();
 
-            if (rect.top < 0 && rect.height + rect.top > 0) {
+            if (rect.top < 150 && rect.height + rect.top > 150) {
                 currentScreen = '#' + sections[i].getAttribute('id');
                 for (var i = 0; i < goTos.length; i++) {
                     setActivationStatus(goTos[i], currentScreen);
