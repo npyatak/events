@@ -168,8 +168,10 @@
 }
 
 .share-block {
+    position: relative;
     float: left;
     width: 40px;
+    z-index: 1;
 }
 .share-block ul {
     

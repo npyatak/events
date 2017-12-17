@@ -37,8 +37,8 @@ $(document).ready(function () {
                 $('html, body').animate({scrollTop:($(target).offset().top - 120)},500);
             }
         }
-        $('.navigation li').removeClass('active');
-        $(this).parent().addClass('active');
+        // $('.navigation li').removeClass('active');
+        // $(this).parent().addClass('active');
     });
     
     $('.share-inline_btn').click(function () {
@@ -66,28 +66,6 @@ $(document).ready(function () {
 
     $('.navigation li:first-child').addClass('active');
     $('.categories li').first().find('a').addClass('all');
-
-
-    // var items = $('.month-items');
-    // function items_scroll() {
-    //     var $items_top = [];
-    //     $.each(items, function () {
-    //         $items_top = [$(this).offset().top];
-    //     });
-    //     console.log($items_top);
-    //
-    //     $(window).scroll(function () {
-    //         // scrollSpy()
-    //         var top = $(this).scrollTop();
-    //         if($(this).scrollTop() >= 100){
-    //             if($items_top === $(this).scrollTop()){
-    //                 console.log($items_top)
-    //             }
-    //         }
-    //     });
-    // }
-    // items_scroll();
-
 
     var currentScreen;
     var goTos = $('.scroll-month');
