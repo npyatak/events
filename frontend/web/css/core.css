@@ -425,6 +425,10 @@ table tbody tr {
     margin: 0 auto;
 }
 
+.ckeditor iframe {
+    width: 100% !important;
+}
+
 @media (max-width:768px) {
     .ckeditor img {
         width: 100% !important;

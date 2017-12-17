@@ -89,35 +89,32 @@ $(document).ready(function () {
     // items_scroll();
 
 
-    // var currentScreen;
-    // var goTos = $('.scroll-month');
-    // var sections = $('.month-items');
-    //
-    // function setActivationStatus(el) {
-    //     if (el.getAttribute('href') === currentScreen) {
-    //         el.parentElement.classList.add('active');
-    //     } else {
-    //         el.parentElement.classList.remove('active');
-    //     }
-    // }
-    //
-    // for (var i = 0; i < goTos.length; i++) {
-    //     setActivationStatus(goTos[i], currentScreen);
-    // }
-    //
-    // window.onscroll = onScroll;
-    //
-    // function onScroll() {
-    //     for (var i = 0; i < sections.length; i++) {
-    //         var rect = sections[i].getBoundingClientRect();
-    //         if (rect.top <= 0 && rect.height + rect.top > 0) {
-    //             currentScreen = '#' + sections[i].getAttribute('id');
-    //             for (var i = 0; i < goTos.length; i++) {
-    //                 setActivationStatus(goTos[i], currentScreen);
-    //             }
-    //         }
-    //     }
-    // }
+    var currentScreen;
+    var goTos = $('.scroll-month');
+    var sections = $('.month-items');
+
+    function setActivationStatus(el, currentScreen) {
+        if (el.getAttribute('href') === currentScreen) {
+            el.parentElement.classList.add('active');
+        } else {
+            el.parentElement.classList.remove('active');
+        }
+    }
+
+    window.onscroll = onScroll;
+
+    function onScroll() {
+        for (var i = 0; i < sections.length; i++) {
+            var rect = sections[i].getBoundingClientRect();
+
+            if (rect.top < 0 && rect.height + rect.top > 0) {
+                currentScreen = '#' + sections[i].getAttribute('id');
+                for (var i = 0; i < goTos.length; i++) {
+                    setActivationStatus(goTos[i], currentScreen);
+                }
+            }
+        }
+    }
 
     // function scrollSpy() {
     //     var scrollSpy_wrap = $('.scrollSpy_wrap');
