@@ -1749,7 +1749,7 @@ aside li a.active, aside li a:hover {
     display: none;
 }
 .error-menu {
-    height: 100px;
+    height: 90px;
     background-color: #341B91;
     color: #fff;
 }
@@ -1765,7 +1765,7 @@ aside li a.active, aside li a:hover {
     float: left;
 }
 .error-menu .container .left:nth-child(2) {
-    padding-top: 40px;
+    padding-top: 35px;
     position: relative;
 }
 .error-menu .container .left:first-child {
