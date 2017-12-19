@@ -10,7 +10,7 @@ use yii\helpers\Html;
 $this->title = $name;
 ?>
 <style>
-    .main-menu, footer {
+    .main-menu {
         display: none !important;
     }
 </style>
@@ -20,7 +20,7 @@ $this->title = $name;
             <div class="left">
                 <a href="<?=Url::home();?>" class="logo"></a>
             </div>
-            <div class="left"><h2><?=Yii::$app->settings->get('projectTitle');?> - <?=$this->title;?></h2></div>
+            <div class="left"><h2><?=Yii::$app->settings->get('projectTitle');?></h2></div>
         </div>
     </div>
     <div class="error-content">

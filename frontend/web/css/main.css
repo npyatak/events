@@ -2709,9 +2709,6 @@ footer p a {
         margin-left: -55px;
         line-height: 24px !important;
     }
-    .event-date {
-        margin-left: -15px;
-    }
 }
 @media (max-height:700px) {
     .navigation li {
