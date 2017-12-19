@@ -87,20 +87,20 @@ hr.blue {
 .ckeditor a {
     color: #281CA0 !important;
 }
-.ckeditor ul {
+.event-content ul {
     list-style: none !important;
     margin: 50px 0 !important;
     padding-left: 40px;
 }
-.ckeditor li {
+.event-content li {
     position: relative;
     margin-bottom: 20px;
     vertical-align: top;
 }
-.ckeditor li:last-child {
+.event-content li:last-child {
     margin-bottom: 0;
 }
-.ckeditor li::before {
+.event-content li::before {
     content: '';
     display: block;
     position: absolute;
@@ -110,18 +110,18 @@ hr.blue {
     height: 1px;
     background-color: #4A90E2;
 }
-.ckeditor ol {
+.event-content ol {
     list-style: none !important;
     margin: 50px 0 !important;
     padding-left: 40px;
 }
-.ckeditor ol li {
+.event-content ol li {
     vertical-align: top;
 }
-.ckeditor ol li::before {
+.event-content ol li::before {
     display: none;
 }
-.ckeditor ol li .dot {
+.event-content ol li .dot {
     display: block;
     position: absolute;
     top: 0;

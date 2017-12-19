@@ -1,8 +1,12 @@
 $(document).ready(function () {
 
-    $('.ckeditor ol li').each(function(i) {
-        $(this).append('<span class="dot">'+(++i)+'</span>');
-    });
+    var ol = $('ol');
+    $.each(ol, function() {
+        var ol_li = $(this).find('li');
+        for(var i=0;i<ol_li.length;i++){
+            $(ol_li[i]).append('<span class="dot">'+(i+1)+'</span>');
+        }
+    })
 
     $('#owl-events').owlCarousel({
         margin: 0,

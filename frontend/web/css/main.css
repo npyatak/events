@@ -142,11 +142,28 @@
     margin-bottom: 0;
 }
 .more-events .item-image {
+    position: relative;
     height: 140px;
     background-repeat: no-repeat;
     background-position: center;
     -webkit-background-size: cover;
     background-size: cover;
+}
+.more-events .item-image .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    -webkit-transition: .25s;
+    -moz-transition: .25s;
+    -ms-transition: .25s;
+    -o-transition: .25s;
+    transition: .25s;
+}
+.more-events .item:hover .item-image .bg {
+    opacity: .5;
 }
 .more-events .item-content {
     padding: 25px;
@@ -156,8 +173,17 @@
     font: 18px 'ProximaNova-Semibold', sans-serif;
     line-height: 25px;
 }
-.more-events .item-title h5 a {
-    color: #262626;
+.more-events .item .item-title h5 span {
+    display: block;
+    color: #262626 !important;
+    -webkit-transition: .25s;
+    -moz-transition: .25s;
+    -ms-transition: .25s;
+    -o-transition: .25s;
+    transition: .25s;
+}
+.more-events .item:hover .item-title h5 span {
+    color: inherit !important;
 }
 .more-events .item-date {
     font: 14px 'ProximaNova-Bold', sans-serif;
@@ -539,7 +565,8 @@
 }
 .big-image img {
     display: block;
-    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
 }
 .big-image_inner {
     position: relative;
@@ -893,7 +920,7 @@
     -webkit-background-size: contain;
     background-size: contain;
 }
-.main-menu.bg-white .main-slogan h2 {
+.main-menu.bg-white .main-slogan h2 a {
     color: #3c3c3c;
 }
 .main-menu .container_inner {
@@ -1165,6 +1192,8 @@ header .desc {
     text-transform: uppercase;
     letter-spacing: 2px;
     line-height: 20px;
+}
+.main-menu .main-slogan h2 a {
     color: #fff;
 }
 .main-menu.transform .main-slogan {
@@ -1233,6 +1262,10 @@ header .desc {
     position: fixed;
     width: 18px;
     margin-top: 60px;
+}
+.navigation.no-fixed {
+    position: absolute;
+    bottom: 0;
 }
 .navigation ul {
     margin: 0;
@@ -1755,8 +1788,8 @@ aside li a.active, aside li a:hover {
     background-size: contain;
 }
 .error-content {
-    padding-top: 150px;
-    padding-bottom: 300px;
+    padding-top: 130px;
+    padding-bottom: 130px;
 }
 .error-content img {
     display: block;
@@ -1765,6 +1798,24 @@ aside li a.active, aside li a:hover {
 }
 .event-detail {
     margin-bottom: 50px;
+}
+.error-text {
+    margin-top: 70px;
+}
+.error-text h2 {
+    margin-bottom: 20px;
+    font: 30px 'ProximaNova-Semibold', sans-serif;
+    color: #262626;
+    text-align: center;
+}
+.error-text p {
+    margin-bottom: 0;
+    font: 18px 'ProximaNova-Semibold', sans-serif;
+    color: #262626;
+    text-align: center;
+}
+.error-text p a {
+    color: #1B00A1;
 }
 
 .general-lid {
@@ -1934,6 +1985,8 @@ footer p a {
     }
     .event-background {
         height: 250px;
+        background-position-x: center;
+        background-position-y: top;
     }
     .event-content {
         width: 100%;
@@ -2140,6 +2193,9 @@ footer p a {
     }
     footer .bottom>.pull-left {
         width: 100%;
+    }
+    .event-detail {
+        margin-top: 49px;
     }
 }
 @media (max-width: 930px){
