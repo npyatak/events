@@ -12,6 +12,8 @@ $(document).ready(function () {
         }
 
         scrollSpy();
+
+        onScroll();
     });
 
     function right_aside() {
@@ -24,6 +26,7 @@ $(document).ready(function () {
 
     $(window).resize(function () {
         right_aside();
+
     });
     $(window).trigger('resize');
 
@@ -81,8 +84,6 @@ $(document).ready(function () {
         }
     }
 
-    window.onscroll = onScroll;
-
     function onScroll() {
         for (var i = 0; i < sections.length; i++) {
             var rect = sections[i].getBoundingClientRect();
@@ -100,7 +101,7 @@ $(document).ready(function () {
         var scrollSpy_wrap = $('.scrollSpy_wrap');
         var scrollSpy_wrapHeight = $('.scrollSpy_wrap').height();
         var scrollSpy_el = $('.scrollSpy');
-        var win_offsetY = window.pageYOffset + 490;
+        var win_offsetY = $(window).scrollTop() + 530;
         console.log(win_offsetY, scrollSpy_wrapHeight);
         if(win_offsetY >= scrollSpy_wrapHeight){
             $(scrollSpy_wrap).find(scrollSpy_el).addClass('no-fixed');

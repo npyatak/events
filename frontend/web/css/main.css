@@ -163,7 +163,7 @@
     transition: .25s;
 }
 .more-events .item:hover .item-image .bg {
-    opacity: .5;
+    opacity: .3;
 }
 .more-events .item-content {
     padding: 25px;
@@ -175,7 +175,7 @@
 }
 .more-events .item .item-title h5 span {
     display: block;
-    color: #262626 !important;
+    color: #262626;
     -webkit-transition: .25s;
     -moz-transition: .25s;
     -ms-transition: .25s;
@@ -183,7 +183,7 @@
     transition: .25s;
 }
 .more-events .item:hover .item-title h5 span {
-    color: inherit !important;
+    color: #190199;
 }
 .more-events .item-date {
     font: 14px 'ProximaNova-Bold', sans-serif;
@@ -1265,7 +1265,7 @@ header .desc {
 }
 .navigation.no-fixed {
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
 }
 .navigation ul {
     margin: 0;
