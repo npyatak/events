@@ -20,5 +20,6 @@
         </div>
         <?php endforeach;?>
     </div>
+    <div id="info"></div>
 </div>
 <?php endif;?>
