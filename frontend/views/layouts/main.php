@@ -52,7 +52,7 @@ AppAsset::register($this);
     <div class="main-menu">
         <div class="container">
             <div class="container_inner">
-                <div class="logo"><a href="<?=Yii::$app->settings->get('logoUrl');?>"></a></div>
+                <div class="logo"><a href="<?=Yii::$app->settings->get('logoUrl');?>" target="_blank"></a></div>
                 <div class="main-slogan"><h2><a href="<?=Url::home();?>"><?=$title;?></a></h2></div>
                 <div class="right">
                     <div class="main-menu_share">
@@ -79,7 +79,7 @@ AppAsset::register($this);
     <div class="container">
         <div class="top">
             <div class="pull-left">
-                <a href="<?=Yii::$app->settings->get('logoUrl');?>" class="footer-logo"></a>
+                <a href="<?=Yii::$app->settings->get('logoUrl');?>" target="_blank" class="footer-logo"></a>
             </div>
             <div class="pull-left">
                 <div class="row justify-content-between">
