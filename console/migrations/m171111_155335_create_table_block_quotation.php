@@ -16,7 +16,7 @@ class m171111_155335_create_table_block_quotation extends Migration
             'id' => $this->primaryKey(),
             'text' => $this->text()->notNull(),
             'author_image' => $this->string(255),
-            'author_name' => $this->string(255)->notNull(),
+            'author_name' => $this->string(255),
             'author_text' => $this->string(255),
         ], $tableOptions);
     }

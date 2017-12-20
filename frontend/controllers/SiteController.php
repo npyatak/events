@@ -103,9 +103,14 @@ class SiteController extends Controller
 
     public function actionEvent($alias) {
         $event = $this->findEvent($alias);
+
+        $date = new \DateTime;
+        $date->setTimestamp($event->date);
+        $firstDay = $date->modify('first day of this month')->format('U');
+        $lastDay = $date->modify('first day of next month')->format('U');
         
-        $nextEvent = Event::find()->where(['>', 'date', $event->date])->orderBy('value_index DESC')->one();
-        $prevEvent = Event::find()->where(['<', 'date', $event->date])->orderBy('value_index DESC')->one();
+        $nextEvent = Event::find()->where(['>', 'date', $event->date])->andWhere(['<', 'date', $lastDay])->orderBy('value_index DESC')->one();
+        $prevEvent = Event::find()->where(['>', 'date', $firstDay])->andWhere(['<', 'date', $event->date])->orderBy('value_index DESC')->one();
 
         return $this->render('event', [
             'event' => $event,

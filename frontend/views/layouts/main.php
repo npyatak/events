@@ -119,6 +119,10 @@ AppAsset::register($this);
     </div>
 </footer>
 
+<?php if($_SERVER['HTTP_HOST'] !== 'events.local'):?>
+<script>!function(e,t,d,s,a,n,c){e[a]={},e[a].date=(new Date).getTime(),n=t.createElement(d),c=t.getElementsByTagName(d)[0],n.type="text/javascript",n.async=!0,n.src=s,c.parentNode.insertBefore(n,c)}(window,document,"script","https://eventstassru.push.world/embed.js","pw"),pw.websiteId="ef40dc0cbad840e00bf0911ed156274d626126cbdd2f632d8c27dce447930a93";</script>
+<?php endif;?>
+
 <?php $this->endBody() ?>
 </body>
 </html>
