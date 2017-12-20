@@ -1,26 +1,20 @@
 <?php
-
-/* @var $this yii\web\View */
-/* @var $name string */
-/* @var $message string */
-/* @var $exception Exception */
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+$this->context->layout = 'error';
+
 $this->title = $name;
 ?>
-<style>
-    .main-menu {
-        display: none !important;
-    }
-</style>
 <div class="site-error">
     <div class="error-menu">
         <div class="container">
             <div class="left">
-                <a href="<?=Url::home();?>" class="logo"></a>
+                <a href="<?=Yii::$app->settings->get('logoUrl');?>" target="_blank" class="logo"></a>
             </div>
-            <div class="left"><h2><?=Yii::$app->settings->get('projectTitle');?></h2></div>
+            <div class="left">
+                <h2><a href="<?=Url::home();?>"><?=Yii::$app->settings->get('projectTitle');?></a></h2>
+            </div>
         </div>
     </div>
     <div class="error-content">
