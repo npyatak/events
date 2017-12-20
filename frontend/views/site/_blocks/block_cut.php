@@ -9,7 +9,7 @@
                 <?=$block->text;?>
             </div>
             <div class="more block_cut_more" data-text-show="<?=$block->text_show ? $block->text_show : 'Показать';?>"  data-text-hide="<?=$block->text_show ? $block->text_hide : 'Свернуть';?>">
-                <span class="more-btn show-cut tt-up">
+                <span class="more-btn show-cut_<?=$block->id;?> tt-up">
                     <span class="more-text"><?=$block->text_show;?></span><i class="fa fa-chevron-right"></i>
                 </span>
             </div>
@@ -23,28 +23,26 @@ $script = "
     $(document).ready(function () {
         var elems;
         var blockCut".$block->id." = $('#cut_".$block->id."').closest('.block_cut');
-        console.log(blockCut".$block->id.");
         if($('.block_cut_end').length) {
             var cutEnd = blockCut".$block->id.".nextAll('.block_cut_end:first');
-            console.log(cutEnd);
             elems".$block->id." = blockCut".$block->id.".nextUntil(cutEnd, '.block');
         } else {
             elems".$block->id." = blockCut".$block->id.".nextAll('.block');
         }
-        console.log(elems".$block->id.".length);
         elems".$block->id.".hide();
 
         $(document)
-            .on('click','.block_cut_more .show-cut',function () {
+            .on('click','.show-cut_".$block->id."', function () {
+                var id = $(this).data('id');
                 $(this).parent().parent().find('.hidden').slideDown(500);
-                $(this).toggleClass('show-cut hide-cut rotate');
+                $(this).toggleClass('show-cut_".$block->id." hide-cut_".$block->id." rotate');
                 $(this).find('.more-text').text($(this).parent().data('text-hide'));
                 elems".$block->id.".show();
                 $(this).closest('.more').insertAfter(elems".$block->id.".last());
             })
-            .on('click','.block_cut_more .hide-cut',function () {
+            .on('click','.hide-cut_".$block->id."',function () {
                 $(this).parent().parent().find('.hidden').slideUp(500);
-                $(this).toggleClass('show-cut hide-cut rotate');
+                $(this).toggleClass('show-cut_".$block->id." hide-cut_".$block->id." rotate');
                 $(this).find('.more-text').text($(this).parent().data('text-show'));
                 elems".$block->id.".hide();
                 $(this).closest('.more').appendTo($(this).closest('.block_cut .change-block'));
