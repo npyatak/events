@@ -1,3 +1,5 @@
 <div class="block_code_inner">
-    <?=$block->code;?>
+    <div class="row justify-content-end m-0">
+        <?=$block->code;?>
+    </div>
 </div>

@@ -4,7 +4,11 @@ use frontend\assets\PlayerAsset;
 PlayerAsset::register($this);
 ?>
 
-<div id="block-video-<?=$block->id;?>"></div>
+<div class="row justify-content-end m-0">
+	<div class="m-r-40">
+		<div id="block-video-<?=$block->id;?>"></div>
+	</div>
+</div>
 
 <?php
 $str = "'width': ".($block->width ? $block->width : "'100%'").",";
