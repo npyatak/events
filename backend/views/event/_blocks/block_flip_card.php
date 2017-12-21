@@ -19,11 +19,18 @@ use common\components\ElfinderInput;
 			<?= Html::error($model, "[$i]height", ['class' => 'help-block']);?>
 		</div>
 	</div>
-    <div class="col-sm-8">
+    <div class="col-sm-4">
 		<div class="form-group <?=$model->hasErrors("control_text") ? 'has-error' : '';?>">
 			<?= Html::activeLabel($model, "[$i]control_text", ['class' => 'control-label']) ?>
 			<?= Html::activeTextInput($model, "[$i]control_text", ['class' => 'form-control']) ?>
 			<?= Html::error($model, "[$i]control_text", ['class' => 'help-block']);?>
+		</div>
+	</div>
+    <div class="col-sm-4">
+		<div class="form-group <?=$model->hasErrors("control_text_back") ? 'has-error' : '';?>">
+			<?= Html::activeLabel($model, "[$i]control_text_back", ['class' => 'control-label']) ?>
+			<?= Html::activeTextInput($model, "[$i]control_text_back", ['class' => 'form-control']) ?>
+			<?= Html::error($model, "[$i]control_text_back", ['class' => 'help-block']);?>
 		</div>
 	</div>
 </div>

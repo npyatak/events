@@ -19,7 +19,8 @@ class m171205_175435_create_table_block_flip_card extends Migration {
             'text_back' => $this->text(),  
             'image_front' => $this->string(255),        
             'image_back' => $this->string(255),      
-            'control_text' => $this->string(255),      
+            'control_text' => $this->string(255),  
+            'control_text_back' => $this->string(255),
             'capture_front' => $this->string(255),      
             'capture_back' => $this->string(255),      
         ], $tableOptions);

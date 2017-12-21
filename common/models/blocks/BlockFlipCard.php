@@ -22,7 +22,7 @@ class BlockFlipCard extends Block
     public function rules()
     {
         return array_merge(parent::rules(), [
-                [['image_front', 'image_back', 'control_text', 'capture_front', 'capture_back'], 'string', 'max' => 255],
+                [['image_front', 'image_back', 'control_text', 'capture_front', 'control_text_back', 'capture_back'], 'string', 'max' => 255],
                 [['width', 'height'], 'integer', 'max' => 9999],
                 [['text_front', 'text_back'], 'safe'],
             ]
@@ -58,6 +58,7 @@ class BlockFlipCard extends Block
             'image_front' => 'Изображение лицевой стороны',
             'image_back' => 'Изображение оборотной стороны',
             'control_text' => 'Текст контрола',
+            'control_text_back' => 'Текст контрола оборотной стороны',
             'capture_front' => 'Подпись лицевой стороны',
             'capture_back' => 'Подпись оборотной стороны',
         ];

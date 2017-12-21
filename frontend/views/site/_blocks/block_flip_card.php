@@ -24,6 +24,7 @@
                             <?=$block->text_back;?>
                         </div>
                         <div class="bottom turn-btn">
+                            <?=$block->control_text_back;?>
                             <div class="turn"></div>
                         </div>
                     </div>

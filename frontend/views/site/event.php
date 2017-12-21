@@ -172,24 +172,24 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                         </div>
                                     </div>
                                     <?php if($prevEvent || $nextEvent):?>
-                                        <?php if($prevEvent):?>
                                         <div class="col-6">
+                                            <?php if($prevEvent):?>
                                             <div class="footer-arrow">
                                                 <a href="<?=$prevEvent->url;?>"><i class="fa fa-chevron-left"></i></a>
                                             </div>
                                             <div class="footer-title">предыдущее</div>
                                             <div class="footer-text"><a href="<?=$prevEvent->url;?>"><?=$prevEvent->title;?></a></div>
+                                            <?php endif;?>
                                         </div>
-                                        <?php endif;?>
-                                        <?php if($nextEvent):?>
                                         <div class="col-6">
+                                            <?php if($nextEvent):?>
                                             <div class="footer-arrow">
                                                 <a href="<?=$nextEvent->url;?>"><i class="fa fa-chevron-right"></i></a>
                                             </div>
                                             <div class="footer-title">следующее</div>
                                             <div class="footer-text"><a href="<?=$nextEvent->url;?>"><?=$nextEvent->title;?></a></div>
+                                            <?php endif;?>
                                         </div>
-                                        <?php endif;?>
                                     <?php endif;?>
                                 </div>
                             </div>
