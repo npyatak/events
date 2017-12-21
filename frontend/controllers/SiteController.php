@@ -109,8 +109,8 @@ class SiteController extends Controller
         $firstDay = $date->modify('first day of this month')->format('U');
         $lastDay = $date->modify('first day of next month')->format('U');
 
-        $nextEvent = Event::find()->where(['>', 'date', $event->date])->andWhere(['<', 'date', $lastDay])->orderBy('value_index DESC')->one();
-        $prevEvent = Event::find()->where(['>', 'date', $firstDay])->andWhere(['<', 'date', $event->date])->orderBy('value_index DESC')->one();
+        $nextEvent = Event::find()->where(['>', 'date', $event->date])->andWhere(['<', 'date', $lastDay])->orderBy('value_index DESC, date ASC')->one();
+        $prevEvent = Event::find()->where(['>', 'date', $firstDay])->andWhere(['<', 'date', $event->date])->orderBy('value_index DESC, date DESC')->one();
 
         return $this->render('event', [
             'event' => $event,
