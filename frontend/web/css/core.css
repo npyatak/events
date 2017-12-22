@@ -320,7 +320,7 @@ table tbody tr {
     line-height: 45px;
     font-weight: bold;
 }
-.box1 .caption {
+.box1 .caption, .box2 .caption {
     position: absolute;
     left: 30px;
     bottom: 60px;
