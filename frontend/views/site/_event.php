@@ -33,7 +33,7 @@ if($category && !in_array($category, $classes)) {
 		<a href="<?=$event->url;?>" style="background-color:<?=$color ? $color : '';?>"></a>
 	</div>
 	<div class="grid-item_desc">
-		<h2><a href="<?=$event->url;?>"><?=$event->date;?></a></h2>
+		<h2><a href="<?=$event->url;?>"><?=$event->title;?></a></h2>
 		<span class="date"><?=$event->viewDate[0];?> <?=$event->viewDate[1];?></span>
 		<a href="<?=$event->url;?>" class="link-arrow">
 			<i class="fa fa-angle-right"></i>
