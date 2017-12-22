@@ -23,7 +23,7 @@ use common\models\Event;
 			]);?>
 			<?=Html::a('<i class="fa fa-twitter"></i>', '', [
 				'class' => 'btn-share btn-twitter',
-				'data-type' => 'vk',
+				'data-type' => 'tw',
 				'data-url' => Url::current(['month' => $monthNumber]),
 				'data-title' => $shares[$monthNumber]->title,
 				'data-image' => ThumbnailImage::getExternalImageUrl($shares[$monthNumber]->image),
@@ -31,13 +31,14 @@ use common\models\Event;
 			]);?>
 			<?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
 				'class' => 'btn-share btn-odnoklassniki',
-				'data-type' => 'tw',
+				'data-type' => 'ok',
 				'data-url' => Url::current(['month' => $monthNumber]),
 				'data-title' => $shares[$monthNumber]->twitter,
 			]);?>
 			<?=Html::a('<i class="fa fa-vk"></i>', '', [
 				'class' => 'btn-share btn-vk',
-				'data-type' => 'ok',
+
+				'data-type' => 'vk',
 				'data-url' => Url::current(['month' => $monthNumber]),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>

@@ -1343,11 +1343,11 @@ header .desc {
     width: 0;
     overflow: hidden;
     color: #1B00A1;
-    -webkit-transition: all .4s;
-    -moz-transition: all .4s;
-    -ms-transition: all .4s;
-    -o-transition: all .4s;
-    transition: all .4s;
+    -webkit-transition: all .25s;
+    -moz-transition: all .25s;
+    -ms-transition: all .25s;
+    -o-transition: all .25s;
+    transition: all .25s;
 }
 .navigation li.active {
     height: auto;
@@ -1360,11 +1360,46 @@ header .desc {
     transform: scale(0);
 }
 .navigation li.active .month {
-    height: auto;
     width: auto;
     z-index: 0;
     overflow: visible;
     opacity: 1;
+}
+.navigation li:nth-child(1).active .month {
+    height: 67.58px;
+}
+.navigation li:nth-child(2).active .month {
+    height: 79.67px;
+}
+.navigation li:nth-child(3).active .month {
+    height: 44px;
+}
+.navigation li:nth-child(4).active .month {
+    height: 67.69px;
+}
+.navigation li:nth-child(5).active .month {
+    height: 37.77px;
+}
+.navigation li:nth-child(6).active .month {
+    height: 51.78px;
+}
+.navigation li:nth-child(7).active .month {
+    height: 51.31px;
+}
+.navigation li:nth-child(8).active .month {
+    height: 65.38px;
+}
+.navigation li:nth-child(9).active .month {
+    height: 87.38px;
+}
+.navigation li:nth-child(10).active .month {
+    height: 76.98px;
+}
+.navigation li:nth-child(11).active .month {
+    height: 68.16px;
+}
+.navigation li:nth-child(12).active .month {
+    height: 77.27px;
 }
 aside {
     position: fixed;
@@ -1416,22 +1451,18 @@ aside li a.active, aside li a:hover {
 }
 .month-title h2 {
     display: inline-block;
+    vertical-align: middle;
     margin: 0;
     font: 30px 'ProximaNova-Bold';
     line-height: 35px;
     color: #262626;
 }
 .share-inline {
-    display: block;
+    display: inline-block;
+    vertical-align: middle;
     height: 36px;
-    position: absolute;
-    top: 50%;
-    left: 160px;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
+    position: relative;
+    margin-left: 20px;
 }
 .share-inline_btn {
     position: relative;
