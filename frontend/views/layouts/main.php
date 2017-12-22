@@ -52,8 +52,8 @@ AppAsset::register($this);
     <div class="main-menu">
         <div class="container">
             <div class="container_inner">
-                <div class="logo"><a href="<?=Url::home();?>"></a></div>
-                <div class="main-slogan"><h2><?=$title;?></h2></div>
+                <div class="logo"><a href="<?=Yii::$app->settings->get('logoUrl');?>" target="_blank"></a></div>
+                <div class="main-slogan"><h2><a href="<?=Url::home();?>"><?=$title;?></a></h2></div>
                 <div class="right">
                     <div class="main-menu_share">
                         <span class="main-share_btn"><i class="ion-android-share"></i></span>
@@ -74,12 +74,12 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 
-
+<?php if(Yii::$app->controller->action->id !== 'error'):?>
 <footer>
     <div class="container">
         <div class="top">
             <div class="pull-left">
-                <a href="<?=Url::home();?>" class="footer-logo"></a>
+                <a href="<?=Yii::$app->settings->get('logoUrl');?>" target="_blank" class="footer-logo"></a>
             </div>
             <div class="pull-left">
                 <div class="row justify-content-between">
@@ -118,6 +118,11 @@ AppAsset::register($this);
         </div>
     </div>
 </footer>
+<?php endif;?>
+
+<?php if($_SERVER['HTTP_HOST'] !== 'events.local'):?>
+<script>!function(e,t,d,s,a,n,c){e[a]={},e[a].date=(new Date).getTime(),n=t.createElement(d),c=t.getElementsByTagName(d)[0],n.type="text/javascript",n.async=!0,n.src=s,c.parentNode.insertBefore(n,c)}(window,document,"script","https://eventstassru.push.world/embed.js","pw"),pw.websiteId="ef40dc0cbad840e00bf0911ed156274d626126cbdd2f632d8c27dce447930a93";</script>
+<?php endif;?>
 
 <?php $this->endBody() ?>
 </body>

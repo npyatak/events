@@ -13,6 +13,14 @@ $title = $event->socials_title ? $event->socials_title : $this->title;
 $desc = $event->socials_text;
 $image = $event->getImageUrl($event->socials_image_url);
 
+$color = null;
+foreach ($event->categories as $cat) {
+    if(!$color) {
+        $color = $cat->color;
+    }
+    $classes[] = 'cat_'.$cat->alias;
+}
+
 $this->registerMetaTag(['property' => 'og:description', 'content' => $desc], 'og:description');
 $this->registerMetaTag(['property' => 'og:title', 'content' => $this->title], 'og:title');
 $this->registerMetaTag(['property' => 'og:image', 'content' => $image], 'og:image');
@@ -20,21 +28,6 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => $url], 'og:url');
 $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
 ?>
 
-<!--<div class="main-menu event-detail_menu">-->
-<!--    <div class="container">-->
-<!--        <div class="container_inner">-->
-<!--            <div class="logo"><a href="--><?//=Url::home();?><!--"></a></div>-->
-<!--            <div class="main-slogan"><h2>События 2018</h2></div>-->
-<!--            <div class="right">-->
-<!--                <div class="main-menu_share">-->
-<!--                    <span class="main-share_btn"><i class="ion-android-share"></i></span>-->
-<!--                </div>-->
-<!--                <div class="main-menu_btn"></div>-->
-<!--            </div>-->
-<!---->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 <div class="event-detail">
     <div class="event-background" style="background-image:url(<?=$event->image_url;?>)"></div>
     <div class="container">
@@ -78,11 +71,11 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                             	<?php endif;?>
 
                                 <div class="add-to-calendar">
-                                    <a class="add-to-calendar-a" href=""><span>д</span>обавить в календарь</a>
+                                    <a class="add-to-calendar-a" href=""><i>+</i><span>д</span>обавить в календарь</a>
                                     <div class="hidden dropdown">
                                         <ul>
-                                            <li><a class="calendar" href="<?=Url::toRoute(['site/gc', 'alias' => $event->alias]);?>" target="_blank">сохранить в google Календарь</a></li>
-                                            <li><a class="calendar" href="<?=Url::toRoute(['site/ics', 'alias' => $event->alias]);?>" target="_blank">сохранить ics-файл</a></li>
+                                            <li><a class="calendar" href="<?=Url::toRoute(['site/gc', 'alias' => $event->alias]);?>" target="_blank">добавить в google календарь</a></li>
+                                            <li><a class="calendar" href="<?=Url::toRoute(['site/ics', 'alias' => $event->alias]);?>" target="_blank">добавить в календарь (.ics)</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -179,24 +172,24 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                         </div>
                                     </div>
                                     <?php if($prevEvent || $nextEvent):?>
-                                        <?php if($prevEvent):?>
                                         <div class="col-6">
+                                            <?php if($prevEvent):?>
                                             <div class="footer-arrow">
                                                 <a href="<?=$prevEvent->url;?>"><i class="fa fa-chevron-left"></i></a>
                                             </div>
                                             <div class="footer-title">предыдущее</div>
                                             <div class="footer-text"><a href="<?=$prevEvent->url;?>"><?=$prevEvent->title;?></a></div>
+                                            <?php endif;?>
                                         </div>
-                                        <?php endif;?>
-                                        <?php if($nextEvent):?>
                                         <div class="col-6">
+                                            <?php if($nextEvent):?>
                                             <div class="footer-arrow">
                                                 <a href="<?=$nextEvent->url;?>"><i class="fa fa-chevron-right"></i></a>
                                             </div>
                                             <div class="footer-title">следующее</div>
                                             <div class="footer-text"><a href="<?=$nextEvent->url;?>"><?=$nextEvent->title;?></a></div>
+                                            <?php endif;?>
                                         </div>
-                                        <?php endif;?>
                                     <?php endif;?>
                                 </div>
                             </div>
@@ -211,11 +204,13 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                 <?php foreach ($event->similarEvents as $similar):?>
                     <a href="<?=$similar->url;?>" class="item">
                         <?php if($similar->small_image_url):?>
-                        <div class="item-image" style="background-image:url(<?=$similar->getImageUrl($similar->small_image_url, '249x140');?>)"></div>
+                        <div class="item-image" style="background-image:url(<?=$similar->getImageUrl($similar->small_image_url, '249x140');?>)">
+                            <span class="bg" style="background-color:<?=$color ? $color : '';?>"></span>
+                        </div>
                         <?php endif;?>
                         <div class="item-content">
                             <div class="item-title">
-                                <h5><?=$similar->title;?></h5>
+                                <h5 style="color:<?=$color ? $color : '';?>"><span><?=$similar->title;?></span></h5>
                             </div>
                             <div class="item-date"><?=$similar->viewDate[0];?> <?=$similar->viewDate[1];?></div>
                         </div>
@@ -243,6 +238,10 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
     .main-menu .main-slogan {
         padding-left: 30px;
         opacity: 1;
+        z-index: 0;
+    }
+    .main-menu_btn {
+        display: none;
     }
 </style>
 

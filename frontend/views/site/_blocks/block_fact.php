@@ -35,7 +35,7 @@ use common\models\blocks\items\BlockFactItem;
                     <div class="more-other">
                         <span class="more-btn-other show">
                             <span class="more-text"><?=$item->link;?></span>
-                            <i class="fa fa-chevron-down"></i>
+                            <i class="fa fa-chevron-right"></i>
                         </span>
                     </div>
                 <?php endif;?>

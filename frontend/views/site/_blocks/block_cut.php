@@ -1,4 +1,4 @@
-<div class="why-block">
+<div class="why-block" id="cut_<?=$block->id;?>">
     <div class="why-block_inner">
         <h3><?=$block->title;?></h3>
         <div class="change-block">
@@ -9,7 +9,7 @@
                 <?=$block->text;?>
             </div>
             <div class="more block_cut_more" data-text-show="<?=$block->text_show ? $block->text_show : 'Показать';?>"  data-text-hide="<?=$block->text_show ? $block->text_hide : 'Свернуть';?>">
-                <span class="more-btn show tt-up">
+                <span class="more-btn show-cut_<?=$block->id;?> tt-up">
                     <span class="more-text"><?=$block->text_show;?></span><i class="fa fa-chevron-right"></i>
                 </span>
             </div>
@@ -22,26 +22,30 @@
 $script = "
     $(document).ready(function () {
         var elems;
+        var blockCut".$block->id." = $('#cut_".$block->id."').closest('.block_cut');
         if($('.block_cut_end').length) {
-            elems = $('.block_cut').nextUntil('.block_cut_end', '.block');
-            $('.more').insertAfter(elems)
+            var cutEnd = blockCut".$block->id.".nextAll('.block_cut_end:first');
+            elems".$block->id." = blockCut".$block->id.".nextUntil(cutEnd, '.block');
         } else {
-            elems = $('.block_cut').nextAll('.block');
+            elems".$block->id." = blockCut".$block->id.".nextAll('.block');
         }
-        elems.hide();
+        elems".$block->id.".hide();
 
         $(document)
-            .on('click','.block_cut_more .show',function () {
+            .on('click','.show-cut_".$block->id."', function () {
+                var id = $(this).data('id');
                 $(this).parent().parent().find('.hidden').slideDown(500);
-                $(this).toggleClass('show hide rotate');
+                $(this).toggleClass('show-cut_".$block->id." hide-cut_".$block->id." rotate');
                 $(this).find('.more-text').text($(this).parent().data('text-hide'));
-                elems.show();
+                elems".$block->id.".show();
+                $(this).closest('.more').insertAfter(elems".$block->id.".last());
             })
-            .on('click','.block_cut_more .hide',function () {
+            .on('click','.hide-cut_".$block->id."',function () {
                 $(this).parent().parent().find('.hidden').slideUp(500);
-                $(this).toggleClass('show hide rotate');
+                $(this).toggleClass('show-cut_".$block->id." hide-cut_".$block->id." rotate');
                 $(this).find('.more-text').text($(this).parent().data('text-show'));
-                elems.hide();
+                elems".$block->id.".hide();
+                $(this).closest('.more').appendTo($(this).closest('.block_cut .change-block'));
             });
     });
 ";?>

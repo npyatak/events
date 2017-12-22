@@ -23,8 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-
                 'id',
                 'title',
                 'alias',
@@ -32,6 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'viewDate',
                     'value' => function($data) {
                         return implode(' ', $data->viewDate);
+                    }
+                ],
+                [
+                    'attribute' => 'date',
+                    'value' => function($data) {
+                        return $data->dateFormatted;
                     }
                 ],
                 [

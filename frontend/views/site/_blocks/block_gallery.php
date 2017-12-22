@@ -9,6 +9,7 @@
                 <div class="caption">
                     <?=$item->copyright;?>
                 </div>
+                <a href="" class="big-image_btn"></a>
             </div>
             <div class="title-wrap">
                 <div class="container_inner">
@@ -20,5 +21,6 @@
         </div>
         <?php endforeach;?>
     </div>
+    <div id="info"></div>
 </div>
 <?php endif;?>

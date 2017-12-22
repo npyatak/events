@@ -86,7 +86,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 <div class="general_content">
 	<div class="container">
 		<div class="general_content-inner scrollSpy_wrap">
-			<div class="navigation">
+			<div class="navigation scrollSpy">
 				<ul>
 					<?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
 					<li <?=(isset($month) && $month == $m[0]) ? 'class="active"' : '';?>>
@@ -99,13 +99,13 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 				</ul>
 			</div>
 			<div class="content" id="events">
-				<h3 class="general-lid">Из сотни событий, которые могут произойти в 2018 году, мы отобрали десятки самых ожидаемых и обсуждаемых.</h3>
+				<h3 class="general-lid">Из сотни событий, которые могут произойти в 2018 году, мы отобрали десятки самых ожидаемых и обсуждаемых. Весь год мы будем следить за ключевыми темами и обновлять наш календарь, чтобы вы не пропустили ничего важного.</h3>
 				<?=$this->render('_months', ['events' => $events, 'category' => $category, 'shares' => $shares]);?>
 			</div>
-			<aside class="scrollSpy">
+			<aside>
 				<span class="close_aside"><i class="ion-android-close"></i></span>
 				<ul class="categories">
-					<li><a href="<?=Url::current(['category' => null]);?>" <?=$category ? '' : 'class="active"';?>>Все события</a></li>
+					<li><a href="<?=Url::current(['category' => null]);?>" <?=$category ? '' : 'class="active"';?>>Все</a></li>
 					<?php foreach ($categories as $cat):?>
 					<li><a href="<?=$cat->url;?>" <?=$category == $cat->alias ? 'class="active"' : '';?> data-category="<?=$cat->alias;?>"><?=$cat->title;?></a></li>
 					<?php endforeach;?>

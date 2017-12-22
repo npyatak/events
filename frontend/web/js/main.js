@@ -1,7 +1,11 @@
 $(document).ready(function () {
 
-    $('.ckeditor ol li').each(function(i) {
-        $(this).append('<span class="dot">'+(++i)+'</span>');
+    var ol = $('ol');
+    $.each(ol, function() {
+        var ol_li = $(this).find('li');
+        for(var i=0;i<ol_li.length;i++){
+            $(ol_li[i]).append('<span class="dot">'+(i+1)+'</span>');
+        }
     });
 
     $('#owl-events').owlCarousel({
@@ -14,9 +18,39 @@ $(document).ready(function () {
         navText: ['<i class="fa fa-chevron-left"></i>','<i class="fa fa-chevron-right"></i>']
     });
 
+    var i = 1, total = $('.owl-dots div').length;
+    $('#info').html('1/'+total);
+
+    $('#owl-events').on('initialized.owl.carousel changed.owl.carousel resized.owl.carousel', function(e) {
+        owl_carousel_page_numbers(e);
+    });
+
+
+    function owl_carousel_page_numbers(e){
+
+        //if (!e.namespace || e.property.name != 'position') return;
+        //console.log('work');
+        var items_per_page = e.page.size;
+
+        if (items_per_page > 1){
+
+            var min_item_index  = e.item.index,
+                max_item_index  = min_item_index + items_per_page,
+                display_text    = (min_item_index+1) + '-' + max_item_index;
+
+        } else {
+
+            var display_text = (e.item.index+1);
+
+        }
+
+        $('#info').text( display_text + '/' + e.item.count);
+
+    }
+
     $(this)
         .on('click','.more-btn-other',function () {
-            $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up')
+            $(this).find('i').toggleClass('fa-chevron-right fa-chevron-up')
         })
         .on('click','.turn-btn',function () {
             $(this).parent().parent().parent().toggleClass('flip');
@@ -27,14 +61,12 @@ $(document).ready(function () {
         $(table).wrapAll('<div class="table-wrap"><div class="container_inner"><div class="ckeditor"></div></div></div>');
     }
 
-    // $(window).resize(function () {
-    //     var event_content = $('.event-content').width();
-    //     var block_content = $('.block_content').position().left;
-    //     if($(this).width() < 1279 && $(this).width() > 768){
-    //         $('.table-wrap').css({width: event_content + 120,'margin-left':-block_content})
-    //     }
-    // });
-    // $(window).trigger('resize');
+    $(window).resize(function () {
+        var owl_img_height = $('.owl-carousel .owl-item:first-child').find('.image').height();
+        $('#info').css({top:owl_img_height})
+        console.log(owl_img_height)
+    });
+    $(window).trigger('resize');
 
     masonryInit();
 

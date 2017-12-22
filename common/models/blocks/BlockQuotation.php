@@ -20,7 +20,7 @@ class BlockQuotation extends Block
     public function rules()
     {
         return array_merge(parent::rules(), [
-                [['text', 'author_name'], 'required'],
+                [['text'], 'required'],
                 [['text'], 'safe'],
                 [['author_image', 'author_name', 'author_text'], 'string', 'max' => 255],
             ]

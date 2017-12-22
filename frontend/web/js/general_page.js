@@ -10,6 +10,10 @@ $(document).ready(function () {
         }else if(win_scr_top >= 0){
             $('header, .general_content, .main-menu').addClass('transform');
         }
+
+        scrollSpy();
+
+        onScroll();
     });
 
     function right_aside() {
@@ -22,6 +26,7 @@ $(document).ready(function () {
 
     $(window).resize(function () {
         right_aside();
+
     });
     $(window).trigger('resize');
 
@@ -79,8 +84,6 @@ $(document).ready(function () {
         }
     }
 
-    window.onscroll = onScroll;
-
     function onScroll() {
         for (var i = 0; i < sections.length; i++) {
             var rect = sections[i].getBoundingClientRect();
@@ -94,17 +97,24 @@ $(document).ready(function () {
         }
     }
 
-    // function scrollSpy() {
-    //     var scrollSpy_wrap = $('.scrollSpy_wrap');
-    //     var scrollSpy_wrapHeight = $('.scrollSpy_wrap').height();
-    //     var scrollSpy_el = $('.scrollSpy');
-    //     var scrollSpy_elTop = scrollSpy_el.offset().top;
-    //     var win_offsetY = window.pageYOffset;
-    //     console.log(win_offsetY, scrollSpy_elTop);
-    //     if(win_offsetY >= (scrollSpy_elTop -90) && win_offsetY <= (scrollSpy_elTop + (scrollSpy_wrapHeight -300))){
-    //
-    //     }else {
-    //
-    //     }
-    // }
+    function scrollSpy() {
+        var footer_top = $('footer').offset().top;
+        var a = window.pageYOffset + window.innerHeight;
+        var scrollSpy_wrap = $('.scrollSpy_wrap');
+        var scrollSpy_el = $('.scrollSpy');
+        if(a >= footer_top){
+            $(scrollSpy_wrap).find(scrollSpy_el).addClass('no-fixed');
+        }else{
+            $(scrollSpy_wrap).find(scrollSpy_el).removeClass('no-fixed');
+        }
+        // var scrollSpy_wrapHeight = $('.scrollSpy_wrap').height();
+
+        // var win_offsetY = $(window).scrollTop() + 530;
+        // console.log(win_offsetY, scrollSpy_wrapHeight);
+        // if(win_offsetY >= scrollSpy_wrapHeight){
+        //     $(scrollSpy_wrap).find(scrollSpy_el).addClass('no-fixed');
+        // }else {
+        //     $(scrollSpy_wrap).find(scrollSpy_el).removeClass('no-fixed');
+        // }
+    }
 });
