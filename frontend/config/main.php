@@ -64,6 +64,7 @@ return [
                 '<year:\d+>/category/<alias:\w+>' => 'site/index',
 
                 '<year:\d+>/event/<alias>' => 'site/event',
+                'month/<id:\d+>' => 'site/month',
                 '<action>' => 'site/<action>',
                 '<action:\w+>/<id:\d+>' => 'site/<action>',
                 

@@ -8,7 +8,7 @@ $this->registerJsFile(Url::toRoute('js/event.js'), ['depends' => [\yii\web\Jquer
 
 $this->title = $event->title;
 
-$url = Url::canonical();
+$url = Url::current([], true);
 $title = $event->socials_title ? $event->socials_title : $this->title;
 $desc = $event->socials_text;
 $image = $event->getImageUrl($event->socials_image_url);

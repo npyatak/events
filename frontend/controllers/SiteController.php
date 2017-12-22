@@ -79,8 +79,9 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionMonth($month, $category = null)
+    public function actionMonth($id, $category = null)
     {
+        $month = $id;
         $dateNow = new \DateTime();
         $year = (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
 

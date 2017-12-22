@@ -23,6 +23,9 @@
                         <div class="answer">
                             <?=$block->text_back;?>
                         </div>
+                        <div class="caption">
+                            <?=$block->capture_back;?>
+                        </div>
                         <div class="bottom turn-btn">
                             <?=$block->control_text_back;?>
                             <div class="turn"></div>

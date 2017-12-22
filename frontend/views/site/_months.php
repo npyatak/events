@@ -16,35 +16,35 @@ use common\models\Event;
 			<?=Html::a('<i class="fa fa-facebook"></i>', '', [
 				'class' => 'btn-share btn-facebook',
 				'data-type' => 'fb',
-				'data-url' => Url::toRoute(['site/month', 'id' => $monthNumber]),
+				'data-url' => Url::toRoute(['site/month', 'id' => $monthNumber], true),
 				'data-title' => $shares[$monthNumber]->title,
-				'data-image' => ThumbnailImage::getExternalImageUrl($shares[$monthNumber]->image),
+				'data-image' => $shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image),
+				'data-desc' => $shares[$monthNumber]->text,
+			]);?>
+			<?=Html::a('<i class="fa fa-vk"></i>', '', [
+				'class' => 'btn-share btn-vk',
+				'data-type' => 'vk',
+				'data-url' => Url::current(['month' => $monthNumber], true),
+				'data-title' => $shares[$monthNumber]->title,
+				'data-image' => $shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
 			<?=Html::a('<i class="fa fa-twitter"></i>', '', [
 				'class' => 'btn-share btn-twitter',
-				'data-type' => 'vk',
-				'data-url' => Url::current(['month' => $monthNumber]),
-				'data-title' => $shares[$monthNumber]->title,
-				'data-image' => ThumbnailImage::getExternalImageUrl($shares[$monthNumber]->image),
-				'data-desc' => $shares[$monthNumber]->text,
+				'data-type' => 'tw',
+				'data-url' => Url::current(['month' => $monthNumber], true),
+				'data-title' => $shares[$monthNumber]->twitter,
 			]);?>
 			<?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
 				'class' => 'btn-share btn-odnoklassniki',
-				'data-type' => 'tw',
-				'data-url' => Url::current(['month' => $monthNumber]),
-				'data-title' => $shares[$monthNumber]->twitter,
-			]);?>
-			<?=Html::a('<i class="fa fa-vk"></i>', '', [
-				'class' => 'btn-share btn-vk',
 				'data-type' => 'ok',
-				'data-url' => Url::current(['month' => $monthNumber]),
+				'data-url' => Url::current(['month' => $monthNumber], true),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
 			<?=Html::a('<i class="fa fa-telegram"></i>', '', [
 				'class' => 'btn-share btn-telegram',
 				'data-type' => 'tg',
-				'data-url' => Url::current(['month' => $monthNumber]),
+				'data-url' => Url::current(['month' => $monthNumber], true),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
 		</div>

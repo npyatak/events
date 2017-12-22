@@ -4,7 +4,16 @@ use frontend\assets\PlayerAsset;
 PlayerAsset::register($this);
 ?>
 
-<div id="block-video-<?=$block->id;?>"></div>
+<div class="video-block">
+    <div class="video-wrap" id="block-video-<?=$block->id;?>"></div>
+    <div class="title-wrap">
+        <div class="container_inner">
+            <div class="row justify-content-end m-0">
+                <div class="video-title"><h5><?=$block->title;?></h5></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php
 $str = "'width': ".($block->width ? $block->width : "'100%'").",";
