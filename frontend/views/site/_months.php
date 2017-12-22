@@ -18,7 +18,7 @@ use common\models\Event;
 				'data-type' => 'fb',
 				'data-url' => Url::toRoute(['site/month', 'id' => $monthNumber], true),
 				'data-title' => $shares[$monthNumber]->title,
-				'data-image' => $shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image),
+				'data-image' => Url::to($shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image), true),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
 			<?=Html::a('<i class="fa fa-vk"></i>', '', [
@@ -26,7 +26,7 @@ use common\models\Event;
 				'data-type' => 'vk',
 				'data-url' => Url::current(['month' => $monthNumber], true),
 				'data-title' => $shares[$monthNumber]->title,
-				'data-image' => $shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image),
+				'data-image' => Url::to($shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image), true),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
 			<?=Html::a('<i class="fa fa-twitter"></i>', '', [
