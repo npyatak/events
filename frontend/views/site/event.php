@@ -95,16 +95,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'data-desc' => $desc,
                                 ]);?>
                             </div>
-                            <div class="share-wrap wrap-vk">
-                                <?=Html::a('<i class="fa fa-vk"></i>', '', [
-                                    'class' => 'share-btn share',
-                                    'data-type' => 'vk',
-                                    'data-url' => $url,
-                                    'data-title' => $title,
-                                    'data-image' => $image,
-                                    'data-desc' => $desc,
-                                ]);?>
-                            </div>
                             <div class="share-wrap wrap-tw">
                                 <?=Html::a('<i class="fa fa-twitter"></i>', '', [
                                     'class' => 'share-btn share',
@@ -118,6 +108,16 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'class' => 'share-btn share',
                                     'data-type' => 'ok',
                                     'data-url' => $url,
+                                    'data-desc' => $desc,
+                                ]);?>
+                            </div>
+                            <div class="share-wrap wrap-vk">
+                                <?=Html::a('<i class="fa fa-vk"></i>', '', [
+                                    'class' => 'share-btn share',
+                                    'data-type' => 'vk',
+                                    'data-url' => $url,
+                                    'data-title' => $title,
+                                    'data-image' => $image,
                                     'data-desc' => $desc,
                                 ]);?>
                             </div>

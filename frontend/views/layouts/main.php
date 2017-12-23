@@ -67,14 +67,6 @@ AppAsset::register($this);
                                 'data-image' => $this->params['share']['image'],
                                 'data-desc' => $this->params['share']['text'],
                             ]);?>
-                            <?=Html::a('<i class="fa fa-vk"></i>', '', [
-                                'class' => 'btn-share btn-vk share',
-                                'data-type' => 'vk',
-                                'data-url' => Url::canonical(),
-                                'data-title' => $this->params['share']['title'],
-                                'data-image' => $this->params['share']['image'],
-                                'data-desc' => $this->params['share']['text'],
-                            ]);?>
                             <?=Html::a('<i class="fa fa-twitter"></i>', '', [
                                 'class' => 'btn-share btn-twitter share',
                                 'data-type' => 'tw',
@@ -85,6 +77,14 @@ AppAsset::register($this);
                                 'class' => 'btn-share btn-odnoklassniki share',
                                 'data-type' => 'ok',
                                 'data-url' => Url::canonical(),
+                                'data-desc' => $this->params['share']['text'],
+                            ]);?>
+                            <?=Html::a('<i class="fa fa-vk"></i>', '', [
+                                'class' => 'btn-share btn-vk share',
+                                'data-type' => 'vk',
+                                'data-url' => Url::canonical(),
+                                'data-title' => $this->params['share']['title'],
+                                'data-image' => $this->params['share']['image'],
                                 'data-desc' => $this->params['share']['text'],
                             ]);?>
                             <?=Html::a('<i class="fa fa-telegram"></i>', '', [

@@ -21,14 +21,6 @@ use common\models\Event;
 				'data-image' => Url::to($shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image), true),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
-			<?=Html::a('<i class="fa fa-vk"></i>', '', [
-				'class' => 'btn-share btn-vk',
-				'data-type' => 'vk',
-				'data-url' => Url::current(['month' => $monthNumber], true),
-				'data-title' => $shares[$monthNumber]->title,
-				'data-image' => Url::to($shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image), true),
-				'data-desc' => $shares[$monthNumber]->text,
-			]);?>
 			<?=Html::a('<i class="fa fa-twitter"></i>', '', [
 				'class' => 'btn-share btn-twitter',
 				'data-type' => 'tw',
@@ -39,6 +31,14 @@ use common\models\Event;
 				'class' => 'btn-share btn-odnoklassniki',
 				'data-type' => 'ok',
 				'data-url' => Url::current(['month' => $monthNumber], true),
+				'data-desc' => $shares[$monthNumber]->text,
+			]);?>
+			<?=Html::a('<i class="fa fa-vk"></i>', '', [
+				'class' => 'btn-share btn-vk',
+				'data-type' => 'vk',
+				'data-url' => Url::current(['month' => $monthNumber], true),
+				'data-title' => $shares[$monthNumber]->title,
+				'data-image' => Url::to($shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image), true),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
 			<?=Html::a('<i class="fa fa-telegram"></i>', '', [

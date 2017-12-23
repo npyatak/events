@@ -86,7 +86,7 @@
 }
 .add-to-calendar a {
     white-space: nowrap;
-    color: #3c3c3c;
+    color: #190199;
 }
 .add-to-calendar-a i {
     display: none;
@@ -1672,7 +1672,7 @@ aside li a.active, aside li a:hover {
     transition: .3s;
     z-index: 2;
 }
-.grid-item_image:hover a {
+.grid-item:hover .grid-item_image a {
     opacity: .3;
 }
 .grid-item.w540-h620 .grid-item_desc {
@@ -1727,10 +1727,16 @@ aside li a.active, aside li a:hover {
     line-height: 25px;
 }
 .grid-item_desc h2 a {
+    display: inline-block;
     color: #262626;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
 }
-.grid-item_desc h2 a:hover {
-    color: #190199;
+.grid-item:hover .grid-item_desc h2 a {
+    color: inherit !important;
 }
 .grid-item_desc .link-arrow {
     position: absolute;
@@ -1781,13 +1787,13 @@ aside li a.active, aside li a:hover {
     transition: .2s;
     opacity: 0;
 }
-.grid-item_desc .link-arrow:hover i {
+.grid-item:hover .grid-item_desc .link-arrow i {
     color: #fff;
 }
-.grid-item_desc .link-arrow:hover .default {
+.grid-item:hover .grid-item_desc .link-arrow .default {
     opacity: 0;
 }
-.grid-item_desc .link-arrow:hover .hover {
+.grid-item:hover .grid-item_desc .link-arrow .hover {
     opacity: 1;
 }
 .grid-item.w540-h620 .link-arrow,
