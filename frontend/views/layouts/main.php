@@ -79,7 +79,7 @@ AppAsset::register($this);
                                 'class' => 'btn-share btn-twitter share',
                                 'data-type' => 'tw',
                                 'data-url' => Url::canonical(),
-                                'data-desc' => $this->params['share']['twitter'],
+                                'data-title' => $this->params['share']['twitter'],
                             ]);?>
                             <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
                                 'class' => 'btn-share btn-odnoklassniki share',

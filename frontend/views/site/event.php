@@ -94,7 +94,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'data-image' => $image,
                                     'data-desc' => $desc,
                                 ]);?>
-                                <span class="share-counter"></span>
                             </div>
                             <div class="share-wrap wrap-vk">
                                 <?=Html::a('<i class="fa fa-vk"></i>', '', [
@@ -105,7 +104,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'data-image' => $image,
                                     'data-desc' => $desc,
                                 ]);?>
-                                <span class="share-counter"></span>
                             </div>
                             <div class="share-wrap wrap-tw">
                                 <?=Html::a('<i class="fa fa-twitter"></i>', '', [
@@ -114,7 +112,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'data-url' => $url,
                                     'data-title' => $twitter,
                                 ]);?>
-                                <span class="share-counter"></span>
                             </div>
                             <div class="share-wrap wrap-ok">
                                 <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
@@ -123,7 +120,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'data-url' => $url,
                                     'data-desc' => $desc,
                                 ]);?>
-                                <span class="share-counter"></span>
                             </div>
                             <div class="share-wrap wrap-tg">
                                 <?=Html::a('<i class="fa fa-telegram"></i>', '', [
@@ -132,7 +128,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'data-url' => $url,
                                     'data-desc' => $title,
                                 ]);?>
-                                <span class="share-counter"></span>
                             </div>
                         </div>
 
@@ -257,18 +252,18 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
         $('.add-to-calendar div').hide();
     });
 
-    $(document).ready(function () {
-        $.ajax({
-            type: 'GET',
-            url: '".Url::toRoute(['site/share-counts', 'url' => $url])."',
-            success: function (data) {
-                data = eval('(' + data + ')');
-                $.each(data, function() {
-                    $('.wrap-'+this.soc).find('.share-counter').html(this.count)
-                })
-            },
-        });
-    });
+    // $(document).ready(function () {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: '".Url::toRoute(['site/share-counts', 'url' => $url])."',
+    //         success: function (data) {
+    //             data = eval('(' + data + ')');
+    //             $.each(data, function() {
+    //                 $('.wrap-'+this.soc).find('.share-counter').html(this.count)
+    //             })
+    //         },
+    //     });
+    // });
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
