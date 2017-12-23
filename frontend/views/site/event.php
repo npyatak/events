@@ -12,6 +12,7 @@ $url = Url::current([], true);
 $title = $event->socials_title ? $event->socials_title : $this->title;
 $desc = $event->socials_text;
 $image = $event->getImageUrl($event->socials_image_url);
+$twitter = $event->twitter_text ? $event->twitter_text : $this->title;
 
 $color = null;
 foreach ($event->categories as $cat) {
@@ -111,7 +112,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'class' => 'share-btn share',
                                     'data-type' => 'tw',
                                     'data-url' => $url,
-                                    'data-title' => $title,
+                                    'data-title' => $twitter,
                                 ]);?>
                                 <span class="share-counter"></span>
                             </div>
