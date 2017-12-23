@@ -73,7 +73,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
                         ]);?>
                     </li>
                     <li>
-                        <?=Html::a('<i class="fa fa-telegram"></i>', '', [
+                        <?=Html::a('<img src="/images/icons/telegram_blue.svg">', '', [
                             'class' => 'g-share-btn share',
                             'data-type' => 'tg',
                             'data-url' => Url::canonical(),

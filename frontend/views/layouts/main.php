@@ -87,7 +87,7 @@ AppAsset::register($this);
                                 'data-image' => $this->params['share']['image'],
                                 'data-desc' => $this->params['share']['text'],
                             ]);?>
-                            <?=Html::a('<i class="fa fa-telegram"></i>', '', [
+                            <?=Html::a('<img src="/images/icons/telegram_white.svg">', '', [
                                 'class' => 'btn-share btn-telegram share',
                                 'data-type' => 'tg',
                                 'data-url' => Url::canonical(),

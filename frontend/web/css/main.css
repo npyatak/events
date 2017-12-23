@@ -231,6 +231,18 @@
     border-radius: 50%;
     color: #fff;
 }
+.share-btn img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
 .share-btn:hover {
     color: #fff;
 }
@@ -1017,6 +1029,19 @@
     transition: opacity .2s, right .6s;
     opacity: 0;
 }
+.main-menu .main-menu_share-wrap .btn-share img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    margin-left: -1px;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
 .main-menu .main-menu_share-wrap .btn-share:not(:first-child) {
     margin-left: 15px;
 }
@@ -1274,6 +1299,19 @@ header .desc {
     -moz-border-radius: 50%;
     border-radius: 50%;
     background-color: #fff;
+}
+.g-share-btn img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    margin-left: -2px;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }
 .g-share-btn i {
     position: absolute;
@@ -1553,6 +1591,19 @@ aside li a.active, aside li a:hover {
     -ms-transition: opacity .2s, left .6s;
     -o-transition: opacity .2s, left .6s;
     transition: opacity .2s, left .6s;
+}
+.share-inline .btn-share img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    margin-left: -1px;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }
 .share-inline .btn-share.btn-facebook {
     left: -56px;
