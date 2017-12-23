@@ -1302,7 +1302,7 @@ header .desc {
 }
 .navigation.no-fixed {
     position: absolute;
-    bottom: 40px;
+    bottom: 50px;
 }
 .navigation ul {
     margin: 0;
@@ -1310,8 +1310,15 @@ header .desc {
     list-style: none;
 }
 .navigation li {
+    position: relative;
     margin-bottom: 45px;
     height: 6px;
+    width: 18px;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
 }
 .navigation li a {
     display: block;
@@ -1322,35 +1329,36 @@ header .desc {
     height: 6px;
     margin: 0 auto;
     background-color: #999;
-    -webkit-transition: .2s;
-    -moz-transition: .2s;
-    -ms-transition: .2s;
-    -o-transition: .2s;
-    transition: .2s;
 }
 .navigation li .month {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 2px;
     -moz-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     -o-transform: rotate(180deg);
+    transform: rotate(180deg);
     writing-mode: tb-rl;
     font: 14px 'ProximaNova-Bold', sans-serif;
     letter-spacing: 2px;
     text-transform: uppercase;
     opacity: 0;
-    z-index: -2;
-    height: 0;
-    width: 0;
+    /*z-index: -2;*/
+    /*height: 0;*/
+    /*width: 0;*/
     overflow: hidden;
     color: #1B00A1;
-    -webkit-transition: all .25s;
-    -moz-transition: all .25s;
-    -ms-transition: all .25s;
-    -o-transition: all .25s;
-    transition: all .25s;
+    -webkit-transition: all .15s;
+    -moz-transition: all .15s;
+    -ms-transition: all .15s;
+    -o-transition: all .15s;
+    transition: all .15s;
 }
-.navigation li.active {
-    height: auto;
+/*.navigation li.active {*/
+    /*height: auto;*/
+/*}*/
+.navigation li.active .month {
+    opacity: 1;
 }
 .navigation li.active span:nth-child(1) {
     -webkit-transform: scale(0);
@@ -1359,48 +1367,84 @@ header .desc {
     -o-transform: scale(0);
     transform: scale(0);
 }
-.navigation li.active .month {
-    width: auto;
-    z-index: 0;
-    overflow: visible;
-    opacity: 1;
-}
-.navigation li:nth-child(1).active .month {
+.navigation li:nth-child(1).active {
     height: 67.58px;
 }
-.navigation li:nth-child(2).active .month {
+.navigation li:nth-child(2).active {
     height: 79.67px;
 }
-.navigation li:nth-child(3).active .month {
+.navigation li:nth-child(3).active {
     height: 44px;
 }
-.navigation li:nth-child(4).active .month {
+.navigation li:nth-child(4).active {
     height: 67.69px;
 }
-.navigation li:nth-child(5).active .month {
+.navigation li:nth-child(5).active {
     height: 37.77px;
 }
-.navigation li:nth-child(6).active .month {
+.navigation li:nth-child(6).active {
     height: 51.78px;
 }
-.navigation li:nth-child(7).active .month {
+.navigation li:nth-child(7).active {
     height: 51.31px;
 }
-.navigation li:nth-child(8).active .month {
+.navigation li:nth-child(8).active {
     height: 65.38px;
 }
-.navigation li:nth-child(9).active .month {
+.navigation li:nth-child(9).active {
     height: 87.38px;
 }
-.navigation li:nth-child(10).active .month {
+.navigation li:nth-child(10).active {
     height: 76.98px;
 }
-.navigation li:nth-child(11).active .month {
+.navigation li:nth-child(11).active {
     height: 68.16px;
 }
-.navigation li:nth-child(12).active .month {
+.navigation li:nth-child(12).active {
     height: 77.27px;
 }
+/*.navigation li.active .month {*/
+    /*width: auto;*/
+    /*z-index: 0;*/
+    /*overflow: visible;*/
+    /*opacity: 1;*/
+/*}*/
+/*.navigation li:nth-child(1).active .month {*/
+    /*height: 67.58px;*/
+/*}*/
+/*.navigation li:nth-child(2).active .month {*/
+    /*height: 79.67px;*/
+/*}*/
+/*.navigation li:nth-child(3).active .month {*/
+    /*height: 44px;*/
+/*}*/
+/*.navigation li:nth-child(4).active .month {*/
+    /*height: 67.69px;*/
+/*}*/
+/*.navigation li:nth-child(5).active .month {*/
+    /*height: 37.77px;*/
+/*}*/
+/*.navigation li:nth-child(6).active .month {*/
+    /*height: 51.78px;*/
+/*}*/
+/*.navigation li:nth-child(7).active .month {*/
+    /*height: 51.31px;*/
+/*}*/
+/*.navigation li:nth-child(8).active .month {*/
+    /*height: 65.38px;*/
+/*}*/
+/*.navigation li:nth-child(9).active .month {*/
+    /*height: 87.38px;*/
+/*}*/
+/*.navigation li:nth-child(10).active .month {*/
+    /*height: 76.98px;*/
+/*}*/
+/*.navigation li:nth-child(11).active .month {*/
+    /*height: 68.16px;*/
+/*}*/
+/*.navigation li:nth-child(12).active .month {*/
+    /*height: 77.27px;*/
+/*}*/
 aside {
     position: fixed;
     width: 180px;
