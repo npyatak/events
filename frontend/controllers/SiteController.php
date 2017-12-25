@@ -173,7 +173,7 @@ class SiteController extends Controller
         foreach ($eventsArr as $m => $eIds) {
             foreach ($eIds as $eId) {
                 echo '<tr>';
-                $eventIds[] = $eId;
+                $eventIds[] = $eId['id'];
                 echo '<td>'.$eId['id'].'</td>'.
                     '<td>'.date('d.m.y', $eId['date']).'</td>'.
                     '<td>'.$eId['value_index'].'</td>'.
@@ -186,6 +186,7 @@ class SiteController extends Controller
 
 
         $eventKey = array_search($event->id, $eventIds);
+        echo 'eventKey: '.$eventKey.'<br>';
         if($eventKey !== null && isset($eventIds[$eventKey - 1])) {
             $prevEvent = Event::findOne($eventIds[$eventKey - 1]);
             echo '<br>';
