@@ -99,7 +99,6 @@ class SiteController extends Controller
         $lastDay = $date2->modify('last day of next month')->format('U');
 
         $query = Event::find()
-            ->select(['id', 'date'])
             ->where(['between', 'date', $firstDay, $lastDay])
             ->andWhere(['status' => Event::STATUS_ACTIVE])
             ->andWhere(['show_on_main' => 1])
@@ -109,14 +108,14 @@ class SiteController extends Controller
         $eventsArr = [];
 
         foreach ($query->all() as $e) {
-            $eventsArr[date('n', $e['date'])][] = $e['id'];
+            $eventsArr[date('n', $e['date'])][] = $e;
         }
 
         ksort($eventsArr);
         $eventIds = [];
         foreach ($eventsArr as $m => $eIds) {
             foreach ($eIds as $eId) {
-                $eventIds[] = $eId;
+                $eventIds[] = $eId['id'];
             }
         }
 
