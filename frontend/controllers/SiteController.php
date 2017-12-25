@@ -121,10 +121,10 @@ class SiteController extends Controller
         }
 
         $eventKey = array_search($event->id, $eventIds);
-        if($eventKey && isset($eventIds[$eventKey - 1])) {
+        if($eventKey !== null && isset($eventIds[$eventKey - 1])) {
             $prevEvent = Event::findOne($eventIds[$eventKey - 1]);
         }
-        if($eventKey && isset($eventIds[$eventKey + 1])) {
+        if($eventKey !== null && isset($eventIds[$eventKey + 1])) {
             $nextEvent = Event::findOne($eventIds[$eventKey + 1]);
         }
 
