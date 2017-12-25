@@ -135,6 +135,71 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionTest($alias) {
+        $event = $this->findEvent($alias);
+        $nextEvent = null;
+        $prevEvent = null;
+
+        $date = new \DateTime;
+        $date->setTimestamp($event->date);
+        $date2 = clone $date;
+        $firstDay = $date->modify('first day of last month')->format('U');
+        $lastDay = $date2->modify('last day of next month')->format('U');
+
+        $query = Event::find()
+            //->select(['id', 'date'])
+            ->where(['between', 'date', $firstDay, $lastDay])
+            ->andWhere(['status' => Event::STATUS_ACTIVE])
+            ->andWhere(['show_on_main' => 1])
+            ->orderBy('value_index DESC, date ASC')
+            ->asArray();
+
+        $eventsArr = [];
+
+        foreach ($query->all() as $e) {
+            $eventsArr[date('n', $e['date'])][] = $e;
+        }
+
+        ksort($eventsArr);
+        $eventIds = [];
+        echo '<table>';
+        echo '<tr>
+        <td>ID</td>
+        <td>Дата</td>
+        <td>Индекс</td>
+        <td>Алиас</td>
+        <td>Заголовок</td>
+        </tr>';
+        foreach ($eventsArr as $m => $eIds) {
+            foreach ($eIds as $eId) {
+                echo '<tr>';
+                $eventIds[] = $eId;
+                echo '<td>'.$eId['id'].'</td>'.
+                    '<td>'.date('d.m.y', $eId['date']).'</td>'.
+                    '<td>'.$eId['value_index'].'</td>'.
+                    '<td>'.$eId['alias'].'</td>'.
+                    '<td>'.$eId['title'].'</td>';
+                echo '</tr>';
+            }
+        }
+        echo '</table>';
+        exit;
+
+        $eventKey = array_search($event->id, $eventIds);
+        if($eventKey !== null && isset($eventIds[$eventKey - 1])) {
+            $prevEvent = Event::findOne($eventIds[$eventKey - 1]);
+        }
+        if($eventKey !== null && isset($eventIds[$eventKey + 1])) {
+            $nextEvent = Event::findOne($eventIds[$eventKey + 1]);
+        }
+
+        return $this->render('event', [
+            'event' => $event,
+            'nextEvent' => $nextEvent,
+            'prevEvent' => $prevEvent,
+        ]);
+    }
+
     public function actionGc($alias) {
         $event = $this->findEvent($alias);
         /*https://calendar.google.com/calendar/render?action=TEMPLATE
