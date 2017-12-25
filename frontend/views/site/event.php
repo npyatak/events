@@ -122,7 +122,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                 ]);?>
                             </div>
                             <div class="share-wrap wrap-tg">
-                                <?=Html::a('<i class="fa fa-telegram"></i>', '', [
+                                <?=Html::a('<img src="/images/icons/telegram_white.svg">', '', [
                                     'class' => 'share-btn share',
                                     'data-type' => 'tg',
                                     'data-url' => $url,

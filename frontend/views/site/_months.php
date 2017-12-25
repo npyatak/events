@@ -41,7 +41,7 @@ use common\models\Event;
 				'data-image' => Url::to($shares[$monthNumber]->getImageUrl($shares[$monthNumber]->image), true),
 				'data-desc' => $shares[$monthNumber]->text,
 			]);?>
-			<?=Html::a('<i class="fa fa-telegram"></i>', '', [
+			<?=Html::a('<img src="/images/icons/telegram_white.svg">', '', [
 				'class' => 'btn-share btn-telegram',
 				'data-type' => 'tg',
 				'data-url' => Url::current(['month' => $monthNumber], true),
