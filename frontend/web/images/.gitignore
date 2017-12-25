@@ -1,6 +1,6 @@
 *
 !.gitignore
 !error/
-!icons/*
+!icons/
 !logo/
 !zoom/
