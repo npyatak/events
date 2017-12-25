@@ -23,7 +23,7 @@ foreach ($event->categories as $cat) {
 }
 
 $this->registerMetaTag(['property' => 'og:description', 'content' => $desc], 'og:description');
-$this->registerMetaTag(['property' => 'og:title', 'content' => $this->title], 'og:title');
+$this->registerMetaTag(['property' => 'og:title', 'content' => $title], 'og:title');
 $this->registerMetaTag(['property' => 'og:image', 'content' => $image], 'og:image');
 $this->registerMetaTag(['property' => 'og:url', 'content' => $url], 'og:url');
 $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
