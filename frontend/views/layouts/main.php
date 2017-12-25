@@ -133,7 +133,9 @@ AppAsset::register($this);
                             <h6>Благодарности:</h6>                         
                             <?=Yii::$app->settings->get('gratitude');?>
                         </div>
-                        <?=Yii::$app->settings->get('additional');?>
+                        <div class="block">
+                            <?=Yii::$app->settings->get('additional');?>
+                        </div>
                     </div>
                 </div>
             </div>

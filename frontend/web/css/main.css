@@ -965,7 +965,7 @@
     box-shadow: 0 0 12px 0 rgba(0,0,0,.13);
 }
 .main-menu.bg-white .logo a {
-    background: url('../images/logo/tass-logo-blue.svg') no-repeat center;
+    background: url('../images/logo/Tass_logo__blui_rus.svg') no-repeat center;
     -webkit-background-size: contain;
     background-size: contain;
 }
@@ -988,7 +988,7 @@
     display: block;
     width: 60px;
     height: 60px;
-    background: url('../images/logo/tass-logo-white.svg') no-repeat center;
+    background: url('../images/logo/Tass_logo__white_rus.svg') no-repeat center;
     -webkit-background-size: contain;
     background-size: contain;
     -webkit-transition: .3s;
@@ -1381,108 +1381,61 @@ header .desc {
     letter-spacing: 2px;
     text-transform: uppercase;
     opacity: 0;
-    /*z-index: -2;*/
-    /*height: 0;*/
-    /*width: 0;*/
     overflow: hidden;
     color: #1B00A1;
-    -webkit-transition: all .15s;
-    -moz-transition: all .15s;
-    -ms-transition: all .15s;
-    -o-transition: all .15s;
-    transition: all .15s;
+    -webkit-transition: all .1s;
+    -moz-transition: all .1s;
+    -ms-transition: all .1s;
+    -o-transition: all .1s;
+    transition: all .1s;
 }
-/*.navigation li.active {*/
-    /*height: auto;*/
-/*}*/
 .navigation li.active .month {
+    -webkit-transition: all .4s .25s;
+    -moz-transition: all .4s .25s;
+    -ms-transition: all .4s .25s;
+    -o-transition: all .4s .25s;
+    transition: all .4s .25s;
     opacity: 1;
 }
 .navigation li.active span:nth-child(1) {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-    -ms-transform: scale(0);
-    -o-transform: scale(0);
-    transform: scale(0);
+    display: none;
 }
 .navigation li:nth-child(1).active {
-    height: 67.58px;
+    margin-bottom: 95px;
 }
 .navigation li:nth-child(2).active {
-    height: 79.67px;
+    margin-bottom: 110px;
 }
 .navigation li:nth-child(3).active {
-    height: 44px;
+    margin-bottom: 75px;
 }
 .navigation li:nth-child(4).active {
-    height: 67.69px;
+    margin-bottom: 100px;
 }
 .navigation li:nth-child(5).active {
-    height: 37.77px;
+    margin-bottom: 70px;
 }
 .navigation li:nth-child(6).active {
-    height: 51.78px;
+    margin-bottom: 85px;
 }
 .navigation li:nth-child(7).active {
-    height: 51.31px;
+    margin-bottom: 85px;
 }
 .navigation li:nth-child(8).active {
-    height: 65.38px;
+    margin-bottom: 95px;
 }
 .navigation li:nth-child(9).active {
-    height: 87.38px;
+    margin-bottom: 120px;
 }
 .navigation li:nth-child(10).active {
-    height: 76.98px;
+    margin-bottom: 110px;
 }
 .navigation li:nth-child(11).active {
-    height: 68.16px;
+    margin-bottom: 95px;
 }
 .navigation li:nth-child(12).active {
-    height: 77.27px;
+    margin-bottom: 100px;
 }
-/*.navigation li.active .month {*/
-    /*width: auto;*/
-    /*z-index: 0;*/
-    /*overflow: visible;*/
-    /*opacity: 1;*/
-/*}*/
-/*.navigation li:nth-child(1).active .month {*/
-    /*height: 67.58px;*/
-/*}*/
-/*.navigation li:nth-child(2).active .month {*/
-    /*height: 79.67px;*/
-/*}*/
-/*.navigation li:nth-child(3).active .month {*/
-    /*height: 44px;*/
-/*}*/
-/*.navigation li:nth-child(4).active .month {*/
-    /*height: 67.69px;*/
-/*}*/
-/*.navigation li:nth-child(5).active .month {*/
-    /*height: 37.77px;*/
-/*}*/
-/*.navigation li:nth-child(6).active .month {*/
-    /*height: 51.78px;*/
-/*}*/
-/*.navigation li:nth-child(7).active .month {*/
-    /*height: 51.31px;*/
-/*}*/
-/*.navigation li:nth-child(8).active .month {*/
-    /*height: 65.38px;*/
-/*}*/
-/*.navigation li:nth-child(9).active .month {*/
-    /*height: 87.38px;*/
-/*}*/
-/*.navigation li:nth-child(10).active .month {*/
-    /*height: 76.98px;*/
-/*}*/
-/*.navigation li:nth-child(11).active .month {*/
-    /*height: 68.16px;*/
-/*}*/
-/*.navigation li:nth-child(12).active .month {*/
-    /*height: 77.27px;*/
-/*}*/
 aside {
     position: fixed;
     width: 180px;
