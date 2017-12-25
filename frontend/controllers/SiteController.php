@@ -183,15 +183,20 @@ class SiteController extends Controller
             }
         }
         echo '</table>';
-        exit;
+
 
         $eventKey = array_search($event->id, $eventIds);
         if($eventKey !== null && isset($eventIds[$eventKey - 1])) {
             $prevEvent = Event::findOne($eventIds[$eventKey - 1]);
+            echo '<br>';
+            echo 'prev: '.$prevEvent->id;
         }
         if($eventKey !== null && isset($eventIds[$eventKey + 1])) {
             $nextEvent = Event::findOne($eventIds[$eventKey + 1]);
+            echo '<br>';
+            echo 'next: '.$nextEvent->id;
         }
+        exit;
 
         return $this->render('event', [
             'event' => $event,
