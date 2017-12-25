@@ -89,15 +89,44 @@ class SiteController extends Controller
 
     public function actionEvent($alias) {
         $event = $this->findEvent($alias);
+        $nextEvent = null;
+        $prevEvent = null;
 
         $date = new \DateTime;
         $date->setTimestamp($event->date);
         $date2 = clone $date;
-        $firstDay = $date->modify('first day of previous month')->format('U');
+        $firstDay = $date->modify('first day of last month')->format('U');
         $lastDay = $date2->modify('last day of next month')->format('U');
 
-        $nextEvent = Event::find()->where(['>', 'date', $event->date])->andWhere(['<', 'date', $lastDay])->orderBy('value_index DESC, date ASC')->one();
-        $prevEvent = Event::find()->where(['>', 'date', $firstDay])->andWhere(['<', 'date', $event->date])->orderBy('value_index DESC, date DESC')->one();
+        $query = Event::find()
+            ->select(['id', 'date'])
+            ->where(['between', 'date', $firstDay, $lastDay])
+            ->andWhere(['status' => Event::STATUS_ACTIVE])
+            ->andWhere(['show_on_main' => 1])
+            ->orderBy('value_index DESC')
+            ->asArray();
+
+        $eventsArr = [];
+
+        foreach ($query->all() as $e) {
+            $eventsArr[date('n', $e['date'])][] = $e['id'];
+        }
+
+        ksort($eventsArr);
+        $eventIds = [];
+        foreach ($eventsArr as $m => $eIds) {
+            foreach ($eIds as $eId) {
+                $eventIds[] = $eId;
+            }
+        }
+
+        $eventKey = array_search($event->id, $eventIds);
+        if($eventKey && isset($eventIds[$eventKey - 1])) {
+            $prevEvent = Event::findOne($eventIds[$eventKey - 1]);
+        }
+        if($eventKey && isset($eventIds[$eventKey + 1])) {
+            $nextEvent = Event::findOne($eventIds[$eventKey + 1]);
+        }
 
         return $this->render('event', [
             'event' => $event,

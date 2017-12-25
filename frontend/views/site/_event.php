@@ -16,7 +16,7 @@ foreach ($event->categories as $cat) {
 	}
 	$classes[] = 'cat_'.$cat->alias;
 }
-if($category && !in_array($category, $classes)) {
+if($category && !in_array('cat_'.$category, $classes)) {
 	$classes[] = 'inactive';
 }
 ?>
