@@ -1,8 +1,8 @@
 <div class="event-quote">
     <div class="quote-inner m-r-40">
-        <p class="quote">
+        <div class="quote">
             <?=$block->text;?>
-        </p>
+        </div>
         <div class="quote-author m-0 row justify-content-start align-items-center">
             <div class="image" style="background-image:url(<?=$block->getImageUrl($block->author_image, '75x75');?>)"></div>
             <div class="desc">

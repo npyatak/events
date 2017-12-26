@@ -27,9 +27,6 @@ $(document).ready(function () {
 
 
     function owl_carousel_page_numbers(e){
-
-        //if (!e.namespace || e.property.name != 'position') return;
-        //console.log('work');
         var items_per_page = e.page.size;
 
         if (items_per_page > 1){
@@ -63,8 +60,7 @@ $(document).ready(function () {
 
     $(window).resize(function () {
         var owl_img_height = $('.owl-carousel .owl-item:first-child').find('.image').height();
-        $('#info').css({top:owl_img_height})
-        console.log(owl_img_height)
+        $('#info').css({top:owl_img_height});
     });
     $(window).trigger('resize');
 

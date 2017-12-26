@@ -33,7 +33,7 @@ use common\models\blocks\items\BlockFactItem;
                         </div>
                     </div>
                     <div class="more-other">
-                        <span class="more-btn-other show">
+                        <span class="more-btn-other show" data-text="<?=$item->link;?>">
                             <span class="more-text"><?=$item->link;?></span>
                             <i class="fa fa-chevron-right"></i>
                         </span>
@@ -52,10 +52,12 @@ $script = "
             .on('click','.block_fact .show',function () {
                 $(this).parent().parent().find('.hidden').slideDown(500);
                 $(this).toggleClass('show hide rotate');
+                $(this).find('.more-text').html('Свернуть');
             })
             .on('click','.block_fact .hide',function () {
                 $(this).parent().parent().find('.hidden').slideUp(500);
                 $(this).toggleClass('show hide rotate');
+                $(this).find('.more-text').html($(this).data('text'));
             });
     });
 ";?>

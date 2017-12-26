@@ -55,16 +55,47 @@ AppAsset::register($this);
                 <div class="logo"><a href="<?=Yii::$app->settings->get('logoUrl');?>" target="_blank"></a></div>
                 <div class="main-slogan"><h2><a href="<?=Url::home();?>"><?=$title;?></a></h2></div>
                 <div class="right">
+                    <?php if(Yii::$app->controller->action->id == 'index'):?>
                     <div class="main-menu_share">
                         <span class="main-share_btn"><i class="ion-android-share"></i></span>
                         <div class="main-menu_share-wrap">
-                            <a class="btn-share btn-facebook" href=""><i class="fa fa-facebook"></i></a>
-                            <a class="btn-share btn-twitter" href=""><i class="fa fa-twitter"></i></a>
-                            <a class="btn-share btn-odnoklassniki" href=""><i class="fa fa-odnoklassniki"></i></a>
-                            <a class="btn-share btn-vk" href=""><i class="fa fa-vk"></i></a>
-                            <a class="btn-share btn-telegram" href=""><i class="fa fa-telegram"></i></a>
+                            <?=Html::a('<i class="fa fa-facebook"></i>', '', [
+                                'class' => 'btn-share btn-facebook share',
+                                'data-type' => 'fb',
+                                'data-url' => Url::canonical(),
+                                'data-title' => $this->params['share']['title'],
+                                'data-image' => $this->params['share']['image'],
+                                'data-desc' => $this->params['share']['text'],
+                            ]);?>
+                            <?=Html::a('<i class="fa fa-twitter"></i>', '', [
+                                'class' => 'btn-share btn-twitter share',
+                                'data-type' => 'tw',
+                                'data-url' => Url::canonical(),
+                                'data-title' => $this->params['share']['twitter'],
+                            ]);?>
+                            <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
+                                'class' => 'btn-share btn-odnoklassniki share',
+                                'data-type' => 'ok',
+                                'data-url' => Url::canonical(),
+                                'data-desc' => $this->params['share']['text'],
+                            ]);?>
+                            <?=Html::a('<i class="fa fa-vk"></i>', '', [
+                                'class' => 'btn-share btn-vk share',
+                                'data-type' => 'vk',
+                                'data-url' => Url::canonical(),
+                                'data-title' => $this->params['share']['title'],
+                                'data-image' => $this->params['share']['image'],
+                                'data-desc' => $this->params['share']['text'],
+                            ]);?>
+                            <?=Html::a('<img src="/images/icons/telegram_white.svg">', '', [
+                                'class' => 'btn-share btn-telegram share',
+                                'data-type' => 'tg',
+                                'data-url' => Url::canonical(),
+                                'data-desc' => $this->params['share']['text'],
+                            ]);?>
                         </div>
                     </div>
+                    <?php endif;?>
                     <div class="main-menu_btn"></div>
                 </div>
             </div>
@@ -98,7 +129,13 @@ AppAsset::register($this);
                         </div>
                     </div>
                     <div class="col-3">
-                        <?=Yii::$app->settings->get('gratitude');?>
+                        <div class="block">
+                            <h6>Благодарности:</h6>                         
+                            <?=Yii::$app->settings->get('gratitude');?>
+                        </div>
+                        <div class="block">
+                            <?=Yii::$app->settings->get('additional');?>
+                        </div>
                     </div>
                 </div>
             </div>

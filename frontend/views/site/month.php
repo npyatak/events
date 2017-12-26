@@ -19,8 +19,14 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 	<div class="masonry-items">
 		<?php if(isset($events)):?>
 			<?php foreach ($events as $event) {
-				echo $this->render('_event', ['event' => $event, 'category' => $category]);
+				//echo $this->render('_event', ['event' => $event, 'category' => $category]);
 			}?>
 		<?php endif;?>
 	</div>
 </div>
+
+<?php $script = "
+    window.location.href = '".Url::home()."';
+";
+
+$this->registerJs($script, yii\web\View::POS_END);?>

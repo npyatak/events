@@ -233,7 +233,7 @@ class Event extends \yii\db\ActiveRecord
 
     public function getImageUrl($image, $thumb_size = false) {
         if(is_file($this->imageSrcPath.$image)) {
-            return $image;
+            return Url::toRoute($image, true);
         } else {
             return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
         }

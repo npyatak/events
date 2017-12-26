@@ -4,10 +4,15 @@ use frontend\assets\PlayerAsset;
 PlayerAsset::register($this);
 ?>
 
-<div class="row justify-content-end m-0">
-	<div class="m-r-40">
-		<div id="block-video-<?=$block->id;?>"></div>
-	</div>
+<div class="video-block">
+    <div class="video-wrap" id="block-video-<?=$block->id;?>"></div>
+    <div class="title-wrap">
+        <div class="container_inner">
+            <div class="row justify-content-end m-0">
+                <div class="video-title"><h5><?=$block->title;?></h5></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php
