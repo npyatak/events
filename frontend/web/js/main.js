@@ -150,7 +150,10 @@ function getShareUrl(obj) {
         url += '&url='      + encodeURIComponent(obj.data('url'));
         url += '&counturl=' + encodeURIComponent(obj.data('url'));
     } else if(obj.data('type') == 'tg') {
-        url  = 'https://t.me/share/url?url=https://telegram.wiki';
+        url  = 'https://telegram.me/share/url?';
+        url += 'text='      + encodeURIComponent(obj.data('title'));
+        url += '&url='      + encodeURIComponent(obj.data('url'));
+        url += '&counturl=' + encodeURIComponent(obj.data('url'));
     }
 
     return url;

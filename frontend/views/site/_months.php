@@ -45,7 +45,7 @@ use common\models\Event;
 				'class' => 'btn-share btn-telegram',
 				'data-type' => 'tg',
 				'data-url' => Url::current(['month' => $monthNumber], true),
-				'data-desc' => $shares[$monthNumber]->text,
+				'data-title' => $shares[$monthNumber]->title,
 			]);?>
 		</div>
 	</div>

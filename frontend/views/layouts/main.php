@@ -91,7 +91,7 @@ AppAsset::register($this);
                                 'class' => 'btn-share btn-telegram share',
                                 'data-type' => 'tg',
                                 'data-url' => Url::canonical(),
-                                'data-desc' => $this->params['share']['text'],
+                                'data-title' => $this->params['share']['title'],
                             ]);?>
                         </div>
                     </div>

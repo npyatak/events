@@ -8,3 +8,6 @@
 7) Создать базу данных и прописать ее в конфиге: /common/config/main-local.php
 8) php yii migrate
 9) php yii fixture/load "*" - для загрузки тестовых данных.
+
+Библиотеки:
+imagick

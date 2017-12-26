@@ -8,15 +8,15 @@ use common\models\blocks\items\BlockFactItem;
         <?php if($block->title):?>
             <div class="title"><?=$block->title;?></div>
         <?php endif;?>
-        <?php foreach ($block->blockFactItems as $item):?>
+        <?php foreach ($block->blockFactItems as $key => $item):?>
             <?php $style = ''; $class = '';
-            if(!$item->border_top) {
+            if(!$item->border_top && $key != 0) {
                 $style .= 'border-top: none; padding-top: 0;';
             }
             if(!$item->border_bottom) {
                 $style .= 'border-bottom: none; padding-bottom: 0;';
             } ?>
-            <div class="item sm" <?=$style != '' ? 'style="'.$style.'"' : '';?>>
+            <div class="item <?=$item->type == BlockFactItem::TYPE_TOP ? 'lg' : 'sm';?>" <?=$style != '' ? 'style="'.$style.'"' : '';?>>
                 <div class="row m-0">
                     <div class="number <?=$item->type == BlockFactItem::TYPE_TOP ? 'with-text' : '';?>">
                         <?=$item->number;?>
