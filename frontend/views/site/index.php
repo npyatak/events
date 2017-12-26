@@ -77,7 +77,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
                             'class' => 'g-share-btn share',
                             'data-type' => 'tg',
                             'data-url' => Url::canonical(),
-                            'data-desc' => $shares[0]->text,
+                            'data-title' => $shares[0]->title,
                         ]);?>
                     </li>
 				</ul>

@@ -33,7 +33,13 @@ $(document).ready(function () {
     $('.scroll-month').click(function (e) {
         e.preventDefault();
         var target = $(this).attr('href');
-        if($(this).hasClass('month_1')){
+        scrollToMonth($target, 'month_1');
+        // $('.navigation li').removeClass('active');
+        // $(this).parent().addClass('active');
+    });
+
+    function scrollToMonth(target, hasClass) {
+        if(typeof hasClass !== 'undefined'){
             $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
         }else{
             if($(window).scrollTop() <= 0){
@@ -42,10 +48,25 @@ $(document).ready(function () {
                 $('html, body').animate({scrollTop:($(target).offset().top - 120)},500);
             }
         }
-        // $('.navigation li').removeClass('active');
-        // $(this).parent().addClass('active');
-    });
-    
+    }
+
+    var monthId = GetURLParameter('month');
+    if(typeof monthId !== 'undefined') {
+        scrollToMonth('#month_'+monthId);
+    }
+
+    function GetURLParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+                return sParameterName[1];
+            }
+        }
+    }
+
     $('.share-inline_btn').click(function () {
         $(this).toggleClass('rotate');    
         $(this).find('i').toggleClass('ion-android-share ion-android-close');

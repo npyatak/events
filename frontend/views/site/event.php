@@ -126,7 +126,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     'class' => 'share-btn share',
                                     'data-type' => 'tg',
                                     'data-url' => $url,
-                                    'data-desc' => $title,
+                                    'data-title' => $title,
                                 ]);?>
                             </div>
                         </div>
