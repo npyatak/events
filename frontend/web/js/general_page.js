@@ -33,7 +33,7 @@ $(document).ready(function () {
     $('.scroll-month').click(function (e) {
         e.preventDefault();
         var target = $(this).attr('href');
-        scrollToMonth($target, 'month_1');
+        scrollToMonth(target, 'month_1');
         // $('.navigation li').removeClass('active');
         // $(this).parent().addClass('active');
     });
