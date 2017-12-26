@@ -39,7 +39,7 @@ $(document).ready(function () {
     });
 
     function scrollToMonth(target, hasClass) {
-        if(typeof hasClass !== 'undefined'){
+        if(typeof hasClass == 'undefined'){
             $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
         }else{
             if($(window).scrollTop() <= 0){
