@@ -59,39 +59,11 @@ AppAsset::register($this);
                     <div class="main-menu_share">
                         <span class="main-share_btn"><i class="ion-android-share"></i></span>
                         <div class="main-menu_share-wrap">
-                            <?=Html::a('<i class="fa fa-facebook"></i>', '', [
-                                'class' => 'btn-share btn-facebook share',
-                                'data-type' => 'fb',
-                                'data-url' => Url::canonical(),
-                                'data-title' => $this->params['share']['title'],
-                                'data-image' => $this->params['share']['image'],
-                                'data-desc' => $this->params['share']['text'],
-                            ]);?>
-                            <?=Html::a('<i class="fa fa-twitter"></i>', '', [
-                                'class' => 'btn-share btn-twitter share',
-                                'data-type' => 'tw',
-                                'data-url' => Url::canonical(),
-                                'data-title' => $this->params['share']['twitter'],
-                            ]);?>
-                            <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
-                                'class' => 'btn-share btn-odnoklassniki share',
-                                'data-type' => 'ok',
-                                'data-url' => Url::canonical(),
-                                'data-desc' => $this->params['share']['text'],
-                            ]);?>
-                            <?=Html::a('<i class="fa fa-vk"></i>', '', [
-                                'class' => 'btn-share btn-vk share',
-                                'data-type' => 'vk',
-                                'data-url' => Url::canonical(),
-                                'data-title' => $this->params['share']['title'],
-                                'data-image' => $this->params['share']['image'],
-                                'data-desc' => $this->params['share']['text'],
-                            ]);?>
-                            <?=Html::a('<img src="/images/icons/telegram_white.svg">', '', [
-                                'class' => 'btn-share btn-telegram share',
-                                'data-type' => 'tg',
-                                'data-url' => Url::canonical(),
-                                'data-title' => $this->params['share']['title'],
+                            <?php $this->params['share']['url'] = Url::canonical();?>
+                            <?= \frontend\widgets\share\ShareWidget::widget([
+                                'share' => $this->params['share'],
+                                'itemClass' => 'btn-share share',
+                                'addItemClasses' => ['fb' => 'btn-facebook', 'tw' => 'btn-twitter', 'ok' => 'btn-odnoklassniki', 'vk' => 'btn-vk', 'tg' => 'btn-telegram']
                             ]);?>
                         </div>
                     </div>

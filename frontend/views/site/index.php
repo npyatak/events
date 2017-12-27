@@ -36,50 +36,18 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 <!--			</div>-->
 			<div class="general_share">
 				<ul>
-					<li>
-                        <?=Html::a('<i class="fa fa-facebook"></i>', '', [
-                            'class' => 'g-share-btn share',
-                            'data-type' => 'fb',
-                            'data-url' => Url::canonical(),
-                            'data-title' => $shares[0]->title,
-                            'data-image' => $image,
-                            'data-desc' => $shares[0]->text,
-                        ]);?>
-                    </li>
-                    <li>
-                        <?=Html::a('<i class="fa fa-vk"></i>', '', [
-                            'class' => 'g-share-btn share',
-                            'data-type' => 'vk',
-                            'data-url' => Url::canonical(),
-                            'data-title' => $shares[0]->title,
-                            'data-image' => $image,
-                            'data-desc' => $shares[0]->text,
-                        ]);?>
-                    </li>
-                    <li>
-                        <?=Html::a('<i class="fa fa-twitter"></i>', '', [
-                            'class' => 'g-share-btn share',
-                            'data-type' => 'tw',
-                            'data-url' => Url::canonical(),
-                            'data-title' => $shares[0]->twitter,
-                        ]);?>
-                    </li>
-                    <li>
-                        <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
-                            'class' => 'g-share-btn share',
-                            'data-type' => 'ok',
-                            'data-url' => Url::canonical(),
-                            'data-desc' => $shares[0]->text,
-                        ]);?>
-                    </li>
-                    <li>
-                        <?=Html::a('<img src="/images/icons/telegram_blue.svg">', '', [
-                            'class' => 'g-share-btn share',
-                            'data-type' => 'tg',
-                            'data-url' => Url::canonical(),
-                            'data-title' => $shares[0]->title,
-                        ]);?>
-                    </li>
+                    <?php $share = [
+                        'title' => $shares[0]->title,
+                        'text' => $shares[0]->text,
+                        'twitter' => $shares[0]->twitter,
+                        'image' => $image, 
+                        'url' => Url::canonical()
+                    ];?>
+                    <?= \frontend\widgets\share\ShareWidget::widget([
+                        'share' => $share,
+                        'wrap' => 'li',
+                        'itemClass' => 'g-share-btn share',
+                    ]);?>
 				</ul>
 			</div>
 		</div>

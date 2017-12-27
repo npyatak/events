@@ -8,11 +8,11 @@ $this->registerJsFile(Url::toRoute('js/event.js'), ['depends' => [\yii\web\Jquer
 
 $this->title = $event->title;
 
-$url = Url::current([], true);
-$title = $event->socials_title ? $event->socials_title : $this->title;
-$desc = $event->socials_text;
-$image = $event->getImageUrl($event->socials_image_url);
-$twitter = $event->twitter_text ? $event->twitter_text : $this->title;
+$share['url'] = Url::current([], true);
+$share['title'] = $event->socials_title ? $event->socials_title : $this->title;
+$share['text'] = $event->socials_text;
+$share['image'] = $event->getImageUrl($event->socials_image_url);
+$share['twitter'] = $event->twitter_text ? $event->twitter_text : $this->title;
 
 $color = null;
 foreach ($event->categories as $cat) {
@@ -22,10 +22,10 @@ foreach ($event->categories as $cat) {
     $classes[] = 'cat_'.$cat->alias;
 }
 
-$this->registerMetaTag(['property' => 'og:description', 'content' => $desc], 'og:description');
-$this->registerMetaTag(['property' => 'og:title', 'content' => $title], 'og:title');
-$this->registerMetaTag(['property' => 'og:image', 'content' => $image], 'og:image');
-$this->registerMetaTag(['property' => 'og:url', 'content' => $url], 'og:url');
+$this->registerMetaTag(['property' => 'og:description', 'content' => $share['text']], 'og:description');
+$this->registerMetaTag(['property' => 'og:title', 'content' => $share['title']], 'og:title');
+$this->registerMetaTag(['property' => 'og:image', 'content' => $share['image']], 'og:image');
+$this->registerMetaTag(['property' => 'og:url', 'content' => $share['url']], 'og:url');
 $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
 ?>
 
@@ -85,50 +85,13 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                     </div>
                     <div class="event-inner">
                         <div class="share-block">
-                            <div class="share-wrap wrap-fb">
-                                <?=Html::a('<i class="fa fa-facebook"></i>', '', [
-                                    'class' => 'share-btn share',
-                                    'data-type' => 'fb',
-                                    'data-url' => $url,
-                                    'data-title' => $title,
-                                    'data-image' => $image,
-                                    'data-desc' => $desc,
-                                ]);?>
-                            </div>
-                            <div class="share-wrap wrap-tw">
-                                <?=Html::a('<i class="fa fa-twitter"></i>', '', [
-                                    'class' => 'share-btn share',
-                                    'data-type' => 'tw',
-                                    'data-url' => $url,
-                                    'data-title' => $twitter,
-                                ]);?>
-                            </div>
-                            <div class="share-wrap wrap-ok">
-                                <?=Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
-                                    'class' => 'share-btn share',
-                                    'data-type' => 'ok',
-                                    'data-url' => $url,
-                                    'data-desc' => $desc,
-                                ]);?>
-                            </div>
-                            <div class="share-wrap wrap-vk">
-                                <?=Html::a('<i class="fa fa-vk"></i>', '', [
-                                    'class' => 'share-btn share',
-                                    'data-type' => 'vk',
-                                    'data-url' => $url,
-                                    'data-title' => $title,
-                                    'data-image' => $image,
-                                    'data-desc' => $desc,
-                                ]);?>
-                            </div>
-                            <div class="share-wrap wrap-tg">
-                                <?=Html::a('<img src="/images/icons/telegram_white.svg">', '', [
-                                    'class' => 'share-btn share',
-                                    'data-type' => 'tg',
-                                    'data-url' => $url,
-                                    'data-title' => $title,
-                                ]);?>
-                            </div>
+                            <?= \frontend\widgets\share\ShareWidget::widget([
+                                'share' => $share,
+                                'wrap' => 'div',
+                                'wrapClass' => 'share-wrap',
+                                'itemWrapClass' => 'wrap-',
+                                'itemClass' => 'share-btn share',
+                            ]);?>
                         </div>
 
                         <div class="block_content">
@@ -150,21 +113,13 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="share-block">
-                                            <div class="share-wrap">
-                                                <a href="" class="share-btn btn-facebook"><i class="fa fa-facebook"></i></a>
-                                            </div>
-                                            <div class="share-wrap">
-                                                <a href="" class="share-btn btn-twitter"><i class="fa fa-twitter"></i></a>
-                                            </div>
-                                            <div class="share-wrap">
-                                                <a href="" class="share-btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i></a>
-                                            </div>
-                                            <div class="share-wrap">
-                                                <a href="" class="share-btn btn-vk"><i class="fa fa-vk"></i></a>
-                                            </div>
-                                            <div class="share-wrap">
-                                                <a href="" class="share-btn btn-telegram"><i class="fa fa-telegram"></i></a>
-                                            </div>
+                                            <?= \frontend\widgets\share\ShareWidget::widget([
+                                                'share' => $share,
+                                                'wrap' => 'div',
+                                                'wrapClass' => 'share-wrap',
+                                                'itemClass' => 'share-btn share',
+                                                'addItemClasses' => ['fb' => 'btn-facebook', 'tw' => 'btn-twitter', 'ok' => 'btn-odnoklassniki', 'vk' => 'btn-vk', 'tg' => 'btn-telegram']
+                                            ]);?>
                                         </div>
                                     </div>
                                     <?php if($prevEvent || $nextEvent):?>
@@ -251,19 +206,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
     $(document).on('click', 'body', function() {
         $('.add-to-calendar div').hide();
     });
-
-    // $(document).ready(function () {
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: '".Url::toRoute(['site/share-counts', 'url' => $url])."',
-    //         success: function (data) {
-    //             data = eval('(' + data + ')');
-    //             $.each(data, function() {
-    //                 $('.wrap-'+this.soc).find('.share-counter').html(this.count)
-    //             })
-    //         },
-    //     });
-    // });
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
