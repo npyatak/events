@@ -135,11 +135,9 @@ function getShareUrl(obj) {
         url += '&image='       + encodeURIComponent(obj.data('image'));
         url += '&noparse=true';
     } else if(obj.data('type') == 'fb') {
-        url  = 'http://www.facebook.com/sharer.php?s=100';
-        url += '&p[title]='     + encodeURIComponent(obj.data('title'));
-        url += '&p[url]='       + encodeURIComponent(obj.data('url'));
-        url += '&p[images][0]=' + encodeURIComponent(obj.data('image'));
-        url += '&p[summary]='   + encodeURIComponent(obj.data('desc'));
+        url = 'https://www.facebook.com/sharer/sharer.php?';
+        url += 'u=' + encodeURIComponent(obj.data('url'));
+        url += '&title='     + encodeURIComponent(obj.data('title'));
     } else if(obj.data('type') == 'ok') {
         url  = 'http://www.ok.ru/dk?st.cmd=addShare&st.s=1';
         url += '&st.comments='  + encodeURIComponent(obj.data('desc'));
