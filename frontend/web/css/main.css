@@ -892,12 +892,12 @@
     display: block;
     clear: both;
 }
-.month-items:nth-child(odd) {
-    height: 500px;
-}
-.month-items:nth-child(even) {
-    height: 800px;
-}
+/*.month-items:nth-child(odd) {*/
+    /*height: 500px;*/
+/*}*/
+/*.month-items:nth-child(even) {*/
+    /*height: 800px;*/
+/*}*/
 .block_content,
 .block_quotation,
 .block_fact,
