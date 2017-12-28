@@ -892,6 +892,12 @@
     display: block;
     clear: both;
 }
+.month-items:nth-child(odd) {
+    height: 500px;
+}
+.month-items:nth-child(even) {
+    height: 800px;
+}
 .block_content,
 .block_quotation,
 .block_fact,
@@ -1139,6 +1145,7 @@ header.transform .slogan,
 header.transform .image {
     opacity: 0;
     z-index: -2;
+    visibility: hidden;
 }
 header.transform .general_share {
     top: 40px;
@@ -1289,6 +1296,21 @@ header .desc {
 }
 .general_share ul li a {
     color: #221FAA;
+}
+.general_share ul li:last-child a::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    background: url('../images/icons/telegram_blue.svg') no-repeat center;
+    -webkit-background-size: contain;
+    background-size: contain;
+    transform: translate(-50%,-50%);
+    width: 14px;
+    height: 14px;
+    margin-left: -1px;
 }
 .g-share-btn {
     position: relative;
