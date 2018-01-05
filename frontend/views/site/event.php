@@ -11,7 +11,7 @@ $this->title = $event->title;
 $share['url'] = Url::current([], true);
 $share['title'] = $event->socials_title ? $event->socials_title : $this->title;
 $share['text'] = $event->socials_text;
-$share['image'] = $event->getImageUrl($event->socials_image_url);
+$share['image'] = Url::to($event->getImageUrl($event->socials_image_url), '');
 $share['twitter'] = $event->twitter_text ? $event->twitter_text : $this->title;
 
 $color = null;

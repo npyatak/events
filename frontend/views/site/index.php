@@ -9,7 +9,7 @@ use common\models\Settings;
 
 $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\web\JqueryAsset::className()]]);
 
-$image = $shares[0]->getImageUrl($shares[0]->image);
+$image = Url::to($shares[0]->getImageUrl($shares[0]->image), '');
 
 $this->registerMetaTag(['property' => 'og:description', 'content' => $shares[0]->text], 'og:description');
 $this->registerMetaTag(['property' => 'og:title', 'content' => $shares[0]->title], 'og:title');
