@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 
 use backend\models\Admin;
 
-$this->title = 'Настройки футера';
+$this->title = 'Настройки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
