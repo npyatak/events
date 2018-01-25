@@ -1,3 +1,7 @@
+$(window).on('load', function () {
+    $('#preloader').fadeOut(300);
+})
+
 $(document).ready(function () {
 
     var ol = $('ol');

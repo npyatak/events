@@ -42,6 +42,9 @@ AppAsset::register($this);
     <?php endif;?>
 </head>
 <body>
+<div id="preloader">
+    <div class="inner"><i class="fa fa-spin fa-refresh"></i></div>
+</div>
 <?php if($_SERVER['HTTP_HOST'] !== 'events.local'):?>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KX9ZXT"

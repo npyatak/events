@@ -40,9 +40,14 @@ $(document).ready(function () {
 
     function scrollToMonth(target, hasClass) {
         if(typeof hasClass == 'undefined'){
-            $(window).on('load', function () {
+            $(window).on('load',function () {
                 $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
             });
+            // if(target === '#month_8'){
+            //     $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+            //
+            // }
+            console.log(target)
         }else{
             if($(window).scrollTop() <= 0){
                 $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
