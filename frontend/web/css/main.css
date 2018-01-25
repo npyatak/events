@@ -700,7 +700,44 @@
     align-items: center;
 }
 .fact-many_inner .item .row {
-    padding-left: 60px;
+    /*padding-left: 60px;*/
+    align-items: center;
+}
+.month_1 {
+    height: 300px;
+}
+.month_2 {
+    height: 430px;
+}
+.month_3 {
+    height: 200px;
+}
+.month_4 {
+    height: 300px;
+}
+.month_5 {
+    height: 400px;
+}
+.month_6 {
+    height: 700px;
+}
+.month_7 {
+    height: 100px;
+}
+.month_8 {
+    height: 600px;
+}
+.month_9 {
+    height: 150px;
+}
+.month_10 {
+    height: 320px;
+}
+.month_11 {
+    height: 450px;
+}
+.month_12 {
+    height: 300px;
 }
 .fact-many_inner .item .number {
     margin-right: 30px;
@@ -845,9 +882,9 @@
     height: 500px;
 }
 .video-title {
-    margin-right: 40px;
     padding: 20px 0 25px;
     width: 670px;
+    margin-right: 40px;
     border-bottom: 1px solid #E2E0E0;
     text-align: center;
 }
@@ -955,7 +992,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    left: 0;
+    left: 0;.block_tass_video
     height: 60px;
     z-index: 99;
     -webkit-transition: .3s;
@@ -1394,11 +1431,6 @@ header .desc {
     position: absolute;
     top: 0;
     left: 2px;
-    -moz-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg);
-    writing-mode: tb-rl;
     font: 14px 'ProximaNova-Bold', sans-serif;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -1458,6 +1490,91 @@ header .desc {
 .navigation li:nth-child(12).active {
     margin-bottom: 100px;
 }
+.navigation li:nth-child(1) .month {
+    -webkit-transform: rotate(-90deg) translateY(-25px) translateX(-15px);
+    -moz-transform: rotate(-90deg) translateY(-25px) translateX(-15px);
+    -ms-transform: rotate(-90deg) translateY(-25px) translateX(-15px);
+    -o-transform: rotate(-90deg) translateY(-25px) translateX(-15px);
+    transform: rotate(-90deg) translateY(-25px) translateX(-15px);
+}
+.navigation li:nth-child(2) .month {
+    -webkit-transform: rotate(-90deg) translateY(-32px) translateX(-27px);
+    -moz-transform: rotate(-90deg) translateY(-32px) translateX(-27px);
+    -ms-transform: rotate(-90deg) translateY(-32px) translateX(-27px);
+    -o-transform: rotate(-90deg) translateY(-32px) translateX(-27px);
+    transform: rotate(-90deg) translateY(-32px) translateX(-27px);
+}
+.navigation li:nth-child(3) .month {
+    -webkit-transform: rotate(-90deg) translateY(-15px) translateX(-10px);
+    -moz-transform: rotate(-90deg) translateY(-15px) translateX(-10px);
+    -ms-transform: rotate(-90deg) translateY(-15px) translateX(-10px);
+    -o-transform: rotate(-90deg) translateY(-15px) translateX(-10px);
+    transform: rotate(-90deg) translateY(-15px) translateX(-10px);
+}
+.navigation li:nth-child(4) .month {
+    -webkit-transform: rotate(-90deg) translateY(-25px) translateX(-20px);
+    -moz-transform: rotate(-90deg) translateY(-25px) translateX(-20px);
+    -ms-transform: rotate(-90deg) translateY(-25px) translateX(-20px);
+    -o-transform: rotate(-90deg) translateY(-25px) translateX(-20px);
+    transform: rotate(-90deg) translateY(-25px) translateX(-20px);
+}
+.navigation li:nth-child(5) .month {
+    -webkit-transform: rotate(-90deg) translateY(-10px) translateX(-5px);
+    -moz-transform: rotate(-90deg) translateY(-10px) translateX(-5px);
+    -ms-transform: rotate(-90deg) translateY(-10px) translateX(-5px);
+    -o-transform: rotate(-90deg) translateY(-10px) translateX(-5px);
+    transform: rotate(-90deg) translateY(-10px) translateX(-5px);
+}
+.navigation li:nth-child(6) .month {
+    -webkit-transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+    -moz-transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+    -ms-transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+    -o-transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+    transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+}
+.navigation li:nth-child(7) .month {
+    -webkit-transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+    -moz-transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+    -ms-transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+    -o-transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+    transform: rotate(-90deg) translateY(-17px) translateX(-12px);
+}
+.navigation li:nth-child(8) .month {
+    -webkit-transform: rotate(-90deg) translateY(-24px) translateX(-17px);
+    -moz-transform: rotate(-90deg) translateY(-24px) translateX(-17px);
+    -ms-transform: rotate(-90deg) translateY(-24px) translateX(-17px);
+    -o-transform: rotate(-90deg) translateY(-24px) translateX(-17px);
+    transform: rotate(-90deg) translateY(-24px) translateX(-17px);
+}
+.navigation li:nth-child(9) .month {
+    -webkit-transform: rotate(-90deg) translateY(-35px) translateX(-30px);
+    -moz-transform: rotate(-90deg) translateY(-35px) translateX(-30px);
+    -ms-transform: rotate(-90deg) translateY(-35px) translateX(-30px);
+    -o-transform: rotate(-90deg) translateY(-35px) translateX(-30px);
+    transform: rotate(-90deg) translateY(-35px) translateX(-30px);
+}
+.navigation li:nth-child(10) .month {
+    -webkit-transform: rotate(-90deg) translateY(-30px) translateX(-25px);
+    -moz-transform: rotate(-90deg) translateY(-30px) translateX(-25px);
+    -ms-transform: rotate(-90deg) translateY(-30px) translateX(-25px);
+    -o-transform: rotate(-90deg) translateY(-30px) translateX(-25px);
+    transform: rotate(-90deg) translateY(-30px) translateX(-25px);
+}
+.navigation li:nth-child(11) .month {
+    -webkit-transform: rotate(-90deg) translateY(-25px) translateX(-17px);
+    -moz-transform: rotate(-90deg) translateY(-25px) translateX(-17px);
+    -ms-transform: rotate(-90deg) translateY(-25px) translateX(-17px);
+    -o-transform: rotate(-90deg) translateY(-25px) translateX(-17px);
+    transform: rotate(-90deg) translateY(-25px) translateX(-17px);
+}
+.navigation li:nth-child(12) .month {
+    -webkit-transform: rotate(-90deg) translateY(-30px) translateX(-17px);
+    -moz-transform: rotate(-90deg) translateY(-30px) translateX(-17px);
+    -ms-transform: rotate(-90deg) translateY(-30px) translateX(-17px);
+    -o-transform: rotate(-90deg) translateY(-30px) translateX(-17px);
+    transform: rotate(-90deg) translateY(-30px) translateX(-17px);
+}
+
 aside {
     position: fixed;
     width: 180px;
@@ -2027,6 +2144,7 @@ aside li a.active, aside li a:hover {
 
 .block_tass_video {
     float: right;
+    width: 100%;
 }
 
 .block_code {
@@ -2085,6 +2203,10 @@ footer p {
     margin-bottom: 0;
     font-size: 13px;
     line-height: 18px;
+}
+footer p b,
+footer p strong {
+    display: inline-block;
 }
 footer h6 {
     margin-bottom: 5px;
