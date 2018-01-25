@@ -40,7 +40,10 @@ $(document).ready(function () {
 
     function scrollToMonth(target, hasClass) {
         if(typeof hasClass == 'undefined'){
-            $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+            // $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+            if(target === '8'){
+                $('html, body').animate({scrollTop:($(target).offset().top - 220)},500);
+            }
         }else{
             if($(window).scrollTop() <= 0){
                 $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
