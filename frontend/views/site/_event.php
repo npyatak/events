@@ -29,7 +29,7 @@ if($category && !in_array('cat_'.$category, $classes)) {
 		$imageUrl = $event->getImageUrl($event->main_page_image_url, $size[0].'x'.$size[1]);
 	}?>
 
-	<div class="grid-item_image" style="background-image:url('')">
+	<div class="grid-item_image" style="background-image:url('<?=$imageUrl;?>')">
 		<a href="<?=$event->url;?>" style="background-color:<?=$color ? $color : '';?>"></a>
 	</div>
 	<div class="grid-item_desc">
