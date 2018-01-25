@@ -703,40 +703,40 @@
     /*padding-left: 60px;*/
     align-items: center;
 }
-.month_1 {
+#month_1 {
     height: 300px;
 }
-.month_2 {
+#month_2 {
     height: 430px;
 }
-.month_3 {
+#month_3 {
     height: 200px;
 }
-.month_4 {
+#month_4 {
     height: 300px;
 }
-.month_5 {
+#month_5 {
     height: 400px;
 }
-.month_6 {
+#month_6 {
     height: 700px;
 }
-.month_7 {
+#month_7 {
     height: 100px;
 }
-.month_8 {
+#month_8 {
     height: 600px;
 }
-.month_9 {
+#month_9 {
     height: 150px;
 }
-.month_10 {
+#month_10 {
     height: 320px;
 }
-.month_11 {
+#month_11 {
     height: 450px;
 }
-.month_12 {
+#month_12 {
     height: 300px;
 }
 .fact-many_inner .item .number {

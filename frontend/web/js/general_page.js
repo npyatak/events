@@ -40,10 +40,14 @@ $(document).ready(function () {
 
     function scrollToMonth(target, hasClass) {
         if(typeof hasClass == 'undefined'){
-            // $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
-            if(target === '8'){
-                $('html, body').animate({scrollTop:($(target).offset().top - 220)},500);
-            }
+            setTimeout(function () {
+                $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+            }, 1000);
+            // if(target === '#month_8'){
+            //     $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+            //
+            // }
+            console.log(target)
         }else{
             if($(window).scrollTop() <= 0){
                 $('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
