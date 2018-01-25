@@ -29,13 +29,13 @@ if($category && !in_array('cat_'.$category, $classes)) {
 		$imageUrl = $event->getImageUrl($event->main_page_image_url, $size[0].'x'.$size[1]);
 	}?>
 
-	<div class="grid-item_image" style="background-image:url('<?=$imageUrl;?>')">
+	<div class="grid-item_image" style="background-image:url('')">
 		<a href="<?=$event->url;?>" style="background-color:<?=$color ? $color : '';?>"></a>
 	</div>
 	<div class="grid-item_desc">
 		<h2 style="color:<?=$color ? $color : '';?>"><a href="<?=$event->url;?>"><?=$event->title;?></a></h2>
 		<span class="date"><?=$event->viewDate[0];?> <?=$event->viewDate[1];?></span>
-		<a href="" class="link-arrow">
+		<a href="<?=$event->url;?>" class="link-arrow">
 			<i class="fa fa-angle-right"></i>
 			<span class="hover" style="background-color:<?=$color ? $color : '';?>"></span>
 			<span class="default"></span>
