@@ -31,9 +31,6 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 			<div class="slogan">
 				<h1><!--?=Yii::$app->settings->get('projectTitle');?--></h1>
 			</div>
-<!--			<div class="desc">-->
-<!--				<span>Из сотни событий, которые могут произойти</span>-->
-<!--			</div>-->
 			<div class="general_share">
 				<ul>
                     <?php $share = [
@@ -84,38 +81,3 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 		</div>
 	</div>
 </div>
-<?php $script = "
-    $('.categories a').on('click', function() {
-    	var elem = $(this);
-
-        $('.grid-item').addClass('inactive');
-        $('.grid-item.cat_'+elem.data('category')).removeClass('inactive');
-
-        history.pushState(null, '', elem .attr('href'));
-        
-        $('.categories a').removeClass('active');
-        elem.addClass('active');
-		
-		if($(this).hasClass('all')){
-			$('.grid-item').removeClass('inactive');
-		}
-		
-        // $.ajax({
-        //     url: elem.attr('href'),
-        //     success: function(data) {
-        //         var html = $(data);
-        //         $('#events').html(data);
-                
-        //         history.pushState(null, '', elem .attr('href'));
-
-        //         masonryInit();
-
-        //         $('.categories a').removeClass('active');
-        //         elem.addClass('active');
-        //     }
-        // });
-
-        return false;
-    });
-";?>
-<?php $this->registerJs($script, yii\web\View::POS_END);?>

@@ -25,6 +25,7 @@ class AppAsset extends AssetBundle
         'js/masonry.pkgd.min.js',
         'js/owl.carousel.min.js',
         'js/main.js?v=27122017_1',
+        'js/jquery.lazyload.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
