@@ -21,14 +21,14 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?= Html::csrfMetaTags() ?>
-    <title>
-        <?php if(Yii::$app->settings->get('projectTitle')) {
-            $title = Yii::$app->settings->get('projectTitle');
-        } elseif(Yii::$app->settings->get('currentYear')) {
-            $title = Yii::$app->settings->get('currentYear').' год. Краткое содержание. ';
-        } ?>
-        <?=$title;?> <?=$this->title ? '- '.Html::encode($this->title) : ''?>
-    </title>
+
+    <?php if(Yii::$app->settings->get('projectTitle')) {
+        $title = Yii::$app->settings->get('projectTitle');
+    } elseif(Yii::$app->settings->get('currentYear')) {
+        $title = Yii::$app->settings->get('currentYear').': Краткое содержание.';
+    } ?>
+    <title><?=$this->title ? Html::encode($this->title) : ''?> - <?=$title;?></title>
+
     <?php $this->head() ?>
 
     <?php if($_SERVER['HTTP_HOST'] !== 'events.local'):?>

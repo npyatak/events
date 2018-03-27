@@ -1,0 +1,365 @@
+/* DELETE  */
+
+body {
+    padding: 0;
+    margin: 0;
+}
+@font-face {
+    font-family: 'FiraSans-Regular';
+    src: url('fonts/Fira/FiraSans-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'FiraSans-Bold';
+    src: url('fonts/Fira/8163.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'FiraSans-Medium';
+    src: url('fonts/Fira/FiraSans-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'FiraSans-Light';
+    src: url('fonts/Fira/FiraSans-Light.ttf') format('truetype');
+}
+
+/* DELETE ^ */
+
+.fh-page__header {
+    background: #3e43c8;
+    height: 620px;
+    position: relative;
+}
+.fh-page__header .left-part {
+    width: 50%;
+    display: inline-block;
+    position: relative;
+    height: 100%;  
+    background-image: url('images/map-1-desktop.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom left;
+}
+.fh-page__header .left-part img {
+    position: absolute;
+    top: 80px;
+    left: 0;
+}
+.left-part .text {
+    position: absolute;
+    bottom: 40px;
+    left: 160px;
+}
+.left-part .text .text__title {
+    width: 420px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 30px;
+    line-height: 35px;
+    font-family: 'FiraSans-Medium';    
+}
+.left-part .text .text__subtitle {
+    width: 420px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'FiraSans-Regular';
+}
+.fh-page__header .right-part {
+    width: 520px;
+    height: 290px;
+    background: #1fb38c;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.right-part .online-block {
+    padding: 40px;
+}
+.online-block .top .top__title {
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+    margin: 0 0 120px 0;
+    color: #fff;
+    position: relative;
+    width: 360px;
+    font-family: 'FiraSans-Bold';
+}
+.online-block .top .top__oval {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    right: 0px;
+    top: 4px;
+}
+.online-btn {
+    border-radius: 70px;
+    background: #fff;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    font-size: 18px;
+    color: #1fb38c;
+}
+.top__oval .oval-inner {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+}
+.online-block .bottom .bottom__text {
+    font-size: 18px;
+    line-height: 25px;
+    color: #fff;
+    width: 360px;
+    font-family: 'FiraSans-Regular';
+}
+.fh-page__middle .left-part__content {
+    background: #f9f9f9;
+    height: auto;
+    float: left;    
+    width: calc(100% - 640px);
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 120px; 
+}
+.fh-page__middle .right-part {
+    width: 480px;
+    height: 200px;
+    float: right; 
+    padding: 40px 0 40px 40px;   
+}
+.fh-page__middle .right-part__title {
+    background: #fff;
+}
+.fh-page__middle .right-part__title .title {
+    color: #000;
+    text-transform: capitalize;
+    font-family: 'FiraSans-Bold';
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+    margin: 0 0 30px 0;
+}
+.news-item {
+    text-decoration: none;
+    margin-bottom: 40px;
+    display: block;
+}
+.news-item .item__time {
+    font-family: 'FiraSans-Light';
+    color: #636363;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+.news-item .item__text {
+    font-family: 'FiraSans-Regular';
+    color: #252aa6;
+    font-size: 18px;
+    line-height: 25px;
+    max-width: 360px;
+    padding: 0;
+    margin: 0;
+}
+.fh-page__middle .left-part__title {
+    background: #f9f9f9;
+    width: 100%;
+}
+.fh-page__middle .left-part__title .title {
+    color: #000;
+    text-transform: capitalize;
+    font-family: 'FiraSans-Bold';
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+    margin: 40px 0 0 40px;
+}
+.fh-page__middle .candidates-item {
+    position: relative;
+    display: block;
+    width: 50%;
+    height: 340px;
+    -webkit-transition: .25s;
+    -moz-transition: .25s;
+    -ms-transition: .25s;
+    -o-transition: .25s;
+    transition: .25s;
+}
+.fh-page__middle .candidates-item:hover {
+    background-color: #e0e0e0;
+}
+.fh-page__middle .candidates-img {
+    float: right;
+    margin-right: 80px;
+    margin-top: 60px;
+}
+.fh-page__middle .candidates-img img {
+    display: block;
+    height: 170px;
+}
+.fh-page__middle .candidate {
+    position: absolute;
+    bottom: 15px;
+    left: 40px;
+}
+.fh-page__middle .candidate h4 {
+    max-width: 100px;
+    color: #000;
+    text-transform: capitalize;
+    font-family: 'FiraSans-Bold';
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+    margin: 0 0 30px 0;
+}
+.fh-page__middle .candidate p {
+    color: #636363;
+    font-family: 'FiraSans-Regular';
+    font-size: 14px;
+    line-height: 30px;
+    position: absolute;
+    min-width: 222px;
+    margin: 0;
+    left: 0;
+    bottom: 5px;
+}
+@media screen and (min-width: 1200px) {
+    .hide-desktop {
+        display: none;
+    }
+    .hide-mobile {
+        display: block;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .hide-desktop {
+        display: block;
+    }
+    .hide-mobile {
+        display: none;
+    }
+    .fh-page__header .left-part {
+        width: calc(100% - 40px);
+    }
+    .left-part .text {
+        left: 40px;
+    }
+    .online-block {
+        width: auto;
+        height: auto;
+        background: #1fb38c;
+        position: relative;
+        padding: 40px;
+    }
+    .online-block .top {
+        width: 100%;
+    }
+    .online-block .top .top__title {
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: 0.5px;
+        margin: 0 0 25px 0;
+        color: #fff;
+        position: relative;
+        width: 100%;
+        font-family: 'FiraSans-Bold';
+    }
+    .online-block .bottom .bottom__text {
+        font-size: 18px;
+        line-height: 25px;
+        color: #fff;
+        width: 100%;
+        font-family: 'FiraSans-Regular';
+    }
+    .fh-page__middle .right-part {
+        float: none;
+        width: auto;
+        height: auto;
+    }
+    .fh-page__middle .left-part {
+        float: none;
+    }
+    .news-item {
+        text-decoration: none;
+        margin-bottom: 40px;
+        display: inline-block;
+        width: 32.3333%;
+    }
+    .fh-page__middle .left-part__content {
+        width: auto;
+        padding: 0;
+    }
+}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .hide-desktop {
+        display: block;
+    }
+    .hide-mobile {
+        display: none;
+    }
+    .fh-page__middle .candidates-item {
+        width: 100%;
+    }
+    .fh-page__header .left-part {
+        width: calc(100% - 40px);
+    }
+    .left-part .text {
+        left: 40px;
+    }
+    .online-block {
+        width: auto;
+        height: auto;
+        background: #1fb38c;
+        position: relative;
+        padding: 40px;
+    }
+    .online-block .top {
+        width: 100%;
+    }
+    .online-block .top .top__title {
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: 0.5px;
+        margin: 0 0 25px 0;
+        color: #fff;
+        position: relative;
+        width: 100%;
+        font-family: 'FiraSans-Bold';
+    }
+    .online-block .bottom .bottom__text {
+        font-size: 18px;
+        line-height: 25px;
+        color: #fff;
+        width: 100%;
+        font-family: 'FiraSans-Regular';
+    }
+    .fh-page__middle .right-part {
+        float: none;
+        width: auto;
+        height: auto;
+    }
+    .fh-page__middle .left-part {
+        float: none;
+    }
+    .news-item {
+        text-decoration: none;
+        margin-bottom: 40px;
+        display: inline-block;
+        width: 100%;
+    }
+    .fh-page__middle .left-part__content {
+        width: auto;
+        padding: 0;
+    }
+}

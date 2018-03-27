@@ -59,7 +59,7 @@ return [
             'baseUrl' => '/',
             'rules' => [
                 '' => 'site/index',
-                
+                'sitemap.xml' => 'site/sitemap',
                 '<year:\d+>' => 'site/index',
                 '<year:\d+>/category/<alias:\w+>' => 'site/index',
 

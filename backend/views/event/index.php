@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{view} {update} {blocks} {delete}',                    
+                    'template' => '{view} {update} {delete}',                    
                     'buttons' => [
                         'view' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $model->url, [

@@ -16,7 +16,7 @@ class ShareWidget extends \yii\base\Widget
 
     public function run() {
     	echo $this->renderWrapOpen($soc = 'fb');
-		    echo Html::a('<i class="fa fa-facebook"></i>', '', [
+		    echo Html::a('<i class="fa fa-facebook"></i>', '#', [
 		        'class' => $this->itemClass.' '.(isset($this->addItemClasses['fb']) ? $this->addItemClasses['fb'] : ''),
 		        'data-type' => 'fb',
 		        'data-url' => $this->share['url'],
@@ -27,7 +27,7 @@ class ShareWidget extends \yii\base\Widget
 		echo $this->renderWrapClose();
 
 		echo $this->renderWrapOpen($soc = 'tw');
-		    echo Html::a('<i class="fa fa-twitter"></i>', '', [
+		    echo Html::a('<i class="fa fa-twitter"></i>', '#', [
 		        'class' => $this->itemClass.' '.(isset($this->addItemClasses['tw']) ? $this->addItemClasses['tw'] : ''),
 		        'data-type' => 'tw',
 		        'data-url' => $this->share['url'],
@@ -36,7 +36,7 @@ class ShareWidget extends \yii\base\Widget
 		echo $this->renderWrapClose();
 
 		echo $this->renderWrapOpen($soc = 'ok');
-		    echo Html::a('<i class="fa fa-odnoklassniki"></i>', '', [
+		    echo Html::a('<i class="fa fa-odnoklassniki"></i>', '#', [
 		        'class' => $this->itemClass.' '.(isset($this->addItemClasses['ok']) ? $this->addItemClasses['ok'] : ''),
 		        'data-type' => 'ok',
 		        'data-url' => $this->share['url'],
@@ -45,7 +45,7 @@ class ShareWidget extends \yii\base\Widget
 		echo $this->renderWrapClose();
 
 		echo $this->renderWrapOpen($soc = 'vk');
-		    echo Html::a('<i class="fa fa-vk"></i>', '', [
+		    echo Html::a('<i class="fa fa-vk"></i>', '#', [
 		        'class' => $this->itemClass.' '.(isset($this->addItemClasses['vk']) ? $this->addItemClasses['vk'] : ''),
 		        'data-type' => 'vk',
 		        'data-url' => $this->share['url'],
@@ -56,7 +56,7 @@ class ShareWidget extends \yii\base\Widget
 		echo $this->renderWrapClose();
 
 		echo $this->renderWrapOpen($soc = 'tg');
-		    echo Html::a('<img src="/images/icons/telegram_white.svg">', '', [
+		    echo Html::a('<img src="/images/icons/telegram_white.svg">', '#', [
 		        'class' => $this->itemClass.' '.(isset($this->addItemClasses['tg']) ? $this->addItemClasses['tg'] : ''),
 		        'data-type' => 'tg',
 		        'data-url' => $this->share['url'],

@@ -38,11 +38,11 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                     <div class="event-header">
                         <div class="row m-0 justify-content-between">
                             <div class="event-title">
-                                <h2><?=$event->title?></h2>
+                                <h1><?=$event->title?></h1>
                                 <div class="event-cat">
                                     <?php if($event->categories) {
                                         foreach ($event->categories as $cat) {
-                                            echo Html::a($cat->title, $cat->url);
+                                            echo Html::a($cat->title, $cat->url, ['rel' => 'nofollow']);
                                         }
                                     }?>
                                 </div>
@@ -75,8 +75,8 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     <a class="add-to-calendar-a" href=""><i>+</i><span>д</span>обавить в календарь</a>
                                     <div class="hidden dropdown">
                                         <ul>
-                                            <li><a class="calendar" href="<?=Url::toRoute(['site/gc', 'alias' => $event->alias]);?>" target="_blank">добавить в google календарь</a></li>
-                                            <li><a class="calendar" href="<?=Url::toRoute(['site/ics', 'alias' => $event->alias]);?>" target="_blank">добавить в календарь (.ics)</a></li>
+                                            <li><a class="calendar" href="<?=Url::toRoute(['site/gc', 'alias' => $event->alias]);?>" target="_blank" rel="nofollow">добавить в google календарь</a></li>
+                                            <li><a class="calendar" href="<?=Url::toRoute(['site/ics', 'alias' => $event->alias]);?>" target="_blank" rel="nofollow">добавить в календарь (.ics)</a></li>
                                         </ul>
                                     </div>
                                 </div>

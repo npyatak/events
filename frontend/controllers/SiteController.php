@@ -29,6 +29,10 @@ class SiteController extends Controller
 
     public function actionIndex($month = null, $category = null)
     {
+        if($_SERVER['REQUEST_URI'] == '/index') {
+            return Yii::$app->getResponse()->redirect(Url::home(), 301);
+        }
+
         $dateNow = new \DateTime();
         $year = (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
 
@@ -87,7 +91,12 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionEvent($alias) {
+    public function actionEvent($alias, $year = null) {
+        $dateNow = new \DateTime();
+        if($year != (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'))) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        
         $event = $this->findEvent($alias);
         $nextEvent = null;
         $prevEvent = null;
@@ -269,7 +278,22 @@ class SiteController extends Controller
         }
 
         return json_encode($data);
+    }
 
+    public function actionSitemap() {
+        $this->layout = false;
+        $dateNow = new \DateTime();
+        $year = (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
+
+        $events = Event::find()
+            ->where(['between', 'date', \DateTime::createFromFormat('!Y', $year)->format('U'), \DateTime::createFromFormat('!Y', $year + 1)->format('U')])
+            ->andWhere(['status' => Event::STATUS_ACTIVE])
+            ->andWhere(['show_on_main' => 1])
+            ->all();
+
+        return $this->render('sitemap', [
+            'events' => $events,
+        ]);
     }
 
     protected function findEvent($alias) {
