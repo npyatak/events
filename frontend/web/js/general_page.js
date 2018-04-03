@@ -55,7 +55,7 @@ $(document).ready(function () {
                 scrollSpy();
                 onScroll();
             });
-        },1000);
+        },4000);
     }else{
         $(window).on('scroll', function () {
             var win_scr_top = $(window).scrollTop();
