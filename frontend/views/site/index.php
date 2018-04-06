@@ -81,3 +81,42 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 		</div>
 	</div>
 </div>
+
+<?php $script = "
+	$(document).ready(function () {
+	    //var monthId = GetURLParameter('month');
+	    var monthId = ".$month.";
+	    if(monthId) {
+	        scrollToMonth('#month_'+monthId);
+	        setTimeout(function () {
+	            $('.navigation').find('li.active').removeClass('active');
+	            $('.navigation').find('.month_'+monthId).parent().addClass('active');
+	        },50);
+	        setTimeout(function () {
+	            $(window).on('scroll', function () {
+	                var win_scr_top = $(window).scrollTop();
+	                if(win_scr_top <= 30){
+	                    $('header, .general_content, .main-menu').removeClass('transform');
+	                }else if(win_scr_top >= 0){
+	                    $('header, .general_content, .main-menu').addClass('transform');
+	                }
+	                scrollSpy();
+	                onScroll();
+	            });
+	        },4000);
+	    } else {
+	        $(window).on('scroll', function () {
+	            var win_scr_top = $(window).scrollTop();
+	            if(win_scr_top <= 30){
+	                $('header, .general_content, .main-menu').removeClass('transform');
+	            }else if(win_scr_top >= 0){
+	                $('header, .general_content, .main-menu').addClass('transform');
+	            }
+	            scrollSpy();
+	            onScroll();
+	        });
+	    }
+	});
+";
+
+$this->registerJs($script, yii\web\View::POS_END);?>

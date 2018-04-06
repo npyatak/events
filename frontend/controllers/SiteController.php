@@ -34,6 +34,11 @@ class SiteController extends Controller
         }
 
         $dateNow = new \DateTime();
+        if(!$month) {
+            $month = $dateNow->format('n');
+        }
+        //print_r($month);exit;
+
         $year = (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
 
         $query = Event::find()
