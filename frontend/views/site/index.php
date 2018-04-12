@@ -83,7 +83,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 
 <?php $script = "
 	$(document).ready(function () {
-	    //var monthId = GetURLParameter('month');
+	    var monthId = GetURLParameter('month');	
 	    
 	    $('.scroll-month').click(function (e) {
 			e.preventDefault();
@@ -172,7 +172,11 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 				$('html, body').animate({scrollTop:($(target).offset().top - 360)},500);
 			});
 		}else{
-			$('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+			if($(window).scrollTop() <= 0){
+				$('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+			}else{
+				$('html, body').animate({scrollTop:($(target).offset().top - 120)},500);
+			}
 		}
 	}
 	
