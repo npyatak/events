@@ -66,7 +66,6 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 				</ul>
 			</div>
 			<div class="content" id="events">
-				<h3 class="general-lid">Из сотни событий, которые могут произойти в 2018 году, мы отобрали десятки самых ожидаемых и обсуждаемых. Весь год мы будем следить за ключевыми темами и обновлять наш календарь, чтобы вы не пропустили ничего важного.</h3>
 				<?=$this->render('_months', ['events' => $events, 'category' => $category, 'shares' => $shares]);?>
 			</div>
 			<aside>
@@ -85,12 +84,61 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 <?php $script = "
 	$(document).ready(function () {
 	    //var monthId = GetURLParameter('month');
+	    
+	    $('.scroll-month').click(function (e) {
+			e.preventDefault();
+			var target = $(this).attr('href');
+			scrollToMonth(target, 'month_1');
+		});
+	
+		function GetURLParameter(sParam) {
+			var sPageURL = window.location.search.substring(1);
+			var sURLVariables = sPageURL.split('&');
+	
+			for (var i = 0; i < sURLVariables.length; i++) {
+				var sParameterName = sURLVariables[i].split('=');
+				if (sParameterName[0] == sParam) {
+					return sParameterName[1];
+				}
+			}
+		}
+		
+		var currentScreen;
+		var goTos = $('.scroll-month');
+		var sections = $('.month-items');
+	
+		function setActivationStatus(el, currentScreen) {
+			if (el.getAttribute('href') === currentScreen) {
+				el.parentElement.classList.add('active');
+			} else {
+				el.parentElement.classList.remove('active');
+			}
+		}
+	
+		function onScroll() {
+			for (var i = 0; i < sections.length; i++) {
+				var rect = sections[i].getBoundingClientRect();
+	
+				if (rect.top < 150 && rect.height + rect.top > 150) {
+					currentScreen = '#' + sections[i].getAttribute('id');
+					for (var i = 0; i < goTos.length; i++) {
+						setActivationStatus(goTos[i], currentScreen);
+					}
+				}
+			}
+			
+			$('.month-items').removeClass('active');
+			$('.month-items:first-child').addClass('active');
+		}
+		
 	    var monthId = ".$month.";
 	    if(monthId) {
 	        scrollToMonth('#month_'+monthId);
 	        setTimeout(function () {
 	            $('.navigation').find('li.active').removeClass('active');
 	            $('.navigation').find('.month_'+monthId).parent().addClass('active');
+	            $('#events').find('month_items.active').removeClass('active');
+	            $('#events').find('#month_'+monthId).addClass('active');
 	        },50);
 	        setTimeout(function () {
 	            $(window).on('scroll', function () {
@@ -103,8 +151,9 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 	                scrollSpy();
 	                onScroll();
 	            });
-	        },4000);
+	        },3000);
 	    } else {
+	    	alert('aa')
 	        $(window).on('scroll', function () {
 	            var win_scr_top = $(window).scrollTop();
 	            if(win_scr_top <= 30){
@@ -117,6 +166,27 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 	        });
 	    }
 	});
+	function scrollToMonth(target, hasClass) {
+		if(typeof hasClass == 'undefined'){
+			$(window).on('load',function () {
+				$('html, body').animate({scrollTop:($(target).offset().top - 360)},500);
+			});
+		}else{
+			$('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+		}
+	}
+	
+	function scrollSpy() {
+		var footer_top = $('footer').offset().top;
+		var a = window.pageYOffset + window.innerHeight;
+		var scrollSpy_wrap = $('.scrollSpy_wrap');
+		var scrollSpy_el = $('.scrollSpy');
+		if(a >= footer_top){
+			$(scrollSpy_wrap).find(scrollSpy_el).addClass('no-fixed');
+		}else{
+			$(scrollSpy_wrap).find(scrollSpy_el).removeClass('no-fixed');
+		}
+	}
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>

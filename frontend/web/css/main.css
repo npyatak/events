@@ -917,12 +917,14 @@
     display: block;
     clear: both;
 }
-/*.month-items:nth-child(odd) {*/
-    /*height: 500px;*/
-/*}*/
-/*.month-items:nth-child(even) {*/
-    /*height: 800px;*/
-/*}*/
+
+.month-items:nth-child(odd) {
+    height: 500px;
+}
+.month-items:nth-child(even) {
+    height: 800px;
+}
+
 .block_content,
 .block_quotation,
 .block_fact,
@@ -1597,6 +1599,12 @@ aside li a.active, aside li a:hover {
     width: 830px;
     margin-left: 100px;
 }
+.month-items .general-lid {
+    display: none;
+}
+.month-items.active .general-lid {
+    display: block;
+}
 .month-items:not(:last-child) {
     margin-bottom: 50px;
 }
@@ -2123,8 +2131,8 @@ aside li a.active, aside li a:hover {
 }
 
 .general-lid {
-    margin-top: 60px;
-    margin-bottom: 25px;
+    padding-top: 60px;
+    padding-bottom: 25px;
     font: 24px 'ProximaNova-Bold', sans-serif;
     line-height: 35px;
     color: #878787;

@@ -9,6 +9,7 @@ use common\models\Event;
 
 <?php foreach (Event::getMonthsArray() as $monthNumber => $m):?>
 <div class="month-items" id="month_<?=$monthNumber;?>">
+	<h3 class="general-lid">Из сотни событий, которые могут произойти в 2018 году, мы отобрали десятки самых ожидаемых и обсуждаемых. Весь год мы будем следить за ключевыми темами и обновлять наш календарь, чтобы вы не пропустили ничего важного.</h3>
 	<div class="month-title">
 		<h2><?=StringHelper::ucfirst($m[0]);?></h2>
 		<div class="share-inline">
