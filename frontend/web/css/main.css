@@ -2490,9 +2490,12 @@ footer p a {
     .close_aside i {
         font-size: 22px;
     }
-    header, header.transform {
-        position: relative;
+    header {
         height: 250px;
+    }
+    header.transform {
+        /*position: relative;*/
+        height: 50px;
     }
     header.transform .image {
         bottom: 0;
@@ -2512,8 +2515,11 @@ footer p a {
         padding-top: 100px;
         opacity: 1 !important;
     }
-    .general_content, .general_content.transform {
-        margin-top: 0px;
+    .general_content {
+        margin-top: 200px;
+    }
+    .general_content.transform {
+        margin-top: 0;
     }
     .dropdown {
         right: 0;
@@ -2900,7 +2906,7 @@ footer p a {
     .month-items:not(:last-child) {
         margin-bottom: 30px;
     }
-    header, header.transform {
+    header {
         height: 200px;
     }
     .month-title h2 {

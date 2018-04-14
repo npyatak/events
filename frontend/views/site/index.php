@@ -183,10 +183,10 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 				console.log(monthId)
 				if(monthId === 1){
 					$(window).on('load',function () {
-						$('html, body').animate({scrollTop:0},500);
+						$('html, body').animate({scrollTop:($(target).offset().top - 200)},500);
 					});
 				}else{
-					$('html, body').animate({scrollTop:($(target).offset().top - 60)},500);
+					$('html, body').animate({scrollTop:($(target).offset().top - 200)},500);
 				}
 			}
 		}
