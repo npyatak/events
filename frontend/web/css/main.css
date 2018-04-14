@@ -2892,14 +2892,13 @@ footer p a {
         margin-right: -60px;
         width: calc(100% + 120px);
     }
-    #events {
-        margin-top: 40px;
+    .general-lid {
+        padding-top: 40px;
+        font: 20px 'ProximaNova-Bold', sans-serif;
+        line-height: 25px;
     }
     .month-items:not(:last-child) {
         margin-bottom: 30px;
-    }
-    .general-lid {
-        display: none;
     }
     header, header.transform {
         height: 200px;

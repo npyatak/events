@@ -165,32 +165,45 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 	            onScroll();
 	        });
 	    }
-	});
-	function scrollToMonth(target, hasClass) {
-		if(typeof hasClass == 'undefined'){
-			$(window).on('load',function () {
-				$('html, body').animate({scrollTop:($(target).offset().top - 360)},500);
-			});
-		}else{
-			if($(window).scrollTop() <= 0){
-				$('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+	    
+	    function scrollToMonth(target, hasClass) {
+			if($(window).width() >= 768) {
+				if(typeof hasClass == 'undefined'){
+					$(window).on('load',function () {
+						$('html, body').animate({scrollTop:($(target).offset().top - 360)},500);
+					});
+				}else{
+					if($(window).scrollTop() <= 0){
+						$('html, body').animate({scrollTop:($(target).offset().top - 420)},500);
+					}else{
+						$('html, body').animate({scrollTop:($(target).offset().top - 120)},500);
+					}
+				}
 			}else{
-				$('html, body').animate({scrollTop:($(target).offset().top - 120)},500);
+				console.log(monthId)
+				if(monthId === 1){
+					$(window).on('load',function () {
+						$('html, body').animate({scrollTop:0},500);
+					});
+				}else{
+					$('html, body').animate({scrollTop:($(target).offset().top - 60)},500);
+				}
 			}
 		}
-	}
-	
-	function scrollSpy() {
-		var footer_top = $('footer').offset().top;
-		var a = window.pageYOffset + window.innerHeight;
-		var scrollSpy_wrap = $('.scrollSpy_wrap');
-		var scrollSpy_el = $('.scrollSpy');
-		if(a >= footer_top){
-			$(scrollSpy_wrap).find(scrollSpy_el).addClass('no-fixed');
-		}else{
-			$(scrollSpy_wrap).find(scrollSpy_el).removeClass('no-fixed');
+		
+		function scrollSpy() {
+			var footer_top = $('footer').offset().top;
+			var a = window.pageYOffset + window.innerHeight;
+			var scrollSpy_wrap = $('.scrollSpy_wrap');
+			var scrollSpy_el = $('.scrollSpy');
+			if(a >= footer_top){
+				$(scrollSpy_wrap).find(scrollSpy_el).addClass('no-fixed');
+			}else{
+				$(scrollSpy_wrap).find(scrollSpy_el).removeClass('no-fixed');
+			}
 		}
-	}
+	});
+
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
