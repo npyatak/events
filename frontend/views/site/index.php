@@ -153,7 +153,6 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 	            });
 	        },3000);
 	    } else {
-	    	alert('aa')
 	        $(window).on('scroll', function () {
 	            var win_scr_top = $(window).scrollTop();
 	            if(win_scr_top <= 30){
