@@ -1,0 +1,117 @@
+<project name="TASS-Academy" default="dist" basedir="..">
+
+    <!--
+    *****************************************
+    ***              Параметры            ***
+    *****************************************
+    -->
+
+    <property name="src" location="sources"/>
+    <property name="build" location="build"/>
+    <property name="packages" location="packages"/>
+    <property name="composer" value="/usr/local/bin/composer"/>
+    <property environment="env"/>
+
+
+    <!-- Сборка пакетов -->
+    <target name="dist" depends="init, build.backend">
+        <parallel>
+            <antcall target="package.backend"/>
+        </parallel>
+    </target>
+
+    <!-- Сборка dev-пакетов -->
+    <target name="dist-dev" depends="init, build-dev.backend">
+        <parallel>
+            <antcall target="package.backend"/>
+        </parallel>
+    </target>
+
+
+    <!--
+    *****************************************
+    ***        Утилитарные Задачи         ***
+    *****************************************
+    -->
+
+    <!-- Инициализация -->
+    <target name="init" depends="clean">
+
+        <!-- Создадим папки для сборки -->
+        <mkdir dir="${build}"/>
+        <mkdir dir="${packages}"/>
+
+        <!-- Скопируем сырцы в папку для сборки -->
+        <copy todir="${build}">
+            <fileset dir="${src}"/>
+        </copy>
+
+    </target>
+
+    
+    <!-- Очистка-->
+    <target name="clean">
+        <delete includeEmptyDirs="true" failonerror="false">
+            <fileset dir="${packages}"/>
+        </delete>
+
+        <delete includeEmptyDirs="true" failonerror="false">
+            <fileset  dir="${build}" 
+                excludes="
+                    vendor/
+                    "/>
+        </delete>
+
+    </target>
+
+
+    <!--
+    *****************************************
+    ***            Сборка кода            ***
+    *****************************************
+    -->
+
+    <target name="build.backend">
+        <exec executable="php" failonerror="true" dir="${build}">
+            <arg value="${composer}"/>
+            <arg value="install"/>
+            <arg value="--no-dev"/>
+            <arg value="--no-progress"/>
+            <arg value="--ignore-platform-reqs"/>
+        </exec>
+    </target>
+
+    <target name="build-dev.backend">
+        <exec executable="php" failonerror="true" dir="${build}">
+            <arg value="${composer}"/>
+            <arg value="install"/>
+            <arg value="--no-progress"/>
+            <arg value="--ignore-platform-reqs"/>
+        </exec>
+    </target>
+
+    <!--
+    *****************************************
+    ***               Пакеты              ***
+    *****************************************
+    -->
+
+    <!-- Сборка пакета BACKEND -->
+    <target name="package.backend">
+        <tar destfile="${packages}/backend.tar.gz"
+             basedir="${build}"
+             longfile="gnu"
+             compression="gzip"
+             includes="
+	            backend/,
+		    common/,
+		    console/,
+		    environments/,
+		    frontend/,
+		    vendor/,
+		    init
+             "
+        />
+    </target>
+  
+</project>
