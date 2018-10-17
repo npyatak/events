@@ -28,7 +28,7 @@ class SettingsController extends CController
     {
         $searchModel = new SettingsSearch();
         $params = Yii::$app->request->queryParams;
-        $params['SettingsSearch']['type'] = [Settings::TYPE_FOOTER];
+        //$params['SettingsSearch']['type'] = [Settings::TYPE_FOOTER];
         $dataProvider = $searchModel->search($params);
 
         return $this->render('index', [

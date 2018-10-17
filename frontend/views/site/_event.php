@@ -33,7 +33,9 @@ if($category && !in_array('cat_'.$category, $classes)) {
 		<a href="<?=$event->url;?>" style="background-color:<?=$color ? $color : '';?>"></a>
 	</div>
 	<div class="grid-item_desc">
-		<h2 style="color:<?=$color ? $color : '';?>"><a href="<?=$event->url;?>"><?=$event->title;?></a></h2>
+		<h2 style="color:<?=$color ? $color : '';?>">
+			<a href="<?=$event->url;?>"><?=$event->short_title ? $event->short_title : $event->title;?></a>
+		</h2>
 		<span class="date"><?=$event->viewDate[0];?> <?=$event->viewDate[1];?></span>
 		<a href="<?=$event->url;?>" class="link-arrow">
 			<i class="fa fa-angle-right"></i>

@@ -15,6 +15,7 @@ use common\components\ThumbnailImage;
  */
 class Share extends \yii\db\ActiveRecord
 {
+    public $url;
     /**
      * @inheritdoc
      */
@@ -53,7 +54,11 @@ class Share extends \yii\db\ActiveRecord
         return __DIR__ . '/../../frontend/web';
     }
 
-    public function getImageUrl($image, $thumb_size = false) {
+    public function getImageUrl($image = false, $thumb_size = false) {
+        if(!$image) {
+            $image = $this->image;
+        }
+        
         if(is_file($this->imageSrcPath.$image)) {
             return $image;
         } else {

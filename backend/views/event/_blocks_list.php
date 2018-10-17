@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 use common\models\Event;
 
-//\backend\assets\UIAsset::register($this);
+\backend\assets\UIAsset::register($this);
 ?>
 
 <ul id="blocks">
@@ -24,6 +24,8 @@ use common\models\Event;
 </div>
 
 <?php $script = "
+    window.ckeConfigs = [];
+
     $(document).on('click', '#add-block', function() {
         var blockClass = $('#block-select').find(':selected').val();
         var i = $('#blocks .block').length;
@@ -46,30 +48,37 @@ use common\models\Event;
         updateBlocksOrder();
     });
 
-    // $('#blocks').sortable({
-    //     cursor: 'move',
-    //     handle: '.header',
-    //     classes: {
-    //         'ui-sortable': 'highlight'
-    //     },
-    //     update: function(event, ui) {
-    //         updateBlocksOrder();
-    //     },
-    //     start: function(event, ui){
-    //         var textareaId = ui.item.find('textarea').attr('id');
-    //         if (typeof textareaId != 'undefined') {
-    //             var editorInstance = CKEDITOR.instances[textareaId];
-    //             editorInstance.destroy();
-    //             CKEDITOR.remove(textareaId);
-    //         }
-    //     },
-    //     stop: function(event, ui){
-    //         var textareaId = ui.item.find('textarea').attr('id');
-    //         if (typeof textareaId != 'undefined') {
-    //             CKEDITOR.replace(textareaId, CKEDITOR.instances[textareaId].config);
-    //         }
-    //     }
-    // });
+    $('#blocks').sortable({
+        cursor: 'move',
+        handle: '.header',
+        classes: {
+            'ui-sortable': 'highlight'
+        },
+        update: function(event, ui) {
+            updateBlocksOrder();
+        },
+        start: function(event, ui) {
+            var textareas = ui.item.find('textarea');
+            $(textareas).each(function() {
+                var id = $(this).attr('id');
+                if (typeof id != 'undefined') {
+                    var editorInstance = CKEDITOR.instances[id];
+                    window.ckeConfigs[id] = editorInstance.config;
+                    editorInstance.destroy();
+                    CKEDITOR.remove(id);
+                }
+            });
+        },
+        stop: function(event, ui) {
+            var textareas = ui.item.find('textarea');
+            $(textareas).each(function() {
+                var id = $(this).attr('id');
+                if (typeof id != 'undefined') {
+                    CKEDITOR.replace(id, window.ckeConfigs[id]);
+                }
+            });
+        }
+    });
 
     function updateBlocksOrder() {
         $('.block').each(function() {

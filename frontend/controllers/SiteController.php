@@ -11,10 +11,12 @@ use jmartinez\yii\ics\ICS;
 
 use common\models\Event;
 use common\models\Category;
+use common\models\Year;
 use common\models\Share;
 
 class SiteController extends Controller
 {
+    public $yearModel;
     /**
      * @inheritdoc
      */
@@ -27,7 +29,7 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionIndex($month = null, $category = null)
+    public function actionIndex($month = null, $category = null, $year = null)
     {
         if($_SERVER['REQUEST_URI'] == '/index') {
             return Yii::$app->getResponse()->redirect(Url::home(), 301);
@@ -37,12 +39,15 @@ class SiteController extends Controller
         if(!$month) {
             $month = $dateNow->format('n');
         }
-        //print_r($month);exit;
 
-        $year = (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
+        $yearModel = $year ? $this->findYear($year) : $this->findYear();
+        if($yearModel === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        $this->yearModel = $yearModel;
 
         $query = Event::find()
-            ->where(['between', 'date', \DateTime::createFromFormat('!Y', $year)->format('U'), \DateTime::createFromFormat('!Y', $year + 1)->format('U')])
+            ->where(['between', 'date', \DateTime::createFromFormat('!Y', $yearModel->number)->format('U'), \DateTime::createFromFormat('!Y', $yearModel->number + 1)->format('U')])
             ->andWhere(['status' => Event::STATUS_ACTIVE])
             ->andWhere(['show_on_main' => 1])
             ->joinWith('categories');
@@ -60,28 +65,27 @@ class SiteController extends Controller
         }
 
         if(!Yii::$app->cacheFrontend->get('shares')) {
-            Yii::$app->cacheFrontend->set('shares', Share::find()->all(), 3600*3);
+            Yii::$app->cacheFrontend->set('shares', Share::find()->where(['year_id' => $yearModel->id])->all(), 3600*3);
         }
 
         return $this->render('index', [
             'events' => $events,
             'month' => $month,
             'category' => $category,
-            'year' => $year,
             'categories' => Category::find()->all(),
             'shares' => Yii::$app->cacheFrontend->get('shares') ? Yii::$app->cacheFrontend->get('shares') : Share::find()->all(),
         ]);
     }
 
-    public function actionMonth($id, $category = null)
+    public function actionMonth($id, $category = null, $year = null)
     {
         $month = $id;
         $dateNow = new \DateTime();
-        $year = (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'));
+        $this->yearModel = $this->findYear($year);
 
         $query = Event::find()
-            ->where(['between', 'date', \DateTime::createFromFormat('!Y.n', $year.'.'.$month)->format('U'), 
-                \DateTime::createFromFormat('!Y.n', ($year + 1).'.'.$month)->format('U')])
+            ->where(['between', 'date', \DateTime::createFromFormat('!Y.n', $this->yearModel->number.'.'.$month)->format('U'), 
+                \DateTime::createFromFormat('!Y.n', ($this->yearModel->number + 1).'.'.$month)->format('U')])
             ->andWhere(['status' => Event::STATUS_ACTIVE])
             ->joinWith('categories');
 
@@ -91,16 +95,12 @@ class SiteController extends Controller
             'events' => $events,
             'share' => Share::find()->where(['month' => $month])->one(),
             'category' => $category,
-            'year' => $year,
             'month' => $month,
         ]);
     }
 
     public function actionEvent($alias, $year = null) {
-        $dateNow = new \DateTime();
-        if($year != (int)Yii::$app->settings->get('currentYear', $dateNow->format('Y'))) {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
+        $this->yearModel = $this->findYear($year);
         
         $event = $this->findEvent($alias);
         $nextEvent = null;
@@ -148,7 +148,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionTest($alias) {
+    /*public function actionTest($alias) {
         $event = $this->findEvent($alias);
         $nextEvent = null;
         $prevEvent = null;
@@ -217,7 +217,7 @@ class SiteController extends Controller
             'nextEvent' => $nextEvent,
             'prevEvent' => $prevEvent,
         ]);
-    }
+    }*/
 
     public function actionGc($alias) {
         $event = $this->findEvent($alias);
@@ -308,5 +308,19 @@ class SiteController extends Controller
         }
 
         return $model;
+    }
+
+    protected function findYear($number = null) {
+        if($number) {
+            $year = Year::find()->where(['number' => $number])->one();
+        } else {
+            $year = Year::find()->where(['is_current' => 1])->one();
+        }
+
+        if($year === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        return $year;
     }
 }

@@ -22,12 +22,12 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?= Html::csrfMetaTags() ?>
 
-    <?php if(Yii::$app->settings->get('projectTitle')) {
-        $title = Yii::$app->settings->get('projectTitle');
-    } elseif(Yii::$app->settings->get('currentYear')) {
-        $title = Yii::$app->settings->get('currentYear').': Краткое содержание.';
+    <?php if(Yii::$app->controller->yearModel->title) {
+        $title = Yii::$app->controller->yearModel->title;
+    } else {
+        $title = Yii::$app->controller->yearModel->number.' год: Краткое содержание.';
     } ?>
-    <title><?=$this->title ? Html::encode($this->title) : ''?> - <?=$title;?></title>
+    <title><?=$this->title ? Html::encode($this->title).' - ' : ''?><?=$title;?></title>
 
     <?php $this->head() ?>
 
@@ -55,7 +55,7 @@ AppAsset::register($this);
     <div class="main-menu">
         <div class="container">
             <div class="container_inner">
-                <div class="logo"><a href="<?=Yii::$app->settings->get('logoUrl');?>" target="_blank"></a></div>
+                <div class="logo"><a href="<?=Yii::$app->controller->yearModel->logo_url;?>" target="_blank"></a></div>
                 <div class="main-slogan"><h2><a href="<?=Url::home();?>"><?=$title;?></a></h2></div>
                 <div class="right">
                     <?php if(Yii::$app->controller->action->id == 'index'):?>
@@ -85,31 +85,31 @@ AppAsset::register($this);
     <div class="container">
         <div class="top">
             <div class="pull-left">
-                <a href="<?=Yii::$app->settings->get('logoUrl');?>" target="_blank" class="footer-logo"></a>
+                <a href="<?=Yii::$app->controller->yearModel->logo_url;?>" target="_blank" class="footer-logo"></a>
             </div>
             <div class="pull-left">
                 <div class="row justify-content-between">
                     <div class="col-8">
                         <div class="block">
                             <h6>Над проектом работали:</h6>
-                            <?=Yii::$app->settings->get('workedOnProject');?>
+                            <?=Yii::$app->controller->yearModel->worked_on_project;?>
                         </div>
                         <div class="block">
                             <h6>В проекте использованы фотографии и видео:</h6>
-                            <?=Yii::$app->settings->get('usedMultimedia');?>
+                            <?=Yii::$app->controller->yearModel->used_multimedia;?>
                         </div>
                         <div class="block">
                             <h6>Источники:</h6>                         
-                            <?=Yii::$app->settings->get('sources');?>
+                            <?=Yii::$app->controller->yearModel->sources;?>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="block">
                             <h6>Благодарности:</h6>                         
-                            <?=Yii::$app->settings->get('gratitude');?>
+                            <?=Yii::$app->controller->yearModel->gratitude;?>
                         </div>
                         <div class="block">
-                            <?=Yii::$app->settings->get('additional');?>
+                            <?=Yii::$app->controller->yearModel->additional;?>
                         </div>
                     </div>
                 </div>

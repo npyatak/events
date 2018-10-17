@@ -48,10 +48,13 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'view_date_type', 'dateFormatted', 'size'], 'required'],
-            [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
-            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url'], 'string', 'max' => 255],
-            [['categoryIds', 'similarIds'], 'safe'],
+            [['title', 'size'], 'required'],
+            [['view_date_type', 'dateFormatted', 'alias'], 'required', 'when' => function($model) {
+                return $model->is_date_unknown == null;
+            }],
+            [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date', 'is_date_unknown'], 'integer'],
+            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url'], 'string', 'max' => 255],
+            [['categoryIds', 'similarIds', 'copyright'], 'safe'],
             [['alias'], 'unique'],
         ];
     }
@@ -64,6 +67,7 @@ class Event extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
+            'short_title' => 'Короткий заголовок',
             'leading_text' => 'Лид',
             'viewDate' => 'Отображаемая дата',
             'date' => 'Дата',
@@ -85,16 +89,23 @@ class Event extends \yii\db\ActiveRecord
             'categoryIds' => 'Категории',
             'similarIds' => 'Связанные события',
             'dateFormatted' => 'Дата',
-            'size' => 'Тип карточки',
+            'size' => 'Размер карточки',
             'twitter_text' => 'Текст для Twitter',
             'alias' => 'Алиас',
             'mobile_image_url' => 'Изображение для мобильных',
             'small_image_url' => 'Маленькое изображение',
+            'copyright' => 'Копирайты',
+            'meta_title' => 'META title',
+            'meta_description' => 'META description',
+            'is_date_unknown' => 'Дата неизвестна',
+            'redirect_url' => 'URL редиректа'
         ];
     }
 
     public function beforeSave($insert) {
-        $this->date = \DateTime::createFromFormat('!d.m.Y', $this->dateFormatted)->format('U');
+        if($this->dateFormatted) {
+            $this->date = \DateTime::createFromFormat('!d.m.Y', $this->dateFormatted)->format('U');
+        }
         $this->similar = json_encode($this->similarIds);
 
         if(!$this->alias) {
@@ -214,7 +225,11 @@ class Event extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getUrl($absolute=false) {
+    public function getUrl($absolute = false) {
+        if($this->redirect_url) {
+            return $this->redirect_url;
+        }
+
         $dateTime = new \DateTime;
         $dateTime->setTimestamp($this->date);
         $year = $dateTime->format('Y');
@@ -224,7 +239,6 @@ class Event extends \yii\db\ActiveRecord
         } else {
             return Yii::$app->urlManagerFrontEnd->createUrl(['/site/event', 'alias' => $this->alias, 'year' => $year]);
         }
-        //return Url::toRoute(['/site/event', 'alias' => $this->alias], $absolute);
     }
 
     public function getImageSrcPath() {
@@ -275,7 +289,7 @@ class Event extends \yii\db\ActiveRecord
     }
 
     public function getMonth($monthId, $secondForm=false) {
-        return $secondForm ? $this->monthsArray[$monthId][1] : $this->monthsArray[$monthId][0];
+        return $secondForm ? self::getMonthsArray()[$monthId][1] : self::getMonthsArray()[$monthId][0];
     }
 
     public function getMonthsArray() {

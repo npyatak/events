@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
 use common\components\ElfinderInput;
+use common\components\CKEditor;
 
 use common\models\Event;
 ?>
@@ -34,14 +35,26 @@ use common\models\Event;
     <?php endif;?>
 
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-4">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-3">
-            <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'short_title')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'view_date_type')->dropDownList($model->dateTypeList)?>
+            <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'redirect_url')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <?= $form->field($model, 'is_date_unknown')->checkbox() ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'view_date_type')->dropDownList($model->dateTypeList, ['disabled' => $model->is_date_unknown != null])?>
         </div>
         <div class="col-sm-2">
             <?= $form->field($model, 'dateFormatted')->widget(
@@ -51,6 +64,7 @@ use common\models\Event;
                         // 'startView'=>'year',
                         // 'minViewMode'=>'months',
                         'format' => 'dd.mm.yyyy',
+                        'disabled' => $model->is_date_unknown != null
                     ]
                 ]
             );?>
@@ -97,6 +111,15 @@ use common\models\Event;
                 <?= $form->field($model, 'twitter_text')->textarea(['rows' => 3]) ?>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-sm-8">
+                <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -137,6 +160,15 @@ use common\models\Event;
         </div>
     </div>
 
+    <div class="form-group">
+        <?= $form->field($model, 'copyright')->widget(CKEditor::className(), [
+            'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
+                'allowedContent' => true,
+                'preset' => 'textEditor'
+            ])
+        ]);?>
+    </div>
+
     <?=$this->render('_blocks_list', ['blockModelsArray' => $blockModelsArray]);?>
 
     <div class="form-group">
@@ -146,3 +178,17 @@ use common\models\Event;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php $script = "
+    $('#event-is_date_unknown').change(function() {
+        if(this.checked) {
+            $('#event-dateformatted').prop('disabled', true);
+            $('#event-view_date_type').prop( 'disabled', true );
+        } else {
+            $('#event-dateformatted').prop('disabled', false);
+            $('#event-view_date_type').prop( 'disabled', false );
+        }
+    });
+";
+
+$this->registerJs($script, yii\web\View::POS_END);?>

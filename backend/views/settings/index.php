@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-use backend\models\Admin;
+use common\models\Settings;
 
 $this->title = 'Настройки';
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,6 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'title',
                 [
                     'attribute' => 'value',
+                    'value' => function($data) {
+                        return $data->type == Settings::TYPE_CHECKBOX_LIST ? implode('<br>', $data->value) : $data->value;
+                    },
+                    'format' => 'raw',
                     'contentOptions' => [
                         'style' => 'max-width: 300px; overflow: hidden;'
                     ]

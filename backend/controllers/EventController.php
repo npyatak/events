@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
 use common\models\Event;
 use common\models\search\EventSearch;
 use common\models\EventBlock;
+use backend\models\EditorModel;
 use common\models\blocks\items\BlockGalleryImage;
 use common\models\blocks\items\BlockFactItem;
 use common\models\blocks\items\BlockCardItem;
@@ -31,6 +32,15 @@ class EventController extends CController
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionView($id)
+    {
+        $model = $this->findModel($id);
+
+        return $this->render('view', [
+            'model' => $model,
         ]);
     }
 
@@ -124,7 +134,7 @@ class EventController extends CController
             $loadBlockModels = $this->loadBlockModels($post);
             $blockModelsArray = $loadBlockModels['models'];
             $blockIDs = $loadBlockModels['blockIDs'];
-            
+
             $validationErrors = ArrayHelper::merge(
                 ActiveForm::validateMultiple($blockModelsArray),
                 ActiveForm::validate($model)
@@ -173,15 +183,27 @@ class EventController extends CController
                     $transaction->rollBack();
                 }
             }
+        }
+
+        $editorModel = EditorModel::find()->where(['model' => 'Event', 'model_id' => $id])->andWhere(['not', ['editor_id' => Yii::$app->user->id]])->orderBy('updated_at DESC')->one();
+        if($editorModel !== null) {
+            if($editorModel->updated_at + 120 < time()) {
+                $editorModel->delete();
+                $editorModel = null;
+            } else {
+                echo '<h2>Внимание! Событие в данный момент редактируется другим пользователем!</h2>';
+                exit;
+            }
         } 
 
         return $this->render('update', [
             'model' => $model,
             'blockModelsArray' => $blockModelsArray,
+            'editorModel' => $editorModel,
         ]);
     }
 
-    public function actionBlocks($id) {
+    /*public function actionBlocks($id) {
         $model = $this->findModel($id);
         $blockIDsOld = [];
         $blockModelsArray = [];
@@ -251,7 +273,7 @@ class EventController extends CController
         return $this->render('blocks', [
             'blockModelsArray' => $blockModelsArray,
         ]);
-    }
+    }*/
 
     /**
      * Deletes an existing Event model.
@@ -350,6 +372,22 @@ class EventController extends CController
         }
     }
 
+    public function actionEditorModel($id) {
+        if(Yii::$app->request->isAjax) {
+            $em = EditorModel::find()->where(['model' => 'Event', 'model_id' => $id, 'editor_id' => Yii::$app->user->id])->one();
+            if($em === null) {
+                $em = new EditorModel;
+                $em->editor_id = Yii::$app->user->id;
+                $em->model_id = $id;
+                $em->model = 'Event';
+            }
+            $em->updated_at = time();
+
+            $em->save();
+            return $em->updated_at;
+        }
+    }
+
     /**
      * Finds the Event model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -367,15 +405,16 @@ class EventController extends CController
     }
 
     protected function check_diff_multi($array1, $array2) {
-        $result = array();
+        $result = [];
+
         foreach($array1 as $key => $val) {
-             if(isset($array2[$key])){
-               if(is_array($val) && $array2[$key]){
-                   $result[$key] = $this->check_diff_multi($val, $array2[$key]);
-               }
-           } else {
-               $result[$key] = $val;
-           }
+            if(is_array($val) && isset($array2[$key])) {
+                $result[$key] = $this->check_diff_multi($val, $array2[$key]);
+            } else {
+                if(!in_array($val, $array2)) {
+                    $result[] = $val;
+                }
+            }
         }
 
         return $result;

@@ -60,6 +60,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filter' => Html::activeDropDownList($searchModel, 'status', Event::getStatusArray(), ['prompt'=>''])
                 ],
                 [
+                    'attribute' => 'size',
+                    'format' => 'raw',
+                    'value' => function($data) {
+                        return $data->getSizeArray()[$data->size];
+                    },
+                    'filter' => Html::activeDropDownList($searchModel, 'size', Event::getSizeArray(), ['prompt'=>''])
+                ],
+                [
                     'header' => 'Блоки (можно менять порядок)',
                     'format' => 'raw',
                     'value' => function($data) {

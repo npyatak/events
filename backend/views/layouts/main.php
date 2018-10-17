@@ -41,7 +41,8 @@ AppAsset::register($this);
         ['label' => 'Редакторы', 'url' => ['/editor'], 'visible' => $isAdmin],
         ['label' => 'Категории', 'url' => ['/category'], 'visible' => $isAdmin],
         ['label' => 'События', 'url' => ['/event']],
-        ['label' => 'Настройки футера', 'url' => ['/settings']],
+        ['label' => 'Годы', 'url' => ['/year']],
+        ['label' => 'Настройки', 'url' => ['/settings']],
         ['label' => 'Поделиться', 'url' => ['/share']],
     ];
     if (Yii::$app->user->isGuest) {

@@ -1,5 +1,5 @@
 <?php
-
+use yii\helpers\Url;
 use yii\helpers\Html;
 
 $this->title = 'Изменить событие: ' . $model->title;
@@ -20,3 +20,22 @@ $this->params['breadcrumbs'][] = 'Изменить';
     ]) ?>
 
 </div>
+
+<?php $script = "
+    editorModel();
+	setInterval(editorModel, 30000);
+
+	function editorModel() {
+	    $.ajax({
+	        url: '".Url::toRoute(['event/editor-model', 'id' => $model->id])."',
+	    });
+	}
+";
+
+if($editorModel !== null) {
+    $script .= "
+        alert('Внимание! Событие в данный момент редактируется другим пользователем!')
+    ";
+}
+
+$this->registerJs($script, yii\web\View::POS_END);?>

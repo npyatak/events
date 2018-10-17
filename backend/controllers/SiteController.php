@@ -51,15 +51,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $searchModel = new SettingsSearch();
-        $params = Yii::$app->request->queryParams;
-        $params['SettingsSearch']['type'] = [Settings::TYPE_MAIN, Settings::TYPE_IMAGE];
-        $dataProvider = $searchModel->search($params);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return Yii::$app->runAction('event/index');
     }
 
     /**

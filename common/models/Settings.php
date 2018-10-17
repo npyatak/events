@@ -7,9 +7,11 @@ use yii\helpers\ArrayHelper;
 
 class Settings extends \yii\db\ActiveRecord
 {
-    const TYPE_MAIN = 1;
-    const TYPE_FOOTER = 2;
+    const TYPE_STRING = 1;
+    const TYPE_TEXT = 2;
+    const TYPE_CHECKBOX_LIST = 3;
     const TYPE_IMAGE = 5;
+    const TYPE_FILE = 6;
 
     public $imageFile;
     /**
@@ -45,8 +47,23 @@ class Settings extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert) {
+        if($this->type == self::TYPE_CHECKBOX_LIST) {
+            $this->value = json_encode($this->value);
+        }
+
+        return parent::beforeSave($insert);
+    }
+
+
+    public function afterFind() {
+        if($this->type == self::TYPE_CHECKBOX_LIST) {
+            $this->value = json_decode($this->value);
+        }
+    }
+
     public function getSettings() {
-        $settings = static::find()->asArray()->all();
+        $settings = static::find()->all();
         return ArrayHelper::map($settings, 'key', 'value');
     }
 
@@ -67,5 +84,15 @@ class Settings extends \yii\db\ActiveRecord
 
     public function getImageSrcPath() {
         return __DIR__ . '/../../frontend/web/uploads/';
+    }
+
+    public function getSocials() {
+        return [
+            'fb' => 'fb',
+            'tw' => 'tw', 
+            'ok' => 'ok', 
+            'vk' => 'vk', 
+            'tg' => 'tg'
+        ];
     }
 }
