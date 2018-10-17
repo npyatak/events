@@ -2601,6 +2601,11 @@ footer p a {
         -o-transform: translateX(0);
         transform: translateX(0);
     }
+    .grid-item.w540-h290,
+    .grid-item.w540-h620,
+    .grid-item.w250-h290 {
+        height: 349px;
+    }
     header .slogan h1 {
         font-size: 65px;
     }
@@ -2703,6 +2708,11 @@ footer p a {
     .grid-item.w540-h620,
     .grid-item.w250-h290 {
         width: 100%;
+    }
+    .grid-item.w540-h290,
+    .grid-item.w540-h620,
+    .grid-item.w250-h290 {
+        height: 310px;
     }
     .grid-item_desc h2 {
         margin-bottom: 10px !important;
