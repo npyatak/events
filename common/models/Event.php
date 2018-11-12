@@ -292,7 +292,7 @@ class Event extends \yii\db\ActiveRecord
         return $secondForm ? self::getMonthsArray()[$monthId][1] : self::getMonthsArray()[$monthId][0];
     }
 
-    public function getMonthsArray() {
+    public static function getMonthsArray() {
         return [
             1 => ['январь', 'января'],
             2 => ['февраль', 'февраля'],
