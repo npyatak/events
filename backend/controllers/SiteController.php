@@ -24,7 +24,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'web-dav-test'],
                         'allow' => true,
                     ],
                     [
@@ -85,5 +85,11 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionWebDavTest()
+    {
+        print_r(Yii::$app->webdavFs->get('yii_test'));
+        print_r(Yii::$app->webdavFs->listContents());
     }
 }

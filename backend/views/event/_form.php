@@ -73,6 +73,35 @@ use common\models\Event;
 
     <?= $form->field($model, 'leading_text')->textarea(['rows' => 3]) ?>
 
+
+    <div class="row">
+        <div class="col-sm-9">
+            <div id="image"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;reset&quot;)">
+                  <span class="fa fa-refresh"></span>
+                </span>
+              </button>
+              <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                <input class="sr-only" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff" type="file">
+                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="Import image with Blob URLs">
+                  <span class="fa fa-upload"></span>
+                </span>
+              </label>
+              <button type="button" class="btn btn-primary" data-method="destroy" title="Destroy">
+                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;destroy&quot;)">
+                  <span class="fa fa-power-off"></span>
+                </span>
+              </button>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-sm-6">
             <?=$form->field($model, 'main_page_image_url')->widget(ElfinderInput::className());?>

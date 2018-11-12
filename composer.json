@@ -28,7 +28,10 @@
         "yiisoft/yii2-imagine": "~2.0.0",
         "unclead/yii2-multiple-input": "~2.0",
         "jmartinez/yii2-jota-ics": "*",
-        "sadovojav/yii2-ckeditor": "dev-master"
+        "sadovojav/yii2-ckeditor": "dev-master",
+        "league/flysystem-webdav": "~1.0",
+        "creocoder/yii2-flysystem": "*",
+        "mihaildev/yii2-elfinder-flysystem": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

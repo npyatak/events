@@ -17,6 +17,10 @@ class ShareWidget extends \yii\base\Widget
     public function run() {
     	$socialsArr = Yii::$app->settings->get('socials');
 
+    	if(empty($socialsArr)) {
+    		return false;
+    	}
+
     	if(in_array('fb', $socialsArr)) {
 	    	echo $this->renderWrapOpen($soc = 'fb');
 			    echo Html::a('<i class="fa fa-facebook"></i>', '#', [
