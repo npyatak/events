@@ -158,7 +158,7 @@ class Event extends \yii\db\ActiveRecord
         return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable(EventCategory::tableName(), ['event_id' => 'id']);
     }
 
-    public function getValueIndexArray() {
+    public static function getValueIndexArray() {
         $res = [];
         for ($i=1; $i <= 10 ; $i++) { 
             $res[$i] = $i;
@@ -167,14 +167,14 @@ class Event extends \yii\db\ActiveRecord
         return $res;
     }
 
-    public function getStatusArray() {
+    public static function getStatusArray() {
         return [
             self::STATUS_INACTIVE => 'Неактивно',
             self::STATUS_ACTIVE => 'Активно',
         ];
     }
 
-    public function getBlocksArray() {
+    public static function getBlocksArray() {
         return [
             '\common\models\blocks\BlockContent',
             '\common\models\blocks\BlockQuotation',
@@ -192,7 +192,7 @@ class Event extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getBlocksList() {
+    public static function getBlocksList() {
         $res = [];
         foreach (self::getBlocksArray() as $block) {
             $res[$block] = $block::getBlockName();
@@ -217,7 +217,7 @@ class Event extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getSizeArray() {
+    public static function getSizeArray() {
         return [
             self::SIZE_SMALL => 'Маленькая',
             self::SIZE_MEDIUM => 'Средняя',
@@ -279,7 +279,7 @@ class Event extends \yii\db\ActiveRecord
         return $this->seasonsArray[$seasonsMonths[date('m', $this->date)]];
     }
 
-    public function getSeasonsArray() {
+    public static function getSeasonsArray() {
         return [
             1 => 'зима',
             2 => 'весна',

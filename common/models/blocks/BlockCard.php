@@ -44,7 +44,7 @@ class BlockCard extends Block
         );
     }
 
-    public function getBlockName() {
+    public static function getBlockName() {
         return 'Карточка';
     }
 

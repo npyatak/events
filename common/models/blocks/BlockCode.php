@@ -26,7 +26,7 @@ class BlockCode extends Block
         );
     }
 
-    public function getBlockName() {
+    public static function getBlockName() {
         return 'HTML-код';
     }
 

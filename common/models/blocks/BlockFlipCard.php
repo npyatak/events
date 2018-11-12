@@ -29,7 +29,7 @@ class BlockFlipCard extends Block
         );
     }
 
-    public function getBlockName() {
+    public static function getBlockName() {
         return 'Флип-карта';
     }
 

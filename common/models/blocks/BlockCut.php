@@ -27,7 +27,7 @@ class BlockCut extends Block
         );
     }
 
-    public function getBlockName() {
+    public static function getBlockName() {
         return '- кат начало';
     }
 

@@ -46,7 +46,7 @@ class BlockGallery extends Block
         );
     }
 
-    public function getBlockName() {
+    public static function getBlockName() {
         return 'Галерея';
     }
 

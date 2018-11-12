@@ -58,7 +58,7 @@ class BlockFactItem extends \yii\db\ActiveRecord
         return $this->hasOne(BlockFact::className(), ['id' => 'block_fact_id']);
     }
 
-    public function getTypesArray() {
+    public static function getTypesArray() {
         return [
             self::TYPE_TOP => 'Число сбоку',
             self::TYPE_SIDE => 'Число сверху',

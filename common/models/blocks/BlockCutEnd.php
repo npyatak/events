@@ -14,7 +14,7 @@ class BlockCutEnd extends Block
         return '{{%block_cut_end}}';
     }
 
-    public function getBlockName() {
+    public static function getBlockName() {
         return '- кат окончание';
     }
 }

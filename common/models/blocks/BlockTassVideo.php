@@ -29,7 +29,7 @@ class BlockTassVideo extends Block
         );
     }
 
-    public function getBlockName() {
+    public static function getBlockName() {
         return 'Видео ТАСС';
     }
 

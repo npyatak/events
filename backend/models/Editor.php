@@ -206,7 +206,7 @@ class Editor extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public function getRolesArray() {
+    public static function getRolesArray() {
         return [
             self::ROLE_EDITOR => 'Редактор',
             self::ROLE_ADMIN => 'Администратор',

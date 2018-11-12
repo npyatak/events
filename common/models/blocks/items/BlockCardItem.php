@@ -53,7 +53,7 @@ class BlockCardItem extends \yii\db\ActiveRecord
         return $this->hasOne(BlockCard::className(), ['id' => 'block_card_id']);
     }
 
-    public function getIconsArray() {
+    public static function getIconsArray() {
         return [
             self::ICON_QUESTION => 'Иконка ?',
             self::ICON_INFO => 'Иконка i',

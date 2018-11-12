@@ -29,7 +29,7 @@ class BlockImage extends Block
         );
     }
 
-    public function getBlockName() {
+    public static function getBlockName() {
         return 'Изображение';
     }
 
