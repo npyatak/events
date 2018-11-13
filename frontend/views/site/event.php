@@ -109,6 +109,13 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                 </div>
 
                 <div class="container_inner">
+                    <div class="copyright">
+                        <span>В проекте использованы фотографии:</span>
+                        <p>ТАСС, Государственный архив Российской Федерации, Государственный центральный музей современной истории России, Фонд Государственного музея политической истории России/Сергей Смольский/ТАСС</p>
+                    </div>
+                </div>
+
+                <div class="container_inner">
                     <div class="footer">
                         <div class="row justify-content-end m-0">
                             <div class="footer-inner m-r-40">
@@ -149,7 +156,6 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                     </div>
                 </div>
             </div>
-
             <?php if(!empty($event->similarIds)):?>
             <div class="more-events">
                 <div class="more-events_title">похожие события</div>

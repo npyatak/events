@@ -1378,7 +1378,7 @@ header .desc {
     display: flex;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    padding-bottom: 80px;
+    padding-bottom: 50px;
     justify-content: flex-start;
     margin: 0 -20px;
 }
@@ -2202,6 +2202,7 @@ footer p {
     margin-bottom: 0;
     font-size: 13px;
     line-height: 18px;
+    word-wrap: break-word;
 }
 footer p b,
 footer p strong {
@@ -2288,6 +2289,36 @@ footer p a {
 
 .block_map {
     margin-bottom: 60px;
+}
+
+.other-years {
+    margin-bottom: 65px;
+}
+.other-years a {
+    font: 14px 'ProximaNova-Bold', sans-serif;
+    text-decoration: none;
+    color: #00077b;
+}
+.other-years a:not(:last-child) {
+    margin-right: 30px;
+}
+
+.copyright {
+    max-width: 545px;
+    margin-bottom: 60px;
+    padding-left: 70px;
+}
+.copyright>span {
+    margin-bottom: 0;
+    font: 13px 'ProximaNova-Bold';
+    line-height: 20px;
+    color: #999999;
+}
+.copyright>p {
+    margin-bottom: 0;
+    font: 13px 'ProximaNova-Regular';
+    line-height: 20px;
+    color: #999999;
 }
 
 
@@ -2692,6 +2723,9 @@ footer p a {
         width: 100%;
         margin-right: 0 !important;
     }
+    .copyright {
+        padding-left: 0;
+    }
 }
 @media (max-width: 767px) {
     .event-detail {
@@ -2924,6 +2958,14 @@ footer p a {
     }
     .month-title h2 {
         font: 24px 'ProximaNova-Semibold', sans-serif;
+    }
+    .other-years a {
+        display: block;
+        margin-right: 0 !important;
+        font-size: 18px;
+    }
+    .other-years a:not(:last-child) {
+        margin-bottom: 25px;
     }
 }
 @media (max-width: 600px) {
