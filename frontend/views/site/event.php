@@ -135,19 +135,19 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                         <div class="col-6">
                                             <?php if($prevEvent):?>
                                             <div class="footer-arrow">
-                                                <a href="<?=$prevEvent->url;?>"><i class="fa fa-chevron-left"></i></a>
+                                                <a href="<?=$prevEvent->url;?>" <?=$prevEvent->noFollow;?>><i class="fa fa-chevron-left"></i></a>
                                             </div>
                                             <div class="footer-title">предыдущее</div>
-                                            <div class="footer-text"><a href="<?=$prevEvent->url;?>"><?=$prevEvent->title;?></a></div>
+                                            <div class="footer-text"><a href="<?=$prevEvent->url;?>" <?=$prevEvent->noFollow;?>><?=$prevEvent->title;?></a></div>
                                             <?php endif;?>
                                         </div>
                                         <div class="col-6">
                                             <?php if($nextEvent):?>
                                             <div class="footer-arrow">
-                                                <a href="<?=$nextEvent->url;?>"><i class="fa fa-chevron-right"></i></a>
+                                                <a href="<?=$nextEvent->url;?>" <?=$nextEvent->noFollow;?>><i class="fa fa-chevron-right"></i></a>
                                             </div>
                                             <div class="footer-title">следующее</div>
-                                            <div class="footer-text"><a href="<?=$nextEvent->url;?>"><?=$nextEvent->title;?></a></div>
+                                            <div class="footer-text"><a href="<?=$nextEvent->url;?>" <?=$nextEvent->noFollow;?>><?=$nextEvent->title;?></a></div>
                                             <?php endif;?>
                                         </div>
                                     <?php endif;?>
@@ -161,7 +161,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
             <div class="more-events">
                 <div class="more-events_title">похожие события</div>
                 <?php foreach ($event->similarEvents as $similar):?>
-                    <a href="<?=$similar->url;?>" class="item">
+                    <a href="<?=$similar->url;?>" <?=$similar->noFollow;?> class="item">
                         <?php if($similar->small_image_url):?>
                         <div class="item-image" style="background-image:url(<?=$similar->getImageUrl($similar->small_image_url, '249x140');?>)">
                             <span class="bg" style="background-color:<?=$color ? $color : '';?>"></span>

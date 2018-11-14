@@ -241,6 +241,14 @@ class Event extends \yii\db\ActiveRecord
         }
     }
 
+    public function getNoFollow() {
+        if($this->redirect_url) {
+            if(substr_count($this->redirect_url, 'tass.ru') == 0) {
+                return 'rel=nofollow';
+            }
+        }
+    }
+
     public function getImageSrcPath() {
         return __DIR__ . '/../../frontend/web';
     }

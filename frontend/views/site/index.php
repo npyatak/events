@@ -81,7 +81,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 		<?php if($otherYears):?>
 	        <div class="other-years">
 	        	<?php foreach ($otherYears as $y) {
-	        		echo Html::a($y->title, $y->url);
+	        		echo Html::a('События '.$y->number, $y->url);
 	        	}?>
 	        </div>
 	    <?php endif;?>
