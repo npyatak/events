@@ -78,11 +78,13 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 				</ul>
 			</aside>
 		</div>
-        <div class="other-years">
-            <a href="">События 2018</a>
-            <a href="">События 2019</a>
-            <a href="">События 2020</a>
-        </div>
+		<?php if($otherYears):?>
+	        <div class="other-years">
+	        	<?php foreach ($otherYears as $y) {
+	        		echo Html::a($y->title, $y->url);
+	        	}?>
+	        </div>
+	    <?php endif;?>
 	</div>
 </div>
 

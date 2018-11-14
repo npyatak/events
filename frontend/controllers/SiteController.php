@@ -45,6 +45,7 @@ class SiteController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
         $this->yearModel = $yearModel;
+        $otherYears = Year::find()->where(['show_on_main' => 1])->andWhere(['not', ['id' => $yearModel->id]])->all();
 
         $query = Event::find()
             ->where(['between', 'date', \DateTime::createFromFormat('!Y', $yearModel->number)->format('U'), \DateTime::createFromFormat('!Y', $yearModel->number + 1)->format('U')])
@@ -74,6 +75,7 @@ class SiteController extends Controller
             'category' => $category,
             'categories' => Category::find()->all(),
             'shares' => Yii::$app->cacheFrontend->get('shares') ? Yii::$app->cacheFrontend->get('shares') : Share::find()->all(),
+            'otherYears' => $otherYears,
         ]);
     }
 

@@ -43,27 +43,12 @@ return [
             'defaultTimeZone' => 'Europe/Moscow',
             'locale' => 'ru-RU'
         ],
-        // 'webdavFs' => [
-        //     'class' => 'creocoder\flysystem\WebDAVFilesystem',
-        //     //'baseUri' => 'http://192.168.25.62/events/',
-        //     'baseUri' => 'http://cdn-dev.corp.tass.ru/events/',
-        //     'userName' => 'events',
-        //     'password' => 'Kv04RU4BUzo8j8UR',
-        // ],
-        'webdavFs' => [
-            'class' => 'creocoder\flysystem\WebDAVFilesystem',
-            'baseUri' => 'http://192.168.25.62/academy/',
-            //'baseUri' => '192.168.25.62',
-            'userName' => 'academy',
-            'password' => '35vKEJgZ9WxYXweAESWe',
-            //'authType' => \Sabre\DAV\Client::AUTH_BASIC,
-        ],
     ],
 
     /*'controllerMap' => [
         'elfinder' => [
             'class' => 'mihaildev\elfinder\PathController',
-            'access' => ['@'],
+            //'access' => ['@'],
             'root' => [
                 'baseUrl'=>'',
                 'basePath'=>'@frontend/web',
@@ -72,15 +57,4 @@ return [
             ]
         ]
     ],*/
-    'controllerMap' => [
-        'elfinder' => [
-            'class' => 'mihaildev\elfinder\PathController',
-            //'access' => ['@'],
-            'root' => [
-                'class' => 'mihaildev\elfinder\flysystem\Volume',
-                'url' => 'http://cdn-dev.corp.tass.ru/events/',
-                'component' => 'webdavFs',
-            ]
-        ]
-    ],
 ];

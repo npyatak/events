@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 
+use yii\helpers\Url;
 /**
  * This is the model class for table "{{%year}}".
  *
@@ -79,5 +80,10 @@ class Year extends \yii\db\ActiveRecord
     public function getShares()
     {
         return $this->hasMany(Share::className(), ['year_id' => 'id']);
+    }
+
+    public function getUrl()
+    {        
+        return Url::toRoute(['site/index', 'year' => $this->is_current ? null : $this->number]);
     }
 }

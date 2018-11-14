@@ -58,9 +58,9 @@ return [
             'showScriptName' => false,
             'baseUrl' => '/',
             'rules' => [
-                '' => 'site/index',
-                'sitemap.xml' => 'site/sitemap',
+                // 'sitemap.xml' => 'site/sitemap',
                 '<year:\d+>' => 'site/index',
+                '' => 'site/index',
                 '<year:\d+>/category/<alias:\w+>' => 'site/index',
 
                 '<year:\d+>/event/<alias>' => 'site/event',

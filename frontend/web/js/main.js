@@ -135,7 +135,7 @@ function getShareUrl(obj) {
         url  = 'http://vkontakte.ru/share.php?';
         url += 'url='          + encodeURIComponent(obj.data('url'));
         url += '&title='       + encodeURIComponent(obj.data('title'));
-        url += '&text='        + encodeURIComponent(obj.data('desc'));
+        url += '&text='        + encodeURIComponent(obj.data('text'));
         url += '&image='       + encodeURIComponent(obj.data('image'));
         url += '&noparse=true';
     } else if(obj.data('type') == 'fb') {
@@ -143,9 +143,11 @@ function getShareUrl(obj) {
         url += 'u=' + encodeURIComponent(obj.data('url'));
         url += '&title='     + encodeURIComponent(obj.data('title'));
     } else if(obj.data('type') == 'ok') {
-        url  = 'http://www.ok.ru/dk?st.cmd=addShare&st.s=1';
-        url += '&st.comments='  + encodeURIComponent(obj.data('desc'));
-        url += '&st._surl='     + encodeURIComponent(obj.data('url'));
+        url  = 'https://connect.ok.ru/offer';
+        url += '?url=' + encodeURIComponent(obj.data('url'));
+        url += '&title=' + encodeURIComponent(obj.data('title'));
+        url += '&text=' + encodeURIComponent(obj.data('text'));
+        url += '&imageUrl=' + encodeURIComponent(obj.data('image'));
     } else if(obj.data('type') == 'tw') {
         url  = 'http://twitter.com/share?';
         url += 'text='      + encodeURIComponent(obj.data('title'));

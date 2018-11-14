@@ -50,6 +50,8 @@ class ShareWidget extends \yii\base\Widget
 			    echo Html::a('<i class="fa fa-odnoklassniki"></i>', '#', [
 			        'class' => $this->itemClass.' '.(isset($this->addItemClasses['ok']) ? $this->addItemClasses['ok'] : ''),
 			        'data-type' => 'ok',
+			        'data-title' => $this->share['title'],
+			        'data-image' => $this->share['image'],
 			        'data-url' => $this->share['url'],
 			        'data-text' => $this->share['text'],
 			    ]);

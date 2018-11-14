@@ -181,3 +181,10 @@ ul.sortable li {
     cursor: move;
     white-space: nowrap;
 }
+.order-controls {
+    font-size: 18px;
+    vertical-align: middle;
+}
+.order-controls a {
+    margin: 0 5px;
+}

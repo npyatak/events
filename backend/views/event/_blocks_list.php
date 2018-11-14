@@ -58,32 +58,74 @@ use common\models\Event;
             updateBlocksOrder();
         },
         start: function(event, ui) {
-            var textareas = ui.item.find('textarea');
-            $(textareas).each(function() {
-                var id = $(this).attr('id');
-                if (typeof id != 'undefined') {
-                    var editorInstance = CKEDITOR.instances[id];
-                    window.ckeConfigs[id] = editorInstance.config;
-                    editorInstance.destroy();
-                    CKEDITOR.remove(id);
-                }
-            });
+            saveTextareas(ui.item.find('textarea'));
         },
         stop: function(event, ui) {
-            var textareas = ui.item.find('textarea');
-            $(textareas).each(function() {
-                var id = $(this).attr('id');
-                if (typeof id != 'undefined') {
-                    CKEDITOR.replace(id, window.ckeConfigs[id]);
-                }
-            });
+            loadTextareas(ui.item.find('textarea'))
         }
     });
+
+    $(document).on('click', '.block .move-up', function(e) {
+        e.defaultPrevented;
+        var block = $(this).closest('.block');
+        if(block.find('.hidden-order').val() == 1) {
+            return false;
+        }
+        var textareas = block.find('textarea');
+        saveTextareas(textareas);
+
+        block.insertBefore(block.prev());
+        
+        loadTextareas(textareas);
+
+        updateBlocksOrder();
+
+        return false;
+    });
+
+    $(document).on('click', '.block .move-down', function() {
+        var block = $(this).closest('.block');
+        if(block.find('.hidden-order').val() == $('.block').length) {
+            return false;
+        }
+        var textareas = block.find('textarea');
+        saveTextareas(textareas);
+
+        block.insertAfter(block.next());
+        
+        loadTextareas(textareas);
+
+        updateBlocksOrder();
+
+        return false;
+    });
+
+    function saveTextareas(textareas) {
+        $(textareas).each(function() {
+            var id = $(this).attr('id');
+            if (typeof id != 'undefined') {
+                var editorInstance = CKEDITOR.instances[id];
+                window.ckeConfigs[id] = editorInstance.config;
+                editorInstance.destroy();
+                CKEDITOR.remove(id);
+            }
+        });
+    }
+
+    function loadTextareas(textareas) {
+        $(textareas).each(function() {
+            var id = $(this).attr('id');
+            if (typeof id != 'undefined') {
+                CKEDITOR.replace(id, window.ckeConfigs[id]);
+            }
+        });
+    }
 
     function updateBlocksOrder() {
         $('.block').each(function() {
             var order = $(this).index() + 1;
             $(this).find('.hidden-order').val(order);
+            $(this).find('.order-number').html(order);
         });
     }
 ";

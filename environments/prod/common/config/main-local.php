@@ -3,14 +3,40 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-            'username' => 'root',
-            'password' => '',
+            'dsn' => 'mysql:host=<mysql.hostname>;port=<mysql.port>;dbname=<mysql.database>',
+            'username' => '<mysql.username>',
+            'password' => '<mysql.password>',
             'charset' => 'utf8',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',
+        ],        
+        'memCache' => [
+            'class' => 'yii\caching\MemCache',
+            'servers' => [
+                [
+                    'host' => '<memcached.host>',
+                    'port' => '<memcached.port>',
+                ],
+            ],
         ],
+        'webdavFs' => [
+            'class' => 'creocoder\flysystem\WebDAVFilesystem',
+            'baseUri' => '<cdn.host>',
+            'userName' => '<cdn.user>',
+            'password' => '<cdn.password>',
+        ],
+    ],
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\PathController',
+            'root' => [
+                'class' => 'mihaildev\elfinder\flysystem\Volume',
+                'url' => '<cdn.host>',
+                'path' => 'events/images',
+                'component' => 'webdavFs',
+            ]
+        ]
     ],
 ];
