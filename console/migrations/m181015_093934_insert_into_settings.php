@@ -47,5 +47,6 @@ class m181015_093934_insert_into_settings extends Migration {
 
     public function safeDown() {
         $this->delete('{{%settings}}', ['key' => 'socials']);
+        $this->delete('{{%settings}}', ['key' => 'smi2_code']);
     }
 }

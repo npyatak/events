@@ -74,6 +74,19 @@ class Year extends \yii\db\ActiveRecord
         ];
     }
 
+    public function afterSave($insert, $changedAttributes) {
+        if($this->is_current) {
+            $otherYears = self::find()->where(['not', ['id' => $this->id]])->all();
+
+            foreach ($otherYears as $y) {
+                $y->is_current = 0;
+                $y->save(false, ['is_current']);
+            }
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
