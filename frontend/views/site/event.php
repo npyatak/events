@@ -108,12 +108,13 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                     </div>
                 </div>
 
-                <div class="container_inner">
-                    <div class="copyright">
-                        <span>В проекте использованы фотографии:</span>
-                        <p>ТАСС, Государственный архив Российской Федерации, Государственный центральный музей современной истории России, Фонд Государственного музея политической истории России/Сергей Смольский/ТАСС</p>
+                <?php if($event->copyright):?>
+                    <div class="container_inner">
+                        <div class="copyright">
+                            <?=$event->copyright;?>
+                        </div>
                     </div>
-                </div>
+                <?php endif;?>
 
                 <div class="container_inner">
                     <div class="footer">

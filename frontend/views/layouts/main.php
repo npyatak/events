@@ -90,27 +90,47 @@ AppAsset::register($this);
             <div class="pull-left">
                 <div class="row justify-content-between">
                     <div class="col-8">
-                        <div class="block">
-                            <h6>Над проектом работали:</h6>
-                            <?=Yii::$app->controller->yearModel->worked_on_project;?>
-                        </div>
-                        <div class="block">
-                            <h6>В проекте использованы фотографии и видео:</h6>
-                            <?=Yii::$app->controller->yearModel->used_multimedia;?>
-                        </div>
-                        <div class="block">
-                            <h6>Источники:</h6>                         
-                            <?=Yii::$app->controller->yearModel->sources;?>
-                        </div>
+                        <?php if(Yii::$app->controller->yearModel->worked_on_project):?>
+                            <div class="block">
+                                <h6>Над проектом работали:</h6>
+                                <?=Yii::$app->controller->yearModel->worked_on_project;?>
+                            </div>
+                        <?php endif;?>
+                        <?php if(Yii::$app->controller->yearModel->used_multimedia):?>
+                            <div class="block">
+                                <h6>В проекте использованы фотографии и видео:</h6>
+                                <?=Yii::$app->controller->yearModel->used_multimedia;?>
+                            </div>
+                        <?php endif;?>
+                        <?php if(Yii::$app->controller->yearModel->sources):?>
+                            <div class="block">
+                                <h6>Источники:</h6>                         
+                                <?=Yii::$app->controller->yearModel->sources;?>
+                            </div>
+                        <?php endif;?>
                     </div>
                     <div class="col-3">
-                        <div class="block">
-                            <h6>Благодарности:</h6>                         
-                            <?=Yii::$app->controller->yearModel->gratitude;?>
-                        </div>
-                        <div class="block">
-                            <?=Yii::$app->controller->yearModel->additional;?>
-                        </div>
+                        <?php if(Yii::$app->controller->yearModel->gratitude):?>
+                            <div class="block">
+                                <h6>Благодарности:</h6>                         
+                                <?=Yii::$app->controller->yearModel->gratitude;?>
+                            </div>
+                        <?php endif;?>
+                        <?php if(Yii::$app->controller->yearModel->additional):?>
+                            <div class="block">
+                                <?=Yii::$app->controller->yearModel->additional;?>
+                            </div>
+                        <?php endif;?>
+                        <?php if(Yii::$app->controller->yearModel->partner_text):?>
+                            <div class="block">
+                                <p>
+                                    <?=Yii::$app->controller->yearModel->partner_url ? 
+                                        Html::a(Yii::$app->controller->yearModel->partner_text, Yii::$app->controller->yearModel->partner_url) :
+                                        Yii::$app->controller->yearModel->partner_text;
+                                    ?>
+                                </p>
+                            </div>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>

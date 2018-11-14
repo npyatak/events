@@ -90,6 +90,6 @@ class SiteController extends Controller
     public function actionWebDavTest()
     {
         //print_r(Yii::$app->webdavFs->getMetadata('yii_test'));
-        print_r(Yii::$app->webdavFs->listContents('academy', true));
+        print_r(Yii::$app->webdavFs->listContents('events/images', true));
     }
 }
