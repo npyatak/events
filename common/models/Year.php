@@ -5,27 +5,7 @@ namespace common\models;
 use Yii;
 
 use yii\helpers\Url;
-/**
- * This is the model class for table "{{%year}}".
- *
- * @property integer $id
- * @property integer $number
- * @property integer $is_current
- * @property integer $show_on_main
- * @property string $title
- * @property string $leading_text
- * @property string $logo_url
- * @property string $main_page_image
- * @property string $worked_on_project
- * @property string $used_multimedia
- * @property string $sources
- * @property string $gratitude
- * @property string $additional
- * @property string $partner_text
- * @property string $partner_url
- *
- * @property Share[] $shares
- */
+
 class Year extends \yii\db\ActiveRecord
 {
     /**
@@ -45,7 +25,7 @@ class Year extends \yii\db\ActiveRecord
             [['number', 'title'], 'required'],
             [['number', 'is_current', 'show_on_main'], 'integer'],
             [['worked_on_project', 'used_multimedia', 'sources', 'gratitude', 'additional', 'partner_text'], 'string'],
-            [['title', 'leading_text', 'logo_url', 'main_page_image', 'partner_url'], 'string', 'max' => 255],
+            [['title', 'leading_text', 'logo_url', 'main_page_image', 'partner_url', 'partner_image_index', 'partner_image_event'], 'string', 'max' => 255],
             ['number', 'unique'],
         ];
     }
@@ -71,6 +51,8 @@ class Year extends \yii\db\ActiveRecord
             'additional' => 'Дополнительный текстовый блок',
             'partner_text' => 'Текст партнера для правой колонки на главной',
             'partner_url' => 'Ссылка с текста партнера на главной',
+            'partner_image_index' => 'Картинка баннера справа на главной',
+            'partner_image_event' => 'Картинка баннера справа на событии',
         ];
     }
 

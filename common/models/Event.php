@@ -17,6 +17,7 @@ class Event extends \yii\db\ActiveRecord
     const DATE_TYPE_DATE = 1;
     const DATE_TYPE_MONTH_AND_YEAR = 2;
     const DATE_TYPE_SEASON_AND_YEAR = 3;
+    const DATE_UNKNOWN = 4;
 
     const SIZE_SMALL = 1;
     const SIZE_MEDIUM = 2;
@@ -49,10 +50,8 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'size'], 'required'],
-            [['view_date_type', 'dateFormatted', 'alias'], 'required', 'when' => function($model) {
-                return $model->is_date_unknown == null;
-            }],
-            [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date', 'is_date_unknown'], 'integer'],
+            [['view_date_type', 'dateFormatted', 'alias'], 'required'],
+            [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
             [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url'], 'string', 'max' => 255],
             [['categoryIds', 'similarIds', 'copyright'], 'safe'],
             [['alias'], 'unique'],
@@ -97,7 +96,6 @@ class Event extends \yii\db\ActiveRecord
             'copyright' => 'Копирайты',
             'meta_title' => 'META title',
             'meta_description' => 'META description',
-            'is_date_unknown' => 'Дата неизвестна',
             'redirect_url' => 'URL редиректа'
         ];
     }
@@ -214,6 +212,7 @@ class Event extends \yii\db\ActiveRecord
             self::DATE_TYPE_DATE => 'Число и месяц',
             self::DATE_TYPE_MONTH_AND_YEAR => 'Месяц и год',
             self::DATE_TYPE_SEASON_AND_YEAR => 'Сезон и год',
+            self::DATE_UNKNOWN => 'Без точной даты',
         ];
     }
 
@@ -254,7 +253,14 @@ class Event extends \yii\db\ActiveRecord
     }
 
     public function getImageUrl($image, $thumb_size = false) {
-        if(is_file($this->imageSrcPath.$image)) {
+        if(isset(Yii::$app->webdavFs)) {
+            $parse = parse_url($image);
+            if(isset($parse['scheme'])) {
+                return $image;
+            } else {
+                return Yii::$app->webdavFs->baseUri.$image;
+            }
+        } else if(is_file($this->imageSrcPath.$image)) {
             return Url::to($image);
         } else {
             return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
@@ -275,6 +281,9 @@ class Event extends \yii\db\ActiveRecord
                 break;
             case self::DATE_TYPE_SEASON_AND_YEAR:
                 $date = [$this->season, $dateTime->format('Y')];
+                break;
+            case self::DATE_UNKNOWN:
+                $date = ['без точной даты', null];
                 break;
         }
 

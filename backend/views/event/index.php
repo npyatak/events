@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use backend\assets\UIAsset;
+use kartik\date\DatePicker;
 
 UIAsset::register($this);
 
@@ -36,7 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'date',
                     'value' => function($data) {
                         return $data->dateFormatted;
-                    }
+                    },
+                    'filter' => DatePicker::widget([
+                        'model' => $searchModel,
+                        'attribute' => 'dateFormatted',
+                        'removeButton' => true,
+                        'type' => 1,
+                        'pluginOptions' => [
+                            // 'startView'=>'year',
+                            // 'minViewMode'=>'months',
+                            'format' => 'dd.mm.yyyy',
+                        ]
+                    ])
                 ],
                 [
                     'attribute' => 'main_page_image_url',

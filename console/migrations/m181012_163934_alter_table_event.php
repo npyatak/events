@@ -15,7 +15,6 @@ class m181012_163934_alter_table_event extends Migration {
         $this->addColumn("{{%event}}", 'short_title', $this->string(255));
         $this->addColumn("{{%event}}", 'meta_title', $this->string(255));
         $this->addColumn("{{%event}}", 'meta_description', $this->string(255));
-        $this->addColumn("{{%event}}", 'is_date_unknown', $this->integer(1));
         $this->addColumn("{{%event}}", 'redirect_url', $this->string(255));
     }
 
@@ -24,7 +23,6 @@ class m181012_163934_alter_table_event extends Migration {
         $this->dropColumn("{{%event}}", 'short_title');
         $this->dropColumn("{{%event}}", 'meta_title');
         $this->dropColumn("{{%event}}", 'meta_description');
-        $this->dropColumn("{{%event}}", 'is_date_unknown');
         $this->dropColumn("{{%event}}", 'redirect_url');
     }
 }

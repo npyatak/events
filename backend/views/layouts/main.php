@@ -21,7 +21,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title>
-        <?=Yii::$app->settings->get('currentYear');?> год. Краткое содержание. Админка. <?= $this->title ? '- '.Html::encode($this->title) : ''?>
+        ТАСС события - админка<?= $this->title ? ' - '.Html::encode($this->title) : ''?>
     </title>
     <?php $this->head() ?>
 </head>

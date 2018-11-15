@@ -3,6 +3,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use common\components\CKEditor;
 use yii\widgets\ActiveForm;
+use common\components\ElfinderInput;
 ?>
 
 <div class="admin-form">
@@ -81,12 +82,23 @@ use yii\widgets\ActiveForm;
         ]);?>
     </div>
 
+    <hr>
+    <h3>Баннер справа</h3>
     <div class="row">
         <div class="col-sm-9">
             <?= $form->field($model, 'partner_text')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-3">
             <?= $form->field($model, 'partner_url')->textInput() ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model, 'partner_image_index')->widget(ElfinderInput::className());?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'partner_image_event')->widget(ElfinderInput::className());?>
         </div>
     </div>
 

@@ -35,28 +35,25 @@ use common\models\Event;
     <?php endif;?>
 
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-3">
             <?= $form->field($model, 'short_title')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-2">
-            <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
-        </div>
         <div class="col-sm-3">
-            <?= $form->field($model, 'redirect_url')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
     <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model, 'redirect_url')->textInput(['maxlength' => true]) ?>
+        </div>
         <div class="col-sm-3">
-            <?= $form->field($model, 'is_date_unknown')->checkbox() ?>
+            <?= $form->field($model, 'view_date_type')->dropDownList($model->dateTypeList)?>
         </div>
-        <div class="col-sm-2">
-            <?= $form->field($model, 'view_date_type')->dropDownList($model->dateTypeList, ['disabled' => $model->is_date_unknown != null])?>
-        </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <?= $form->field($model, 'dateFormatted')->widget(
                 DatePicker::className(), [
                     'removeButton' => false,
@@ -64,7 +61,6 @@ use common\models\Event;
                         // 'startView'=>'year',
                         // 'minViewMode'=>'months',
                         'format' => 'dd.mm.yyyy',
-                        'disabled' => $model->is_date_unknown != null
                     ]
                 ]
             );?>
@@ -207,17 +203,3 @@ use common\models\Event;
     <?php ActiveForm::end(); ?>
 
 </div>
-
-<?php $script = "
-    $('#event-is_date_unknown').change(function() {
-        if(this.checked) {
-            $('#event-dateformatted').prop('disabled', true);
-            $('#event-view_date_type').prop( 'disabled', true );
-        } else {
-            $('#event-dateformatted').prop('disabled', false);
-            $('#event-view_date_type').prop( 'disabled', false );
-        }
-    });
-";
-
-$this->registerJs($script, yii\web\View::POS_END);?>

@@ -27,6 +27,8 @@ class m181013_111327_updates_for_year extends Migration {
             'additional' => $this->text()->comment('Дополнительный текстовый блок'),
             'partner_text' => $this->text()->comment('Текст партнера для правой колонки на главной'),
             'partner_url' => $this->string(255)->comment('Ссылка с текста партнера на главной'),
+            'partner_image_index' => $this->string(255)->comment('Картинка баннера справа на главной'),
+            'partner_image_event' => $this->string(255)->comment('Картинка баннера справа на событии'),
         ], $tableOptions);
 
         $this->batchInsert('{{%year}}', ['id', 'number', 'is_current', 'show_on_main', 'title', 'leading_text', 'logo_url', 'main_page_image', 'worked_on_project', 'used_multimedia', 'sources', 'gratitude', 'additional'], [

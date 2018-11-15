@@ -48,7 +48,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                     }?>
                                 </div>
                             </div>
-                            <div class="event-date <?php if($event->view_date_type == Event::DATE_TYPE_DATE):?>day<?php endif;?>">
+                            <div class="event-date <?=$event->view_date_type == Event::DATE_TYPE_DATE ? 'day' : '';?>">
                             	<?php if($event->view_date_type == Event::DATE_TYPE_DATE):?>
                                     <div class="season">
                                         <div>
@@ -61,6 +61,12 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
                                         <div>
                                             <span><?=$event->viewDate[0];?></span>
                                             <span><?=$event->viewDate[1];?></span>
+                                        </div>
+                                    </div>
+                                <?php elseif($event->view_date_type == Event::DATE_UNKNOWN):?>
+                                    <div class="season">
+                                        <div>
+                                            <span><?=date('Y', $event->date);?></span>
                                         </div>
                                     </div>
                                 <?php else:?>

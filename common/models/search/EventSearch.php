@@ -12,14 +12,15 @@ use common\models\Event;
  */
 class EventSearch extends Event
 {
+    public $dateFormatted;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'date', 'value_index', 'status'], 'integer'],
-            [['title', 'alias'], 'safe'],
+            [['id', 'value_index', 'status'], 'integer'],
+            [['title', 'dateFormatted', 'alias'], 'safe'],
         ];
     }
 
@@ -55,6 +56,10 @@ class EventSearch extends Event
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
+        }
+
+        if($this->dateFormatted) {
+            $this->date = strtotime($this->dateFormatted);
         }
 
         // grid filtering conditions
