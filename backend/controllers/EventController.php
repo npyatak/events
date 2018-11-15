@@ -203,6 +203,15 @@ class EventController extends CController
         ]);
     }
 
+    public function actionUploadImages($id)
+    {
+        $model = $this->findModel($id);
+
+        return $this->render('upload-images', [
+            'model' => $model,
+        ]);
+    }
+
     /*public function actionBlocks($id) {
         $model = $this->findModel($id);
         $blockIDsOld = [];
