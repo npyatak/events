@@ -79,6 +79,10 @@ use common\models\Event;
         loadTextareas(textareas);
 
         updateBlocksOrder();
+        
+        $('html, body').animate({
+            scrollTop: block.offset().top - 50
+        }, 500);
 
         return false;
     });
@@ -96,6 +100,10 @@ use common\models\Event;
         loadTextareas(textareas);
 
         updateBlocksOrder();
+        
+        $('html, body').animate({
+            scrollTop: block.offset().top - 50
+        }, 500);
 
         return false;
     });
