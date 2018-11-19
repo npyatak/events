@@ -53,7 +53,7 @@ return [
             'root' => [
                 'class' => 'mihaildev\elfinder\flysystem\Volume',
                 'url' => '<cdn.host>',
-                'path' => 'images',
+                'path' => 'events/images',
                 'component' => 'webdavFs',
             ]
         ],
