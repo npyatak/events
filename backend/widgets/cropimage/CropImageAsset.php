@@ -13,7 +13,7 @@ class CropImageAsset extends AssetBundle
     ];
     public $js = [
         'js/cropper.js',
-        'js/script.js',
+        //'js/script.js',
     ];
     public $depends = [
         'backend\assets\AppAsset',

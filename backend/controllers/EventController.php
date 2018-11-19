@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use yii\imagine\Image;
+use yii\web\UploadedFile;
 
 use common\models\Event;
 use common\models\search\EventSearch;
@@ -17,7 +19,7 @@ use backend\models\EditorModel;
 use common\models\blocks\items\BlockGalleryImage;
 use common\models\blocks\items\BlockFactItem;
 use common\models\blocks\items\BlockCardItem;
-
+use backend\models\forms\EventImagesForm;
 /**
  * EventController implements the CRUD actions for Event model.
  */
@@ -203,12 +205,59 @@ class EventController extends CController
         ]);
     }
 
-    public function actionUploadImages($id)
+    public function actionImages($id)
     {
-        $model = $this->findModel($id);
+        $event = $this->findModel($id);
+        $eventImagesForms = [];
 
-        return $this->render('upload-images', [
-            'model' => $model,
+        $sizes = [];
+        $sizes[] = ['header' => 'На главную', 'eventAttribute' => 'main_page_image_url', 'w' => $event->mainPageSizes[$event->size][0], 'h' => $event->mainPageSizes[$event->size][1]];
+        $sizes[] = ['header' => 'На главную мобильная', 'eventAttribute' => 'mobile_image_url', 'w' => 290, 'h' => 190];
+        $sizes[] = ['header' => 'Для соц.сетей', 'eventAttribute' => 'socials_image_url', 'w' => 1500, 'h' => 628];
+
+        foreach ($sizes as $s) {
+            $eventImagesForm = new EventImagesForm;
+            $eventImagesForm->imageWidth = $s['w'];
+            $eventImagesForm->imageHeight = $s['h'];
+            $eventImagesForm->eventAttribute = $s['eventAttribute'];
+            $eventImagesForm->header = $s['header'];
+            $eventImagesForms[] = $eventImagesForm;
+        }
+
+        $post = Yii::$app->request->post();
+        if(!empty($post) && $post['image']) {
+            $image = Yii::$app->urlManagerFrontEnd->createAbsoluteUrl($post['image']);
+            //print_r($post);exit;
+            $root = __DIR__ . '/../../frontend/web';
+            $path = '/images/'.$event->alias.'/';
+            if(!file_exists($root.$path)) {
+                mkdir($root.$path, 0775, true);
+            }
+
+            $expSlash = explode('/', $post['image']);
+            $expDot = explode('.', end($expSlash));
+
+            foreach ($post['EventImagesForm'] as $data) {
+                $fileName = $expDot[0].'_'.$data['imageWidth'].'x'.$data['imageHeight'].'.'.$expDot[1];
+
+                Image::crop($image, $data['width'], $data['height'], [$data['x'], $data['y']])
+                    ->save($root.$path.$fileName);
+
+                Image::thumbnail($root.$path.$fileName, $data['imageWidth'], $data['imageHeight'])
+                    ->save($root.$path.$fileName);
+
+                if(isset(Yii::$app->webdavYandex)) {                    
+                    $content = file_get_contents($root.$path.$fileName);
+                    unlink($root.$path.$fileName);
+                    
+                    Yii::$app->webdavYandex->write($path.$fileName, $content);
+                }
+            }
+        }
+
+        return $this->render('images', [
+            'event' => $event,
+            'eventImagesForms' => $eventImagesForms,
         ]);
     }
 

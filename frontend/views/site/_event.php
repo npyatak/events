@@ -1,11 +1,7 @@
 <?php
 use yii\helpers\Url;
 
-$sizes = [
-	1 => [250, 290],
-	2 => [540, 290],
-	3 => [540, 620],
-];
+$sizes = $event->mainPageSizes;
 $size = $sizes[$event->size];
 
 $classes = [];

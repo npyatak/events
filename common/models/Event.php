@@ -28,6 +28,7 @@ class Event extends \yii\db\ActiveRecord
     public $dateFormatted;
     public $imageDir = 'event';
     public $month;
+
     /**
      * @inheritdoc
      */
@@ -221,6 +222,14 @@ class Event extends \yii\db\ActiveRecord
             self::SIZE_SMALL => 'Маленькая',
             self::SIZE_MEDIUM => 'Средняя',
             self::SIZE_LARGE => 'Большая',
+        ];
+    }
+
+    public function getMainPageSizes() {
+        return [
+            self::SIZE_SMALL => [250, 290],
+            self::SIZE_MEDIUM => [540, 290],
+            self::SIZE_LARGE => [540, 620],
         ];
     }
 

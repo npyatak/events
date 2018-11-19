@@ -13,7 +13,7 @@ return [
     'name' => 'ТАСС главные события - админка',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log'/*, 'cdn'*/],
     'modules' => [],
     'components' => [
         'request' => [
