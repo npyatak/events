@@ -958,6 +958,30 @@
 .table-wrap .container_inner {
     width: 100%;
 }
+.table-wrap .ckeditor table tbody tr:first-child {
+    border-bottom: 4px solid #221faa !important;
+}
+.table-wrap .ckeditor table tbody tr:first-child td {
+    font: 9px 'ProximaNova-Semibold';
+    line-height: 24px;
+    color: #333;
+    text-transform: uppercase;
+}
+.table-wrap .ckeditor table tbody tr:not(:first-child) td:first-child {
+    font: 11px 'ProximaNova-Semibold';
+    color: #333;
+}
+.table-wrap .ckeditor table tbody tr:not(:first-child) td:not(:first-child) {
+    font: 11px 'ProximaNova-Regular';
+    color: #333;
+}
+.table-wrap .ckeditor table tbody tr:not(:first-child) td {
+    padding: 18px 0 !important;
+}
+.table-wrap .ckeditor table tbody tr td:not(:first-child) {
+    padding-left: 25px !important;
+}
+
 .block_image,
 .block_gallery,
 .block_map,
@@ -2160,6 +2184,9 @@ aside li a.active, aside li a:hover {
     width: 670px;
     margin-right: 40px;
 }
+.block_code_inner iframe {
+    width: 100% !important;
+}
 
 footer .container {
     padding: 0;
@@ -2784,6 +2811,11 @@ footer p a {
     .table-wrap .ckeditor {
         margin: 0;
         width: 100%;
+    }
+    .block_code {
+        margin-left: -60px;
+        margin-right: -60px;
+        width: calc(100% + 120px);
     }
     .block_code_inner {
         width: 100%;
