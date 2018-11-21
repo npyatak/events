@@ -3286,7 +3286,7 @@ footer p a {
 @media (max-width: 550px) {
     .event-title h1,
     .event-title h2 {
-        font-size: 38px;
+        font-size: 36px;
         line-height: 44px;
     }
     .month-title .share-inline {
@@ -3359,10 +3359,10 @@ footer p a {
     .fact_inner p {
         line-height: 24px !important;
     }
-    .event-date {
+/*    .event-date {
         width: calc(100% + 30px);
         margin: 0 -15px;
-    }
+    }*/
     .block_code_inner iframe {
         height: 250px !important;
     }
