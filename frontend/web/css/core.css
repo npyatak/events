@@ -70,6 +70,11 @@ hr.blue {
 .m-r-20 {
     margin-right: 20px !important;
 }
+
+.m-t-30 {
+    margin-top: 30px !important;
+}
+
 .container_inner {
     width: 780px;
     margin: 0 auto;

@@ -2455,6 +2455,102 @@ footer p a {
 
 
 
+
+.partner_refer{
+    width: 100%;
+    text-align: center;
+    /*margin-top: 30px;*/
+}
+.partner_img{
+    background-size: cover;
+    background-position: center;
+    min-height: 222px;
+    padding: 30px 10px;
+    background-image: url(/images/temple.jpg);
+}
+.partner_refer .text{
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 0;
+    color: #fff;
+}
+.partner_refer .red{
+    background-color: #EE2428;
+    color: #fff;
+    padding: 12px 10px;
+    display: block;
+    transition: background .25s;
+}
+.partner_refer .red:hover{
+    background-color: #C71E21;
+}
+.partner_refer .red p{
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+.partner_refer .red span{
+    text-transform: uppercase;
+    display: block;
+}
+@media (max-width: 999px){
+/*    aside{
+      padding-bottom: 120px;  
+    }*/
+    .partner_refer{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 20px 0;
+        margin-top: 0 !important;
+        border-top: 2px solid #3835B4;
+    }
+    .partner_img{
+        background-image: none !important;
+        min-height: 0;
+        padding: 0;
+    }
+    .partner_refer .red{
+        background: none !important;
+        padding: 0;
+    }
+    .partner_refer .red p{
+        font-size: 15px;
+    }
+    .partner_refer .text{
+        font-size: 15px;
+    }
+    .partner_refer .red span{
+        font-size: 16px;
+    }
+}
+
+.no_main{
+    width: 250px;
+    position: absolute;
+    margin-top: 37px;
+}
+.no_main .partner_refer .text{
+    font-size: 20px;
+    max-width: 170px;
+    margin: 0 auto;
+}
+
+.no_main .partner_img{
+    min-height: 350px;
+}
+.no_main
+
+.right_wrap{
+    position: relative;
+}
+
+
+
+
+
+
+
 @media (max-width:1279px){
     .main-menu .container,
     header .container,
