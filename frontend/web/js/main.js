@@ -60,13 +60,48 @@ $(document).ready(function () {
     var table = $('.event-content').find('table');
     if(table){
         $(table).wrapAll('<div class="table-wrap"><div class="container_inner"><div class="ckeditor"></div></div></div>');
+        $('.table-wrap').append('<div class="table-btn"></div>');
     }
 
     $(window).resize(function () {
         var owl_img_height = $('.owl-carousel .owl-item:first-child').find('.image').height();
         $('#info').css({top:owl_img_height});
+
+        if($(this).width() > 768){
+            $('.table-wrap').find('.table-btn').css({'display':'none'})
+        }else{
+            $('.table-wrap').find('.table-btn').css({'display':'block'})
+        }
     });
     $(window).trigger('resize');
+
+    var count = 0,
+        u = 100;
+    $(document).on('click', '.table-btn', function () {
+       var el = $(this),
+           table = $(this).parent().find('.ckeditor'),
+           pos = table.find('table').width() - $(window).width();
+       count++;
+       $(table).animate({scrollLeft: count * u}, 200);
+       if(pos < table.scrollLeft()){
+           $(this).css({"display":'none'});
+       }else{
+           $(this).css({"display":'block'});
+       }
+    });
+
+    $('.table-wrap .ckeditor').on('scroll', function () {
+       var pos = $(this).find('table').offset().left,
+           elWidth = $(this).find('table').width() - $(window).width(),
+           btn = $(this).parents().find('.table-btn');
+        if(elWidth < Math.abs(pos) + 50){
+            btn.addClass('none');
+            console.log('no')
+        }else{
+            btn.removeClass('none');
+            console.log('yes')
+        }
+    });
 
     masonryInit();
 
