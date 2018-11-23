@@ -31,7 +31,7 @@ class Share extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'image', 'text', 'twitter'], 'required'],
-            [['title', 'image', 'text', 'twitter'], 'safe'],
+            [['title', 'image', 'text', 'twitter', 'year_id'], 'safe'],
         ];
     }
 
@@ -47,7 +47,13 @@ class Share extends \yii\db\ActiveRecord
             'text' => 'Текст',
             'twitter' => 'Текст для Twitter',
             'image' => 'Изображение',
+            'year_id' => 'Год',
         ];
+    }
+
+    public function getYear()
+    {
+        return $this->hasOne(Year::className(), ['id' => 'year_id']);
     }
 
     public function getImageSrcPath() {

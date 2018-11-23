@@ -14,7 +14,7 @@ $image = Url::to($shares[0]->getImageUrl($shares[0]->image), true);
 $this->registerMetaTag(['property' => 'og:description', 'content' => $shares[0]->text], 'og:description');
 $this->registerMetaTag(['property' => 'og:title', 'content' => $shares[0]->title], 'og:title');
 $this->registerMetaTag(['property' => 'og:image', 'content' => $image], 'og:image');
-$this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()], 'og:url');
+$this->registerMetaTag(['property' => 'og:url', 'content' => Url::toRoute(['site/index', 'year' => Yii::$app->controller->yearModel->number], true)], 'og:url');
 $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
 
 $this->params['share'] = ['text' => $shares[0]->text, 'title' => $shares[0]->title, 'image' => $image, 'twitter' => $shares[0]->twitter];
@@ -38,7 +38,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
                         'text' => $shares[0]->text,
                         'twitter' => $shares[0]->twitter,
                         'image' => $image, 
-                        'url' => Url::canonical()
+                        'url' => Url::toRoute(['site/index', 'year' => Yii::$app->controller->yearModel->number], true)
                     ];?>
                     <?= \frontend\widgets\share\ShareWidget::widget([
                         'share' => $share,
@@ -77,16 +77,16 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 					<?php endforeach;?>
 				</ul>
 
-		
-				<div class="partner_refer m-t-30">
-					<div class="partner_img">
-						<p class="text">Не нашли ничего на свой вкус?</p>
+				<?php if(Yii::$app->controller->yearModel->partner_url && Yii::$app->controller->yearModel->partner_text):?>
+					<div class="partner_refer m-t-30">
+						<div class="partner_img">
+							<p class="text"><?=Yii::$app->controller->yearModel->partner_text;?></p>
+						</div>
+						<a href="<?=Yii::$app->controller->yearModel->partner_url;?>" class="red">
+							<p>Попробуйте поискать <span>здесь</span></p>
+						</a>
 					</div>
-					<a href="#" class="red">
-						<p>Попробуйте поискать <span>здесь</span></p>
-					</a>
-				</div>
-
+				<?php endif;?>
 			</aside>
 
 

@@ -68,16 +68,14 @@ class SiteController extends Controller
             ]);
         }
 
-        if(!Yii::$app->cacheFrontend->get('shares')) {
-            Yii::$app->cacheFrontend->set('shares', Share::find()->where(['year_id' => $yearModel->id])->all(), 3600*3);
-        }
+        $shares = Share::find()->where(['year_id' => $yearModel->id])->orderBy('month')->all();
 
         return $this->render('index', [
             'events' => $events,
             'month' => $month,
             'category' => $category,
             'categories' => Category::find()->all(),
-            'shares' => Yii::$app->cacheFrontend->get('shares') ? Yii::$app->cacheFrontend->get('shares') : Share::find()->all(),
+            'shares' => $shares,
             'otherYears' => $otherYears,
         ]);
     }

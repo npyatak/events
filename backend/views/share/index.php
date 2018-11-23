@@ -23,6 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 'month',
+                [
+                    'attribute' => 'year_id',
+                    'value' => function($data) {
+                        return $data->year->number;
+                    }
+                ],
                 'image',
                 'title',
                 'text',
