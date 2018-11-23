@@ -76,8 +76,9 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 					<li><a href="<?=$cat->url;?>" <?=$category == $cat->alias ? 'class="active"' : '';?> data-category="<?=$cat->alias;?>"><?=$cat->title;?></a></li>
 					<?php endforeach;?>
 				</ul>
-
+				
 				<?php if(Yii::$app->controller->yearModel->partner_url && Yii::$app->controller->yearModel->partner_text):?>
+					<!-- для того что бы отобразить текст жирным добавляем к partner_refer класс bold, а чтобы сделать курсивом класс italic  -->
 					<div class="partner_refer m-t-30">
 						<div class="partner_img">
 							<p class="text"><?=Yii::$app->controller->yearModel->partner_text;?></p>
