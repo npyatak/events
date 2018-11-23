@@ -45,10 +45,29 @@ if($this->params['is_mobile']) {
     <div class="event-background" style="background-image:url(<?=$imageUrl;?>)"></div>
     <div class="container">
         <div class="row justify-content-between">
+
+
+            <aside class="no_main">
+                <div class="partner_refer">
+                    <div class="partner_img">
+                        <p class="text">Не нашли ничего на свой вкус?</p>
+                    </div>
+                    <a href="#" class="red">
+                        <p>Попробуйте поискать <span>здесь</span></p>
+                    </a>
+                </div>
+
+            </aside>
+
+
+
+            
+
             <div class="event-content">
+
                 <div class="container_inner">
                     <div class="event-header">
-                        <div class="row m-0 justify-content-between">
+                        <div class="row m-0 justify-content-between right_wrap">
                             <div class="event-title">
                                 <h1><?=$event->title?></h1>
                                 <div class="event-cat">
@@ -123,6 +142,10 @@ if($this->params['is_mobile']) {
                             }
                         }?>
                     </div>
+
+
+
+
                 </div>
 
                 <?php if($event->copyright):?>
@@ -240,6 +263,25 @@ if($this->params['is_mobile']) {
     $(document).on('click', 'body', function() {
         $('.add-to-calendar div').hide();
     });
+
+
+    $(document).ready(function () {
+;
+
+        function right_aside() {
+            var cont = $('.container').width();
+            var win_width = $(window).width();
+            $('aside').css({right:((win_width - cont) / 2) - 20});
+        }
+
+        right_aside();
+
+        $(window).resize(function () {
+            right_aside();
+
+        });
+    });
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
+

@@ -76,7 +76,21 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 					<li><a href="<?=$cat->url;?>" <?=$category == $cat->alias ? 'class="active"' : '';?> data-category="<?=$cat->alias;?>"><?=$cat->title;?></a></li>
 					<?php endforeach;?>
 				</ul>
+
+		
+				<div class="partner_refer m-t-30">
+					<div class="partner_img">
+						<p class="text">Не нашли ничего на свой вкус?</p>
+					</div>
+					<a href="#" class="red">
+						<p>Попробуйте поискать <span>здесь</span></p>
+					</a>
+				</div>
+
 			</aside>
+
+
+
 		</div>
 		<?php if($otherYears):?>
 	        <div class="other-years">
