@@ -188,6 +188,77 @@ ul.sortable li {
 .order-controls a {
     margin: 0 5px;
 }
-#img {
+.image {
   max-width: 100%; /* This rule is very important, please do not ignore this! */
+}
+.sizes-wrap > * {
+    display: inline;
+    width: 45%;
+}
+.images-wrap {
+    margin: 20px 0;
+}
+.image-row {
+    display: inline-block;
+    width: calc(33% - 10px);
+    margin: 0 5px;
+    vertical-align: top;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+.image-row :first {
+    margin-left: 0;
+}
+.image-row .header {
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+.modal-dialog {
+    width: 1500px;
+    margin: 30px auto;
+}
+.crop-wrap {
+    display: inline-block;
+    vertical-align: top;
+    width: 1200px;
+}
+.crop-wrap .image {
+    width: 100%;
+    height: auto;
+}
+.crop-inputs {
+    display: inline-block;
+    vertical-align: top;
+    width: 250px;
+    margin-left: 10px;
+}
+.preview {
+    display: inline-block;
+    /*width: 100%;
+    height: auto!important;
+    overflow: hidden;
+    min-height: 50px;*/
+    margin-bottom: 10px;
+}
+.crop-inputs .preview {
+    margin-top: 10px;
+}
+/*.preview img {
+    width: 250px!important;
+    height: auto!important;
+    min-height: 150px;
+}*/
+.initial-preview {
+    max-width: 100%;
+}
+.controls {
+    display: inline-block;
+    width: 35%;
+    vertical-align: top;
+}
+.attribute-input-group {
+    display: inline-block;
+    width: 60%;
+    vertical-align: top;
 }

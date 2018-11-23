@@ -12,7 +12,7 @@ return [
     'sourceLanguage' => 'en-US',
     'name' => 'ТАСС главные события',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log'/*, 'common\components\CDNComponent'*/],
     'controllerNamespace' => 'frontend\controllers',
     'homeUrl' => '/',
     'components' => [

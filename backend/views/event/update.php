@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = 'Изменить';
     <?= $this->render('_form', [
         'model' => $model,
         'blockModelsArray' => $blockModelsArray,
+        'eventImagesFormArray' => $eventImagesFormArray,
     ]) ?>
 
 </div>

@@ -92,9 +92,34 @@ class SiteController extends Controller
         //print_r(Yii::$app->webdavFs->getMetadata('events/images/aaaaa'));
         //print_r(Yii::$app->webdavFs->getMetadata('events/bbbbb'));
 
+        $root = __DIR__ . '/../../frontend/web';
+        $event = \common\models\Event::findOne(76);
+        $attribute = 'origin_image';
+
+        Yii::$app->webdavFs->createDir('path/to/directory');
+
+        // $content = file_get_contents($root.$event->$attribute);
+        //     if(Yii::$app->webdavFs->has('/events'.$event->$attribute)) {
+        //         Yii::$app->webdavFs->update('/events'.$event->$attribute, $content);
+        //     } else {
+        //         Yii::$app->webdavFs->write('/events'.$event->$attribute, $content);
+        //     }
+
+        //Yii::$app->webdavFs->delete('events/images/123/test1/');
+        Yii::$app->webdavFs->createDir('test/');
+
+        // if(Yii::$app->webdavFs->has('/events/images/ds')) {
+        //     echo '2112';
+        //     //Yii::$app->webdavFs->rename('events/images/123/telescopes-review-ai.jpg', 'events/images/123/telescopes.jpg');
+        // }
+        //Yii::$app->webdavFs->delete('events/uploads/1131d8358f6ad0910dfed66c911673e4.png');
         //print_r(Yii::$app->webdavFs->listContents('test/', true));
-        print_r(Yii::$app->webdavFs->listContents('events/images', true));
+        echo '<pre>';
+        print_r(Yii::$app->webdavFs->listContents('/events/uploads', true));
+        echo '</pre>';
+        //print_r(Yii::$app->webdavFs->getMetadata('events/images'));
         //print_r(Yii::$app->webdavFs->listContents('academy/images', true));
+
     }
 
     public function actionElfinderTest()
