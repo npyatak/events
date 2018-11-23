@@ -214,9 +214,14 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
     <div class="news-partners">
         <div class="container">
             <?=Yii::$app->settings->get('smi2_code');?>
+            <div class="news-partners-dots"></div>
         </div>
     </div>
 <?php endif;?>
+
+
+
+
 
 <div class="big-image_modal">
     <div class="big-image_modal-inner">
@@ -267,10 +272,87 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 
         $(window).resize(function () {
             right_aside();
+            news_slider_init_destroy();
+        });
+        news_slider_init_destroy();
+    });
 
+
+    $('.news-partners-els').addClass('owl-carousel');
+    function news_slider_init_destroy(){
+        var owl = $('.news-partners-els');
+        if(typeof owl != 'undefined'){
+            var win_w = $(window).width();
+            if(win_w < 998){
+                owl.owlCarousel({ 
+                loop:false, //Зацикливаем слайдер
+                margin:30, //Отступ от элемента справа в 50px
+                nav:false, //Отключение навигации
+                // autoplay:true, //Автозапуск слайдера
+                smartSpeed:1000, //Время движения слайда
+                autoplayTimeout:2000, //Время смены слайда
+                dotsContainer: '.news-partners-dots',
+                // autoHeight: true,
+                items: 3,
+                dots: true,
+                responsive:{ 
+                                0:{
+                                     items:1,
+                                     margin:0,
+                                 },
+                                 480:{
+                                     items:2
+                                 },
+                                 730:{
+                                     items:3
+                                 },
+                                 992:{
+                                     items:3
+                                 }
+                             }
+                        });
+                    }else{
+                        
+                        owl.trigger('destroy.owl.carousel'); //разрушаем карусель
+                        
+            }
+         }
+    }
+
+    
+
+
+
+
+
+    $(document).ready(function() {
+        
+
+        $('.f1_slider').owlCarousel({
+            loop:true, //Зацикливаем слайдер
+            margin:50, //Отступ от элемента справа в 50px
+            nav:true, //Отключение навигации
+            autoplay:false, //Автозапуск слайдера
+            smartSpeed:1000, //Время движения слайда
+            autoplayTimeout:2000, //Время смены слайда
+            navContainer: '.f1_nav',
+            autoHeight: false,
+            items: 1,
+            dots: false,
+            navText:[\"<i class='fa fa-angle-left' aria-hidden='true'></i>\",\"<i class='fa fa-angle-right' aria-hidden='true'></i>\"],
+            responsive:{ //Адаптивность. Кол-во выводимых элементов при определенной ширине.
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1000:{
+                    items:4
+                }
+            }
         });
     });
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
-

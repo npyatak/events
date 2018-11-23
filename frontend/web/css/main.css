@@ -2404,10 +2404,16 @@ footer p a {
     display: -webkit-flex;
     display: -moz-flex;
     display: flex;
+    justify-content: space-between;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    /*border: 1px solid red;*/
 }
 .news-partners-el {
     position: relative;
-    width: 270px;
+    max-width: 270px;
+    width: 23%;
     height: 290px;
     background-repeat: no-repeat;
     background-position: center;
@@ -2439,8 +2445,66 @@ footer p a {
     z-index: 2;
 }
 .news-partners-el:not(:last-child) {
-    margin-right: 40px;
+    margin-right: 2%;
 }
+
+
+
+
+@media(max-width: 1100px){
+    .news-partners-el{
+        max-width: 210px;
+    }
+}
+@media(max-width: 992px){
+   .news-partners-el{
+        max-width: 100%;
+        width: 100%;
+        margin: 0 auto;
+    } 
+    .news-partners-el:not(:last-child) {
+        margin-right: 0;
+    }
+}
+@media(max-width: 480px){
+    .news-partners-el{
+        max-width: 270px;
+    }
+}
+
+
+.news-partners-dots{
+    /*border: 1px solid red;*/
+    margin-top: 20px;
+    text-align: center;
+}
+.news-partners-dots .owl-dot{
+    width: 10px;
+    height: 10px;
+    background-color: #BEBEBE;
+    border-radius: 50%;
+    transition: background .25s;
+    display: inline-block;
+    margin-right: 10px;
+}
+.news-partners-dots .owl-dot:last-child{
+    margin-right: 0;
+}
+.news-partners-dots .owl-dot:hover{
+  background-color: #4F4DAA;  
+}
+.news-partners-dots .owl-dot.active{
+    background-color: #221FAA;
+}
+
+
+
+
+
+
+
+
+
 .news-partners-el>div p {
     margin-bottom: 5px;
     font: 18px 'ProximaNova-Semibold', sans-serif;
@@ -2645,13 +2709,13 @@ footer p a {
         -webkit-justify-content: space-between;
         justify-content: space-between;
     }
-    .news-partners-el {
+/*    .news-partners-el {
         width: calc(50% - 20px);
-    }
-    .news-partners-el:not(:last-child) {
+    }*/
+/*    .news-partners-el:not(:last-child) {
         margin-right: 0;
         margin-bottom: 30px;
-    }
+    }*/
 }
 @media (max-width: 1024px){
     .header_inner {
@@ -3443,9 +3507,9 @@ footer p a {
     .block_code_inner iframe {
         height: 300px !important;
     }
-    .news-partners-el {
+/*    .news-partners-el {
         width: 100%;
-    }
+    }*/
 }
 @media (max-width: 500px) {
     header .image img {
