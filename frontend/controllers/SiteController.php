@@ -31,8 +31,10 @@ class SiteController extends Controller
 
     public function actionIndex($month = null, $category = null, $year = null)
     {
-        //print_r($_SERVER['REQUEST_URI']);exit;
-        if($_SERVER['REQUEST_URI'] == '/index') {
+        if(in_array($_SERVER['REQUEST_URI'], ['/index', '/'.$year.'/events', '/'.$year.'/events/'])) {
+            if($year) {
+                return Yii::$app->getResponse()->redirect(Url::toRoute(['site/index', 'year' => $year]), 301);
+            }
             return Yii::$app->getResponse()->redirect(Url::home(), 301);
         }
 

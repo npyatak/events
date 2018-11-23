@@ -34,7 +34,7 @@ return [
             'password' => 'Tass12345',
         ],
         'cdn' => [
-            'class' => 'common\components\CDNImages',
+            'class' => 'common\components\CDN',
             'enabled' => true,
             'domains' => '<cdn.mirrors>',
         ]
