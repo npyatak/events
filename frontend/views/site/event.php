@@ -7,7 +7,7 @@ use common\models\Event;
 $this->registerJsFile(Url::toRoute('js/event.js'), ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 $this->title = $event->meta_title ? $event->meta_title : $event->title;
-$this->registerMetaTag(['property' => 'description', 'content' => $event->meta_description]);
+$this->registerMetaTag(['name' => 'description', 'content' => $event->meta_description]);
 
 $share['url'] = Url::current([], true);
 $share['title'] = $event->socials_title ? $event->socials_title : $this->title;

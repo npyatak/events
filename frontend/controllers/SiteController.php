@@ -31,6 +31,7 @@ class SiteController extends Controller
 
     public function actionIndex($month = null, $category = null, $year = null)
     {
+        //print_r($_SERVER['REQUEST_URI']);exit;
         if($_SERVER['REQUEST_URI'] == '/index') {
             return Yii::$app->getResponse()->redirect(Url::home(), 301);
         }
@@ -107,6 +108,10 @@ class SiteController extends Controller
         $event = $this->findEvent($alias);
         $nextEvent = null;
         $prevEvent = null;
+
+        if($event->redirect_url) {
+            return $this->redirect($event->redirect_url);
+        }
 
         $date = new \DateTime;
         $date->setTimestamp($event->date);

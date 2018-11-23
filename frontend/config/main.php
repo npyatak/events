@@ -57,9 +57,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'baseUrl' => '/',
+            'enableStrictParsing' => true,
             'rules' => [
                 // 'sitemap.xml' => 'site/sitemap',
                 '<year:\d+>' => 'site/index',
+                '<year:\d+>/events' => 'site/index',
                 '' => 'site/index',
                 '<year:\d+>/category/<alias:\w+>' => 'site/index',
 
