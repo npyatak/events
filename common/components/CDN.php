@@ -19,6 +19,16 @@ class CDN extends Component// implements BootstrapInterface
     public $domains = [];
     public $validDomains = [];
 
+    public function init()
+    {
+        $domains = explode(',', $this->domains);
+        $this->domains = [];
+        foreach ($domains as $d) {
+            $this->domains[] = trim($d);
+        }
+
+        parent::init();
+    }
     /**
      * @param \yii\base\Application $app
      */
