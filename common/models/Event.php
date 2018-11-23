@@ -29,6 +29,8 @@ class Event extends \yii\db\ActiveRecord
     public $imageDir = 'event';
     public $month;
 
+    public $imageFile;
+
     /**
      * @inheritdoc
      */
@@ -53,9 +55,10 @@ class Event extends \yii\db\ActiveRecord
             [['title', 'size'], 'required'],
             [['view_date_type', 'dateFormatted', 'alias'], 'required'],
             [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
-            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url'], 'string', 'max' => 255],
-            [['categoryIds', 'similarIds', 'copyright'], 'safe'],
+            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url', 'origin_image', 'main_page_mobile_image_url'], 'string', 'max' => 255],
+            [['categoryIds', 'similarIds', 'copyright', 'imageFile'], 'safe'],
             [['alias'], 'unique'],
+            [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
         ];
     }
 
@@ -75,6 +78,7 @@ class Event extends \yii\db\ActiveRecord
             'socials_image_url' => 'Ссылка на изображение для соц.сетей',
             'image_url' => 'Ссылка на заглавное изображение',
             'main_page_image_url' => 'Ссылка на изображение для карточки на главной',
+            'main_page_mobile_image_url' => 'Ссылка на изображение для карточки на главной',
             'image_copyright' => 'Копирайт к заглавной фотографии',
             'socials_text' => 'Текст для соц.сетей',
             'socials_title' => 'Заголовок для соц.сетей',
@@ -97,7 +101,9 @@ class Event extends \yii\db\ActiveRecord
             'copyright' => 'Копирайты',
             'meta_title' => 'META title',
             'meta_description' => 'META description',
-            'redirect_url' => 'URL редиректа'
+            'redirect_url' => 'URL редиректа',
+            'imageFile' => 'Исходное изображение',
+            'origin_image' => 'Исходное изображение',
         ];
     }
 
@@ -130,6 +136,18 @@ class Event extends \yii\db\ActiveRecord
             }
         }
 
+        if(isset($changedAttributes['alias'])) {
+            if(file_exists($this->imageSrcPath.'/images/'.$changedAttributes['alias'])) {
+                rename($this->imageSrcPath.'/images/'.$changedAttributes['alias'], $this->imageSrcPath.'/images/'.$this->alias);
+            }
+
+            if(isset(Yii::$app->webdavFs)) {
+                if(Yii::$app->webdavFs->has('events/images/'.$changedAttributes['alias'])) {
+                    Yii::$app->webdavFs->rename('events/images/'.$changedAttributes['alias'], 'events/images/'.$this->alias);
+                }
+            }
+        }
+
         return parent::afterSave($insert, $changedAttributes);
     }
 
@@ -137,6 +155,38 @@ class Event extends \yii\db\ActiveRecord
         $this->dateFormatted = date('d.m.Y', $this->date);
         $this->categoryIds = EventCategory::find()->select(['category_id'])->where(['event_id' => $this->id])->column();
         $this->similarIds = json_decode($this->similar);
+    }
+
+    public function afterDelete() {
+        $imageAttributes = ['socials_image_url', 'image_url', 'main_page_image_url', 'mobile_image_url', 'small_image_url', 'origin_image'];
+        
+        foreach ($imageAttributes as $img) {
+            if($this->$img) {
+                if(file_exists($this->imageSrcPath.$this->$img)) {
+                    unlink($this->imageSrcPath.$this->$img);
+                    /*$it = new \RecursiveDirectoryIterator($this->imageSrcPath.$path.$img, \RecursiveDirectoryIterator::SKIP_DOTS);
+                    $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
+
+                    foreach($files as $file) {
+                        if ($file->isDir()){
+                            rmdir($file->getRealPath());
+                        } else {
+                            unlink($file->getRealPath());
+                        }
+                    }
+
+                    rmdir($this->imageSrcPath.$path);*/
+                }
+
+                if(isset(Yii::$app->webdavFs)) {
+                    if(Yii::$app->webdavFs->has('events/'.$this->$img)) {
+                        Yii::$app->webdavFs->delete('events/'.$this->$img);
+                    }
+                }
+            }
+        }
+
+        return parent::afterDelete();
     }
 
     public function getEventBlocks()
@@ -267,6 +317,7 @@ class Event extends \yii\db\ActiveRecord
             if(isset($parse['scheme'])) {
                 return $image;
             } else {
+                return Yii::$app->cdn->getUrl($image);
                 return Yii::$app->webdavFs->baseUri.$image;
             }
         } else if(is_file($this->imageSrcPath.$image)) {

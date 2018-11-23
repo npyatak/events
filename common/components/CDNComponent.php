@@ -12,7 +12,7 @@ use yii\web\Response;
 use yii\web\View;
 use yii\helpers\Html;
 
-class CDNComponent extends Component implements BootstrapInterface
+class CDNComponent extends Component// implements BootstrapInterface
 {
     public $enabled = true;
 
@@ -22,7 +22,7 @@ class CDNComponent extends Component implements BootstrapInterface
     /**
      * @param \yii\base\Application $app
      */
-    public function bootstrap($app)
+    /*public function bootstrap($app)
     {
         print_r($this->ping('https://webdav.yandex.ru'));exit;
         if(isset(Yii::$app->cdn)) {
@@ -36,11 +36,20 @@ class CDNComponent extends Component implements BootstrapInterface
         print_r($this->validDomains);
         //print_r($this->getUrl('\images\photo2\360810_ins3.png'));
         exit;
-    }
+    }*/
 
     public function getUrl($url)
     {
-        return $this->getHost($url);//.'/'.$this->filesystem->getAdapter()->applyPathPrefix($fileName);
+        //print_r($this->domain.$url);exit;
+        return $this->domain.$url;
+        //return $this->getHost($url);//.'/'.$this->filesystem->getAdapter()->applyPathPrefix($fileName);
+    }
+
+    public function getDomain()
+    {
+        $rand = rand(0, count($this->domains) - 1);
+
+        return $this->domains[$rand];
     }
 
         /**

@@ -13,6 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model' => $model,
         'blockModelsArray' => $blockModelsArray,
+        'eventImagesFormArray' => $eventImagesFormArray,
     ]) ?>
 
 </div>

@@ -56,6 +56,7 @@ class EventController extends CController
         $model = new Event();
         $model->loadDefaultValues();
         $blockModelsArray = [];
+        $eventImagesFormArray = $this->getEventImageForms();
 
         $post = Yii::$app->request->post();
 
@@ -64,6 +65,8 @@ class EventController extends CController
 
             $loadBlockModels = $this->loadBlockModels($post);
             $blockModelsArray = $loadBlockModels['models'];
+
+            \yii\base\Model::loadMultiple($eventImagesFormArray, $post);
 
             $validationArr = ArrayHelper::merge(
                 ActiveForm::validateMultiple($blockModelsArray),
@@ -91,6 +94,30 @@ class EventController extends CController
                     if($success) {
                         $transaction->commit();
 
+                        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                        if($model->imageFile) {
+                            $root = __DIR__ . '/../../frontend/web';
+                            $path = '/uploads/';
+                            if(!file_exists($root.$path)) {
+                                mkdir($root.$path, 0775, true);
+                            }
+
+                            $model->origin_image = $path.$model->id.'_origin'.'.'.$model->imageFile->extension;
+                            $model->save(false, ['origin_image']);
+
+                            $model->imageFile->saveAs($root.$model->origin_image);
+
+                            if(isset(Yii::$app->webdavFs)) {                    
+                                $content = file_get_contents($root.$model->origin_image);
+
+                                Yii::$app->webdavFs->put('events/'.$model->origin_image, $content);
+                            }
+                        }
+
+                        foreach ($eventImagesFormArray as $imageForm) {
+                            $this->saveImageForm($imageForm, $key, $model);
+                        }
+
                         Yii::$app->session->setFlash("success", 'Данные успешно обновлены');
 
                         return $this->redirect(['update', 'id' => $model->id]);
@@ -106,6 +133,7 @@ class EventController extends CController
         return $this->render('create', [
             'model' => $model,
             'blockModelsArray' => $blockModelsArray,
+            'eventImagesFormArray' => $eventImagesFormArray,
         ]);
     }
 
@@ -119,6 +147,7 @@ class EventController extends CController
         $model = $this->findModel($id);
         $blockIDsOld = [];
         $blockModelsArray = [];
+        $eventImagesFormArray = $this->getEventImageForms($model);
 
         foreach ($model->eventBlocks as $eventBlock) {
             $blockIDsOld[$eventBlock->model][] = $eventBlock->block_id;
@@ -136,6 +165,8 @@ class EventController extends CController
             $loadBlockModels = $this->loadBlockModels($post);
             $blockModelsArray = $loadBlockModels['models'];
             $blockIDs = $loadBlockModels['blockIDs'];
+
+            \yii\base\Model::loadMultiple($eventImagesFormArray, $post);
 
             $validationErrors = ArrayHelper::merge(
                 ActiveForm::validateMultiple($blockModelsArray),
@@ -175,6 +206,34 @@ class EventController extends CController
                     if($success) {
                         $transaction->commit();
 
+                        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                        if($model->imageFile) {
+                            $root = __DIR__ . '/../../frontend/web';
+                            $path = '/uploads/';
+                            if(!file_exists($root.$path)) {
+                                mkdir($root.$path, 0775, true);
+                            }
+
+                            $oldFile = $model->origin_image;
+                            $model->origin_image = $path.$model->id.'_origin'.'.'.$model->imageFile->extension;
+                            $model->save(false, ['origin_image']);
+
+                            // if(file_exists($root.$oldFile)) {
+                            //     unlink($root.$oldFile);
+                            // }
+                            $model->imageFile->saveAs($root.$model->origin_image);
+
+                            if(isset(Yii::$app->webdavFs)) {                    
+                                $content = file_get_contents($root.$model->origin_image);
+
+                                Yii::$app->webdavFs->put('events/'.$model->origin_image, $content);
+                            }
+                        }
+
+                        foreach ($eventImagesFormArray as $key => $imageForm) {
+                            $this->saveImageForm($imageForm, $key, $model);
+                        }
+
                         Yii::$app->session->setFlash("success", 'Данные успешно обновлены');
 
                         return $this->redirect(['update', 'id' => $model->id]);
@@ -202,17 +261,65 @@ class EventController extends CController
             'model' => $model,
             'blockModelsArray' => $blockModelsArray,
             'editorModel' => $editorModel,
+            'eventImagesFormArray' => $eventImagesFormArray,
         ]);
     }
 
-    public function actionImages($id)
+    protected function saveImageForm($imageForm, $key, $event) 
     {
-        $event = $this->findModel($id);
+        $root = __DIR__ . '/../../frontend/web';
+        $path = '/uploads/';
+        if(!file_exists($root.$path)) {
+            mkdir($root.$path, 0775, true);
+        }
+
+        $imageForm->imageFile = UploadedFile::getInstance($imageForm, "[$key]imageFile");
+        if($imageForm->imageFile) {
+            $originFileName = $path.$event->id.'_origin_'.$imageForm->eventAttribute.'.'.$imageForm->imageFile->extension;
+            $imageForm->imageFile->saveAs($root.$originFileName);
+        } else {
+            $imageForm->imageFile = UploadedFile::getInstance($event, 'imageFile');
+            $originFileName = $event->origin_image;
+        }
+
+        if($imageForm->imageFile) {
+            $attribute = $imageForm->eventAttribute;
+            $event->$attribute = $path.$event->id.'_'.$attribute.'_'.$imageForm->imageWidth.'x'.$imageForm->imageHeight.'.'.$imageForm->imageFile->extension;
+            $event->save(false, [$attribute]);
+
+            Image::crop($root.$originFileName, $imageForm->width, $imageForm->height, [$imageForm->x, $imageForm->y])
+                ->save($root.$event->$attribute);
+
+            Image::thumbnail($root.$event->$attribute, $imageForm->imageWidth, $imageForm->imageHeight)
+                ->save($root.$event->$attribute);
+
+            if(isset(Yii::$app->webdavFs)) {
+                $content = file_get_contents($root.$event->$attribute);
+                unlink($root.$event->$attribute);
+                
+                Yii::$app->webdavFs->put('events/'.$event->$attribute, $content);
+            }
+        }
+    }
+
+    public function getEventImageForms($event = null)
+    {
         $eventImagesForms = [];
 
         $sizes = [];
-        $sizes[] = ['header' => 'На главную', 'eventAttribute' => 'main_page_image_url', 'w' => $event->mainPageSizes[$event->size][0], 'h' => $event->mainPageSizes[$event->size][1]];
-        $sizes[] = ['header' => 'На главную мобильная', 'eventAttribute' => 'mobile_image_url', 'w' => 290, 'h' => 190];
+        if($event) {
+            $sizes[] = ['header' => 'На главную', 'eventAttribute' => 'main_page_image_url', 'w' => $event->mainPageSizes[$event->size][0], 'h' => $event->mainPageSizes[$event->size][1], 'sizeRelated' => true];
+        } else {
+            $sizes[] = ['header' => 'На главную', 'eventAttribute' => 'main_page_image_url', 'w' => (new Event)->mainPageSizes[1][0], 'h' => (new Event)->mainPageSizes[1][1], 'sizeRelated' => true];          
+        }
+        
+        $sizes[] = ['header' => 'На главную мобильная', 'eventAttribute' => 'main_page_mobile_image_url', 'w' => 290, 'h' => 190];
+                
+        $sizes[] = ['header' => 'Страница новости для планшета и мобилки', 'eventAttribute' => 'mobile_image_url', 'w' =>  1000, 'h' => 550];
+        $sizes[] = ['header' => 'Страница новости десктоп', 'eventAttribute' => 'image_url', 'w' => 1600, 'h' => 600];
+        
+        $sizes[] = ['header' => 'Маленькое изображение (блок похожие)', 'eventAttribute' => 'small_image_url', 'w' => 250, 'h' => 140];     
+        
         $sizes[] = ['header' => 'Для соц.сетей', 'eventAttribute' => 'socials_image_url', 'w' => 1500, 'h' => 628];
 
         foreach ($sizes as $s) {
@@ -221,44 +328,11 @@ class EventController extends CController
             $eventImagesForm->imageHeight = $s['h'];
             $eventImagesForm->eventAttribute = $s['eventAttribute'];
             $eventImagesForm->header = $s['header'];
+            $eventImagesForm->sizeRelated = isset($s['sizeRelated']) ? true : false;
             $eventImagesForms[] = $eventImagesForm;
         }
 
-        $post = Yii::$app->request->post();
-        if(!empty($post) && $post['image']) {
-            $image = Yii::$app->urlManagerFrontEnd->createAbsoluteUrl($post['image']);
-            //print_r($post);exit;
-            $root = __DIR__ . '/../../frontend/web';
-            $path = '/images/'.$event->alias.'/';
-            if(!file_exists($root.$path)) {
-                mkdir($root.$path, 0775, true);
-            }
-
-            $expSlash = explode('/', $post['image']);
-            $expDot = explode('.', end($expSlash));
-
-            foreach ($post['EventImagesForm'] as $data) {
-                $fileName = $expDot[0].'_'.$data['imageWidth'].'x'.$data['imageHeight'].'.'.$expDot[1];
-
-                Image::crop($image, $data['width'], $data['height'], [$data['x'], $data['y']])
-                    ->save($root.$path.$fileName);
-
-                Image::thumbnail($root.$path.$fileName, $data['imageWidth'], $data['imageHeight'])
-                    ->save($root.$path.$fileName);
-
-                if(isset(Yii::$app->webdavYandex)) {                    
-                    $content = file_get_contents($root.$path.$fileName);
-                    unlink($root.$path.$fileName);
-                    
-                    Yii::$app->webdavYandex->write($path.$fileName, $content);
-                }
-            }
-        }
-
-        return $this->render('images', [
-            'event' => $event,
-            'eventImagesForms' => $eventImagesForms,
-        ]);
+        return $eventImagesForms;
     }
 
     /*public function actionBlocks($id) {
@@ -343,7 +417,8 @@ class EventController extends CController
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['/event']);
+        $redirect = Yii::$app->request->referrer ? Yii::$app->request->referrer : ['/event'];
+        return $this->redirect($redirect);
     }
 
     public function actionAddBlock($blockClass, $i) {

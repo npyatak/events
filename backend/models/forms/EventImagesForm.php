@@ -16,6 +16,7 @@ class EventImagesForm extends Model
     public $height;
     public $scaleX;
     public $scaleY;
+    public $sizeRelated = false;
 
     public $header;
     public $eventAttribute;
@@ -27,8 +28,8 @@ class EventImagesForm extends Model
     public function rules()
     {
         return [
-            [['imageWidth', 'imageHeight', 'x', 'y', 'width', 'height', 'eventAttribute'], 'safe'],
-            [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 5, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
+            [['imageWidth', 'imageHeight', 'x', 'y', 'width', 'height', 'eventAttribute', 'imageFile'], 'safe'],
+            [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
         ];
     }
 
@@ -39,6 +40,7 @@ class EventImagesForm extends Model
             'y' => 'Y выбранной области',
             'width' => 'Ширина выбранной области',
             'height' => 'Высота выбранной области',
+            'imageFile' => 'Изображение',
         ];
     }
 }

@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin([
         'id' => 'event-images-form'
     ]); ?>
-	    <?= InputFile::widget([
+	    <? InputFile::widget([
 		    'language'   => 'ru',
 		    'controller' => 'elfinderLocal', // вставляем название контроллера, по умолчанию равен elfinder
 		    //'path' => 'image', // будет открыта папка из настроек контроллера с добавлением указанной под деритории  
@@ -28,6 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			'buttonName' => 'Выбрать файл',
 			'id' => 'sourceImage',
 		]);?>
+
+		<?=Html::fileInput('image', '', ['id' => 'inputImage']);?>
 
 	    <?php foreach ($eventImagesForms as $i => $imagesForm):?>
 	    	<h3><?=$imagesForm->header;?></h3>
@@ -57,6 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
 						<?= Html::activeTextInput($imagesForm, "[$i]height", ['class' => 'height', 'readonly' => true]) ?>
 						<?//= Html::activeTextInput($imagesForm, "[$i]scaleX", ['class' => 'scaleX', 'readonly' => true]) ?>
 						<?//= Html::activeTextInput($imagesForm, "[$i]scaleY", ['class' => 'scaleY', 'readonly' => true]) ?>
+
+						<div class="preview"></div>
 
 						<button class="getCroppedCanvas btn btn-success">Результат</button>
 			        </div>
@@ -98,26 +102,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		initCroppers();
 	})
 
-	// image.cropper({
-	//     minCropBoxWidth: 540,
-	//     minCropBoxHeight: 290,
-	//     aspectRatio: 540 / 290,
-	//     crop: function(event) {
-	//         console.log(event.detail.x);
-	//         console.log(event.detail.y);
-	//         console.log(event.detail.width);
-	//         console.log(event.detail.height);
-	//         console.log(event.detail.rotate);
-	//         console.log(event.detail.scaleX);
-	//         console.log(event.detail.scaleY);
-	//     }
-	// });
-
-	// Get the Cropper.js instance after initialized
-	//var cropper = image.data('cropper');
-
-	//initCroppers();
-
 	function initCroppers() {
 		var rows = $('.image-row');
 		for (var j = 1; j <= rows.length; j++) {
@@ -125,6 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			var row = $(rows[i]);
 			images.push($(rows[i]).find('.image'));
 			images[i].cropper({
+            	preview: '.preview',
 				viewMode: 1,
 				dragMode: 'move',
 			    //minCropBoxWidth: $('#eventimagesform-'+i+'-imagewidth').val(),
@@ -152,7 +137,20 @@ $this->params['breadcrumbs'][] = $this->title;
 		$('#getCroppedCanvasModal .modal-dialog').css({width: parseInt($('#eventimagesform-'+i+'-imagewidth').val()) + 30});
 
 		return false;
-	})
+	});
+
+    $('#inputImage').change(function(e) {
+    	if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                //$('#your_img').attr('src', e.target.result);
+				$('.image').attr('src', e.target.result);
+				initCroppers();
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
