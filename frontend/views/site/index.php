@@ -77,8 +77,8 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 					<?php endforeach;?>
 				</ul>
 
-		
-				<div class="partner_refer m-t-30">
+				<!-- для того что бы отобразить текст жирным добавляем к partner_refer класс bold, а чтобы сделать курсивом класс italic  -->
+				<div class="partner_refer m-t-30 bold">
 					<div class="partner_img">
 						<p class="text">Не нашли ничего на свой вкус?</p>
 					</div>

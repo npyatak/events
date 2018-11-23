@@ -283,7 +283,7 @@ if($this->params['is_mobile']) {
 
         $(window).resize(function () {
             right_aside();
-            news_slider_init_destroy();
+            // news_slider_init_destroy();
         });
         news_slider_init_destroy();
     });
@@ -293,8 +293,8 @@ if($this->params['is_mobile']) {
     function news_slider_init_destroy(){
         var owl = $('.news-partners-els');
         if(typeof owl != 'undefined'){
-            var win_w = $(window).width();
-            if(win_w < 998){
+            // var win_w = $(window).width();
+            // if(win_w < 998){
                 owl.owlCarousel({ 
                 loop:false, //Зацикливаем слайдер
                 margin:30, //Отступ от элемента справа в 50px
@@ -304,7 +304,7 @@ if($this->params['is_mobile']) {
                 autoplayTimeout:2000, //Время смены слайда
                 dotsContainer: '.news-partners-dots',
                 // autoHeight: true,
-                items: 3,
+                items: 4,
                 dots: true,
                 responsive:{ 
                                 0:{
@@ -318,15 +318,15 @@ if($this->params['is_mobile']) {
                                      items:3
                                  },
                                  992:{
-                                     items:3
+                                     items:4
                                  }
                              }
                         });
-                    }else{
+            //         }else{
                         
-                        owl.trigger('destroy.owl.carousel'); //разрушаем карусель
+            //             owl.trigger('destroy.owl.carousel'); //разрушаем карусель
                         
-            }
+            // }
          }
     }
 
