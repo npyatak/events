@@ -6,6 +6,7 @@
     bottom: 0;
     z-index: 999;
     background-color: #F2F2F2;
+    /*display: none;*/
 }
 #preloader .inner {
     position: absolute;
@@ -2412,7 +2413,7 @@ footer p a {
 }
 .news-partners-el {
     position: relative;
-    max-width: 270px;
+    /*max-width: 270px;*/
     /*width: 23%;*/
     height: 290px;
     background-repeat: no-repeat;
@@ -2427,7 +2428,19 @@ footer p a {
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity .25s;
+    -webkit-transition: opacity .25s;
+    -ms-transition: opacity .25s;
 }
+
+.news-partners-el:hover{
+    opacity: .9;
+    /*box-shadow: 0 0 6px 0 rgba(0,0,0,0.18), 0 4px 22px 0 rgba(0,0,0,0.12);*/
+}
+
 .news-partners-el::after {
     content: '';
     display: block;
@@ -2436,11 +2449,11 @@ footer p a {
     left: 0;
     right: 0;
     height: 205px;
-    background-image: -webkit-linear-gradient(to bottom, rgba(71, 66, 213, 0), #221faa 62%);
-    background-image: -moz-linear-gradient(to bottom, rgba(71, 66, 213, 0), #221faa 62%);
-    background-image: -ms-linear-gradient(to bottom, rgba(71, 66, 213, 0), #221faa 62%);
-    background-image: -o-linear-gradient(to bottom, rgba(71, 66, 213, 0), #221faa 62%);
-    background-image: linear-gradient(to bottom, rgba(71, 66, 213, 0), #221faa 62%);
+    background-image: -webkit-linear-gradient(to bottom, rgba(71, 66, 213, 0), #221FAA 62%);
+    background-image: -moz-linear-gradient(to bottom, rgba(71, 66, 213, 0), #221FAA 62%);
+    background-image: -ms-linear-gradient(to bottom, rgba(71, 66, 213, 0), #221FAA 62%);
+    background-image: -o-linear-gradient(to bottom, rgba(71, 66, 213, 0), #221FAA 62%);
+    background-image: linear-gradient(to bottom, rgba(71, 66, 213, 0), #221FAA 62%);
 }
 .news-partners-el>div {
     position: relative;
@@ -2452,8 +2465,44 @@ footer p a {
     margin-right: 0;
 }
 
+.news-partners .container{
+    position: relative;
+}
+.news-partners-nav{
+    position: absolute;
+    height: 290px;
+    bottom: 0;
+    width: 100%;
+    /*background-color: red;*/
+    overflow: hidden;
+}
 
 
+.news-partners-nav div{
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
+    background-color: #fff;
+    padding: 30px 15px; 
+}
+.news-partners-nav .owl-prev{
+   left: 0;
+}
+
+.news-partners-nav .owl-next{
+    right: 0;
+}
+.news-partners-nav .owl-prev:before{
+    content: '◄';
+    color: #000;
+}
+.news-partners-nav .owl-next:before{
+    content: '►';
+    color: #000;
+}
+    
 
 /*@media(max-width: 1100px){
     .news-partners-el{
@@ -2482,12 +2531,11 @@ footer p a {
 }
 
 
-.news-partners-dots{
-    /*border: 1px solid red;*/
+/*.news-partners-dots{
     margin-top: 20px;
     text-align: center;
-}
-.news-partners-dots.disabled{
+}*/
+/*.news-partners-dots.disabled{
     display: none;
 }
 .news-partners-dots .owl-dot{
@@ -2498,15 +2546,31 @@ footer p a {
     transition: background .25s;
     display: inline-block;
     margin-right: 10px;
-}
-.news-partners-dots .owl-dot:last-child{
+}*/
+/*.news-partners-dots .owl-dot:last-child{
     margin-right: 0;
-}
-.news-partners-dots .owl-dot:hover{
+}*/
+/*.news-partners-dots .owl-dot:hover{
   background-color: #4F4DAA;  
 }
 .news-partners-dots .owl-dot.active{
     background-color: #221FAA;
+}*/
+
+
+
+.event-wrap{
+    position: relative;
+    align-content: flex-start;
+}
+.sticky {
+  position: fixed;
+  /*z-index: 101;*/
+  top: 80px !important;
+}
+.stop {
+  position: relative;
+  /*z-index: 101;*/
 }
 
 
@@ -2621,7 +2685,9 @@ footer p a {
 .no_main .partner_img{
     min-height: 350px;
 }
-.no_main
+.no_main{
+    right: 0;
+}
 
 .right_wrap{
     position: relative;
@@ -2727,13 +2793,6 @@ footer p a {
         -webkit-justify-content: space-between;
         justify-content: space-between;
     }
-/*    .news-partners-el {
-        width: calc(50% - 20px);
-    }*/
-/*    .news-partners-el:not(:last-child) {
-        margin-right: 0;
-        margin-bottom: 30px;
-    }*/
 }
 @media (max-width: 1024px){
     .header_inner {
@@ -3311,6 +3370,7 @@ footer p a {
         letter-spacing: 3px;
         color: #212121;
         text-align: center;
+        text-transform: uppercase;
     }
 }
 @media (max-width: 600px) {

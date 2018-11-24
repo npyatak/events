@@ -44,26 +44,16 @@ if($this->params['is_mobile']) {
 <div class="event-detail">
     <div class="event-background" style="background-image:url(<?=$imageUrl;?>)"></div>
     <div class="container">
-        <div class="row justify-content-between">
+        <div class="row justify-content-between event-wrap">
 
 
-            <aside class="no_main">
-                <div class="partner_refer">
-                    <div class="partner_img">
-                        <p class="text">Не нашли ничего на свой вкус?</p>
-                    </div>
-                    <a href="#" class="red">
-                        <p>Попробуйте поискать <span>здесь</span></p>
-                    </a>
-                </div>
-
-            </aside>
+           
 
 
 
             
 
-            <div class="event-content">
+            <div class="event-content" id="article">
 
                 <div class="container_inner">
                     <div class="event-header">
@@ -197,6 +187,28 @@ if($this->params['is_mobile']) {
                     </div>
                 </div>
             </div>
+
+
+
+
+
+            <aside class="no_main" id="aside_1">
+                <div class="partner_refer">
+                    <div class="partner_img">
+                        <p class="text">Не нашли ничего на свой вкус?</p>
+                    </div>
+                    <a href="#" class="red">
+                        <p>Попробуйте поискать <span>здесь</span></p>
+                    </a>
+                </div>
+
+            </aside>
+
+
+
+
+
+
             <?php if(!empty($event->similarIds)):?>
             <div class="more-events">
                 <div class="more-events_title">похожие события</div>
@@ -225,7 +237,7 @@ if($this->params['is_mobile']) {
     <div class="news-partners">
         <div class="container">
             <?=Yii::$app->settings->get('smi2_code');?>
-            <div class="news-partners-dots"></div>
+            <div class="news-partners-nav"></div>
         </div>
     </div>
 <?php endif;?>
@@ -271,7 +283,6 @@ if($this->params['is_mobile']) {
 
 
     $(document).ready(function () {
-;
 
         function right_aside() {
             var cont = $('.container').width();
@@ -279,13 +290,13 @@ if($this->params['is_mobile']) {
             $('aside').css({right:((win_width - cont) / 2) - 20});
         }
 
-        right_aside();
+        // right_aside();
 
         $(window).resize(function () {
-            right_aside();
+            // right_aside();
             // news_slider_init_destroy();
         });
-        news_slider_init_destroy();
+        
     });
 
 
@@ -298,14 +309,16 @@ if($this->params['is_mobile']) {
                 owl.owlCarousel({ 
                 loop:false, //Зацикливаем слайдер
                 margin:30, //Отступ от элемента справа в 50px
-                nav:false, //Отключение навигации
+                nav:true, //Отключение навигации
                 // autoplay:true, //Автозапуск слайдера
                 smartSpeed:1000, //Время движения слайда
                 autoplayTimeout:2000, //Время смены слайда
-                dotsContainer: '.news-partners-dots',
+                navContainer: '.news-partners-nav',
+                // dotsContainer: '.news-partners-dots',
                 // autoHeight: true,
                 items: 4,
-                dots: true,
+                dots: false,
+                navText: '',
                 responsive:{ 
                                 0:{
                                      items:1,
@@ -329,41 +342,58 @@ if($this->params['is_mobile']) {
             // }
          }
     }
+    news_slider_init_destroy();
+
+
+
+
+
+
+    (function(){
+        var a = document.querySelector('#aside_1'), b = null, P = 0;
+        window.addEventListener('scroll', Ascroll, false);
+        document.body.addEventListener('scroll', Ascroll, false);
+        function Ascroll() {
+          if (b == null) {
+            var Sa = getComputedStyle(a, ''), s = '';
+            for (var i = 0; i < Sa.length; i++) {
+              if (Sa[i].indexOf('overflow') == 0 || Sa[i].indexOf('padding') == 0 || Sa[i].indexOf('border') == 0 || Sa[i].indexOf('outline') == 0 || Sa[i].indexOf('box-shadow') == 0 || Sa[i].indexOf('background') == 0) {
+                s += Sa[i] + ': ' +Sa.getPropertyValue(Sa[i]) + '; '
+              }
+            }
+            b = document.createElement('div');
+            b.style.cssText = s + ' box-sizing: border-box; width: ' + a.offsetWidth + 'px;';
+            a.insertBefore(b, a.firstChild);
+            var l = a.childNodes.length;
+            for (var i = 1; i < l; i++) {
+              b.appendChild(a.childNodes[1]);
+            }
+            a.style.height = b.getBoundingClientRect().height + 'px';
+            a.style.padding = '0';
+            a.style.border = '0';
+          }
+          var Ra = a.getBoundingClientRect(),
+              R = Math.round(Ra.top + b.getBoundingClientRect().height - document.querySelector('#article').getBoundingClientRect().bottom);  // селектор блока, при достижении нижнего края которого нужно открепить прилипающий элемент
+          if ((Ra.top - P) <= 80) {
+            if ((Ra.top - P) <= R + 80) {
+              b.className = 'stop';
+              b.style.top = - R +'px';
+            } else {
+              b.className = 'sticky';
+              b.style.top = P + 'px';
+            }
+          } else {
+            b.className = '';
+            b.style.top = '';
+          }
+          window.addEventListener('resize', function() {
+            a.children[0].style.width = getComputedStyle(a, '').width
+          }, false);
+        }
+    })()
 
     
 
-
-
-
-
-    $(document).ready(function() {
-        
-
-        $('.f1_slider').owlCarousel({
-            loop:true, //Зацикливаем слайдер
-            margin:50, //Отступ от элемента справа в 50px
-            nav:true, //Отключение навигации
-            autoplay:false, //Автозапуск слайдера
-            smartSpeed:1000, //Время движения слайда
-            autoplayTimeout:2000, //Время смены слайда
-            navContainer: '.f1_nav',
-            autoHeight: false,
-            items: 1,
-            dots: false,
-            navText:[\"<i class='fa fa-angle-left' aria-hidden='true'></i>\",\"<i class='fa fa-angle-right' aria-hidden='true'></i>\"],
-            responsive:{ //Адаптивность. Кол-во выводимых элементов при определенной ширине.
-                0:{
-                    items:1
-                },
-                600:{
-                    items:2
-                },
-                1000:{
-                    items:4
-                }
-            }
-        });
-    });
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
