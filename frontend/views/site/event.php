@@ -7,7 +7,7 @@ use common\models\Event;
 $this->registerJsFile(Url::toRoute('js/event.js'), ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 $this->title = $event->meta_title ? $event->meta_title : $event->title;
-$this->registerMetaTag(['property' => 'description', 'content' => $event->meta_description]);
+$this->registerMetaTag(['name' => 'description', 'content' => $event->meta_description]);
 
 $share['url'] = Url::current([], true);
 $share['title'] = $event->socials_title ? $event->socials_title : $this->title;
@@ -281,9 +281,11 @@ if($this->params['is_mobile']) {
         $('.add-to-calendar div').hide();
     });
 
-
     $(document).ready(function () {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 73e2671d3792db1ca9e74842311bfd1329915698
         function right_aside() {
             var cont = $('.container').width();
             var win_width = $(window).width();
@@ -299,11 +301,11 @@ if($this->params['is_mobile']) {
         
     });
 
-
     $('.news-partners-els').addClass('owl-carousel');
     function news_slider_init_destroy(){
         var owl = $('.news-partners-els');
         if(typeof owl != 'undefined'){
+<<<<<<< HEAD
             // var win_w = $(window).width();
             // if(win_w < 998){
                 owl.owlCarousel({ 
@@ -341,9 +343,40 @@ if($this->params['is_mobile']) {
                         
             // }
          }
+=======
+            owl.owlCarousel({ 
+            loop:false, //Зацикливаем слайдер
+            margin:30, //Отступ от элемента справа в 50px
+            nav:false, //Отключение навигации
+            // autoplay:true, //Автозапуск слайдера
+            smartSpeed:1000, //Время движения слайда
+            autoplayTimeout:2000, //Время смены слайда
+            dotsContainer: '.news-partners-dots',
+            // autoHeight: true,
+            items: 4,
+            dots: true,
+            responsive: { 
+                    0:{
+                        items:1,
+                        margin:0,
+                    },
+                    480:{
+                        items:2
+                    },
+                    730:{
+                        items:3
+                    },
+                    992:{
+                        items:4
+                    }
+                }
+            });
+        }
+>>>>>>> 73e2671d3792db1ca9e74842311bfd1329915698
     }
     news_slider_init_destroy();
 
+<<<<<<< HEAD
 
 
 
@@ -360,6 +393,31 @@ if($this->params['is_mobile']) {
               if (Sa[i].indexOf('overflow') == 0 || Sa[i].indexOf('padding') == 0 || Sa[i].indexOf('border') == 0 || Sa[i].indexOf('outline') == 0 || Sa[i].indexOf('box-shadow') == 0 || Sa[i].indexOf('background') == 0) {
                 s += Sa[i] + ': ' +Sa.getPropertyValue(Sa[i]) + '; '
               }
+=======
+    $(document).ready(function() {
+        $('.f1_slider').owlCarousel({
+            loop:true, //Зацикливаем слайдер
+            margin:50, //Отступ от элемента справа в 50px
+            nav:true, //Отключение навигации
+            autoplay:false, //Автозапуск слайдера
+            smartSpeed:1000, //Время движения слайда
+            autoplayTimeout:2000, //Время смены слайда
+            navContainer: '.f1_nav',
+            autoHeight: false,
+            items: 1,
+            dots: false,
+            navText:[\"<i class='fa fa-angle-left' aria-hidden='true'></i>\",\"<i class='fa fa-angle-right' aria-hidden='true'></i>\"],
+            responsive:{ //Адаптивность. Кол-во выводимых элементов при определенной ширине.
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1000:{
+                    items:4
+                }
+>>>>>>> 73e2671d3792db1ca9e74842311bfd1329915698
             }
             b = document.createElement('div');
             b.style.cssText = s + ' box-sizing: border-box; width: ' + a.offsetWidth + 'px;';

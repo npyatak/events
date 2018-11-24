@@ -160,7 +160,7 @@ use common\models\Event;
     </div>
 
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-sm-6">
             <?=$form->field($model, 'main_page_image_url')->widget(ElfinderInput::className());?>
         </div>
@@ -176,7 +176,7 @@ use common\models\Event;
         <div class="col-sm-6">
             <?= $form->field($model, 'small_image_url')->widget(ElfinderInput::className());?>
         </div>
-    </div>
+    </div> -->
 
     <div class="form-group">
         <div class="row">
@@ -184,9 +184,9 @@ use common\models\Event;
                 <?= $form->field($model, 'socials_title')->textInput() ?>
             </div>
 
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6">
                 <?= $form->field($model, 'socials_image_url')->widget(ElfinderInput::className());?>
-            </div>
+            </div> -->
         </div>
 
         <div class="row">

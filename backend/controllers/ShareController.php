@@ -19,6 +19,7 @@ class ShareController extends CController
     {
         $searchModel = new ShareSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->joinWith('year');
 
         return $this->render('index', [
             'searchModel' => $searchModel,

@@ -98,7 +98,7 @@ AppAsset::register($this);
                         <?php endif;?>
                         <?php if(Yii::$app->controller->yearModel->used_multimedia):?>
                             <div class="block">
-                                <h6>В проекте использованы фотографии и видео:</h6>
+                                <h6><?=Yii::$app->controller->yearModel->used_multimedia_label;?></h6>
                                 <?=Yii::$app->controller->yearModel->used_multimedia;?>
                             </div>
                         <?php endif;?>

@@ -12,13 +12,23 @@ use yii\web\Response;
 use yii\web\View;
 use yii\helpers\Html;
 
-class CDNComponent extends Component// implements BootstrapInterface
+class CDN extends Component// implements BootstrapInterface
 {
     public $enabled = true;
 
     public $domains = [];
     public $validDomains = [];
 
+    public function init()
+    {
+        $domains = explode(',', $this->domains);
+        $this->domains = [];
+        foreach ($domains as $d) {
+            $this->domains[] = trim($d);
+        }
+
+        parent::init();
+    }
     /**
      * @param \yii\base\Application $app
      */

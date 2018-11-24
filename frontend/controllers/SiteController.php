@@ -31,7 +31,10 @@ class SiteController extends Controller
 
     public function actionIndex($month = null, $category = null, $year = null)
     {
-        if($_SERVER['REQUEST_URI'] == '/index') {
+        if(in_array($_SERVER['REQUEST_URI'], ['/index', '/'.$year.'/events', '/'.$year.'/events/'])) {
+            if($year) {
+                return Yii::$app->getResponse()->redirect(Url::toRoute(['site/index', 'year' => $year]), 301);
+            }
             return Yii::$app->getResponse()->redirect(Url::home(), 301);
         }
 
@@ -65,16 +68,14 @@ class SiteController extends Controller
             ]);
         }
 
-        if(!Yii::$app->cacheFrontend->get('shares')) {
-            Yii::$app->cacheFrontend->set('shares', Share::find()->where(['year_id' => $yearModel->id])->all(), 3600*3);
-        }
+        $shares = Share::find()->where(['year_id' => $yearModel->id])->orderBy('month')->all();
 
         return $this->render('index', [
             'events' => $events,
             'month' => $month,
             'category' => $category,
             'categories' => Category::find()->all(),
-            'shares' => Yii::$app->cacheFrontend->get('shares') ? Yii::$app->cacheFrontend->get('shares') : Share::find()->all(),
+            'shares' => $shares,
             'otherYears' => $otherYears,
         ]);
     }
@@ -107,6 +108,10 @@ class SiteController extends Controller
         $event = $this->findEvent($alias);
         $nextEvent = null;
         $prevEvent = null;
+
+        if($event->redirect_url) {
+            return $this->redirect($event->redirect_url);
+        }
 
         $date = new \DateTime;
         $date->setTimestamp($event->date);

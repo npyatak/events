@@ -47,6 +47,7 @@ use common\components\ElfinderInput;
     </div>
 
     <div class="form-group">
+        <?= $form->field($model, 'used_multimedia_label')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'used_multimedia')->widget(CKEditor::className(), [
             'editorOptions' => [
                 'allowedContent' => true,

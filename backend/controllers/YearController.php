@@ -62,9 +62,9 @@ class YearController extends CController
                 $share = new Share;
                 $share->month = $i == 0 ? null : $i;
                 $share->year_id = $model->id;
-                $share->title = 'Самые ожидаемые и обсуждаемые события '.($i ? Event::getMonth($i, true) : '');
+                $share->title = 'Самые ожидаемые и обсуждаемые события '.($i ? (new Event)->getMonth($i, true) : '');
                 $share->text = 'Кажется,';
-                $share->twitter = 'Проект "'.$model->title.'". Самые ожидаемые и обсуждаемые события '.($i ? Event::getMonth($i, true) : '');
+                $share->twitter = 'Проект "'.$model->title.'". Самые ожидаемые и обсуждаемые события '.($i ? (new Event)->getMonth($i, true) : '');
                 $share->image = '/images/shar/FBlogo1200.png';
 
                 $share->save();

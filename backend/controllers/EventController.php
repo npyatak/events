@@ -114,7 +114,7 @@ class EventController extends CController
                             }
                         }
 
-                        foreach ($eventImagesFormArray as $imageForm) {
+                        foreach ($eventImagesFormArray as $key => $imageForm) {
                             $this->saveImageForm($imageForm, $key, $model);
                         }
 
