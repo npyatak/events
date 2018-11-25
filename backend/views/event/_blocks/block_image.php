@@ -1,18 +1,24 @@
 <?php
+use yii\helpers\Url;
 use yii\helpers\Html;
 use common\components\CKEditor;
 use common\components\ElfinderInput;
+
+use common\models\Event;
 ?>
 
 <div class="row">
-    <div class="col-sm-10">
+    <div class="col-sm-3">
 		<div class="form-group <?=$model->hasErrors("source") ? 'has-error' : '';?>">
-			<?= Html::activeLabel($model, "[$i]source", ['class' => 'control-label']) ?>
-			<?= ElfinderInput::widget([
+			<?= Html::activeLabel($model, "[$i]imageFile", ['class' => 'control-label']) ?>
+			<?= \dosamigos\fileinput\FileInput::widget([
 			    'model' => $model,
-			    'attribute' => "[$i]source",
+			    'attribute' => "[$i]imageFile",
+                'thumbnail' => Html::img((new Event)->getImageUrl($model->source)),
+                'style' => \dosamigos\fileinput\FileInput::STYLE_CUSTOM,
+                'customView' => Yii::getAlias('@backend').'/components/fileuploader/template.php',
 			]);?>
-			<?= Html::error($model, "[$i]source", ['class' => 'help-block']);?>
+			<?= Html::error($model, "[$i]imageFile", ['class' => 'help-block']);?>
 		</div>
 	</div>
     <div class="col-sm-2">

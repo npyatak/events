@@ -179,23 +179,25 @@ use common\models\Event;
     </div> -->
 
     <div class="form-group">
-        <div class="row">
-            <div class="col-sm-6">
+        <!-- <div class="row">
+            <!-- <div class="col-sm-6">
                 <?= $form->field($model, 'socials_title')->textInput() ?>
-            </div>
+            </div> -->
 
             <!-- <div class="col-sm-6">
                 <?= $form->field($model, 'socials_image_url')->widget(ElfinderInput::className());?>
-            </div> -->
-        </div>
+            </div>
+        </div> -->
 
         <div class="row">
-            <div class="col-sm-8">
-                <?= $form->field($model, 'socials_text')->textarea(['rows' => 3]) ?>
+            <div class="col-sm-5">
+                <?= $form->field($model, 'socials_title')->textInput() ?>
             </div>
-
             <div class="col-sm-4">
-                <?= $form->field($model, 'twitter_text')->textarea(['rows' => 3]) ?>
+                <?= $form->field($model, 'socials_text')->textarea(['rows' => 2]) ?>
+            </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'twitter_text')->textarea(['rows' => 2]) ?>
             </div>
         </div>
 

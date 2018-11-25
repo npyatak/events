@@ -23,6 +23,14 @@ use common\models\Settings;
                 'preset' => 'basic'
             ])
         ]);
+    } elseif($model->type == Settings::TYPE_HTML) {
+        echo $form->field($model, 'value')->widget(CKEditor::classname(), [
+            'editorOptions' => [
+                'allowedContent' => true,
+                'preset' => 'full',
+                'startupMode' => 'source',
+            ]
+        ]);
     } elseif($model->type == Settings::TYPE_IMAGE) {
         echo $form->field($model, 'imageFile')->fileInput();
     } elseif($model->type == Settings::TYPE_CHECKBOX_LIST) {

@@ -46,25 +46,21 @@ if($this->params['is_mobile']) {
     <div class="container">
         <div class="row justify-content-between">
 
-
             <aside class="no_main">
-                <div class="partner_refer">
-                    <div class="partner_img">
-                        <p class="text">Не нашли ничего на свой вкус?</p>
+                <?php if(Yii::$app->controller->yearModel->partner_url && Yii::$app->controller->yearModel->partner_text):?>
+                    <!-- для того что бы отобразить текст жирным добавляем к partner_refer класс bold, а чтобы сделать курсивом класс italic  -->
+                    <div class="partner_refer">
+                        <div class="partner_img">
+                            <p class="text"><?=Yii::$app->controller->yearModel->partner_text;?></p>
+                        </div>
+                        <a href="<?=Yii::$app->controller->yearModel->partner_url;?>" class="red">
+                            <p>Попробуйте поискать <span>здесь</span></p>
+                        </a>
                     </div>
-                    <a href="#" class="red">
-                        <p>Попробуйте поискать <span>здесь</span></p>
-                    </a>
-                </div>
-
+                <?php endif;?>
             </aside>
 
-
-
-            
-
             <div class="event-content">
-
                 <div class="container_inner">
                     <div class="event-header">
                         <div class="row m-0 justify-content-between right_wrap">
@@ -142,10 +138,6 @@ if($this->params['is_mobile']) {
                             }
                         }?>
                     </div>
-
-
-
-
                 </div>
 
                 <?php if($event->copyright):?>

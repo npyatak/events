@@ -31,7 +31,8 @@
         "sadovojav/yii2-ckeditor": "dev-master",
         "league/flysystem-webdav": "~1.0",
         "creocoder/yii2-flysystem": "*",
-        "mihaildev/yii2-elfinder-flysystem": "*"
+        "mihaildev/yii2-elfinder-flysystem": "*",
+        "2amigos/yii2-file-input-widget": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -6,10 +6,8 @@ use Yii;
 
 class BlockImage extends Block
 {
-    //public $blockName = 'Изображение';
-    /**
-     * @inheritdoc
-     */
+    public $imageFile;
+    
     public static function tableName()
     {
         return '{{%block_image}}';
@@ -25,6 +23,7 @@ class BlockImage extends Block
                 [['source'], 'required'],
                 [['show_fullscreen'], 'integer'],
                 [['source', 'copyright_text', 'text'], 'string', 'max' => 255],
+                [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
             ]
         );
     }

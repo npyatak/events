@@ -60,6 +60,7 @@ class Block extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Заголовок',
             'text' => 'Текст',
+            'imageFile' => 'Изображение',
         ];
     }
 

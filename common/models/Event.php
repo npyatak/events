@@ -312,18 +312,20 @@ class Event extends \yii\db\ActiveRecord
     }
 
     public function getImageUrl($image, $thumb_size = false) {
-        if(isset(Yii::$app->webdavFs)) {
-            $parse = parse_url($image);
-            if(isset($parse['scheme'])) {
-                return $image;
+        if($image) {
+            if(isset(Yii::$app->webdavFs)) {
+                $parse = parse_url($image);
+                if(isset($parse['scheme'])) {
+                    return $image;
+                } else {
+                    return Yii::$app->cdn->getUrl($image);
+                    return Yii::$app->webdavFs->baseUri.$image;
+                }
+            } else if(is_file($this->imageSrcPath.$image)) {
+                return Url::to($image);
             } else {
-                return Yii::$app->cdn->getUrl($image);
-                return Yii::$app->webdavFs->baseUri.$image;
+                return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
             }
-        } else if(is_file($this->imageSrcPath.$image)) {
-            return Url::to($image);
-        } else {
-            return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
         }
     }
 

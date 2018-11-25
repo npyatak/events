@@ -10,6 +10,7 @@ class Settings extends \yii\db\ActiveRecord
     const TYPE_STRING = 1;
     const TYPE_TEXT = 2;
     const TYPE_CHECKBOX_LIST = 3;
+    const TYPE_HTML = 4;
     const TYPE_IMAGE = 5;
     const TYPE_FILE = 6;
 
