@@ -2177,7 +2177,7 @@ aside li a.active, aside li a:hover {
     margin: 0 auto;
 }
 .event-detail {
-    margin-bottom: 50px;
+    padding-bottom: 50px;
 }
 .error-text {
     margin-top: 70px;
