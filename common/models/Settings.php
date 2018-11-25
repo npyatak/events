@@ -96,4 +96,16 @@ class Settings extends \yii\db\ActiveRecord
             'tg' => 'tg'
         ];
     }
+
+    public function getTypeArray()
+    {
+        return [
+            self::TYPE_STRING => 'STRING',
+            self::TYPE_TEXT => 'TEXT',
+            self::TYPE_CHECKBOX_LIST => 'CHECKBOX_LIST',
+            self::TYPE_HTML => 'HTML',
+            self::TYPE_IMAGE => 'IMAGE',
+            self::TYPE_FILE => 'FILE',
+        ];
+    }
 }

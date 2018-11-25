@@ -93,6 +93,21 @@ class SettingsController extends CController
         ]);
     }
 
+    public function actionChangeType($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->settings->clearCache();
+
+            return $this->redirect(['index']);
+        } 
+
+        return $this->render('change-type', [
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Deletes an existing Settings model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

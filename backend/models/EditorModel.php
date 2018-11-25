@@ -25,4 +25,9 @@ class EditorModel extends ActiveRecord
             [['model'], 'string'],
         ];
     }
+
+    public function getEditor()
+    {
+        return $this->hasOne(Editor::className(), ['id' => 'editor_id']);
+    }
 }

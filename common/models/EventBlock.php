@@ -18,6 +18,8 @@ class EventBlock extends \yii\db\ActiveRecord
 {
 
     public $_block;
+    
+    public $key;
     /**
      * @inheritdoc
      */

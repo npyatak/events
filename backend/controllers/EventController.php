@@ -31,6 +31,11 @@ class EventController extends CController
         $searchModel = new EventSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $editorModels = EditorModel::find()->where(['<', 'updated_at', time() - 120])->all();
+        foreach ($editorModels as $editorModel) {
+            $editorModel->delete();
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -191,6 +196,7 @@ class EventController extends CController
 
                             $eventBlock->order = $blockModel->order;
                             $eventBlock->anchor = $blockModel->anchor;
+                            $eventBlock->key = $key;
 
                             $eventBlock->save();
                         }
@@ -252,7 +258,7 @@ class EventController extends CController
                 $editorModel->delete();
                 $editorModel = null;
             } else {
-                echo '<h2>Внимание! Событие в данный момент редактируется другим пользователем!</h2>';
+                echo '<h2>Внимание! Событие в данный момент редактируется другим пользователем ('.$editorModel->editor->name.')!</h2>';
                 exit;
             }
         } 
@@ -518,6 +524,16 @@ class EventController extends CController
 
             $em->save();
             return $em->updated_at;
+        }
+    }
+
+    public function actionCheckEdited()
+    {   
+        if(Yii::$app->request->isAjax) {
+            $eventIds = EditorModel::find()->select('model_id')->where(['>', 'updated_at', time() - 120])->andWhere(['not', ['editor_id' => Yii::$app->user->id]])->column();
+            
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['ids' => $eventIds];
         }
     }
 

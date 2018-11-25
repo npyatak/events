@@ -108,11 +108,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'title' => 'Просмотр'
                             ]);
                         },
-                        'blocks' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-th-large"></span>', $url, [
-                                'title' => 'Редактировать блоки'
-                            ]);
-                        },
                     ],
                 ],
             ],
@@ -145,6 +140,21 @@ $this->params['breadcrumbs'][] = $this->title;
             data: ul.find('input').serialize(),
             success: function (data) {
 
+            }
+        });
+    }
+
+    checkEdited();
+    setInterval(checkEdited, 30000);
+
+    function checkEdited() {
+        $.ajax({
+            url: '".Url::toRoute(['event/check-edited'])."',
+            success: function (data) {
+                $('tr .glyphicon-pencil').css({'color': ''});
+                $.each(data.ids, function(index, key) {
+                    $('tr[data-key=\"'+key+'\"]').find('.glyphicon-pencil').css({'color': '#f00'});
+                })
             }
         });
     }

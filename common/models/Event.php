@@ -136,7 +136,7 @@ class Event extends \yii\db\ActiveRecord
             }
         }
 
-        if(isset($changedAttributes['alias'])) {
+        /*if(isset($changedAttributes['alias'])) {
             if(file_exists($this->imageSrcPath.'/images/'.$changedAttributes['alias'])) {
                 rename($this->imageSrcPath.'/images/'.$changedAttributes['alias'], $this->imageSrcPath.'/images/'.$this->alias);
             }
@@ -146,7 +146,7 @@ class Event extends \yii\db\ActiveRecord
                     Yii::$app->webdavFs->rename('events/images/'.$changedAttributes['alias'], 'events/images/'.$this->alias);
                 }
             }
-        }
+        }*/
 
         return parent::afterSave($insert, $changedAttributes);
     }
