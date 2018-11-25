@@ -44,7 +44,7 @@ if($this->params['is_mobile']) {
 <div class="event-detail">
     <div class="event-background" style="background-image:url(<?=$imageUrl;?>)"></div>
     <div class="container">
-        <div class="row justify-content-between">
+        <div class="row justify-content-between event-wrap">
 
             <aside class="no_main">
                 <?php if(Yii::$app->controller->yearModel->partner_url && Yii::$app->controller->yearModel->partner_text):?>
@@ -60,7 +60,7 @@ if($this->params['is_mobile']) {
                 <?php endif;?>
             </aside>
 
-            <div class="event-content">
+            <div class="event-content" id="article">
                 <div class="container_inner">
                     <div class="event-header">
                         <div class="row m-0 justify-content-between right_wrap">
@@ -189,6 +189,7 @@ if($this->params['is_mobile']) {
                     </div>
                 </div>
             </div>
+
             <?php if(!empty($event->similarIds)):?>
             <div class="more-events">
                 <div class="more-events_title">похожие события</div>
@@ -216,15 +217,13 @@ if($this->params['is_mobile']) {
 <?php if(Yii::$app->settings->get('smi2_code')):?>
     <div class="news-partners">
         <div class="container">
-            <?=Yii::$app->settings->get('smi2_code');?>
-            <div class="news-partners-dots"></div>
+            <div class="wrap-slider">
+                <?=Yii::$app->settings->get('smi2_code');?>
+                <div class="news-partners-nav"></div>
+            </div>
         </div>
     </div>
 <?php endif;?>
-
-
-
-
 
 <div class="big-image_modal">
     <div class="big-image_modal-inner">
@@ -261,37 +260,25 @@ if($this->params['is_mobile']) {
         $('.add-to-calendar div').hide();
     });
 
-    $(document).ready(function () {
-        function right_aside() {
-            var cont = $('.container').width();
-            var win_width = $(window).width();
-            $('aside').css({right:((win_width - cont) / 2) - 20});
-        }
-
-        right_aside();
-
-        $(window).resize(function () {
-            right_aside();
-            // news_slider_init_destroy();
-        });
-        news_slider_init_destroy();
-    });
 
     $('.news-partners-els').addClass('owl-carousel');
     function news_slider_init_destroy(){
         var owl = $('.news-partners-els');
         if(typeof owl != 'undefined'){
+
             owl.owlCarousel({ 
             loop:false, //Зацикливаем слайдер
             margin:30, //Отступ от элемента справа в 50px
-            nav:false, //Отключение навигации
+            nav:true, //Отключение навигации
             // autoplay:true, //Автозапуск слайдера
             smartSpeed:1000, //Время движения слайда
             autoplayTimeout:2000, //Время смены слайда
-            dotsContainer: '.news-partners-dots',
+            // dotsContainer: '.news-partners-dots',
+            navContainer: '.news-partners-nav',
             // autoHeight: true,
             items: 4,
-            dots: true,
+            navText: '',
+            dots: false,
             responsive: { 
                     0:{
                         items:1,
@@ -309,34 +296,9 @@ if($this->params['is_mobile']) {
                 }
             });
         }
-    }
 
-    $(document).ready(function() {
-        $('.f1_slider').owlCarousel({
-            loop:true, //Зацикливаем слайдер
-            margin:50, //Отступ от элемента справа в 50px
-            nav:true, //Отключение навигации
-            autoplay:false, //Автозапуск слайдера
-            smartSpeed:1000, //Время движения слайда
-            autoplayTimeout:2000, //Время смены слайда
-            navContainer: '.f1_nav',
-            autoHeight: false,
-            items: 1,
-            dots: false,
-            navText:[\"<i class='fa fa-angle-left' aria-hidden='true'></i>\",\"<i class='fa fa-angle-right' aria-hidden='true'></i>\"],
-            responsive:{ //Адаптивность. Кол-во выводимых элементов при определенной ширине.
-                0:{
-                    items:1
-                },
-                600:{
-                    items:2
-                },
-                1000:{
-                    items:4
-                }
-            }
-        });
-    });
+    }
+    news_slider_init_destroy();
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
