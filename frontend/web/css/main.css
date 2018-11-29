@@ -2355,6 +2355,20 @@ footer p a {
     transform: translate(-50%,-50%);
 }
 
+#tw-inject .justify-content-end,
+#in-inject .justify-content-end,
+#fb-inject .justify-content-end,
+#vk-inject .justify-content-end,
+#ok-inject .justify-content-end,
+#instagram-inject .justify-content-end,
+#facebook-inject .justify-content-end,
+#vkontakte-inject .justify-content-end,
+#twitter-inject .justify-content-end,
+#odnoklassniki-inject .justify-content-end {
+    -ms-justify-content: flex-start!important;
+    justify-content: flex-start!important;
+}
+
 .block_map {
     margin-bottom: 60px;
 }
