@@ -3,12 +3,17 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use common\components\CKEditor;
 use yii\widgets\ActiveForm;
-use common\components\ElfinderInput;
+use backend\widgets\input\ImageInput;
+
+\backend\widgets\input\ImageInputAsset::register($this);
 ?>
 
 <div class="admin-form">
 
-    <?php $form = ActiveForm::begin(['enableClientValidation' => true]); ?>
+    <?php $form = ActiveForm::begin([
+        'enableClientValidation' => true,
+        'options' => ['enctype' => 'multipart/form-data']
+    ]); ?>
 
 
     <div class="row">
@@ -26,14 +31,15 @@ use common\components\ElfinderInput;
         </div>
     </div>
 
-    <?= $form->field($model, 'leading_text')->textInput(['maxlength' => true]) ?>
-
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
+            <?=ImageInput::widget(['model' => $model, 'attribute' => 'mainPageImageFile', 'previewAttribute' => 'main_page_image']);?>
+        </div>
+        <div class="col-sm-8">
             <?= $form->field($model, 'logo_url')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-6">
-            <?= $form->field($model, 'main_page_image')->textInput(['maxlength' => true]) ?>
+        <div class="col-sm-8">
+            <?= $form->field($model, 'leading_text')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
@@ -47,7 +53,6 @@ use common\components\ElfinderInput;
     </div>
 
     <div class="form-group">
-        <?= $form->field($model, 'used_multimedia_label')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'used_multimedia')->widget(CKEditor::className(), [
             'editorOptions' => [
                 'allowedContent' => true,
@@ -86,20 +91,17 @@ use common\components\ElfinderInput;
     <hr>
     <h3>Баннер справа</h3>
     <div class="row">
-        <div class="col-sm-9">
-            <?= $form->field($model, 'partner_text')->textInput(['maxlength' => true]) ?>
+        <div class="col-sm-3">
+            <?=ImageInput::widget(['model' => $model, 'attribute' => 'partnerImageIndexFile', 'previewAttribute' => 'partner_image_index']);?>
         </div>
         <div class="col-sm-3">
+            <?=ImageInput::widget(['model' => $model, 'attribute' => 'partnerImageEventFile', 'previewAttribute' => 'partner_image_event']);?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'partner_text')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-6">
             <?= $form->field($model, 'partner_url')->textInput() ?>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6">
-            <?= $form->field($model, 'partner_image_index')->widget(ElfinderInput::className());?>
-        </div>
-        <div class="col-sm-6">
-            <?= $form->field($model, 'partner_image_event')->widget(ElfinderInput::className());?>
         </div>
     </div>
 

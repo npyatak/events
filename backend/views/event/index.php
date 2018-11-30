@@ -13,7 +13,7 @@ use common\models\Event;
 $this->title = 'События';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="district-index">
+<div class="event-index">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a('Добавить событие', ['create'], ['class' => 'btn btn-success']) ?>
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'header' => 'Изображение на главной',
                     'format' => 'raw',
                     'value' => function($data) {
-                        return $data->main_page_image_url ? Html::img($data->getImageUrl($data->main_page_image_url, '200x200'), ['width' => '200']) : '';
+                        return $data->main_page_image_url ? Html::img(Yii::$app->image->getImageUrl($data->main_page_image_url), ['width' => '200']) : '';
                     },
                 ],
                 

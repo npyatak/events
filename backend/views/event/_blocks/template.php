@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 <li class="block">
 	<div class="header row">
-		<div class="remove">x</div>
+		<div class="remove">&times;</div>
         <div class="col-sm-2 order-controls">
         	<span class="order-number"><?=$model->order;?></span>
 			<a href="" class="move-up"><span class="glyphicon glyphicon-arrow-up"></span></a>

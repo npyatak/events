@@ -3,11 +3,15 @@
 namespace common\models\blocks;
 
 use Yii;
+use yii\web\UploadedFile;
 
 class BlockFlipCard extends Block
 {
     const DEFAULT_WIDTH = 660;
     const DEFAULT_HEIGHT = 400;
+
+    public $imageFrontFile;
+    public $imageBackFile;
     /**
      * @inheritdoc
      */
@@ -22,9 +26,11 @@ class BlockFlipCard extends Block
     public function rules()
     {
         return array_merge(parent::rules(), [
+
                 [['image_front', 'image_back', 'control_text', 'capture_front', 'control_text_back', 'capture_back'], 'string', 'max' => 255],
                 [['width', 'height'], 'integer', 'max' => 9999],
                 [['text_front', 'text_back'], 'safe'],
+                [['imageFrontFile', 'imageBackFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
             ]
         );
     }
@@ -44,6 +50,33 @@ class BlockFlipCard extends Block
         return parent::beforeSave($insert);
     }
 
+    public function afterSave($insert, $changedAttributes)
+    {
+        $this->imageFrontFile = UploadedFile::getInstance($this, "[$this->key]imageFrontFile");
+        if($this->imageFrontFile) {
+            Yii::$app->image->updateImageAttribute($this, 'image_front', $this->imageFrontFile);
+        }
+
+        $this->imageBackFile = UploadedFile::getInstance($this, "[$this->key]imageBackFile");
+        if($this->imageBackFile) {
+            Yii::$app->image->updateImageAttribute($this, 'image_back', $this->imageBackFile);
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function afterDelete() {        
+        if($this->image_front) {
+            Yii::$app->image->deleteFile($this->image_front);
+        }
+        
+        if($this->image_back) {
+            Yii::$app->image->deleteFile($this->image_back);
+        }
+
+        return parent::afterDelete();
+    }
+
     /**
      * @inheritdoc
      */
@@ -57,6 +90,8 @@ class BlockFlipCard extends Block
             'text_back' => 'Текст оборотной стороны',
             'image_front' => 'Изображение лицевой стороны',
             'image_back' => 'Изображение оборотной стороны',
+            'imageFrontFile' => 'Изображение лицевой стороны',
+            'imageBackFile' => 'Изображение оборотной стороны',
             'control_text' => 'Текст контрола',
             'control_text_back' => 'Текст контрола оборотной стороны',
             'capture_front' => 'Подпись лицевой стороны',

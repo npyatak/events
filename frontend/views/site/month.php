@@ -7,7 +7,7 @@ use common\models\Event;
 
 $this->registerMetaTag(['property' => 'og:description', 'content' => $share->text], 'og:description');
 $this->registerMetaTag(['property' => 'og:title', 'content' => $share->title], 'og:title');
-$this->registerMetaTag(['property' => 'og:image', 'content' => Url::to($share->imageUrl, true)], 'og:image');
+$this->registerMetaTag(['property' => 'og:image', 'content' => Url::to(Yii::$app->image->getImageUrl($share->image), true)], 'og:image');
 $this->registerMetaTag(['property' => 'og:url', 'content' => Url::toRoute(['site/month', 'year' => Yii::$app->controller->yearModel->number], true)], 'og:url');
 $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
 ?>

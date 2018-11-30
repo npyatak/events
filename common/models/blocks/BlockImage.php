@@ -21,7 +21,9 @@ class BlockImage extends Block
     {
         return array_merge(parent::rules(), 
             [
-                //[['source'], 'required'],
+                [['imageFile'], 'required', 'when' => function($model) {
+                    return $model->isNewRecord;
+                }],
                 [['show_fullscreen'], 'integer'],
                 [['source', 'copyright_text', 'text'], 'string', 'max' => 255],
                 [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
@@ -33,34 +35,31 @@ class BlockImage extends Block
         return 'Изображение';
     }
 
-    public function afterSave($insert, $changedAttributes) {
-            $this->imageFile = UploadedFile::getInstance($this, "[$this->key]imageFile");
-        print_r($this);exit;
-        //print_r($changedAttributes);exit;
-        if(!isset($changedAttributes['source'])) {
-            $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
-            if($this->imageFile) {
-                $root = __DIR__ . '/../../frontend/web';
-                $path = '/uploads/';
-                if(!file_exists($root.$path)) {
-                    mkdir($root.$path, 0775, true);
-                }
+    public function beforeValidate()
+    {        
+        $this->imageFile = UploadedFile::getInstance($this, "[$this->key]imageFile");
 
-                $this->source = $path.$this->event_id.'block_image_'.$this->id.'.'.$this->imageFile->extension;
-                $this->save(false, ['source']);
+        if (parent::beforeValidate()) {
+            return true;
+        }
+        return false;
+    }
 
-                $this->imageFile->saveAs($root.$this->source);
-
-                if(isset(Yii::$app->webdavFs)) {                    
-                    $content = file_get_contents($root.$this->source);
-                    unlink($root.$this->source);
-
-                    Yii::$app->webdavFs->put('events/'.$this->source, $content);
-                }
-            }
+    public function afterSave($insert, $changedAttributes)
+    {
+        if($this->imageFile) {
+            Yii::$app->image->updateImageAttribute($this, 'source', $this->imageFile);
         }
 
         return parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function afterDelete() {        
+        if($this->source) {
+            Yii::$app->image->deleteFile($this->source);
+        }
+
+        return parent::afterDelete();
     }
 
     /**

@@ -34,7 +34,9 @@ class BlockGallery extends Block
                     } elseif(count($this->itemsToSave) > 20) {
                         $this->addError($attribute, 'Не более 20 слайдов');
                     } else {
-                        foreach ($this->itemsToSave as $item) {
+                        foreach ($this->itemsToSave as $key => $item) {
+                            $item->imageNamePrefix = $this->imageNamePrefix;
+                            $item->getImageInstance($this->key, $key);
                             $item->validate();
                             if($item->hasErrors()) {
                                 $this->addError($attribute, 'Необходимо заполнить все изображения');

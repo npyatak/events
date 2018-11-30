@@ -19,7 +19,7 @@ use backend\models\EditorModel;
 use common\models\blocks\items\BlockGalleryImage;
 use common\models\blocks\items\BlockFactItem;
 use common\models\blocks\items\BlockCardItem;
-use backend\models\forms\EventImagesForm;
+use backend\models\forms\CropForm;
 /**
  * EventController implements the CRUD actions for Event model.
  */
@@ -61,7 +61,7 @@ class EventController extends CController
         $model = new Event();
         $model->loadDefaultValues();
         $blockModelsArray = [];
-        $eventImagesFormArray = $this->getEventImageForms();
+        $cropFormArray = $this->getCropForms();
 
         $post = Yii::$app->request->post();
 
@@ -71,7 +71,7 @@ class EventController extends CController
             $loadBlockModels = $this->loadBlockModels($post);
             $blockModelsArray = $loadBlockModels['models'];
 
-            \yii\base\Model::loadMultiple($eventImagesFormArray, $post);
+            \yii\base\Model::loadMultiple($cropFormArray, $post);
 
             $validationArr = ArrayHelper::merge(
                 ActiveForm::validateMultiple($blockModelsArray),
@@ -83,6 +83,7 @@ class EventController extends CController
                     $success = $model->save();
                     foreach ($blockModelsArray as $key => $blockModel) {
                         if($success) {
+                            $blockModel->imageNamePrefix = $model->id;
                             $success = $blockModel->save();
 
                             $eventBlock = new EventBlock;
@@ -119,8 +120,8 @@ class EventController extends CController
                             }
                         }
 
-                        foreach ($eventImagesFormArray as $key => $imageForm) {
-                            $this->saveImageForm($imageForm, $key, $model);
+                        foreach ($cropFormArray as $key => $cropForm) {
+                            $this->saveCropForm($cropForm, $key, $model);
                         }
 
                         Yii::$app->session->setFlash("success", 'Данные успешно обновлены');
@@ -138,7 +139,7 @@ class EventController extends CController
         return $this->render('create', [
             'model' => $model,
             'blockModelsArray' => $blockModelsArray,
-            'eventImagesFormArray' => $eventImagesFormArray,
+            'cropFormArray' => $cropFormArray,
         ]);
     }
 
@@ -152,7 +153,7 @@ class EventController extends CController
         $model = $this->findModel($id);
         $blockIDsOld = [];
         $blockModelsArray = [];
-        $eventImagesFormArray = $this->getEventImageForms($model);
+        $cropFormArray = $this->getCropForms($model);
 
         foreach ($model->eventBlocks as $eventBlock) {
             $blockIDsOld[$eventBlock->model][] = $eventBlock->block_id;
@@ -171,7 +172,8 @@ class EventController extends CController
             $blockModelsArray = $loadBlockModels['models'];
             $blockIDs = $loadBlockModels['blockIDs'];
 
-            \yii\base\Model::loadMultiple($eventImagesFormArray, $post);
+            $this->loadCroppedImages($cropFormArray);
+            //\yii\base\Model::loadMultiple($cropFormArray, $post);
 
             $validationErrors = ArrayHelper::merge(
                 ActiveForm::validateMultiple($blockModelsArray),
@@ -196,7 +198,6 @@ class EventController extends CController
 
                             $eventBlock->order = $blockModel->order;
                             $eventBlock->anchor = $blockModel->anchor;
-                            $eventBlock->key = $key;
 
                             $eventBlock->save();
                         }
@@ -224,9 +225,6 @@ class EventController extends CController
                             $model->origin_image = $path.$model->id.'_origin'.'.'.$model->imageFile->extension;
                             $model->save(false, ['origin_image']);
 
-                            // if(file_exists($root.$oldFile)) {
-                            //     unlink($root.$oldFile);
-                            // }
                             $model->imageFile->saveAs($root.$model->origin_image);
 
                             if(isset(Yii::$app->webdavFs)) {                    
@@ -236,8 +234,8 @@ class EventController extends CController
                             }
                         }
 
-                        foreach ($eventImagesFormArray as $key => $imageForm) {
-                            $this->saveImageForm($imageForm, $key, $model);
+                        foreach ($cropFormArray as $key => $cropForm) {
+                            $this->saveCropForm($cropForm, $key, $model);
                         }
 
                         Yii::$app->session->setFlash("success", 'Данные успешно обновлены');
@@ -267,11 +265,22 @@ class EventController extends CController
             'model' => $model,
             'blockModelsArray' => $blockModelsArray,
             'editorModel' => $editorModel,
-            'eventImagesFormArray' => $eventImagesFormArray,
+            'cropFormArray' => $cropFormArray,
         ]);
     }
 
-    protected function saveImageForm($imageForm, $key, $event) 
+    public function loadCroppedImages($cropFormArray) 
+    {
+        $post = Yii::$app->request->post();
+
+        foreach ($cropFormArray as $cropForm) {
+            $cropForm->attributes = $post['CropForm']['Event'][$cropForm->attribute];
+        }
+
+        return $cropFormArray;
+    }
+
+    protected function saveCropForm($cropForm, $key, $event) 
     {
         $root = __DIR__ . '/../../frontend/web';
         $path = '/uploads/';
@@ -279,24 +288,24 @@ class EventController extends CController
             mkdir($root.$path, 0775, true);
         }
 
-        $imageForm->imageFile = UploadedFile::getInstance($imageForm, "[$key]imageFile");
-        if($imageForm->imageFile) {
-            $originFileName = $path.$event->id.'_origin_'.$imageForm->eventAttribute.'.'.$imageForm->imageFile->extension;
-            $imageForm->imageFile->saveAs($root.$originFileName);
+        $cropForm->imageFile = UploadedFile::getInstanceByName("CropForm[Event][$cropForm->attribute][imageFile]");
+        if($cropForm->imageFile) {
+            $originFileName = $path.$event->id.'_origin_'.$cropForm->attribute.'.'.$cropForm->imageFile->extension;
+            $cropForm->imageFile->saveAs($root.$originFileName);
         } else {
-            $imageForm->imageFile = UploadedFile::getInstance($event, 'imageFile');
+            $cropForm->imageFile = UploadedFile::getInstance($event, 'imageFile');
             $originFileName = $event->origin_image;
         }
 
-        if($imageForm->imageFile) {
-            $attribute = $imageForm->eventAttribute;
-            $event->$attribute = $path.$event->id.'_'.$attribute.'_'.$imageForm->imageWidth.'x'.$imageForm->imageHeight.'.'.$imageForm->imageFile->extension;
+        if($cropForm->imageFile) {
+            $attribute = $cropForm->attribute;
+            $event->$attribute = $path.$event->id.'_'.$attribute.'_'.$cropForm->imageWidth.'x'.$cropForm->imageHeight.'.'.$cropForm->imageFile->extension;
             $event->save(false, [$attribute]);
 
-            Image::crop($root.$originFileName, $imageForm->width, $imageForm->height, [$imageForm->x, $imageForm->y])
+            Image::crop($root.$originFileName, $cropForm->width, $cropForm->height, [$cropForm->x, $cropForm->y])
                 ->save($root.$event->$attribute);
 
-            Image::thumbnail($root.$event->$attribute, $imageForm->imageWidth, $imageForm->imageHeight)
+            Image::thumbnail($root.$event->$attribute, $cropForm->imageWidth, $cropForm->imageHeight)
                 ->save($root.$event->$attribute);
 
             if(isset(Yii::$app->webdavFs)) {
@@ -308,111 +317,39 @@ class EventController extends CController
         }
     }
 
-    public function getEventImageForms($event = null)
+    public function getCropForms($event = null)
     {
-        $eventImagesForms = [];
+        $cropForms = [];
 
         $sizes = [];
         if($event) {
-            $sizes[] = ['header' => 'На главную', 'eventAttribute' => 'main_page_image_url', 'w' => $event->mainPageSizes[$event->size][0], 'h' => $event->mainPageSizes[$event->size][1], 'sizeRelated' => true];
+            $sizes['main_page_image_url'] = ['header' => 'Главная (десктоп)', 'attribute' => 'main_page_image_url', 'w' => $event->mainPageSizes[$event->size][0], 'h' => $event->mainPageSizes[$event->size][1], 'sizeRelated' => true];
         } else {
-            $sizes[] = ['header' => 'На главную', 'eventAttribute' => 'main_page_image_url', 'w' => (new Event)->mainPageSizes[1][0], 'h' => (new Event)->mainPageSizes[1][1], 'sizeRelated' => true];          
+            $sizes['main_page_image_url'] = ['header' => 'Главная (десктоп)', 'attribute' => 'main_page_image_url', 'w' => (new Event)->mainPageSizes[1][0], 'h' => (new Event)->mainPageSizes[1][1], 'sizeRelated' => true];          
         }
         
-        $sizes[] = ['header' => 'На главную мобильная', 'eventAttribute' => 'main_page_mobile_image_url', 'w' => 290, 'h' => 190];
+        $sizes['main_page_mobile_image_url'] = ['header' => 'Главная (мобилка)', 'attribute' => 'main_page_mobile_image_url', 'w' => 290, 'h' => 190];
                 
-        $sizes[] = ['header' => 'Страница новости для планшета и мобилки', 'eventAttribute' => 'mobile_image_url', 'w' =>  1000, 'h' => 550];
-        $sizes[] = ['header' => 'Страница новости десктоп', 'eventAttribute' => 'image_url', 'w' => 1600, 'h' => 600];
+        $sizes['mobile_image_url'] = ['header' => 'Страница события (мобилка)', 'attribute' => 'mobile_image_url', 'w' =>  1000, 'h' => 550];
+        $sizes['image_url'] = ['header' => 'Страница события (десктоп)', 'attribute' => 'image_url', 'w' => 1600, 'h' => 600];
         
-        $sizes[] = ['header' => 'Маленькое изображение (блок похожие)', 'eventAttribute' => 'small_image_url', 'w' => 250, 'h' => 140];     
+        $sizes['small_image_url'] = ['header' => 'Блок связанных', 'attribute' => 'small_image_url', 'w' => 250, 'h' => 140];     
         
-        $sizes[] = ['header' => 'Для соц.сетей', 'eventAttribute' => 'socials_image_url', 'w' => 1500, 'h' => 628];
-
+        $sizes['socials_image_url'] = ['header' => 'Cоц.сети', 'attribute' => 'socials_image_url', 'w' => 1500, 'h' => 628];
+        
         foreach ($sizes as $s) {
-            $eventImagesForm = new EventImagesForm;
-            $eventImagesForm->imageWidth = $s['w'];
-            $eventImagesForm->imageHeight = $s['h'];
-            $eventImagesForm->eventAttribute = $s['eventAttribute'];
-            $eventImagesForm->header = $s['header'];
-            $eventImagesForm->sizeRelated = isset($s['sizeRelated']) ? true : false;
-            $eventImagesForms[] = $eventImagesForm;
+            $cropForm = new CropForm;
+            $cropForm->imageWidth = $s['w'];
+            $cropForm->imageHeight = $s['h'];
+            $cropForm->attribute = $s['attribute'];
+            $cropForm->header = $s['header'];
+            $cropForm->sizeRelated = isset($s['sizeRelated']) ? true : false;
+            $cropForms[] = $cropForm;
         }
 
-        return $eventImagesForms;
+        return $cropForms;
     }
-
-    /*public function actionBlocks($id) {
-        $model = $this->findModel($id);
-        $blockIDsOld = [];
-        $blockModelsArray = [];
-
-        foreach ($model->eventBlocks as $eventBlock) {
-            $blockIDsOld[$eventBlock->model][] = $eventBlock->block_id;
-            $block = $eventBlock->block;
-            $block->order = $eventBlock->order;
-            $block->anchor = $eventBlock->anchor;
-            $blockModelsArray[] = $block;
-        }
-
-        $post = Yii::$app->request->post();
-
-        if (!empty($post)) {
-            $transaction = Yii::$app->db->beginTransaction();
-
-            $loadBlockModels = $this->loadBlockModels($post);
-            $blockModelsArray = $loadBlockModels['models'];
-            $blockIDs = $loadBlockModels['blockIDs'];
-            
-            $validationErrors = ActiveForm::validateMultiple($blockModelsArray);
-
-            if(empty($validationErrors)) {
-                try  {
-                    $success = true;
-                    foreach ($blockModelsArray as $key => $blockModel) {
-                        if($success) {
-                            $success = $blockModel->save();
-
-                            if($blockModel->eventBlock === null) {
-                                $eventBlock = new EventBlock;
-                                $eventBlock->event_id = $model->id;
-                                $eventBlock->model = $blockModel->formName();
-                                $eventBlock->block_id = $blockModel->id;
-                            } else {
-                                $eventBlock = $blockModel->eventBlock;
-                            }
-
-                            $eventBlock->order = $blockModel->order;
-                            $eventBlock->anchor = $blockModel->anchor;
-
-                            $eventBlock->save();
-                        }
-                    }
-
-                    foreach ($this->check_diff_multi($blockIDsOld, $blockIDs) as $key => $ids) {
-                        foreach ($ids as $id) {
-                            $class = 'common\models\blocks\\'.$key;
-                            $class::findOne($id)->delete();
-                        }
-                    }
-
-                    if($success) {
-                        $transaction->commit();
-
-                        return $this->redirect(['/event']);
-                    } else {
-                        $transaction->rollBack();
-                    }
-                } catch (Exception $e) {
-                    $transaction->rollBack();
-                }
-            }
-        } 
-
-        return $this->render('blocks', [
-            'blockModelsArray' => $blockModelsArray,
-        ]);
-    }*/
-
+    
     /**
      * Deletes an existing Event model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -472,6 +409,7 @@ class EventController extends CController
     protected function loadBlockModels($post) {
         $blockIDs = [];
         $blockModelsArray = [];
+        $keyCount = 0;
 
         foreach ($post as $key => $blockDataArray) {
             $class = 'common\models\blocks\\'.$key;
@@ -483,7 +421,13 @@ class EventController extends CController
                     } else {
                         $blockModel = new $class;
                     }
+
                     $blockModel->attributes = $blockData;
+
+                    if(isset($post['CropForm'][$key][$i])) {
+                        $blockModel->cropImage = $post['CropForm'][$key][$i];
+                    }
+                    $blockModel->key = $keyCount;
 
                     if(isset($blockModel->itemsModelName)) {
                         $blockModel->loadItems($post[$blockModel->itemsModelName][$i]);
@@ -491,6 +435,8 @@ class EventController extends CController
 
                     $blockModelsArray[$i] = $blockModel;
                     $blockModel = null;
+
+                    $keyCount++;
                 }
             }
         }
@@ -557,8 +503,15 @@ class EventController extends CController
         $result = [];
 
         foreach($array1 as $key => $val) {
-            if(is_array($val) && isset($array2[$key])) {
-                $result[$key] = $this->check_diff_multi($val, $array2[$key]);
+            if(is_array($val)) {
+                if(isset($array2[$key])) {
+                    $result[$key] = $this->check_diff_multi($val, $array2[$key]);
+                } else {
+                    foreach ($val as $k => $v) {
+                        echo $v;
+                        $result[$key][] = $v;
+                    }
+                }
             } else {
                 if(!in_array($val, $array2)) {
                     $result[] = $val;

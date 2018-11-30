@@ -3,8 +3,9 @@
 namespace common\models\blocks\items;
 
 use Yii;
-use common\models\blocks\BlockGallery;
+use yii\web\UploadedFile;
 
+use common\models\blocks\BlockGallery;
 /**
  * This is the model class for table "{{%block_gallery_image}}".
  *
@@ -18,6 +19,8 @@ use common\models\blocks\BlockGallery;
  */
 class BlockGalleryImage extends \yii\db\ActiveRecord
 {
+    public $imageFile;
+    public $imageNamePrefix;
     /**
      * @inheritdoc
      */
@@ -32,11 +35,36 @@ class BlockGalleryImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image'], 'required'],
+            [['imageFile'], 'required', 'when' => function($model) {
+                return $model->isNewRecord;
+            }],
             [['block_gallery_id'], 'integer'],
             [['image', 'title', 'copyright'], 'string', 'max' => 255],
             [['block_gallery_id'], 'exist', 'skipOnError' => true, 'targetClass' => BlockGallery::className(), 'targetAttribute' => ['block_gallery_id' => 'id']],
+            [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
         ];
+    }
+
+    public function getImageInstance($galleryKey, $key) 
+    {
+        $this->imageFile = UploadedFile::getInstance($this, "[$galleryKey][$key]imageFile");
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if($this->imageFile) {
+            Yii::$app->image->updateImageAttribute($this, 'image', $this->imageFile);
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function afterDelete() {        
+        if($this->image) {
+            Yii::$app->image->deleteFile($this->image);
+        }
+
+        return parent::afterDelete();
     }
 
     /**
@@ -50,6 +78,7 @@ class BlockGalleryImage extends \yii\db\ActiveRecord
             'image' => 'Изображение',
             'title' => 'Заголовок',
             'copyright' => 'Копирайт',
+            'imageFile' => 'Изображение',
         ];
     }
 

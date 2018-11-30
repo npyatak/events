@@ -4,9 +4,9 @@ namespace backend\models\forms;
 use Yii;
 use yii\base\Model;
 
-class EventImagesForm extends Model
+class CropForm extends Model
 {
-    public $image;
+    public $postPath;
     public $imageFile;
     public $imageWidth;
     public $imageHeight;
@@ -19,7 +19,7 @@ class EventImagesForm extends Model
     public $sizeRelated = false;
 
     public $header;
-    public $eventAttribute;
+    public $attribute;
 
 
     /**
@@ -28,7 +28,7 @@ class EventImagesForm extends Model
     public function rules()
     {
         return [
-            [['imageWidth', 'imageHeight', 'x', 'y', 'width', 'height', 'eventAttribute', 'imageFile'], 'safe'],
+            [['imageWidth', 'imageHeight', 'x', 'y', 'width', 'height', 'attribute', 'imageFile'], 'safe'],
             [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
         ];
     }

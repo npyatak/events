@@ -1,7 +1,6 @@
-
 <div class="big-image">
     <div class="big-image_inner">
-        <img src="<?=$block->getImageUrl($block->source, '900x540');?>" alt="<?=$block->text;?>">
+        <img src="<?=Yii::$app->image->getImageUrl($block->source, '900x540');?>" alt="<?=$block->text;?>">
         <div class="caption">
             <?=$block->copyright_text;?>
         </div>

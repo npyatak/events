@@ -43,6 +43,9 @@ return [
             'defaultTimeZone' => 'Europe/Moscow',
             'locale' => 'ru-RU'
         ],
+        'image' => [
+            'class' => 'common\components\ImageHelper',
+        ],
     ],
 
     /*'controllerMap' => [

@@ -99,9 +99,9 @@ class SiteController extends Controller
         $content = file_get_contents('http://192.168.25.62/events/uploads/90_main_page_image_url_540x620.jpg');
         //Yii::$app->webdavFs->put('/events/test/123.jpg', $content);
 
-        if(Yii::$app->webdavFs->delete('/events/test')) {
-            print_r(Yii::$app->webdavFs->delete('events/test/'));
-        }
+        // if(Yii::$app->webdavFs->delete('/events/test')) {
+        //     print_r(Yii::$app->webdavFs->delete('events/test/'));
+        // }
         //Yii::$app->webdavFs->createDir('/events/test/');
 
         // if(Yii::$app->webdavFs->has('/events/images/ds')) {
@@ -111,7 +111,7 @@ class SiteController extends Controller
         //Yii::$app->webdavFs->delete('events/uploads/1131d8358f6ad0910dfed66c911673e4.png');
         //print_r(Yii::$app->webdavFs->listContents('test/', true));
         echo '<pre>';
-        print_r(Yii::$app->webdavFs->listContents('/events', true));
+        print_r(Yii::$app->webdavFs->listContents('/events/images', true));
         echo '</pre>';
         //print_r(Yii::$app->webdavFs->getMetadata('events/images'));
         //print_r(Yii::$app->webdavFs->listContents('academy/images', true));

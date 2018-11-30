@@ -9,7 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'События', 'url' => ['index'
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="district-view">
+<div class="event-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

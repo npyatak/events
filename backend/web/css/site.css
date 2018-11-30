@@ -121,9 +121,9 @@ a.desc:after {
 .block {
     position: relative;
     margin: 40px auto;
-    border: 1px solid #c3c3c3;
+    border: 1px solid #a1a1a1;
     border-radius: 5px;
-    border-bottom: 5px solid #c3c3c3;
+    border-bottom: 5px solid #a1a1a1;
     list-style: none;
 }
 .block .header {
@@ -139,11 +139,10 @@ a.desc:after {
 }
 .block .remove {
     position: absolute;
-    right: 20px;
-    top: 20px;
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
+    right: 27px;
+    top: 12px;
+    font-size: 30px;
+    color: #f11;
     font-weight: bold;
     cursor: pointer;
 }
@@ -157,25 +156,27 @@ input[type="checkbox"] {
     display: inline-block;
     vertical-align: top;
 }
-.remove-gallery-image {
-    vertical-align: middle;
-    font-weight: bold;
-    font-size: 20px;
-    cursor: pointer;
-}
 .block-fact-item, .block-card-item {
     position: relative;
-    border: 1px solid #c3c3c3;
+    border: 1px solid #a1a1a1;
     border-radius: 5px;
     padding: 20px;
 }
-.remove-fact-item, .remove-card-item {
+.block-gallery-image {
+    position: relative;
+    padding-top: 15px;
+}
+.remove-fact-item, .remove-card-item, .remove-gallery-image {
     position: absolute;
-    top: 3px;
+    top: -3px;
     right: 10px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
+    color: #f11;
     cursor: pointer;
+}
+.remove-gallery-image {
+    top: -20px;
 }
 ul.sortable li {
     cursor: move;
@@ -203,15 +204,16 @@ ul.sortable li {
     width: calc(33% - 10px);
     margin: 0 5px 5px 0;
     vertical-align: top;
-    border: 1px solid #ddd;
+    border: 1px solid #bbb;
     border-radius: 10px;
-    padding: 10px;
+    padding: 12px 10px 0 10px;
 }
 .image-row :first {
     margin-left: 0;
 }
-.image-row .header {
-    font-size: 16px;
+.crop-header {
+    font-size: 14px;
+    font-weight: 700;
     padding-bottom: 10px;
 }
 .modal-dialog {
@@ -269,4 +271,8 @@ ul.sortable li {
     min-width: 100px;
     min-height: 50px;
     width: 100%;
+}
+.block-gallery-image {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
 }

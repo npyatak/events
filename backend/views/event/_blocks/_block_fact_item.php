@@ -6,7 +6,7 @@ use common\models\blocks\items\BlockFactItem;
 ?>
 
 <div class="block-fact-item">
-	<div class="remove-fact-item">x</div>
+	<div class="remove-fact-item">&times;</div>
 	<div class="row">
 		<?= Html::activeHiddenInput($model, "[$i][$key]id") ?>
 	    <div class="col-sm-6">

@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m181123_143934_alter_table_year extends Migration {
+class m181125_173934_alter_block_tables extends Migration {
 
     public function safeUp() {
         $tableOptions = null;
@@ -11,10 +11,12 @@ class m181123_143934_alter_table_year extends Migration {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->addColumn("{{%year}}", 'used_multimedia_label', $this->string()->defaultValue('В проекте использованы фотографии'));
+        $this->alterColumn('{{%block_image}}', 'source', $this->string());
+        $this->alterColumn('{{%block_gallery_image}}', 'image', $this->string());
     }
 
     public function safeDown() {
-        $this->dropColumn("{{%year}}", 'used_multimedia_label');
+        $this->alterColumn('{{%block_image}}', 'source', $this->string()->notNull());
+        $this->alterColumn('{{%block_gallery_image}}', 'image', $this->string()->notNull());
     }
 }

@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 use common\models\Event;
 
-\backend\assets\UIAsset::register($this);
+//\backend\assets\UIAsset::register($this);
 ?>
 
 <ul id="blocks">
@@ -48,7 +48,7 @@ use common\models\Event;
         updateBlocksOrder();
     });
 
-    $('#blocks').sortable({
+    /*$('#blocks').sortable({
         cursor: 'move',
         handle: '.header',
         classes: {
@@ -63,7 +63,7 @@ use common\models\Event;
         stop: function(event, ui) {
             loadTextareas(ui.item.find('textarea'))
         }
-    });
+    });*/
 
     $(document).on('click', '.block .move-up', function(e) {
         e.defaultPrevented;
@@ -130,11 +130,11 @@ use common\models\Event;
     }
 
     function updateBlocksOrder() {
-        $('.block').each(function() {
-            var order = $(this).index() + 1;
-            $(this).find('.hidden-order').val(order);
-            $(this).find('.order-number').html(order);
-        });
+        for (var order = 1; order <= $('.block').length; order++) {
+            index = order - 1;
+            $('.block:eq('+index+')').find('.hidden-order').val(order);
+            $('.block:eq('+index+')').find('.order-number').html(order);
+        }
     }
 ";
 

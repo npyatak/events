@@ -5,7 +5,7 @@
         <?php foreach ($block->blockGalleryImages as $item):?>
         <div class="item">
             <div class="image">
-                <img src="<?=$block->getImageUrl($item->image, '900x540');?>" alt="<?=$item->title;?>">
+                <img src="<?=Yii::$app->image->getImageUrl($item->image, '900x540');?>" alt="<?=$item->title;?>">
                 <div class="caption">
                     <?=$item->copyright;?>
                 </div>

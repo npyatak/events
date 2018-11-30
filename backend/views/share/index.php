@@ -29,7 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $data->year->number;
                     }
                 ],
-                'image',
+                [
+                    'attribute' => 'image',
+                    'header' => 'Изображение на главной',
+                    'format' => 'raw',
+                    'value' => function($data) {
+                        return $data->image ? Html::img(Yii::$app->image->getImageUrl($data->image), ['width' => '200']) : '';
+                    },
+                ],
                 'title',
                 'text',
                 'twitter',

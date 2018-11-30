@@ -7,7 +7,7 @@ $this->params['breadcrumbs'][] = ['label' => 'События', 'url' => ['index'
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Изменить';
 ?>
-<div class="district-update">
+<div class="event-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = 'Изменить';
     <?= $this->render('_form', [
         'model' => $model,
         'blockModelsArray' => $blockModelsArray,
-        'eventImagesFormArray' => $eventImagesFormArray,
+        'cropFormArray' => $cropFormArray,
     ]) ?>
 
 </div>

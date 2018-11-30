@@ -20,9 +20,9 @@ if($category && !in_array('cat_'.$category, $classes)) {
 <div class="grid-item w<?=$size[0];?>-h<?=$size[1];?> <?=implode(' ', $classes);?>">
 	<?php 
 	if($this->params['is_mobile']) {
-		$imageUrl = $event->getImageUrl($event->mobile_image_url);
+		$imageUrl = Yii::$app->image->getImageUrl($event->mobile_image_url);
 	} else {
-		$imageUrl = $event->getImageUrl($event->main_page_image_url, $size[0].'x'.$size[1]);
+		$imageUrl = Yii::$app->image->getImageUrl($event->main_page_image_url, $size[0].'x'.$size[1]);
 	}?>
 	
 	<div class="grid-item_image lazy" data-original="<?=$imageUrl;?>">

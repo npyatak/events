@@ -11,6 +11,9 @@ class Block extends \yii\db\ActiveRecord
 {
     public $order;
     public $anchor;
+    
+    public $key;
+    public $imageNamePrefix;
 
     public function rules()
     {
@@ -62,10 +65,6 @@ class Block extends \yii\db\ActiveRecord
             'text' => 'Текст',
             'imageFile' => 'Изображение',
         ];
-    }
-
-    public function getImageSrcPath() {
-        return __DIR__ . '/../../../frontend/web';
     }
 
     public function getImageUrl($image, $thumb_size = false) {

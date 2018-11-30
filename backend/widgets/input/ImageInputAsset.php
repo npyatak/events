@@ -1,10 +1,10 @@
 <?php
 
-namespace backend\widgets\cropimage;
+namespace backend\widgets\input;
 
 use yii\web\AssetBundle;
 
-class CropImageAsset extends AssetBundle
+class ImageInputAsset extends AssetBundle
 {
     public $sourcePath = __DIR__ . '/assets';
 
@@ -12,8 +12,8 @@ class CropImageAsset extends AssetBundle
         'css/cropper.css',
     ];
     public $js = [
-        'js/cropper.js',
-        //'js/script.js',
+        'js/cropper.min.js',
+        'js/crop.js',
     ];
     public $depends = [
         'backend\assets\AppAsset',

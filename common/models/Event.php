@@ -55,7 +55,7 @@ class Event extends \yii\db\ActiveRecord
             [['title', 'size'], 'required'],
             [['view_date_type', 'dateFormatted', 'alias'], 'required'],
             [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
-            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url', 'origin_image', 'main_page_mobile_image_url'], 'string', 'max' => 255],
+            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url', 'origin_image', 'main_page_mobile_image_url', 'copyright_title'], 'string', 'max' => 255],
             [['categoryIds', 'similarIds', 'copyright', 'imageFile'], 'safe'],
             [['alias'], 'unique'],
             [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
@@ -99,6 +99,7 @@ class Event extends \yii\db\ActiveRecord
             'mobile_image_url' => 'Изображение для мобильных',
             'small_image_url' => 'Маленькое изображение',
             'copyright' => 'Копирайты',
+            'copyright_title' => 'Заголовок копирайтов',
             'meta_title' => 'META title',
             'meta_description' => 'META description',
             'redirect_url' => 'URL редиректа',
@@ -311,7 +312,7 @@ class Event extends \yii\db\ActiveRecord
         return __DIR__ . '/../../frontend/web';
     }
 
-    public function getImageUrl($image, $thumb_size = false) {
+    /*public function getImageUrl($image, $thumb_size = false) {
         if($image) {
             if(isset(Yii::$app->webdavFs)) {
                 $parse = parse_url($image);
@@ -327,7 +328,7 @@ class Event extends \yii\db\ActiveRecord
                 return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
             }
         }
-    }
+    }*/
 
     public function getViewDate() {
         $date = [];

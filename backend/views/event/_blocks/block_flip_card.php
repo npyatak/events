@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use common\components\CKEditor;
-use common\components\ElfinderInput;
 ?>
 
 <div class="row">
@@ -35,29 +34,30 @@ use common\components\ElfinderInput;
 	</div>
 </div>
 
-<div class="form-group">
-	<?= Html::activeLabel($model, "[$i]text_front") ?>
-	<?=CKEditor::widget([
-	    'model' => $model,
-	    'attribute' => "[$i]text_front",
-	    'editorOptions' => [
-	    	'preset' => 'colorAndAlign'
-	    ]
-    ]);?>
-</div>
 
 <div class="row">
-    <div class="col-sm-6">
-		<div class="form-group <?=$model->hasErrors("image_front") ? 'has-error' : '';?>">
-			<?= Html::activeLabel($model, "[$i]image_front", ['class' => 'control-label']) ?>
-			<?= ElfinderInput::widget([
-			    'model' => $model,
-			    'attribute' => "[$i]image_front",
+    <div class="col-sm-4">
+		<div class="form-group <?=$model->hasErrors("imageFrontFile") ? 'has-error' : '';?>">
+			<?=\backend\widgets\input\ImageInput::widget([
+				'model' => $model,
+				'attribute' => "[$i]imageFrontFile",
+				'previewAttribute' => 'image_front',
 			]);?>
-			<?= Html::error($model, "[$i]image_front", ['class' => 'help-block']);?>
 		</div>
 	</div>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
+		<div class="form-group">
+			<?= Html::activeLabel($model, "[$i]text_front") ?>
+			<?=CKEditor::widget([
+			    'model' => $model,
+			    'attribute' => "[$i]text_front",
+			    'editorOptions' => [
+			    	'preset' => 'colorAndAlign'
+			    ]
+		    ]);?>
+		</div>
+	</div>
+    <div class="col-sm-8">
 		<div class="form-group <?=$model->hasErrors("capture_front") ? 'has-error' : '';?>">
 			<?= Html::activeLabel($model, "[$i]capture_front", ['class' => 'control-label']) ?>
 			<?= Html::activeTextInput($model, "[$i]capture_front", ['class' => 'form-control']) ?>
@@ -66,29 +66,29 @@ use common\components\ElfinderInput;
 	</div>
 </div>
 
-<div class="form-group">
-	<?= Html::activeLabel($model, "[$i]text_back") ?>
-	<?=CKEditor::widget([
-	    'model' => $model,
-	    'attribute' => "[$i]text_back",
-	    'editorOptions' => [
-	    	'preset' => 'colorAndAlign'
-	    ]
-    ]);?>
-</div>
-
 <div class="row">
-    <div class="col-sm-6">
-		<div class="form-group <?=$model->hasErrors("image_back") ? 'has-error' : '';?>">
-			<?= Html::activeLabel($model, "[$i]image_back", ['class' => 'control-label']) ?>
-			<?= ElfinderInput::widget([
-			    'model' => $model,
-			    'attribute' => "[$i]image_back",
+    <div class="col-sm-4">
+		<div class="form-group <?=$model->hasErrors("imageBackFile") ? 'has-error' : '';?>">
+			<?=\backend\widgets\input\ImageInput::widget([
+				'model' => $model,
+				'attribute' => "[$i]imageBackFile",
+				'previewAttribute' => 'image_back',
 			]);?>
-			<?= Html::error($model, "[$i]image_back", ['class' => 'help-block']);?>
 		</div>
 	</div>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
+		<div class="form-group">
+			<?= Html::activeLabel($model, "[$i]text_back") ?>
+			<?=CKEditor::widget([
+			    'model' => $model,
+			    'attribute' => "[$i]text_back",
+			    'editorOptions' => [
+			    	'preset' => 'colorAndAlign'
+			    ]
+		    ]);?>
+		</div>
+	</div>
+    <div class="col-sm-8">
 		<div class="form-group <?=$model->hasErrors("capture_back") ? 'has-error' : '';?>">
 			<?= Html::activeLabel($model, "[$i]capture_back", ['class' => 'control-label']) ?>
 			<?= Html::activeTextInput($model, "[$i]capture_back", ['class' => 'form-control']) ?>

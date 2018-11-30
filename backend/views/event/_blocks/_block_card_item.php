@@ -6,7 +6,7 @@ use common\models\blocks\items\BlockCardItem;
 ?>
 
 <div class="block-card-item">
-	<div class="remove-card-item">x</div>
+	<div class="remove-card-item">&times;</div>
 	<div class="row">
 		<?= Html::activeHiddenInput($model, "[$i][$key]id") ?>
 	    <div class="col-sm-9">

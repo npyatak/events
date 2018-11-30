@@ -35,7 +35,7 @@ $script = "
 	        'autostart': 'false',
 	        'duration': '',
 	        'playlist': [{
-	            'image': '".$block->image."',
+	            'image': '".Yii::$app->image->getImageUrl($block->image)."',
 	            'sources': [
 	                {file: '".$block->list_1."'},
 	                {file: '".$block->list_2."'},

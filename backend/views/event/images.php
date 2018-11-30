@@ -7,7 +7,7 @@ $this->title = $event->title.' - Загрузить картинки';
 $this->params['breadcrumbs'][] = ['label' => 'События', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-\backend\widgets\cropimage\CropImageAsset::register($this);
+\backend\widgets\cropimage\ImageInputAsset::register($this);
 ?>
 
 <div class="gallery-create">
@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		<?=Html::fileInput('image', '', ['id' => 'inputImage']);?>
 
-	    <?php foreach ($eventImagesForms as $i => $imagesForm):?>
-	    	<h3><?=$imagesForm->header;?></h3>
+	    <?php foreach ($cropForms as $i => $cropForm):?>
+	    	<h3><?=$cropForm->header;?></h3>
 		    <div class="row image-row" data-i="<?=$i;?>">
 				<div class="col-sm-10">
 		            <div style="max-height: 500px;">
@@ -42,23 +42,23 @@ $this->params['breadcrumbs'][] = $this->title;
 				<div class="col-sm-2">
 		            <div class="inputs">
 		            	<div class="sizes-wrap">
-							<?= Html::activeTextInput($imagesForm, "[$i]imageWidth", ['readonly' => true]) ?>
+							<?= Html::activeTextInput($cropForm, "[$i]imageWidth", ['readonly' => true]) ?>
 							&times;
-							<?= Html::activeTextInput($imagesForm, "[$i]imageHeight", ['readonly' => true]) ?>
+							<?= Html::activeTextInput($cropForm, "[$i]imageHeight", ['readonly' => true]) ?>
 						</div>
-						<?= Html::activeHiddenInput($imagesForm, "[$i]eventAttribute") ?>
+						<?= Html::activeHiddenInput($cropForm, "[$i]attribute") ?>
 
 
-        				<?= Html::activeLabel($imagesForm, "[$i]x", ['class' => 'control-label']) ?>
-						<?= Html::activeTextInput($imagesForm, "[$i]x", ['class' => 'x', 'readonly' => true]) ?>
-        				<?= Html::activeLabel($imagesForm, "[$i]y", ['class' => 'control-label']) ?>
-						<?= Html::activeTextInput($imagesForm, "[$i]y", ['class' => 'y', 'readonly' => true]) ?>
-        				<?= Html::activeLabel($imagesForm, "[$i]width", ['class' => 'control-label']) ?>
-						<?= Html::activeTextInput($imagesForm, "[$i]width", ['class' => 'width', 'readonly' => true]) ?>
-        				<?= Html::activeLabel($imagesForm, "[$i]height", ['class' => 'control-label']) ?>
-						<?= Html::activeTextInput($imagesForm, "[$i]height", ['class' => 'height', 'readonly' => true]) ?>
-						<?//= Html::activeTextInput($imagesForm, "[$i]scaleX", ['class' => 'scaleX', 'readonly' => true]) ?>
-						<?//= Html::activeTextInput($imagesForm, "[$i]scaleY", ['class' => 'scaleY', 'readonly' => true]) ?>
+        				<?= Html::activeLabel($cropForm, "[$i]x", ['class' => 'control-label']) ?>
+						<?= Html::activeTextInput($cropForm, "[$i]x", ['class' => 'x', 'readonly' => true]) ?>
+        				<?= Html::activeLabel($cropForm, "[$i]y", ['class' => 'control-label']) ?>
+						<?= Html::activeTextInput($cropForm, "[$i]y", ['class' => 'y', 'readonly' => true]) ?>
+        				<?= Html::activeLabel($cropForm, "[$i]width", ['class' => 'control-label']) ?>
+						<?= Html::activeTextInput($cropForm, "[$i]width", ['class' => 'width', 'readonly' => true]) ?>
+        				<?= Html::activeLabel($cropForm, "[$i]height", ['class' => 'control-label']) ?>
+						<?= Html::activeTextInput($cropForm, "[$i]height", ['class' => 'height', 'readonly' => true]) ?>
+						<?//= Html::activeTextInput($cropForm, "[$i]scaleX", ['class' => 'scaleX', 'readonly' => true]) ?>
+						<?//= Html::activeTextInput($cropForm, "[$i]scaleY", ['class' => 'scaleY', 'readonly' => true]) ?>
 
 						<div class="preview"></div>
 
@@ -112,9 +112,9 @@ $this->params['breadcrumbs'][] = $this->title;
             	preview: '.preview',
 				viewMode: 1,
 				dragMode: 'move',
-			    //minCropBoxWidth: $('#eventimagesform-'+i+'-imagewidth').val(),
-			    //minCropBoxHeight: $('#eventimagesform-'+i+'-imageheight').val(),
-			    aspectRatio: $('#eventimagesform-'+i+'-imagewidth').val() / $('#eventimagesform-'+i+'-imageheight').val(),
+			    //minCropBoxWidth: $('#cropform-'+i+'-imagewidth').val(),
+			    //minCropBoxHeight: $('#cropform-'+i+'-imageheight').val(),
+			    aspectRatio: $('#cropform-'+i+'-imagewidth').val() / $('#cropform-'+i+'-imageheight').val(),
 			    crop: function(event) {
 			        $(event.target).closest('.image-row').find('.x').val(event.detail.x);
 			        $(event.target).closest('.image-row').find('.y').val(event.detail.y);
@@ -132,9 +132,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	$('.getCroppedCanvas').click(function(e) {
 		i = $(this).closest('.image-row').attr('data-i');
-		var result = cropper[i].getCroppedCanvas({width: $('#eventimagesform-'+i+'-imagewidth').val(), height: $('#eventimagesform-'+i+'-imageheight').val()})
+		var result = cropper[i].getCroppedCanvas({width: $('#cropform-'+i+'-imagewidth').val(), height: $('#cropform-'+i+'-imageheight').val()})
 		$('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
-		$('#getCroppedCanvasModal .modal-dialog').css({width: parseInt($('#eventimagesform-'+i+'-imagewidth').val()) + 30});
+		$('#getCroppedCanvasModal .modal-dialog').css({width: parseInt($('#cropform-'+i+'-imagewidth').val()) + 30});
 
 		return false;
 	});

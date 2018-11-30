@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-use common\components\ThumbnailImage;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "{{%share}}".
@@ -16,6 +16,9 @@ use common\components\ThumbnailImage;
 class Share extends \yii\db\ActiveRecord
 {
     public $url;
+    public $imageFile;
+
+    public $imageNamePrefix;
     /**
      * @inheritdoc
      */
@@ -32,6 +35,7 @@ class Share extends \yii\db\ActiveRecord
         return [
             [['title', 'image', 'text', 'twitter'], 'required'],
             [['title', 'image', 'text', 'twitter', 'year_id'], 'safe'],
+            [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
         ];
     }
 
@@ -47,8 +51,21 @@ class Share extends \yii\db\ActiveRecord
             'text' => 'Текст',
             'twitter' => 'Текст для Twitter',
             'image' => 'Изображение',
+            'imageFile' => 'Изображение',
             'year_id' => 'Год',
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        $this->imageNamePrefix = $this->id;
+
+        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
+
+        if($this->imageFile) {
+            Yii::$app->image->updateImageAttribute($this, 'image', $this->imageFile);
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
     }
 
     public function getYear()
@@ -58,17 +75,5 @@ class Share extends \yii\db\ActiveRecord
 
     public function getImageSrcPath() {
         return __DIR__ . '/../../frontend/web';
-    }
-
-    public function getImageUrl($image = false, $thumb_size = false) {
-        if(!$image) {
-            $image = $this->image;
-        }
-        
-        if(is_file($this->imageSrcPath.$image)) {
-            return $image;
-        } else {
-            return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
-        }
     }
 }
