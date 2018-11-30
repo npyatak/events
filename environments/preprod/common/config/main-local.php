@@ -27,11 +27,25 @@ return [
             'userName' => '<cdn.user>',
             'password' => '<cdn.password>',
         ],
+        'webdavYandex' => [
+            'class' => 'creocoder\flysystem\WebDAVFilesystem',
+            'baseUri' => 'https://webdav.yandex.ru/',
+            'userName' => 'events-test',
+            'password' => 'Tass12345',
+        ],
         'cdn' => [
             'class' => 'common\components\CDN',
             'enabled' => true,
             'domains' => '<cdn.mirrors>',
-        ],
+        ]
+
+        //для яндекса 
+        // 'webdavFs' => [
+        //     'class' => 'creocoder\flysystem\WebDAVFilesystem',
+        //     'baseUri' => 'https://webdav.yandex.ru',
+        //     'userName' => 'login',
+        //     'password' => 'password',
+        // ],
     ],
     'controllerMap' => [
         'elfinder' => [
@@ -43,5 +57,14 @@ return [
                 'component' => 'webdavFs',
             ]
         ],
+        'elfinderYandex' => [
+            'class' => 'mihaildev\elfinder\PathController',
+            'root' => [
+                'class' => 'mihaildev\elfinder\flysystem\Volume',
+                'url' => 'https://webdav.yandex.ru/',
+                //'path' => '',
+                'component' => 'webdavYandex',
+            ]
+        ]
     ],
 ];
