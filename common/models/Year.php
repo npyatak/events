@@ -11,6 +11,9 @@ class Year extends \yii\db\ActiveRecord
     public $mainPageImageFile;
     public $partnerImageIndexFile;
     public $partnerImageEventFile;
+    public $cropImage = [];
+    public $partnerImageIndexCropParams = ['w' => 360, 'h' => 600, 'attribute' => 'partner_image_index'];
+    public $partnerImageEventCropParams = ['w' => 500, 'h' => 840, 'attribute' => 'partner_image_event'];
 
     public $imageNamePrefix;
     /**
@@ -32,7 +35,8 @@ class Year extends \yii\db\ActiveRecord
             [['worked_on_project', 'used_multimedia', 'sources', 'gratitude', 'additional', 'partner_text'], 'string'],
             [['title', 'leading_text', 'logo_url', 'main_page_image', 'partner_url', 'partner_image_index', 'partner_image_event'], 'string', 'max' => 255],
             ['number', 'unique'],
-            [['mainPageImageFile', 'partnerImageIndexFile', 'partnerImageEventFile'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
+            ['mainPageImageFile', 'file', 'extensions'=>'svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/svg+xml'],
+            [['partnerImageIndexFile', 'partnerImageEventFile'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
         ];
     }
 
@@ -55,13 +59,13 @@ class Year extends \yii\db\ActiveRecord
             'sources' => 'Источники',
             'gratitude' => 'Блок благодарностей экспертам и организациям',
             'additional' => 'Дополнительный текстовый блок',
-            'partner_text' => 'Текст партнера для правой колонки на главной',
-            'partner_url' => 'Ссылка с текста партнера на главной',
+            'partner_text' => 'Текст меню бургера',
+            'partner_url' => 'Ссылка',
             'partner_image_index' => 'Картинка баннера справа на главной',
             'partner_image_event' => 'Картинка баннера справа на событии',
             'mainPageImageFile' => 'Заглавное изображение', 
-            'partnerImageIndexFile' => 'Картинка на главной',
-            'partnerImageEventFile' => 'Картинка на событии',
+            'partnerImageIndexFile' => 'Изображение на главной',
+            'partnerImageEventFile' => 'Изображение на странице события',
         ];
     }
 
@@ -75,14 +79,30 @@ class Year extends \yii\db\ActiveRecord
             }
         }
 
-        $fileAttributes = ['main_page_image' => 'mainPageImageFile', 'partner_image_index' => 'partnerImageIndexFile', 'partner_image_event' => 'partnerImageEventFile'];
         $this->imageNamePrefix = $this->id;
 
-        foreach ($fileAttributes as $attribute => $file) {
-            $this->$file = UploadedFile::getInstance($this, $file);
-            
-            if($this->$file) {
-                Yii::$app->image->updateImageAttribute($this, $attribute, $this->$file);
+        $this->mainPageImageFile = UploadedFile::getInstance($this, 'mainPageImageFile');     
+        if($this->mainPageImageFile) {
+            Yii::$app->image->updateImageAttribute($this, 'main_page_image', $this->mainPageImageFile);
+        }
+
+        $this->cropImage = Yii::$app->request->post()['CropForm']['Year'];
+
+        $this->partnerImageIndexFile = UploadedFile::getInstance($this, "partnerImageIndexFile");
+        if($this->partnerImageIndexFile) {
+            if(isset($this->cropImage['partnerImageIndexFile'])) {
+                Yii::$app->image->updateImageAttribute($this, 'partner_image_index', $this->partnerImageIndexFile, $this->cropImage['partnerImageIndexFile']);
+            } else {
+                Yii::$app->image->updateImageAttribute($this, 'partner_image_index', $this->partnerImageIndexFile);
+            }
+        }
+
+        $this->partnerImageEventFile = UploadedFile::getInstance($this, "partnerImageEventFile");
+        if($this->partnerImageEventFile) {
+            if(isset($this->cropImage['partnerImageEventFile'])) {
+                Yii::$app->image->updateImageAttribute($this, 'partner_image_event', $this->partnerImageEventFile, $this->cropImage['partnerImageEventFile']);
+            } else {
+                Yii::$app->image->updateImageAttribute($this, 'partner_image_event', $this->partnerImageEventFile);
             }
         }
 

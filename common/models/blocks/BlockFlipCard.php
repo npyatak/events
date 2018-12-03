@@ -12,6 +12,9 @@ class BlockFlipCard extends Block
 
     public $imageFrontFile;
     public $imageBackFile;
+    public $cropImage = [];
+    public $imageFrontCropParams = ['w' => 1320, 'h' => 800, 'attribute' => 'image_front'];
+    public $imageBackCropParams = ['w' => 1320, 'h' => 800, 'attribute' => 'image_back'];
     /**
      * @inheritdoc
      */
@@ -54,12 +57,20 @@ class BlockFlipCard extends Block
     {
         $this->imageFrontFile = UploadedFile::getInstance($this, "[$this->key]imageFrontFile");
         if($this->imageFrontFile) {
-            Yii::$app->image->updateImageAttribute($this, 'image_front', $this->imageFrontFile);
+            if(isset($this->cropImage['imageFrontFile'])) {
+                Yii::$app->image->updateImageAttribute($this, 'image_front', $this->imageFrontFile, $this->cropImage['imageFrontFile']);
+            } else {
+                Yii::$app->image->updateImageAttribute($this, 'image_front', $this->imageFrontFile);
+            }
         }
 
         $this->imageBackFile = UploadedFile::getInstance($this, "[$this->key]imageBackFile");
         if($this->imageBackFile) {
-            Yii::$app->image->updateImageAttribute($this, 'image_back', $this->imageBackFile);
+            if(isset($this->cropImage['imageBackFile'])) {
+                Yii::$app->image->updateImageAttribute($this, 'image_back', $this->imageBackFile, $this->cropImage['imageBackFile']);
+            } else {
+                Yii::$app->image->updateImageAttribute($this, 'image_back', $this->imageBackFile);
+            }
         }
 
         return parent::afterSave($insert, $changedAttributes);

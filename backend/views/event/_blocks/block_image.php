@@ -10,6 +10,7 @@ use common\components\CKEditor;
 			<?=\backend\widgets\input\ImageInput::widget([
 				'model' => $model,
 				'attribute' => "[$i]imageFile",
+				'cropParams' => $model->imageCropParams, 
 				'previewAttribute' => 'source',
 			]);?>
 		</div>

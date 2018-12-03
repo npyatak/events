@@ -92,10 +92,20 @@ use backend\widgets\input\ImageInput;
     <h3>Баннер справа</h3>
     <div class="row">
         <div class="col-sm-3">
-            <?=ImageInput::widget(['model' => $model, 'attribute' => 'partnerImageIndexFile', 'previewAttribute' => 'partner_image_index']);?>
+            <?=ImageInput::widget([
+                'model' => $model, 
+                'attribute' => 'partnerImageIndexFile', 
+                'previewAttribute' => 'partner_image_index',
+                'cropParams' => $model->partnerImageIndexCropParams, 
+            ]);?>
         </div>
         <div class="col-sm-3">
-            <?=ImageInput::widget(['model' => $model, 'attribute' => 'partnerImageEventFile', 'previewAttribute' => 'partner_image_event']);?>
+            <?=ImageInput::widget([
+                'model' => $model, 
+                'attribute' => 'partnerImageEventFile', 
+                'previewAttribute' => 'partner_image_event',
+                'cropParams' => $model->partnerImageEventCropParams, 
+            ]);?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'partner_text')->textInput(['maxlength' => true]) ?>

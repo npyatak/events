@@ -195,7 +195,7 @@ if($this->params['is_mobile']) {
                 <?php foreach ($event->similarEvents as $similar):?>
                     <a href="<?=$similar->url;?>" <?=$similar->noFollow;?> class="item">
                         <?php if($similar->small_image_url):?>
-                        <div class="item-image" style="background-image:url(<?=$similar->getImageUrl($similar->small_image_url, '249x140');?>)">
+                        <div class="item-image" style="background-image:url(<?=Yii::$app->image->getImageUrl($similar->small_image_url);?>)">
                             <span class="bg" style="background-color:<?=$color ? $color : '';?>"></span>
                         </div>
                         <?php endif;?>

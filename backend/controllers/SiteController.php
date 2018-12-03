@@ -111,7 +111,7 @@ class SiteController extends Controller
         //Yii::$app->webdavFs->delete('events/uploads/1131d8358f6ad0910dfed66c911673e4.png');
         //print_r(Yii::$app->webdavFs->listContents('test/', true));
         echo '<pre>';
-        print_r(Yii::$app->webdavFs->listContents('/events/images', true));
+        print_r(Yii::$app->webdavFs->listContents('/events/images/xfiles', true));
         echo '</pre>';
         //print_r(Yii::$app->webdavFs->getMetadata('events/images'));
         //print_r(Yii::$app->webdavFs->listContents('academy/images', true));

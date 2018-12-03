@@ -8,6 +8,7 @@ use yii\helpers\Html;
 			<?=\backend\widgets\input\ImageInput::widget([
 				'model' => $model,
 				'attribute' => "[$i]imageFile",
+				'cropParams' => $model->imageCropParams, 
 				'previewAttribute' => 'image',
 			]);?>
 		</div>

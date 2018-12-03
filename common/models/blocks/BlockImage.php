@@ -8,6 +8,8 @@ use yii\web\UploadedFile;
 class BlockImage extends Block
 {
     public $imageFile;
+    public $imageCropParams = ['w' => 1820, 'h' => 1080, 'attribute' => 'source'];
+    public $cropImage = [];
 
     public static function tableName()
     {
@@ -46,9 +48,13 @@ class BlockImage extends Block
     }
 
     public function afterSave($insert, $changedAttributes)
-    {
+    {    
         if($this->imageFile) {
-            Yii::$app->image->updateImageAttribute($this, 'source', $this->imageFile);
+            if(isset($this->cropImage['imageFile'])) {
+                Yii::$app->image->updateImageAttribute($this, 'source', $this->imageFile, $this->cropImage['imageFile']);
+            } else {
+                Yii::$app->image->updateImageAttribute($this, 'source', $this->imageFile);
+            }
         }
 
         return parent::afterSave($insert, $changedAttributes);

@@ -9,6 +9,8 @@ class BlockTassVideo extends Block
 {
 
     public $imageFile;
+    public $imageCropParams = ['w' => 1820, 'h' => 1020, 'attribute' => 'image'];
+    public $cropImage = [];
     /**
      * @inheritdoc
      */
@@ -39,7 +41,11 @@ class BlockTassVideo extends Block
     {
         $this->imageFile = UploadedFile::getInstance($this, "[$this->key]imageFile");
         if($this->imageFile) {
-            Yii::$app->image->updateImageAttribute($this, 'image', $this->imageFile);
+            if(isset($this->cropImage['imageFile'])) {
+                Yii::$app->image->updateImageAttribute($this, 'image', $this->imageFile, $this->cropImage['imageFile']);
+            } else {
+                Yii::$app->image->updateImageAttribute($this, 'image', $this->imageFile);
+            }
         }
 
         return parent::afterSave($insert, $changedAttributes);

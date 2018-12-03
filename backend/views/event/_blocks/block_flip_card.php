@@ -42,6 +42,7 @@ use common\components\CKEditor;
 				'model' => $model,
 				'attribute' => "[$i]imageFrontFile",
 				'previewAttribute' => 'image_front',
+				'cropParams' => $model->imageFrontCropParams, 
 			]);?>
 		</div>
 	</div>
@@ -73,6 +74,7 @@ use common\components\CKEditor;
 				'model' => $model,
 				'attribute' => "[$i]imageBackFile",
 				'previewAttribute' => 'image_back',
+				'cropParams' => $model->imageBackCropParams, 
 			]);?>
 		</div>
 	</div>

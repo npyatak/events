@@ -9,7 +9,11 @@ $iteration = substr_replace($attribute, '',  strrpos($attribute, ']') - strlen($
 
 if($attribute) {
     $rawAttribute = substr_replace($attribute, '', 0,  strrpos($attribute, ']') + 1);
-    $i = "[$modelClass]".$iteration."[$rawAttribute]";
+    if(substr_count(']', $attribute) > 0) {
+        $i = "[$modelClass]".$iteration."[$rawAttribute]";
+    } else {
+        $i = "[$modelClass][$attribute]";
+    }
 } else {
     $i = "[$modelClass]".$iteration."[$cropForm->attribute]";
 }
