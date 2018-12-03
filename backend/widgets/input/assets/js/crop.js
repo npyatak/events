@@ -57,7 +57,7 @@ function initCropper(i) {
 }
 
 
-$('.showResult').click(function(e) {
+$(document).on('click', '.showResult', function(e) {
     i = $(this).closest('.imageWrapper').attr('data-i');
 
     if(cropper.hasOwnProperty(i)) {
@@ -71,17 +71,18 @@ $('.showResult').click(function(e) {
     return false;
 });
 
-$('#viewResult').on('shown.bs.modal', function () {
+$(document).on('shown.bs.modal', '#viewResult', function () {
     $('#viewResult .modal-dialog').css({width: $('#viewResult .modal-body img').width() + 30});
 });
 
-$('.showCrop').click(function(e) {
+$(document).on('click', '.showCrop', function(e) {
     $(this).closest('.imageWrapper').find('.crop-modal').modal().find('.modal-title span').html($(this).closest('.imageWrapper').find('.header').html());
 
     return false;
 });
 
-$('.crop-modal').on('shown.bs.modal', function () {
+//$('.crop-modal').on('shown.bs.modal', function () {
+$(document).on('shown.bs.modal', '.crop-modal', function () {
     var i = $(this).closest('.imageWrapper').attr('data-i');
     initCropper(i);
 });
