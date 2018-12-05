@@ -63,7 +63,7 @@ class Year extends \yii\db\ActiveRecord
             'partner_url' => 'Ссылка',
             'partner_image_index' => 'Картинка баннера справа на главной',
             'partner_image_event' => 'Картинка баннера справа на событии',
-            'mainPageImageFile' => 'Заглавное изображение', 
+            'mainPageImageFile' => 'Заглавное изображение (SVG)', 
             'partnerImageIndexFile' => 'Изображение на главной',
             'partnerImageEventFile' => 'Изображение на странице события',
         ];

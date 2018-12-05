@@ -28,13 +28,22 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'ckeditor-image-upload'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
             ],
         ];
+    }
+
+    public function beforeAction($action)
+    {            
+        if ($action->id == 'ckeditor-image-upload') {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
     }
 
     /**
@@ -52,6 +61,52 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return Yii::$app->runAction('event/index');
+    }
+
+    public function actionCkeditorImageUpload()
+    {
+        $funcNum = $_REQUEST['CKEditorFuncNum'];
+        $message = null;
+
+        if($_FILES['upload']) {
+            if (($_FILES['upload'] == "none") OR (empty($_FILES['upload']['name']))) {
+                $message = 'Пожалуйста, выберите изображение';
+            } else if ($_FILES['upload']["size"] == 0 OR $_FILES['upload']["size"] > 5*1024*1024) {
+                $message = 'Размер не должен превышать 5мб';
+            } else if ( ($_FILES['upload']["type"] != "image/jpg") 
+                && ($_FILES['upload']["type"] != "image/jpeg") 
+                && ($_FILES['upload']["type"] != "image/png"))
+            {
+                $message = Yii::t('app', "The image type should be JPG , JPEG Or PNG.");
+            } else if (!is_uploaded_file($_FILES['upload']["tmp_name"])) {
+                $message = 'Ошибка. Попробуйте позже.';
+            } else {
+                //$extension = pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
+
+                $name = $_FILES['upload']['name']; 
+
+                $path = __DIR__ . '/../../frontend/web';
+                $folder = '/uploads/ckeditor_images/';  
+
+                if(!file_exists($path.$folder)) {
+                    mkdir($path.$folder, 0775, true);
+                }
+
+                move_uploaded_file($_FILES['upload']['tmp_name'], $path.$folder.$name);
+
+                if(isset(Yii::$app->webdavFs)) {                    
+                    $content = file_get_contents($path.$folder.$name);
+                    unlink($path.$folder.$name);
+
+                    Yii::$app->webdavFs->put('events/'.$folder.$name, $content);
+                }
+
+                $url = Yii::$app->image->getImageUrl($folder.$name);
+            }
+
+            echo '<script type="text/javascript">window.parent.CKEDITOR.tools.callFunction("'
+                .$funcNum.'", "'.$url.'", "'.$message.'" );</script>';
+        }
     }
 
     /**

@@ -41,6 +41,8 @@ Class CKEditor extends \sadovojav\ckeditor\CKEditor {
         ];
         $options['extraPlugins'] = 'BlueHr,TitleWithLine,image2';
 
+        $options['filebrowserUploadUrl'] = Yii::$app->urlManagerBackEnd->createUrl('site/ckeditor-image-upload');
+
         $options['toolbar'] = [
             ['Format', 'FontSize', 'Font'],
             ['Bold', 'Italic', 'Underline', 'TextColor', 'StrikeThrough', 'HorizontalRule', 'BlueHr', 'TitleWithLine'],

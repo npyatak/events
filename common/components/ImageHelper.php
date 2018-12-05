@@ -2,6 +2,7 @@
 namespace common\components;
 
 use Yii;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\imagine\Image;
 
@@ -27,7 +28,7 @@ class ImageHelper {
         }
     }
 
-	public static function updateImageAttribute($model, $attribute, $imageFile, $cropForm = false) 
+	public static function updateImageAttribute($model, $attribute, $imageFile, $cropForm = false, $watermark = false) 
 	{
         if(!file_exists(self::PATH_ROOT.self::PATH)) {
             mkdir(self::PATH_ROOT.self::PATH, 0775, true);
@@ -42,6 +43,20 @@ class ImageHelper {
 
             Image::thumbnail(self::PATH_ROOT.$model->$attribute, $cropForm['imageWidth'], $cropForm['imageHeight'])
                 ->save(self::PATH_ROOT.$model->$attribute);
+        }
+
+        if($watermark) {
+            foreach ($watermark as $params) {
+                if($params['type'] == 'text') {
+                    $fontFile = self::PATH_ROOT.'/css/fonts/ProximaNova/Proxima_Nova_Bold.otf';
+                    Image::text(self::PATH_ROOT.$model->$attribute, $params['text'], $fontFile, $params['position'], $params['style'])
+                        ->save(self::PATH_ROOT.$model->$attribute);
+                } elseif($params['type'] == 'image') {
+                    $image = self::PATH_ROOT.$params['image'];
+                    Image::watermark(self::PATH_ROOT.$model->$attribute, $image, $params['position'])
+                        ->save(self::PATH_ROOT.$model->$attribute);
+                }
+            }
         }
 
         if(isset(Yii::$app->webdavFs)) {                    
@@ -67,13 +82,5 @@ class ImageHelper {
                 Yii::$app->webdavFs->delete('events/'.$fileName);
             }
         }
-    }
-
-    public function getImageSrcPath() {
-        return __DIR__ . '/../../../frontend/web';
-    }
-
-    public function getPath() {
-        return '/uploads/';
     }
 }

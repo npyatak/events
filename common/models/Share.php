@@ -17,6 +17,13 @@ class Share extends \yii\db\ActiveRecord
 {
     public $url;
     public $imageFile;
+    public $imageFileTw;
+    public $imageFileFb;
+    public $cropImage = [];
+    public $imageCropParams = ['w' => 968, 'h' => 504, 'attribute' => 'image'];
+    public $imageTwCropParams = ['w' => 1074, 'h' => 480, 'attribute' => 'image_tw'];
+    public $imageFbCropParams = ['w' => 1200, 'h' => 628, 'attribute' => 'image_fb'];
+    public $watermarkType;
 
     public $imageNamePrefix;
     /**
@@ -34,8 +41,8 @@ class Share extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'image', 'text', 'twitter'], 'required'],
-            [['title', 'image', 'text', 'twitter', 'year_id'], 'safe'],
-            [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
+            [['title', 'image', 'text', 'twitter', 'year_id', 'watermarkType'], 'safe'],
+            [['imageFile', 'imageFileTw', 'imageFileFb'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
         ];
     }
 
@@ -52,17 +59,52 @@ class Share extends \yii\db\ActiveRecord
             'twitter' => 'Текст для Twitter',
             'image' => 'Изображение',
             'imageFile' => 'Изображение',
+            'imageFileTw' => 'Изображение Twitter',
+            'imageFileFb' => 'Изображение Facebook',
             'year_id' => 'Год',
+            'watermarkType' => 'Тип водяного знака',
         ];
     }
 
     public function afterSave($insert, $changedAttributes) {
         $this->imageNamePrefix = $this->id;
+   
+        $this->cropImage = Yii::$app->request->post()['CropForm']['Share'];
 
-        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
+        foreach ($this->cropImage as $fileAttribute => $crop) {
+            $this->$fileAttribute = UploadedFile::getInstance($this, $fileAttribute);
 
-        if($this->imageFile) {
-            Yii::$app->image->updateImageAttribute($this, 'image', $this->imageFile);
+            if($this->$fileAttribute) {
+                $type = $this->watermarkArr[$this->watermarkType];
+
+                $exp = explode('.', $type['gradientImage']);
+                $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
+
+                $watermark = [
+                    [
+                        'type' => 'text',
+                        'text' => $this->year->title,
+                        'style' => ['size' => 35, 'color' => $type['color']],
+                        'position' => [230, 50],
+                    ],
+                    [
+                        'type' => 'image',
+                        'image' => $type['logoImage'],
+                        'position' => [100, 0],
+                    ],
+                    [
+                        'type' => 'image',
+                        'image' => $gradientImage,
+                        'position' => [0, 0],
+                    ],
+                ];
+                
+                if(isset($crop)) {
+                    Yii::$app->image->updateImageAttribute($this, $crop['attribute'], $this->$fileAttribute, $crop, $watermark);
+                } else {
+                    Yii::$app->image->updateImageAttribute($this, $crop['attribute'], $this->$fileAttribute);
+                }
+            }
         }
 
         return parent::afterSave($insert, $changedAttributes);
@@ -73,7 +115,11 @@ class Share extends \yii\db\ActiveRecord
         return $this->hasOne(Year::className(), ['id' => 'year_id']);
     }
 
-    public function getImageSrcPath() {
-        return __DIR__ . '/../../frontend/web';
+    public function getWatermarkArr()
+    {
+        return [
+            1 => ['label' => 'Белый', 'color' => 'fff', 'logoImage' => '/images/logo/white/logo.png', 'gradientImage' => '/images/logo/white/gradient.png'],
+            2 => ['label' => 'Синий', 'color' => '232372', 'logoImage' => '/images/logo/blue/logo.png', 'gradientImage' => '/images/logo/white/gradient.png'],
+        ];
     }
 }

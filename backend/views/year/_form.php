@@ -108,7 +108,12 @@ use backend\widgets\input\ImageInput;
             ]);?>
         </div>
         <div class="col-sm-6">
-            <?= $form->field($model, 'partner_text')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'partner_text')->widget(CKEditor::className(), [
+                'editorOptions' => [
+                    'allowedContent' => true,
+                    'preset' => 'textEditor'
+                ]
+            ]);?>
         </div>
         <div class="col-sm-6">
             <?= $form->field($model, 'partner_url')->textInput() ?>
