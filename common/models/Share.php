@@ -82,6 +82,11 @@ class Share extends \yii\db\ActiveRecord
 
                 $watermark = [
                     [
+                        'type' => 'image',
+                        'image' => $gradientImage,
+                        'position' => [0, 0],
+                    ],
+                    [
                         'type' => 'text',
                         'text' => $this->year->title,
                         'style' => ['size' => 35, 'color' => $type['color']],
@@ -91,11 +96,6 @@ class Share extends \yii\db\ActiveRecord
                         'type' => 'image',
                         'image' => $type['logoImage'],
                         'position' => [100, 0],
-                    ],
-                    [
-                        'type' => 'image',
-                        'image' => $gradientImage,
-                        'position' => [0, 0],
                     ],
                 ];
                 
