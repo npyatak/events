@@ -89,7 +89,14 @@ use common\models\Event;
     <?= $form->field($model, 'leading_text')->textarea(['rows' => 3]) ?>
 
     <div class="row images-wrap">
-        <?= $form->field($model, 'imageFile')->fileInput() ?>
+        <div class="row">
+            <div class="col-sm-3">
+                <?= $form->field($model, 'imageFile')->fileInput() ?>
+            </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'watermarkType')->dropDownList(Yii::$app->image->watermarkTypesList())->label('Тип водяного знака'); ?>
+            </div>
+        </div>
 
         <?php foreach ($cropFormArray as $cropForm):?>
             <div class="image-row">

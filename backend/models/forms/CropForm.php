@@ -17,6 +17,7 @@ class CropForm extends Model
     public $scaleX;
     public $scaleY;
     public $sizeRelated = false;
+    public $watermark = false;
 
     public $header;
     public $attribute;
@@ -28,7 +29,7 @@ class CropForm extends Model
     public function rules()
     {
         return [
-            [['imageWidth', 'imageHeight', 'x', 'y', 'width', 'height', 'attribute', 'imageFile'], 'safe'],
+            [['imageWidth', 'imageHeight', 'x', 'y', 'width', 'height', 'attribute', 'imageFile', 'watermark'], 'safe'],
             [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
         ];
     }

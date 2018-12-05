@@ -5,11 +5,6 @@ use common\components\ElfinderInput;
 use backend\widgets\input\ImageInput;
 
 \backend\widgets\input\ImageInputAsset::register($this);
-
-$wmList = [];
-foreach ($model->watermarkArr as $key => $value) {
-    $wmList[$key] = $value['label'];
-}
 ?>
 
 <div class="admin-form">
@@ -24,7 +19,7 @@ foreach ($model->watermarkArr as $key => $value) {
             <?= $form->field($model, 'title')->textInput() ?>
         </div>
         <div class="col-sm-3">
-            <?= $form->field($model, 'watermarkType')->dropDownList($wmList); ?>
+            <?= $form->field($model, 'watermarkType')->dropDownList(Yii::$app->image->watermarkTypesList()); ?>
         </div>
     </div>
 

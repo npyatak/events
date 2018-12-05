@@ -30,6 +30,7 @@ class Event extends \yii\db\ActiveRecord
     public $month;
 
     public $imageFile;
+    public $watermarkType;
 
     /**
      * @inheritdoc
@@ -55,8 +56,8 @@ class Event extends \yii\db\ActiveRecord
             [['title', 'size'], 'required'],
             [['view_date_type', 'dateFormatted', 'alias'], 'required'],
             [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
-            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url', 'origin_image', 'main_page_mobile_image_url', 'copyright_title'], 'string', 'max' => 255],
-            [['categoryIds', 'similarIds', 'copyright', 'imageFile'], 'safe'],
+            [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url', 'origin_image', 'main_page_mobile_image_url', 'copyright_title', 'socials_image_url_fb', 'socials_image_url_tw'], 'string', 'max' => 255],
+            [['categoryIds', 'similarIds', 'copyright', 'imageFile', 'watermarkType'], 'safe'],
             [['alias'], 'unique'],
             [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
         ];
@@ -105,6 +106,8 @@ class Event extends \yii\db\ActiveRecord
             'redirect_url' => 'URL редиректа',
             'imageFile' => 'Исходное изображение',
             'origin_image' => 'Исходное изображение',
+            'socials_image_url_fb' => 'Соц.сети Facebook',
+            'socials_image_url_tw' => 'Соц.сети Twitter',
         ];
     }
 
@@ -312,24 +315,6 @@ class Event extends \yii\db\ActiveRecord
         return __DIR__ . '/../../frontend/web';
     }
 
-    /*public function getImageUrl($image, $thumb_size = false) {
-        if($image) {
-            if(isset(Yii::$app->webdavFs)) {
-                $parse = parse_url($image);
-                if(isset($parse['scheme'])) {
-                    return $image;
-                } else {
-                    return Yii::$app->cdn->getUrl($image);
-                    return Yii::$app->webdavFs->baseUri.$image;
-                }
-            } else if(is_file($this->imageSrcPath.$image)) {
-                return Url::to($image);
-            } else {
-                return ThumbnailImage::getExternalImageUrl($image, $thumb_size, 'event');
-            }
-        }
-    }*/
-
     public function getViewDate() {
         $date = [];
         $dateTime = new \DateTime;
@@ -391,5 +376,39 @@ class Event extends \yii\db\ActiveRecord
 
     public function getSimilarEvents() {
         return self::find()->where(['in', 'id', $this->similarIds])->orderBy('date')->all();
+    }
+
+    public function watermarkParams($crop)
+    {
+        $type = Yii::$app->image->watermarkTypes()[$this->watermarkType];
+
+        $exp = explode('.', $type['gradientImage']);
+        $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
+
+        $watermarkParams = [
+            [
+                'type' => 'image',
+                'image' => $gradientImage,
+                'position' => [0, 0],
+            ],
+            [
+                'type' => 'image',
+                'image' => $type['logoImage'],
+                'position' => [100, 0],
+            ],
+        ];
+
+        $year = Year::find()->where(['number' => date('Y', $this->date)])->one();
+
+        if($year) {
+            $watermarkParams[] = [
+                'type' => 'text',
+                'text' => $year->title,
+                'style' => ['size' => 35, 'color' => $type['color']],
+                'position' => [240, 40],
+            ];
+        }
+
+        return $watermarkParams;
     }
 }

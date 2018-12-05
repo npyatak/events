@@ -201,12 +201,13 @@ ul.sortable li {
 }
 .image-row {
     display: inline-block;
-    width: calc(33% - 10px);
+    width: calc(25% - 10px);
     margin: 0 5px 5px 0;
     vertical-align: top;
     border: 1px solid #bbb;
     border-radius: 10px;
     padding: 12px 10px 0 10px;
+    overflow: hidden;
 }
 .image-row :first {
     margin-left: 0;

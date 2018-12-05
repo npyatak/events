@@ -308,6 +308,10 @@ class EventController extends CController
             Image::thumbnail($root.$event->$attribute, $cropForm->imageWidth, $cropForm->imageHeight)
                 ->save($root.$event->$attribute);
 
+            if(in_array($attribute, ['socials_image_url', 'socials_image_url_fb', 'socials_image_url_tw'])) {
+                Yii::$app->image->drawWatermarks($root.$event->$attribute, $event->watermarkParams($cropForm));
+            }
+
             if(isset(Yii::$app->webdavFs)) {
                 $content = file_get_contents($root.$event->$attribute);
                 unlink($root.$event->$attribute);
@@ -335,8 +339,10 @@ class EventController extends CController
         
         $sizes['small_image_url'] = ['header' => 'Блок связанных', 'attribute' => 'small_image_url', 'w' => 250, 'h' => 140];     
         
-        $sizes['socials_image_url'] = ['header' => 'Cоц.сети', 'attribute' => 'socials_image_url', 'w' => 1500, 'h' => 628];
-        
+        $sizes['socials_image_url'] = ['header' => 'Cоц.сети', 'attribute' => 'socials_image_url', 'w' => 968, 'h' => 504];
+        $sizes['socials_image_url_fb'] = ['header' => 'Поделиться Facebook', 'attribute' => 'socials_image_url_fb', 'w' => 1200, 'h' => 628];
+        $sizes['socials_image_url_tw'] = ['header' => 'Поделиться Twitter', 'attribute' => 'socials_image_url_tw', 'w' => 1074, 'h' => 480];
+
         foreach ($sizes as $s) {
             $cropForm = new CropForm;
             $cropForm->imageWidth = $s['w'];

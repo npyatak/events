@@ -75,7 +75,7 @@ class Share extends \yii\db\ActiveRecord
             $this->$fileAttribute = UploadedFile::getInstance($this, $fileAttribute);
 
             if($this->$fileAttribute) {
-                $type = $this->watermarkArr[$this->watermarkType];
+                $type = Yii::$app->image->watermarkTypes()[$this->watermarkType];
 
                 $exp = explode('.', $type['gradientImage']);
                 $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
@@ -90,7 +90,7 @@ class Share extends \yii\db\ActiveRecord
                         'type' => 'text',
                         'text' => $this->year->title,
                         'style' => ['size' => 35, 'color' => $type['color']],
-                        'position' => [230, 50],
+                        'position' => [240, 40],
                     ],
                     [
                         'type' => 'image',
@@ -113,13 +113,5 @@ class Share extends \yii\db\ActiveRecord
     public function getYear()
     {
         return $this->hasOne(Year::className(), ['id' => 'year_id']);
-    }
-
-    public function getWatermarkArr()
-    {
-        return [
-            1 => ['label' => 'Белый', 'color' => 'fff', 'logoImage' => '/images/logo/white/logo.png', 'gradientImage' => '/images/logo/white/gradient.png'],
-            2 => ['label' => 'Синий', 'color' => '232372', 'logoImage' => '/images/logo/blue/logo.png', 'gradientImage' => '/images/logo/white/gradient.png'],
-        ];
     }
 }
