@@ -64,7 +64,6 @@ AppAsset::register($this);
                     <div class="main-menu_share">
                         <span class="main-share_btn"><i class="ion-android-share"></i></span>
                         <div class="main-menu_share-wrap">
-                            <?php $this->params['share']['url'] = Url::canonical();?>
                             <?= \frontend\widgets\share\ShareWidget::widget([
                                 'share' => $this->params['share'],
                                 'itemClass' => 'btn-share share',

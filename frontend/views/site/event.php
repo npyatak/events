@@ -9,11 +9,15 @@ $this->registerJsFile(Url::toRoute('js/event.js'), ['depends' => [\yii\web\Jquer
 $this->title = $event->meta_title ? $event->meta_title : $event->title;
 $this->registerMetaTag(['name' => 'description', 'content' => $event->meta_description]);
 
-$share['url'] = Url::current([], true);
-$share['title'] = $event->socials_title ? $event->socials_title : $this->title;
-$share['text'] = $event->socials_text;
-$share['image'] = Url::to(Yii::$app->image->getImageUrl($event->socials_image_url), true);
-$share['twitter'] = $event->twitter_text ? $event->twitter_text : $this->title;
+$this->params['share'] = [
+    'url' => Url::current([], true),
+    'text' => $event->socials_text, 
+    'title' => $event->title, 
+    'image' => $event->socials_image_url, 
+    'twitter' => $event->twitter_text, 
+    'image_fb' => $event->socials_image_url_fb,
+    'image_tw' => $event->socials_image_url_tw,
+];
 
 $color = null;
 foreach ($event->categories as $cat) {
@@ -22,12 +26,6 @@ foreach ($event->categories as $cat) {
     }
     $classes[] = 'cat_'.$cat->alias;
 }
-
-$this->registerMetaTag(['property' => 'og:description', 'content' => $share['text']], 'og:description');
-$this->registerMetaTag(['property' => 'og:title', 'content' => $share['title']], 'og:title');
-$this->registerMetaTag(['property' => 'og:image', 'content' => $share['image']], 'og:image');
-$this->registerMetaTag(['property' => 'og:url', 'content' => $share['url']], 'og:url');
-$this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
 ?>
 
 
@@ -117,7 +115,7 @@ if($this->params['is_mobile']) {
                     <div class="event-inner">
                         <div class="share-block">
                             <?= \frontend\widgets\share\ShareWidget::widget([
-                                'share' => $share,
+                                'share' => $this->params['share'],
                                 'wrap' => 'div',
                                 'wrapClass' => 'share-wrap',
                                 'itemWrapClass' => 'wrap-',
@@ -155,7 +153,7 @@ if($this->params['is_mobile']) {
                                     <div class="col-12">
                                         <div class="share-block">
                                             <?= \frontend\widgets\share\ShareWidget::widget([
-                                                'share' => $share,
+                                                'share' => $this->params['share'],
                                                 'wrap' => 'div',
                                                 'wrapClass' => 'share-wrap',
                                                 'itemClass' => 'share-btn share',
