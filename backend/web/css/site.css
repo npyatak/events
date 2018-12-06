@@ -222,6 +222,10 @@ ul.sortable li {
     font-weight: 700;
     padding-bottom: 10px;
 }
+.crop-header span {
+    font-size: 12px;
+    font-weight: normal;
+}
 .modal-dialog {
     width: 1500px;
     margin: 30px auto;

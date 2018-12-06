@@ -25,7 +25,7 @@ if($attrString == '') {
 ?>
 
 <div class="imageWrapper" data-i="<?=strtolower($modelClass).'-'.$attrString;?>" <?=$cropForm->sizeRelated ? 'id="sizeRelated"' : '';?>>
-    <div class="crop-header"><?=$header;?></div>
+    <div class="crop-header"><?=$header;?> <span>(не менее <?=$cropForm->imageWidth.'&times;'.$cropForm->imageHeight;?>)</span></div>
 
     <div class="preview" data-image="<?=Yii::$app->image->getImageUrl($model->$previewAttribute);?>">
         <img class="initial-preview" src="<?=Yii::$app->image->getImageUrl($model->$previewAttribute);?>">
