@@ -44,7 +44,12 @@
     font-size: 12px;
     line-height: 15px;
 }
+.event-right-content {
+    float: right;
+    width: 250px;
+}
 .event-content {
+    float: left;
     width: 900px;
     margin-top: -262px;
     padding: 75px 60px 50px 60px;
@@ -1047,7 +1052,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    left: 0;.block_tass_video
+    left: 0;
     height: 60px;
     z-index: 99;
     -webkit-transition: .3s;
@@ -1630,6 +1635,11 @@ header .desc {
     transform: rotate(-90deg) translateY(-30px) translateX(-17px);
 }
 
+aside.no-fixed {
+    position: absolute;
+    bottom: 50px;
+    right: 0 !important;
+}
 aside {
     position: fixed;
     width: 180px;
@@ -1962,6 +1972,11 @@ aside li a.active, aside li a:hover {
     font: 14px 'ProximaNova-Bold', sans-serif;
     color: #1B00A1;
 }
+.grid-item .grid-item_desc .no-date {
+    font: 14px 'ProximaNova-Bold', sans-serif;
+    line-height: 25px;
+    color: #999999;
+}
 .gutter-sizer {
     width: 6%;
 }
@@ -2178,10 +2193,6 @@ aside li a.active, aside li a:hover {
 }
 .event-detail {
     padding-bottom: 50px;
-}
-
-.event-detail .more-events{
-    margin-top: 505px;
 }
 
 .error-text {
@@ -2623,7 +2634,13 @@ footer p a {
 
 .event-wrap{
     position: relative;
-    align-content: flex-start;
+    margin-left: -20px;
+    width: calc(100% + 40px);
+}
+.event-wrap::after {
+    content: '';
+    display: block;
+    clear: both;
 }
 
 
@@ -2648,7 +2665,15 @@ footer p a {
 
 
 
-
+.general_content-inner .partner_refer::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin-top: 35px;
+    margin-bottom: 50px;
+    background-color: #cbcbcb;
+}
 .partner_refer{
     width: 100%;
     text-align: center;
@@ -2724,7 +2749,7 @@ footer p a {
     }
 }
 
-.no_main{
+.no_main {
     width: 250px;
     position: absolute;
     margin-top: 37px;
@@ -2742,6 +2767,9 @@ footer p a {
 
 .right_wrap{
     position: relative;
+}
+.event-detail .no_main {
+    position: static;
 }
 
 
@@ -2782,6 +2810,12 @@ footer p a {
         width: 100%;
         margin-top: 0;
         padding-top: 40px;
+    }
+    .event-right-content {
+        width: 100%;
+    }
+    .event-detail .no_main {
+        display: none;
     }
     .more-events {
         width: 100%;

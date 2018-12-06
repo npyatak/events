@@ -32,7 +32,11 @@ if($category && !in_array('cat_'.$category, $classes)) {
 		<h2 style="color:<?=$color ? $color : '';?>">
 			<a href="<?=$event->url;?>" <?=$event->noFollow;?>><?=$event->short_title ? $event->short_title : $event->title;?></a>
 		</h2>
-		<span class="date"><?=$event->viewDate[0];?> <?=$event->viewDate[1];?></span>
+        <?php if($event->view_date_type == $event::DATE_UNKNOWN):?>
+            <span class="no-date"><?=$event->viewDate[0];?> <?=$event->viewDate[1];?></span>
+        <?php else:?>
+		    <span class="date"><?=$event->viewDate[0];?> <?=$event->viewDate[1];?></span>
+        <?php endif;?>
 		<a href="<?=$event->url;?>" <?=$event->noFollow;?> class="link-arrow">
 			<i class="fa fa-angle-right"></i>
 			<span class="hover" style="background-color:<?=$color ? $color : '';?>"></span>
