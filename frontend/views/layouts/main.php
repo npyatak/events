@@ -22,6 +22,7 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?= Html::csrfMetaTags() ?>
 
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico?v=1" type="image/x-icon" />
     <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicon/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512"  href="/images/favicon/android-chrome-512x512.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
