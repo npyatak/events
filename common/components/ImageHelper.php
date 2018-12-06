@@ -37,16 +37,18 @@ class ImageHelper {
         $model->$attribute = self::PATH.$model->imageNamePrefix.'_'.$model->tableSchema->name.'_'.$attribute.'_'.$model->id.'.'.$imageFile->extension;
         $imageFile->saveAs(self::PATH_ROOT.$model->$attribute);
 
-        if($cropForm) {
-            Image::crop(self::PATH_ROOT.$model->$attribute, $cropForm['width'], $cropForm['height'], [$cropForm['x'], $cropForm['y']])
-                ->save(self::PATH_ROOT.$model->$attribute);
+        if($imageFile->type !== 'image/svg+xml') {
+            if($cropForm) {
+                Image::crop(self::PATH_ROOT.$model->$attribute, $cropForm['width'], $cropForm['height'], [$cropForm['x'], $cropForm['y']])
+                    ->save(self::PATH_ROOT.$model->$attribute);
 
-            Image::thumbnail(self::PATH_ROOT.$model->$attribute, $cropForm['imageWidth'], $cropForm['imageHeight'])
-                ->save(self::PATH_ROOT.$model->$attribute);
-        }
+                Image::thumbnail(self::PATH_ROOT.$model->$attribute, $cropForm['imageWidth'], $cropForm['imageHeight'])
+                    ->save(self::PATH_ROOT.$model->$attribute);
+            }
 
-        if($watermark) {
-            self::drawWatermarks(self::PATH_ROOT.$model->$attribute, $watermark);
+            if($watermark) {
+                self::drawWatermarks(self::PATH_ROOT.$model->$attribute, $watermark);
+            }
         }
 
         if(isset(Yii::$app->webdavFs)) {                    

@@ -254,6 +254,7 @@ ul.sortable li {
 }*/
 .initial-preview {
     max-width: 100%;
+    min-width: 200px;
 }
 .controls {
     display: inline-block;

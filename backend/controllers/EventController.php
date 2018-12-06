@@ -291,7 +291,7 @@ class EventController extends CController
         $cropForm->imageFile = UploadedFile::getInstanceByName("CropForm[Event][$cropForm->attribute][imageFile]");
         if($cropForm->imageFile) {
             $originFileName = $path.$event->id.'_origin_'.$cropForm->attribute.'.'.$cropForm->imageFile->extension;
-            $cropForm->imageFile->saveAs($root.$originFileName);
+            $cropForm->imageFile->saveAs($root.$originFileName, false);
         } else {
             $cropForm->imageFile = UploadedFile::getInstance($event, 'imageFile');
             $originFileName = $event->origin_image;
@@ -302,14 +302,18 @@ class EventController extends CController
             $event->$attribute = $path.$event->id.'_'.$attribute.'_'.$cropForm->imageWidth.'x'.$cropForm->imageHeight.'.'.$cropForm->imageFile->extension;
             $event->save(false, [$attribute]);
 
-            Image::crop($root.$originFileName, $cropForm->width, $cropForm->height, [$cropForm->x, $cropForm->y])
-                ->save($root.$event->$attribute);
+            $cropForm->imageFile->saveAs($root.$event->$attribute);
 
-            Image::thumbnail($root.$event->$attribute, $cropForm->imageWidth, $cropForm->imageHeight)
-                ->save($root.$event->$attribute);
+            if($cropForm->imageFile->type !== 'image/svg+xml') {
+                Image::crop($root.$event->$attribute, $cropForm->width, $cropForm->height, [$cropForm->x, $cropForm->y])
+                    ->save($root.$event->$attribute);
 
-            if(in_array($attribute, ['socials_image_url', 'socials_image_url_fb', 'socials_image_url_tw'])) {
-                Yii::$app->image->drawWatermarks($root.$event->$attribute, $event->watermarkParams($cropForm));
+                Image::thumbnail($root.$event->$attribute, $cropForm->imageWidth, $cropForm->imageHeight)
+                    ->save($root.$event->$attribute);
+
+                if(in_array($attribute, ['socials_image_url', 'socials_image_url_fb', 'socials_image_url_tw'])) {
+                    Yii::$app->image->drawWatermarks($root.$event->$attribute, $event->watermarkParams($cropForm));
+                }
             }
 
             if(isset(Yii::$app->webdavFs)) {
