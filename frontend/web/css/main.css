@@ -2179,6 +2179,11 @@ aside li a.active, aside li a:hover {
 .event-detail {
     padding-bottom: 50px;
 }
+
+.event-detail .more-events{
+    margin-top: 505px;
+}
+
 .error-text {
     margin-top: 70px;
 }
@@ -2831,6 +2836,9 @@ footer p a {
     footer .container,
     .news-partners .container {
         padding: 0 50px;
+    }
+    .event-detail .more-events{
+        margin-top: 50px;
     }
 }
 @media (max-width: 1100px){
