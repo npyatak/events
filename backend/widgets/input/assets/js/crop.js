@@ -3,8 +3,9 @@ var images = [];
 var cropper = [];
 
 function initCropper(i) {
-    var image = $('.imageWrapper[data-i=\"'+i+'\"]').find('.image');
-    var preview = $('.imageWrapper[data-i=\"'+i+'\"]').find('.preview');
+    var wrapper = $('.imageWrapper[data-i=\"'+i+'\"]');
+    var image = wrapper.find('.image');
+    var preview = wrapper.find('.preview');
 
     if($(window).height() - 150 < inputImage.height) {
         $('.crop-modal .crop-wrap').height($(window).height() - 150);
@@ -61,6 +62,12 @@ function initCropper(i) {
     });
 
     cropper[i] = image.data('cropper');
+
+    if(inputImage.width < minCropBoxWidth || inputImage.height < minCropBoxHeight) {
+        wrapper.find('.modal-title span').html('Внимание! Выбранное изображение меньше минимального размера, возможна потеря качества');
+    } else {
+        wrapper.find('.modal-title span').html('');
+    }
 }
 
 

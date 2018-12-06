@@ -55,7 +55,7 @@ if($attrString == '') {
                 <div class="modal-header">
                     <div class="row">
                         <div class="col-sm-11">
-                            <h4 class="modal-title"><?=$header;?> - изменить</h4>
+                            <h4 class="modal-title"><?=$header;?> - изменить<span></span></h4>
                         </div>
                         <div class="col-sm-1">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">

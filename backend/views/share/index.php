@@ -12,9 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div>
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>
+    <!-- <p>
         <?= Html::a('Добавить данные', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    </p> -->
 
     <?php Pjax::begin(); ?>    
         <?= GridView::widget([

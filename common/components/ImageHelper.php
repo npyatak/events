@@ -39,11 +39,17 @@ class ImageHelper {
 
         if($imageFile->type !== 'image/svg+xml') {
             if($cropForm) {
-                Image::crop(self::PATH_ROOT.$model->$attribute, $cropForm['width'], $cropForm['height'], [$cropForm['x'], $cropForm['y']])
-                    ->save(self::PATH_ROOT.$model->$attribute);
+                $imgWidth = getimagesize(self::PATH_ROOT.$model->$attribute)[0];
+                
+                if($imgWidth < $cropForm['imageWidth']) {
+                    Image::getImagine()->open(self::PATH_ROOT.$model->$attribute)->resize(new \Imagine\Image\Box($cropForm['imageWidth'], $cropForm['imageHeight']))->save(self::PATH_ROOT.$model->$attribute);
+                } else {
+                    Image::crop(self::PATH_ROOT.$model->$attribute, $cropForm['width'], $cropForm['height'], [$cropForm['x'], $cropForm['y']])
+                        ->save(self::PATH_ROOT.$model->$attribute);
 
-                Image::thumbnail(self::PATH_ROOT.$model->$attribute, $cropForm['imageWidth'], $cropForm['imageHeight'])
-                    ->save(self::PATH_ROOT.$model->$attribute);
+                    Image::thumbnail(self::PATH_ROOT.$model->$attribute, $cropForm['imageWidth'], $cropForm['imageHeight'])
+                        ->save(self::PATH_ROOT.$model->$attribute);
+                }
             }
 
             if($watermark) {

@@ -35,8 +35,7 @@ class Year extends \yii\db\ActiveRecord
             [['worked_on_project', 'used_multimedia', 'sources', 'gratitude', 'additional', 'partner_text'], 'string'],
             [['title', 'leading_text', 'logo_url', 'main_page_image', 'partner_url', 'partner_image_index', 'partner_image_event'], 'string', 'max' => 255],
             ['number', 'unique'],
-            ['mainPageImageFile', 'file', 'extensions'=>'svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/svg+xml'],
-            [['partnerImageIndexFile', 'partnerImageEventFile'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
+            [['mainPageImageFile', 'partnerImageIndexFile', 'partnerImageEventFile'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
         ];
     }
 
@@ -63,7 +62,7 @@ class Year extends \yii\db\ActiveRecord
             'partner_url' => 'Ссылка',
             'partner_image_index' => 'Картинка баннера справа на главной',
             'partner_image_event' => 'Картинка баннера справа на событии',
-            'mainPageImageFile' => 'Заглавное изображение (SVG)', 
+            'mainPageImageFile' => 'Заглавное изображение', 
             'partnerImageIndexFile' => 'Изображение на главной',
             'partnerImageEventFile' => 'Изображение на странице события',
         ];

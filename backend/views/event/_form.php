@@ -189,7 +189,7 @@ use common\models\Event;
 <?php 
 $script = "
     $('#event-size').change(function(e) {
-        sizesArr = ".json_encode($model->mainPageSizes).";
+        sizesArr = ".json_encode($model->mainPageImageSizes).";
         size = sizesArr[$(this).val()];
         i = $('#sizeRelated').attr('data-i');
 

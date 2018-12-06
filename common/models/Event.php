@@ -287,6 +287,14 @@ class Event extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getMainPageImageSizes() {
+        return [
+            self::SIZE_SMALL => [250, 140],
+            self::SIZE_MEDIUM => [540, 290],
+            self::SIZE_LARGE => [540, 620],
+        ];
+    }
+
     public function getUrl($absolute = false) {
         if($this->redirect_url) {
             return $this->redirect_url;

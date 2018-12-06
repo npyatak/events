@@ -221,6 +221,11 @@ ul.sortable li {
     width: 1500px;
     margin: 30px auto;
 }
+.modal-title span {
+    margin-left: 40px;
+    color: #e33;
+    font-size: 13px;
+}
 .crop-wrap {
     display: inline-block;
     vertical-align: top;

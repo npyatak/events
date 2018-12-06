@@ -30,6 +30,10 @@ class EventController extends CController
     {
         $searchModel = new EventSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$dataProvider->pagination->pageSize = 50;
+        $dataProvider->sort = [
+            'defaultOrder' => ['id' => SORT_DESC]
+        ];
 
         $editorModels = EditorModel::find()->where(['<', 'updated_at', time() - 120])->all();
         foreach ($editorModels as $editorModel) {
@@ -305,11 +309,17 @@ class EventController extends CController
             Image::getImagine()->open($root.$originFileName)->save($root.$event->$attribute);
 
             if($cropForm->imageFile->type !== 'image/svg+xml') {
-                Image::crop($root.$event->$attribute, $cropForm->width, $cropForm->height, [$cropForm->x, $cropForm->y])
-                    ->save($root.$event->$attribute);
+                $imgWidth = getimagesize($root.$event->$attribute)[0];
+                
+                if($imgWidth < $cropForm->imageWidth) {
+                    Image::getImagine()->open($root.$originFileName)->resize(new \Imagine\Image\Box($cropForm->imageWidth, $cropForm->imageHeight))->save($root.$event->$attribute);
+                } else {
+                    Image::crop($root.$event->$attribute, $cropForm->width, $cropForm->height, [$cropForm->x, $cropForm->y])
+                        ->save($root.$event->$attribute);
 
-                Image::thumbnail($root.$event->$attribute, $cropForm->imageWidth, $cropForm->imageHeight)
-                    ->save($root.$event->$attribute);
+                    Image::thumbnail($root.$event->$attribute, $cropForm->imageWidth, $cropForm->imageHeight)
+                        ->save($root.$event->$attribute);
+                }
 
                 if(in_array($attribute, ['socials_image_url', 'socials_image_url_fb', 'socials_image_url_tw'])) {
                     Yii::$app->image->drawWatermarks($root.$event->$attribute, $event->watermarkParams($cropForm));
@@ -331,9 +341,9 @@ class EventController extends CController
 
         $sizes = [];
         if($event) {
-            $sizes['main_page_image_url'] = ['header' => 'Главная (десктоп)', 'attribute' => 'main_page_image_url', 'w' => $event->mainPageSizes[$event->size][0], 'h' => $event->mainPageSizes[$event->size][1], 'sizeRelated' => true];
+            $sizes['main_page_image_url'] = ['header' => 'Главная (десктоп)', 'attribute' => 'main_page_image_url', 'w' => $event->mainPageImageSizes[$event->size][0], 'h' => $event->mainPageImageSizes[$event->size][1], 'sizeRelated' => true];
         } else {
-            $sizes['main_page_image_url'] = ['header' => 'Главная (десктоп)', 'attribute' => 'main_page_image_url', 'w' => (new Event)->mainPageSizes[1][0], 'h' => (new Event)->mainPageSizes[1][1], 'sizeRelated' => true];          
+            $sizes['main_page_image_url'] = ['header' => 'Главная (десктоп)', 'attribute' => 'main_page_image_url', 'w' => (new Event)->mainPageImageSizes[1][0], 'h' => (new Event)->mainPageImageSizes[1][1], 'sizeRelated' => true];          
         }
         
         $sizes['main_page_mobile_image_url'] = ['header' => 'Главная (мобилка)', 'attribute' => 'main_page_mobile_image_url', 'w' => 290, 'h' => 190];
