@@ -71,7 +71,7 @@ class EventController extends CController
             $loadBlockModels = $this->loadBlockModels($post);
             $blockModelsArray = $loadBlockModels['models'];
 
-            \yii\base\Model::loadMultiple($cropFormArray, $post);
+            $this->loadCroppedImages($cropFormArray);
 
             $validationArr = ArrayHelper::merge(
                 ActiveForm::validateMultiple($blockModelsArray),
