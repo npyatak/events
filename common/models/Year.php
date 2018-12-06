@@ -74,8 +74,9 @@ class Year extends \yii\db\ActiveRecord
             $otherYears = self::find()->where(['not', ['id' => $this->id]])->all();
 
             foreach ($otherYears as $y) {
-                $y->is_current = 0;
-                $y->save(false, ['is_current']);
+                Yii::$app->db->createCommand()
+                    ->update($y->tableSchema->name, ['is_current' => 0], 'id = "'.$y->id.'"')
+                    ->execute();
             }
         }
 
