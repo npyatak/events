@@ -65,10 +65,8 @@ function initCropper(i) {
 
     console.log(inputImage.width);
     if(inputImage.width < minCropBoxWidth || inputImage.height < minCropBoxHeight) {
-        console.log('<');
         wrapper.find('.modal-title span').html('Внимание! Выбранное изображение меньше минимального размера, возможна потеря качества');
     } else {
-        console.log('else');
         wrapper.find('.modal-title span').html('');
     }
 }
@@ -98,7 +96,7 @@ $(document).on('click', '.showCrop', function(e) {
     return false;
 });
 
-//$('.crop-modal').on('shown.bs.modal', function () {
+
 $(document).on('shown.bs.modal', '.crop-modal', function () {
     var i = $(this).closest('.imageWrapper').attr('data-i');
     initCropper(i);
@@ -145,4 +143,9 @@ $(document).on('change', '.crop-image-input', function(e) {
         }
         reader.readAsDataURL(this.files[0]);
     }
+});
+
+$(document).on('change', ':file', function() {
+    var label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+    $(this).parents('.input-group').find(':text').val(label)
 });

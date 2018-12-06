@@ -38,12 +38,26 @@ if($attrString == '') {
 
     <?php if($attribute):?>
         <div class="form-group attribute-input-group <?=$model->hasErrors($attribute) ? 'has-error' : '';?>">
-            <?= Html::activeFileInput($model, $attribute, ['class' => 'crop-image-input']) ?>
+            <div class="input-group">
+                <label class="input-group-btn">
+                    <span class="btn btn-default">
+                        Обзор <?= Html::activeFileInput($model, $attribute, ['class' => 'crop-image-input']) ?>
+                    </span>
+                </label>
+                <input type="text" class="form-control" readonly>
+            </div>
             <?= Html::error($model, $attribute, ['class' => 'help-block']);?>
         </div>
     <?php else:?>
         <div class="form-group attribute-input-group <?=$cropForm->hasErrors("imageFile") ? 'has-error' : '';?>">
-            <?= Html::activeFileInput($cropForm, $i."imageFile", ['class' => 'crop-image-input']) ?>
+            <div class="input-group">
+                <label class="input-group-btn">
+                    <span class="btn btn-default">
+                        Обзор <?= Html::activeFileInput($cropForm, $i."imageFile", ['class' => 'crop-image-input']) ?>
+                    </span>
+                </label>
+                <input type="text" class="form-control" readonly>
+            </div>
             <?= Html::error($cropForm, $i."imageFile", ['class' => 'help-block']);?>
         </div>
     <?php endif;?>

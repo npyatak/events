@@ -16,7 +16,14 @@ $attrString = strtolower(preg_replace(['/\[/', '/\]/'], ['', '-'], $attribute));
     <br>
 
     <div class="form-group <?=$model->hasErrors($attribute) ? 'has-error' : '';?>">
-        <?= Html::activeFileInput($model, $attribute, ['class' => 'crop-image-input']) ?>
+        <div class="input-group">
+            <label class="input-group-btn">
+                <span class="btn btn-default">
+                    Обзор <?= Html::activeFileInput($model, $attribute, ['class' => 'crop-image-input']) ?>
+                </span>
+            </label>
+            <input type="text" class="form-control" readonly>
+        </div>
         <?= Html::error($model, $attribute, ['class' => 'help-block']);?>
     </div>
 </div>

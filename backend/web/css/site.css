@@ -109,6 +109,11 @@ a.desc:after {
         padding: 10px 15px;
     }
 }
+@media(min-width:1400px) {
+    .container {
+        width: 1400px;
+    }
+}
 
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
@@ -268,7 +273,7 @@ ul.sortable li {
 }
 .attribute-input-group {
     display: inline-block;
-    width: 60%;
+    width: calc(65% - 4px);
     vertical-align: top;
 }
 .fileinput {
@@ -282,4 +287,7 @@ ul.sortable li {
 .block-gallery-image {
     border-bottom: 1px solid #ddd;
     margin-bottom: 5px;
+}
+.crop-image-input {
+    display: none!important;
 }

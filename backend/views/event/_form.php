@@ -94,7 +94,7 @@ use common\models\Event;
                 <?= $form->field($model, 'imageFile')->fileInput() ?>
             </div>
             <div class="col-sm-3">
-                <?= $form->field($model, 'watermarkType')->dropDownList(Yii::$app->image->watermarkTypesList())->label('Тип водяного знака'); ?>
+                <?= $form->field($model, 'watermarkType')->dropDownList(Yii::$app->image->watermarkTypesList())->label('Тип водяного знака для шеринга'); ?>
             </div>
         </div>
 

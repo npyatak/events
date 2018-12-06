@@ -96,7 +96,7 @@ class Event extends \yii\db\ActiveRecord
             'dateFormatted' => 'Дата',
             'size' => 'Размер карточки',
             'twitter_text' => 'Текст для Twitter',
-            'alias' => 'Алиас',
+            'alias' => 'Алиас для url',
             'mobile_image_url' => 'Изображение для мобильных',
             'small_image_url' => 'Маленькое изображение',
             'copyright' => 'Копирайты',
