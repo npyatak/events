@@ -169,6 +169,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 	                }
 	                scrollSpy();
 	                onScroll();
+	                scrollSpy2();
 	            });
 	        },3000);
 	    } else {
@@ -214,6 +215,20 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 			var a = window.pageYOffset + window.innerHeight;
 			var scrollSpy_wrap = $('.scrollSpy_wrap');
 			var scrollSpy_el = $('.scrollSpy');
+			if(a >= footer_top){
+				$(scrollSpy_wrap).find(scrollSpy_el).addClass('no-fixed');
+			}else{
+				$(scrollSpy_wrap).find(scrollSpy_el).removeClass('no-fixed');
+			}
+		}
+		
+		function scrollSpy2() {
+			var footer_top = $('footer').offset().top;
+			var scrollSpy_el = $('aside');
+			var a = window.pageYOffset + scrollSpy_el.height() + 200;
+			var scrollSpy_wrap = $('.scrollSpy_wrap');
+			console.log(a)
+			console.log(footer_top)
 			if(a >= footer_top){
 				$(scrollSpy_wrap).find(scrollSpy_el).addClass('no-fixed');
 			}else{

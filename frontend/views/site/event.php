@@ -44,24 +44,12 @@ if($this->params['is_mobile']) {
 <div class="event-detail">
     <div class="event-background" style="background-image:url(<?=$imageUrl;?>)"></div>
     <div class="container">
-        <div class="row justify-content-between event-wrap">
-
-            <aside class="no_main">
-                <?php if(Yii::$app->controller->yearModel->partner_url && Yii::$app->controller->yearModel->partner_text):?>
-                    <!-- для того что бы отобразить текст жирным добавляем к partner_refer класс bold, а чтобы сделать курсивом класс italic  -->
-                    <div class="partner_refer">
-                        <div class="partner_img" style="background-image: url(<?=Yii::$app->image->getImageUrl(Yii::$app->controller->yearModel->partner_image_event);?>);"></div>
-                        <a href="<?=Yii::$app->controller->yearModel->partner_url;?>" class="red">
-                            <p><?=Yii::$app->controller->yearModel->partner_text;?></p>
-                        </a>
-                    </div>
-                <?php endif;?>
-            </aside>
+        <div class="event-wrap">
 
             <div class="event-content" id="article">
                 <div class="container_inner">
                     <div class="event-header">
-                        <div class="row m-0 justify-content-between right_wrap">
+                        <div class="row justify-content-between m-0 right_wrap">
                             <div class="event-title">
                                 <h1><?=$event->title?></h1>
                                 <div class="event-cat">
@@ -189,26 +177,39 @@ if($this->params['is_mobile']) {
                 </div>
             </div>
 
-            <?php if(!empty($event->similarIds)):?>
-            <div class="more-events">
-                <div class="more-events_title">похожие события</div>
-                <?php foreach ($event->similarEvents as $similar):?>
-                    <a href="<?=$similar->url;?>" <?=$similar->noFollow;?> class="item">
-                        <?php if($similar->small_image_url):?>
-                        <div class="item-image" style="background-image:url(<?=Yii::$app->image->getImageUrl($similar->small_image_url);?>)">
-                            <span class="bg" style="background-color:<?=$color ? $color : '';?>"></span>
+            <div class="event-right-content">
+                <?php if(!empty($event->similarIds)):?>
+                    <div class="more-events">
+                        <div class="more-events_title">похожие события</div>
+                        <?php foreach ($event->similarEvents as $similar):?>
+                            <a href="<?=$similar->url;?>" <?=$similar->noFollow;?> class="item">
+                                <?php if($similar->small_image_url):?>
+                                    <div class="item-image" style="background-image:url(<?=Yii::$app->image->getImageUrl($similar->small_image_url);?>)">
+                                        <span class="bg" style="background-color:<?=$color ? $color : '';?>"></span>
+                                    </div>
+                                <?php endif;?>
+                                <div class="item-content">
+                                    <div class="item-title">
+                                        <h5 style="color:<?=$color ? $color : '';?>"><span><?=$similar->title;?></span></h5>
+                                    </div>
+                                    <div class="item-date"><?=$similar->viewDate[0];?> <?=$similar->viewDate[1];?></div>
+                                </div>
+                            </a>
+                        <?php endforeach;?>
+                    </div>
+                <?php endif;?>
+                <div class="no_main">
+                    <?php if(Yii::$app->controller->yearModel->partner_url && Yii::$app->controller->yearModel->partner_text):?>
+                        <!-- для того что бы отобразить текст жирным добавляем к partner_refer класс bold, а чтобы сделать курсивом класс italic  -->
+                        <div class="partner_refer">
+                            <div class="partner_img" style="background-image: url(<?=Yii::$app->image->getImageUrl(Yii::$app->controller->yearModel->partner_image_event);?>);"></div>
+                            <a href="<?=Yii::$app->controller->yearModel->partner_url;?>" class="red">
+                                <p><?=Yii::$app->controller->yearModel->partner_text;?></p>
+                            </a>
                         </div>
-                        <?php endif;?>
-                        <div class="item-content">
-                            <div class="item-title">
-                                <h5 style="color:<?=$color ? $color : '';?>"><span><?=$similar->title;?></span></h5>
-                            </div>
-                            <div class="item-date"><?=$similar->viewDate[0];?> <?=$similar->viewDate[1];?></div>
-                        </div>
-                    </a>
-                <?php endforeach;?>
+                    <?php endif;?>
+                </div>
             </div>
-            <?php endif;?>
         </div>
     </div>
 </div>
