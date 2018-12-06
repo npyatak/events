@@ -63,9 +63,12 @@ function initCropper(i) {
 
     cropper[i] = image.data('cropper');
 
+    console.log(inputImage.width);
     if(inputImage.width < minCropBoxWidth || inputImage.height < minCropBoxHeight) {
+        console.log('<');
         wrapper.find('.modal-title span').html('Внимание! Выбранное изображение меньше минимального размера, возможна потеря качества');
     } else {
+        console.log('else');
         wrapper.find('.modal-title span').html('');
     }
 }

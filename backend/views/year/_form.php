@@ -33,7 +33,12 @@ use backend\widgets\input\ImageInput;
 
     <div class="row">
         <div class="col-sm-4">
-            <?=ImageInput::widget(['model' => $model, 'attribute' => 'mainPageImageFile', 'previewAttribute' => 'main_page_image']);?>
+            <?=ImageInput::widget([
+                'model' => $model, 
+                'attribute' => 'mainPageImageFile', 
+                'previewAttribute' => 'main_page_image',
+                //'cropParams' => $model->mainPageImageCropParams, 
+            ]);?>
         </div>
         <div class="col-sm-8">
             <?= $form->field($model, 'logo_url')->textInput(['maxlength' => true]) ?>

@@ -12,6 +12,7 @@ class Year extends \yii\db\ActiveRecord
     public $partnerImageIndexFile;
     public $partnerImageEventFile;
     public $cropImage = [];
+    public $mainPageImageCropParams = ['w' => 1920, 'h' => 380, 'attribute' => 'main_page_image'];
     public $partnerImageIndexCropParams = ['w' => 360, 'h' => 600, 'attribute' => 'partner_image_index'];
     public $partnerImageEventCropParams = ['w' => 500, 'h' => 840, 'attribute' => 'partner_image_event'];
 
@@ -79,14 +80,18 @@ class Year extends \yii\db\ActiveRecord
             }
         }
 
+        $this->cropImage = Yii::$app->request->post()['CropForm']['Year'];
+
         $this->imageNamePrefix = $this->id;
 
         $this->mainPageImageFile = UploadedFile::getInstance($this, 'mainPageImageFile');     
         if($this->mainPageImageFile) {
-            Yii::$app->image->updateImageAttribute($this, 'main_page_image', $this->mainPageImageFile);
+            if(isset($this->cropImage['mainPageImageFile'])) {
+                Yii::$app->image->updateImageAttribute($this, 'main_page_image', $this->mainPageImageFile, $this->cropImage['mainPageImageFile']);
+            } else {
+                Yii::$app->image->updateImageAttribute($this, 'main_page_image', $this->mainPageImageFile);
+            }
         }
-
-        $this->cropImage = Yii::$app->request->post()['CropForm']['Year'];
 
         $this->partnerImageIndexFile = UploadedFile::getInstance($this, "partnerImageIndexFile");
         if($this->partnerImageIndexFile) {
