@@ -6,8 +6,15 @@ function initCropper(i) {
     var image = $('.imageWrapper[data-i=\"'+i+'\"]').find('.image');
     var preview = $('.imageWrapper[data-i=\"'+i+'\"]').find('.preview');
 
-    console.log(i);
-    console.log($('#cropform-'+i+'-imagewidth').length);
+    if($(window).height() - 150 < inputImage.height) {
+        $('.crop-modal .crop-wrap').height($(window).height() - 150);
+        $('.crop-modal .crop-wrap').width(inputImage.width * $('.crop-modal .crop-wrap').height() / inputImage.height);
+
+        if($('.crop-modal .crop-wrap').width() > 1200) {
+            $('.crop-modal .crop-wrap').width(1200);
+            $('.crop-modal .crop-wrap').height(inputImage.height * $('.crop-modal .crop-wrap').width() / inputImage.width);
+        }
+    }
 
     if(cropper.hasOwnProperty(i)) {
         image.cropper('destroy');

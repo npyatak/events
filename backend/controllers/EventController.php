@@ -302,7 +302,7 @@ class EventController extends CController
             $event->$attribute = $path.$event->id.'_'.$attribute.'_'.$cropForm->imageWidth.'x'.$cropForm->imageHeight.'.'.$cropForm->imageFile->extension;
             $event->save(false, [$attribute]);
 
-            $cropForm->imageFile->saveAs($root.$event->$attribute);
+            Image::getImagine()->open($root.$originFileName)->save($root.$event->$attribute);
 
             if($cropForm->imageFile->type !== 'image/svg+xml') {
                 Image::crop($root.$event->$attribute, $cropForm->width, $cropForm->height, [$cropForm->x, $cropForm->y])

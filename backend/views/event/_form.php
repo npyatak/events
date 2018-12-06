@@ -51,6 +51,21 @@ use common\models\Event;
     </div>
 
     <div class="row">
+        <div class="col-sm-3">
+            <?= $form->field($model, 'show_on_main')->checkbox() ?>
+        </div>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'value_index')->dropDownList($model->valueIndexArray) ?>
+        </div>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'size')->dropDownList($model->sizeArray) ?>
+        </div>
+        <div class="col-sm-3">
+            <?= $form->field($model, 'status')->dropDownList(Event::getStatusArray()) ?>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-sm-6">
             <?= $form->field($model, 'redirect_url')->textInput(['maxlength' => true]) ?>
         </div>
@@ -70,21 +85,6 @@ use common\models\Event;
             );?>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <?= $form->field($model, 'show_on_main')->checkbox() ?>
-        </div>
-        <div class="col-sm-3">
-            <?= $form->field($model, 'value_index')->dropDownList($model->valueIndexArray) ?>
-        </div>
-        <div class="col-sm-3">
-            <?= $form->field($model, 'size')->dropDownList($model->sizeArray) ?>
-        </div>
-        <div class="col-sm-3">
-            <?= $form->field($model, 'status')->dropDownList(Event::getStatusArray()) ?>
-        </div>
-    <!-- </div> -->
 
     <?= $form->field($model, 'leading_text')->textarea(['rows' => 3]) ?>
 
