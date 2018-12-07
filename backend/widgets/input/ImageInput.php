@@ -3,6 +3,7 @@ namespace backend\widgets\input;
 
 use Yii;
 use yii\helpers\Html;
+use common\component\ImageHelper;
 
 use backend\models\forms\CropForm;
 
@@ -57,6 +58,7 @@ class ImageInput extends \yii\base\Widget
                 'previewAttribute' => $this->previewAttribute,
                 'cropForm' => $this->cropForm, 
                 'header' => $header ? $header : $this->cropForm->header,
+                'originImage' => $this->getOrigin(),
             ]);
         } else {
             return $this->getView()->renderFile(__DIR__ . '/views/image.php', [
@@ -64,9 +66,30 @@ class ImageInput extends \yii\base\Widget
                 'attribute' => $this->attribute,
                 'previewAttribute' => $this->previewAttribute,
                 'header' => $header,
+                'originImage' => $this->getOrigin(),
             ]);
         }
 
+    }
+
+    public function getOrigin()
+    {
+        return false;
+        /*$path =  ImageHelper::PATH_ROOT;
+        $modelClass = (new \ReflectionClass($model))->getShortName()
+        
+        if($model->$previewAttribute) {
+            $exp = explode('.', $model->$previewAttribute);
+            $extension = $exp[1];
+            if($modelClass == 'Event') {
+                $originFileName = $path.$this->model->id.'_origin_'.$cropForm->attribute.'.'.$extension;
+                if(file_exists($originFileName)) {
+                    return 
+                }
+
+                $originFileName = $this->model->origin_image;
+            }
+        }*/
     }
 
     private function registerAssets()

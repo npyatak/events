@@ -8,7 +8,7 @@ use yii\web\UploadedFile;
 class BlockQuotation extends Block
 {
     public $authorImageFile;
-    public $authorImageCropParams = ['w' => 144, 'h' => 144, 'attribute' => 'author_image'];
+    public $authorImageCropParams = ['w' => 75, 'h' => 75, 'attribute' => 'author_image'];
     public $cropImage = [];
     /**
      * @inheritdoc
@@ -38,7 +38,6 @@ class BlockQuotation extends Block
 
     public function afterSave($insert, $changedAttributes)
     {
-        //$this->authorImageFile = UploadedFile::getInstanceByName($this->cropImage['postPath']."[author_image][imageFile]");
         $this->authorImageFile = UploadedFile::getInstance($this, "[$this->key]authorImageFile");
         
         if($this->authorImageFile) {

@@ -9,7 +9,9 @@ $iteration = substr_replace($attribute, '',  strrpos($attribute, ']') - strlen($
 
 if($attribute) {
     $rawAttribute = substr_replace($attribute, '', 0,  strrpos($attribute, ']') + 1);
-    if(substr_count(']', $attribute) > 0) {
+
+    preg_match_all("/\]/", $attribute, $match);
+    if(count($match) > 0) {
         $i = "[$modelClass]".$iteration."[$rawAttribute]";
     } else {
         $i = "[$modelClass][$attribute]";
@@ -61,7 +63,6 @@ if($attrString == '') {
             <?= Html::error($cropForm, $i."imageFile", ['class' => 'help-block']);?>
         </div>
     <?php endif;?>
-    <?//= $form->field($cropForm, $i."imageFile", ['options' => ['class' => 'form-group attribute-input-group']])->fileInput(['class' => 'crop-image-input'])->label(false) ?>
 
     <div class="modal crop-modal fade docs-cropped" role="dialog" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog">
@@ -80,7 +81,7 @@ if($attrString == '') {
                 </div>
                 <div class="modal-body">
                     <div class="crop-wrap">
-                        <img class="image" src="">
+                        <img class="image" src="<?=$originImage;?>">
                     </div>
                     <div class="crop-inputs">
                         <div class="sizes-wrap">
@@ -89,7 +90,6 @@ if($attrString == '') {
                             <?= Html::activeTextInput($cropForm, $i."imageHeight", ['readonly' => true]) ?>
                         </div>
                         <?= Html::activeHiddenInput($cropForm, $i."attribute") ?>
-
 
                         <?= Html::activeLabel($cropForm, $i."x", ['class' => 'control-label']) ?>
                         <?= Html::activeTextInput($cropForm, $i."x", ['class' => 'x', 'readonly' => true]) ?>

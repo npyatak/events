@@ -1,4 +1,3 @@
-//$('input[type="textarea"]').on('change', function(e) {
 $('input[type=text], textarea').bind('input propertychange', function() {
 	if(typeof($(this).attr('maxlength')) !== 'undefined') {
 		var remain = $(this).attr('maxlength') - $(this).val().length;

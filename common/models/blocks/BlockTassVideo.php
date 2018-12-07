@@ -9,7 +9,7 @@ class BlockTassVideo extends Block
 {
 
     public $imageFile;
-    public $imageCropParams = ['w' => 1820, 'h' => 1020, 'attribute' => 'image'];
+    public $imageCropParams = ['w' => 900, 'h' => 510, 'attribute' => 'image'];
     public $cropImage = [];
     /**
      * @inheritdoc

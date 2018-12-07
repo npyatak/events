@@ -13,8 +13,8 @@ class BlockFlipCard extends Block
     public $imageFrontFile;
     public $imageBackFile;
     public $cropImage = [];
-    public $imageFrontCropParams = ['w' => 1320, 'h' => 800, 'attribute' => 'image_front'];
-    public $imageBackCropParams = ['w' => 1320, 'h' => 800, 'attribute' => 'image_back'];
+    public $imageFrontCropParams = ['w' => 660, 'h' => 400, 'attribute' => 'image_front'];
+    public $imageBackCropParams = ['w' => 660, 'h' => 400, 'attribute' => 'image_back'];
     /**
      * @inheritdoc
      */

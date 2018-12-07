@@ -91,7 +91,7 @@ $(document).on('shown.bs.modal', '#viewResult', function () {
 });
 
 $(document).on('click', '.showCrop', function(e) {
-    $(this).closest('.imageWrapper').find('.crop-modal').modal().find('.modal-title span').html($(this).closest('.imageWrapper').find('.header').html());
+    $(this).closest('.imageWrapper').find('.crop-modal').modal();
 
     return false;
 });
