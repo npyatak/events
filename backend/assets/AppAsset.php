@@ -15,7 +15,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        //'js/crop.js'
+        'js/input.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

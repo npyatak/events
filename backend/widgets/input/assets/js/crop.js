@@ -126,6 +126,8 @@ $(document).on('change', '.crop-image-input', function(e) {
     	var imageWrapper = $(this).closest('.imageWrapper');
         var i = imageWrapper.attr('data-i');
         var reader = new FileReader();
+        
+        var mimeType = e.target.files[0].type;
 
         reader.onload = function (e) {
             inputImage = new Image;
@@ -133,7 +135,7 @@ $(document).on('change', '.crop-image-input', function(e) {
 
             imageWrapper.find('.image').attr('src', reader.result);
 
-            if(imageWrapper.find('.crop-modal').length) {
+            if(imageWrapper.find('.crop-modal').length && mimeType != 'image/svg+xml') {
                 inputImage.onload = function() {
                     imageWrapper.find('.crop-modal').modal();
                 }

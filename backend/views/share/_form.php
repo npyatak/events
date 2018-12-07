@@ -16,7 +16,7 @@ use backend\widgets\input\ImageInput;
 
     <div class="row">
         <div class="col-sm-9">
-            <?= $form->field($model, 'title')->textInput() ?>
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-3">
             <?= $form->field($model, 'watermarkType')->dropDownList(Yii::$app->image->watermarkTypesList()); ?>
@@ -50,9 +50,9 @@ use backend\widgets\input\ImageInput;
         </div>
     </div>
     
-    <?= $form->field($model, 'text')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'text')->textarea(['rows' => 4, 'maxlength' => true]) ?>
 
-    <?= $form->field($model, 'twitter')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'twitter')->textarea(['rows' => 4, 'maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

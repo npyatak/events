@@ -41,7 +41,8 @@ class Share extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'image', 'text', 'twitter'], 'required'],
-            [['title', 'image', 'text', 'twitter', 'year_id', 'watermarkType'], 'safe'],
+            [['title', 'text', 'twitter'], 'string', 'max' => 255],
+            [['image',  'year_id', 'watermarkType'], 'safe'],
             [['imageFile', 'imageFileTw', 'imageFileFb'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
         ];
     }

@@ -7,7 +7,7 @@ use common\components\CKEditor;
 	<div class="col-sm-6">
 	    <div class="form-group <?=$model->hasErrors("title") ? 'has-error' : '';?>">
 	        <?= Html::activeLabel($model, "[$i]title", ['class' => 'control-label']) ?>
-	        <?= Html::activeTextInput($model, "[$i]title", ['class' => 'form-control']) ?>
+	        <?= Html::activeTextInput($model, "[$i]title", ['class' => 'form-control', 'maxlength' => true]) ?>
 	        <?= Html::error($model, "[$i]title", ['class' => 'help-block']);?>
 	    </div>
 	</div>
@@ -15,7 +15,7 @@ use common\components\CKEditor;
 	<div class="col-sm-6">
 	    <div class="form-group <?=$model->hasErrors("preview") ? 'has-error' : '';?>">
 	        <?= Html::activeLabel($model, "[$i]preview", ['class' => 'control-label']) ?>
-	        <?= Html::activeTextInput($model, "[$i]preview", ['class' => 'form-control']) ?>
+	        <?= Html::activeTextInput($model, "[$i]preview", ['class' => 'form-control', 'maxlength' => true]) ?>
 	        <?= Html::error($model, "[$i]preview", ['class' => 'help-block']);?>
 	    </div>
 	</div>
@@ -25,7 +25,7 @@ use common\components\CKEditor;
 	<div class="col-sm-6">
 	    <div class="form-group <?=$model->hasErrors("text_show") ? 'has-error' : '';?>">
 	        <?= Html::activeLabel($model, "[$i]text_show", ['class' => 'control-label']) ?>
-	        <?= Html::activeTextInput($model, "[$i]text_show", ['class' => 'form-control']) ?>
+	        <?= Html::activeTextInput($model, "[$i]text_show", ['class' => 'form-control', 'maxlength' => true]) ?>
 	        <?= Html::error($model, "[$i]text_show", ['class' => 'help-block']);?>
 	    </div>
 	</div>
@@ -33,7 +33,7 @@ use common\components\CKEditor;
 	<div class="col-sm-6">
 	    <div class="form-group <?=$model->hasErrors("text_hide") ? 'has-error' : '';?>">
 	        <?= Html::activeLabel($model, "[$i]text_hide", ['class' => 'control-label']) ?>
-	        <?= Html::activeTextInput($model, "[$i]text_hide", ['class' => 'form-control']) ?>
+	        <?= Html::activeTextInput($model, "[$i]text_hide", ['class' => 'form-control', 'maxlength' => true]) ?>
 	        <?= Html::error($model, "[$i]text_hide", ['class' => 'help-block']);?>
 	    </div>
 	</div>

@@ -13,8 +13,8 @@ class Year extends \yii\db\ActiveRecord
     public $partnerImageEventFile;
     public $cropImage = [];
     public $mainPageImageCropParams = ['w' => 1920, 'h' => 380, 'attribute' => 'main_page_image'];
-    public $partnerImageIndexCropParams = ['w' => 360, 'h' => 600, 'attribute' => 'partner_image_index'];
-    public $partnerImageEventCropParams = ['w' => 500, 'h' => 840, 'attribute' => 'partner_image_event'];
+    public $partnerImageIndexCropParams = ['w' => 180, 'h' => 300, 'attribute' => 'partner_image_index'];
+    public $partnerImageEventCropParams = ['w' => 250, 'h' => 420, 'attribute' => 'partner_image_event'];
 
     public $imageNamePrefix;
     /**

@@ -121,7 +121,7 @@ use backend\widgets\input\ImageInput;
             ]);?>
         </div>
         <div class="col-sm-6">
-            <?= $form->field($model, 'partner_url')->textInput() ?>
+            <?= $form->field($model, 'partner_url')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 

@@ -8,7 +8,7 @@ use common\models\blocks\items\BlockFactItem;
 <div class="block-fact" id="block-fact-<?=$i;?>">
     <div class="form-group <?=$model->hasErrors("title") ? 'has-error' : '';?>">
         <?= Html::activeLabel($model, "[$i]title", ['class' => 'control-label']) ?>
-        <?= Html::activeTextInput($model, "[$i]title", ['class' => 'form-control']) ?>
+        <?= Html::activeTextInput($model, "[$i]title", ['class' => 'form-control', 'maxlength' => true]) ?>
         <?= Html::error($model, "[$i]title", ['class' => 'help-block']);?>
     </div>
 

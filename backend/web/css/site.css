@@ -252,8 +252,8 @@ ul.sortable li {
 }
 .preview {
     display: inline-block;
-    /*width: 100%;
-    height: auto!important;
+    width: 100%;
+    /*height: auto!important;
     overflow: hidden;
     min-height: 50px;*/
     margin-bottom: 10px;
@@ -294,4 +294,14 @@ ul.sortable li {
 }
 .crop-image-input {
     display: none!important;
+}
+.form-group {
+    position: relative;
+}
+.remain {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    color: #b87d2b;
+    font-size: 12px;
 }

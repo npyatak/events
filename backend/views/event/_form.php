@@ -86,7 +86,7 @@ use common\models\Event;
         </div>
     </div>
 
-    <?= $form->field($model, 'leading_text')->textarea(['rows' => 3]) ?>
+    <?= $form->field($model, 'leading_text')->textarea(['rows' => 3, 'maxlength' => true]) ?>
 
     <div class="row images-wrap">
         <div class="row">
@@ -108,13 +108,13 @@ use common\models\Event;
     <div class="form-group">
         <div class="row">
             <div class="col-sm-5">
-                <?= $form->field($model, 'socials_title')->textInput() ?>
+                <?= $form->field($model, 'socials_title')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-sm-4">
-                <?= $form->field($model, 'socials_text')->textarea(['rows' => 2]) ?>
+                <?= $form->field($model, 'socials_text')->textarea(['rows' => 2, 'maxlength' => true]) ?>
             </div>
             <div class="col-sm-3">
-                <?= $form->field($model, 'twitter_text')->textarea(['rows' => 2]) ?>
+                <?= $form->field($model, 'twitter_text')->textarea(['rows' => 2, 'maxlength' => true]) ?>
             </div>
         </div>
 

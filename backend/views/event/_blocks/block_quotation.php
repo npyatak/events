@@ -30,7 +30,7 @@ use common\components\CKEditor;
     <div class="col-sm-9">
 		<div class="form-group <?=$model->hasErrors("author_name") ? 'has-error' : '';?>">
 			<?= Html::activeLabel($model, "[$i]author_name") ?>
-			<?= Html::activeTextInput($model, "[$i]author_name", ['class' => 'form-control']) ?>
+			<?= Html::activeTextInput($model, "[$i]author_name", ['class' => 'form-control', 'maxlength' => true]) ?>
 			<?= Html::error($model, "[$i]author_name", ['class' => 'help-block']);?>
 		</div>
 		<div class="form-group">
