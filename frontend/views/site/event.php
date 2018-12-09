@@ -202,10 +202,7 @@ if($this->params['is_mobile']) {
                     <?php if(Yii::$app->controller->yearModel->partner_url && Yii::$app->controller->yearModel->partner_text):?>
                         <!-- для того что бы отобразить текст жирным добавляем к partner_refer класс bold, а чтобы сделать курсивом класс italic  -->
                         <div class="partner_refer">
-                            <div class="partner_img" style="background-image: url(<?=Yii::$app->image->getImageUrl(Yii::$app->controller->yearModel->partner_image_event);?>);"></div>
-                            <a href="<?=Yii::$app->controller->yearModel->partner_url;?>" class="red">
-                                <p><?=Yii::$app->controller->yearModel->partner_text;?></p>
-                            </a>
+                            <a href="<?=Yii::$app->controller->yearModel->partner_url;?>" style="background-image: url(<?=Yii::$app->image->getImageUrl(Yii::$app->controller->yearModel->partner_image_event);?>);"></a>
                         </div>
                     <?php endif;?>
                 </div>
