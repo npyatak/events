@@ -75,38 +75,40 @@ class Share extends \yii\db\ActiveRecord
             $this->cropImage = $post['CropForm']['Share'];
         }
 
-        foreach ($this->cropImage as $fileAttribute => $crop) {
-            $this->$fileAttribute = UploadedFile::getInstance($this, $fileAttribute);
+        if(!empty($this->cropImage)) {
+            foreach ($this->cropImage as $fileAttribute => $crop) {
+                $this->$fileAttribute = UploadedFile::getInstance($this, $fileAttribute);
 
-            if($this->$fileAttribute) {
-                $type = Yii::$app->image->watermarkTypes()[$this->watermarkType];
+                if($this->$fileAttribute) {
+                    $type = Yii::$app->image->watermarkTypes()[$this->watermarkType];
 
-                $exp = explode('.', $type['gradientImage']);
-                $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
+                    $exp = explode('.', $type['gradientImage']);
+                    $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
 
-                $watermark = [
-                    [
-                        'type' => 'image',
-                        'image' => $gradientImage,
-                        'position' => [0, 0],
-                    ],
-                    [
-                        'type' => 'text',
-                        'text' => $this->year->title,
-                        'style' => ['size' => 35, 'color' => $type['color']],
-                        'position' => [240, 40],
-                    ],
-                    [
-                        'type' => 'image',
-                        'image' => $type['logoImage'],
-                        'position' => [100, 0],
-                    ],
-                ];
-                
-                if(isset($crop)) {
-                    Yii::$app->image->updateImageAttribute($this, $crop['attribute'], $this->$fileAttribute, $crop, $watermark);
-                } else {
-                    Yii::$app->image->updateImageAttribute($this, $crop['attribute'], $this->$fileAttribute);
+                    $watermark = [
+                        [
+                            'type' => 'image',
+                            'image' => $gradientImage,
+                            'position' => [0, 0],
+                        ],
+                        [
+                            'type' => 'text',
+                            'text' => $this->year->title,
+                            'style' => ['size' => 35, 'color' => $type['color']],
+                            'position' => [240, 40],
+                        ],
+                        [
+                            'type' => 'image',
+                            'image' => $type['logoImage'],
+                            'position' => [100, 0],
+                        ],
+                    ];
+                    
+                    if(isset($crop)) {
+                        Yii::$app->image->updateImageAttribute($this, $crop['attribute'], $this->$fileAttribute, $crop, $watermark);
+                    } else {
+                        Yii::$app->image->updateImageAttribute($this, $crop['attribute'], $this->$fileAttribute);
+                    }
                 }
             }
         }
