@@ -159,15 +159,29 @@ $(document).ready(function () {
             year = sPageURLPathname.substr(1);
 
         var currentYear = new Date().getFullYear();
-        if(sURLVariables == 0 && year && year !== currentYear && (year > currentYear || year < currentYear)){
+        if(currentYear == 2018){
+            // currentYear =
+        }
+        if(sURLVariables == 0 && year != 2018){
             scrollToMonth('#month_1');
             monthId = 1
-        }else{
+        }else if(sURLVariables == 0 && year == 2018){
             var prev = monthId -1;
-            $('#month_'+prev+'.month-items').prevAll().css('display','none');
+            $('body').css({'overflow':'hidden'});
+            $('#month_'+prev+'.month-items').prevAll().css({'display':'none'});
             scrollToMonth('#month_'+monthId);
             setTimeout(function () {
-                $('#month_'+prev+'.month-items').prevAll().css('display','block');
+                $('#month_'+prev+'.month-items').prevAll().css({'display':'block'});
+                $('body').css({'overflow':'visible'});
+            },2000);
+        }else {
+            var prev = monthId -1;
+            $('body').css({'overflow':'hidden'});
+            $('#month_'+prev+'.month-items').prevAll().css({'display':'none'});
+            scrollToMonth('#month_'+monthId);
+            setTimeout(function () {
+                $('#month_'+prev+'.month-items').prevAll().css({'display':'block'});
+                $('body').css({'overflow':'visible'});
             },2000);
         }
         setTimeout(function () {

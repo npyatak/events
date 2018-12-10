@@ -1670,7 +1670,11 @@ aside li a.active, aside li a:hover {
     background-color: #1B00A1;
     color: #fff;
 }
+.month-items {
+    min-height: 350px !important;
+}
 .content {
+    position: relative;
     width: 830px;
     margin-left: 100px;
 }
