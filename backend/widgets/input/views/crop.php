@@ -8,10 +8,9 @@ $modelClass = (new \ReflectionClass($model))->getShortName();
 $iteration = substr_replace($attribute, '',  strrpos($attribute, ']') - strlen($attribute) + 1);
 
 if($attribute) {
-    $rawAttribute = substr_replace($attribute, '', 0,  strrpos($attribute, ']') + 1);
-
     preg_match_all("/\]/", $attribute, $match);
-    if(count($match) > 0) {
+    if(count($match[0]) > 0) {
+        $rawAttribute = substr_replace($attribute, '', 0,  strrpos($attribute, ']') + 1);
         $i = "[$modelClass]".$iteration."[$rawAttribute]";
     } else {
         $i = "[$modelClass][$attribute]";
