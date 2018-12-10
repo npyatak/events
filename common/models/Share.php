@@ -70,7 +70,10 @@ class Share extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes) {
         $this->imageNamePrefix = $this->id;
    
-        $this->cropImage = Yii::$app->request->post()['CropForm']['Share'];
+        $post = Yii::$app->request->post();
+        if(isset($post) && isset($post['CropForm']['Share'])) {
+            $this->cropImage = $post['CropForm']['Share'];
+        }
 
         foreach ($this->cropImage as $fileAttribute => $crop) {
             $this->$fileAttribute = UploadedFile::getInstance($this, $fileAttribute);
