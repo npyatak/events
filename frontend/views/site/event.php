@@ -201,6 +201,7 @@ if($this->params['is_mobile']) {
                         <!-- для того что бы отобразить текст жирным добавляем к partner_refer класс bold, а чтобы сделать курсивом класс italic  -->
                         <div class="partner_refer">
                             <a href="<?=Yii::$app->controller->yearModel->partner_url;?>" style="background-image: url(<?=Yii::$app->image->getImageUrl(Yii::$app->controller->yearModel->partner_image_event);?>);"></a>
+                            <?=Yii::$app->controller->yearModel->partner_text;?>
                         </div>
                     <?php endif;?>
                 </div>

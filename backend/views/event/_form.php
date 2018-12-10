@@ -151,6 +151,8 @@ use common\models\Event;
         </div>
     </div>
 
+    <?= $form->field($model, 'copyright_title')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group">
         <?= $form->field($model, 'copyright')->widget(CKEditor::className(), [
             'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
