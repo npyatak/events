@@ -19,7 +19,7 @@ use backend\widgets\input\ImageInput;
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-3">
-            <?= $form->field($model, 'watermarkType')->dropDownList(Yii::$app->image->watermarkTypesList()); ?>
+            <?= $form->field($model, 'watermark_type')->dropDownList(Yii::$app->image->watermarkTypesList()); ?>
         </div>
     </div>
 

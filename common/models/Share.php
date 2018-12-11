@@ -23,7 +23,6 @@ class Share extends \yii\db\ActiveRecord
     public $imageCropParams = ['w' => 968, 'h' => 504, 'attribute' => 'image'];
     public $imageTwCropParams = ['w' => 1074, 'h' => 480, 'attribute' => 'image_tw'];
     public $imageFbCropParams = ['w' => 1200, 'h' => 628, 'attribute' => 'image_fb'];
-    public $watermarkType;
 
     public $imageNamePrefix;
     /**
@@ -42,7 +41,7 @@ class Share extends \yii\db\ActiveRecord
         return [
             [['title', 'image', 'text', 'twitter'], 'required'],
             [['title', 'text', 'twitter'], 'string', 'max' => 255],
-            [['image',  'year_id', 'watermarkType'], 'safe'],
+            [['image',  'year_id', 'watermark_type'], 'safe'],
             [['imageFile', 'imageFileTw', 'imageFileFb'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
         ];
     }
@@ -63,7 +62,7 @@ class Share extends \yii\db\ActiveRecord
             'imageFileTw' => 'Изображение Twitter',
             'imageFileFb' => 'Изображение Facebook',
             'year_id' => 'Год',
-            'watermarkType' => 'Тип водяного знака',
+            'watermark_type' => 'Тип водяного знака',
         ];
     }
 
@@ -80,7 +79,7 @@ class Share extends \yii\db\ActiveRecord
                 $this->$fileAttribute = UploadedFile::getInstance($this, $fileAttribute);
 
                 if($this->$fileAttribute) {
-                    $type = Yii::$app->image->watermarkTypes()[$this->watermarkType];
+                    $type = Yii::$app->image->watermarkTypes()[$this->watermark_type];
 
                     $exp = explode('.', $type['gradientImage']);
                     $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];

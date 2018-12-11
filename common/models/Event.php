@@ -30,7 +30,6 @@ class Event extends \yii\db\ActiveRecord
     public $month;
 
     public $imageFile;
-    public $watermarkType;
 
     /**
      * @inheritdoc
@@ -57,7 +56,7 @@ class Event extends \yii\db\ActiveRecord
             [['view_date_type', 'dateFormatted', 'alias'], 'required'],
             [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
             [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url', 'origin_image', 'main_page_mobile_image_url', 'copyright_title', 'socials_image_url_fb', 'socials_image_url_tw'], 'string', 'max' => 255],
-            [['categoryIds', 'similarIds', 'copyright', 'imageFile', 'watermarkType'], 'safe'],
+            [['categoryIds', 'similarIds', 'copyright', 'imageFile', 'watermark_type'], 'safe'],
             [['alias'], 'unique'],
             [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
         ];
@@ -388,7 +387,7 @@ class Event extends \yii\db\ActiveRecord
 
     public function watermarkParams($crop)
     {
-        $type = Yii::$app->image->watermarkTypes()[$this->watermarkType];
+        $type = Yii::$app->image->watermarkTypes()[$this->watermark_type];
 
         $exp = explode('.', $type['gradientImage']);
         $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
