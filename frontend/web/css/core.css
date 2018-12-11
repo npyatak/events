@@ -39,7 +39,7 @@ body {
     color: #3c3c3c;
 }
 body.overflow {
-    overflow: hidden;
+    overflow: hidden !important;
 }
 a:hover {
     text-decoration: none;

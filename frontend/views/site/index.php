@@ -10,10 +10,10 @@ $this->registerJsFile(Url::toRoute('js/general_page.js'), ['depends' => [\yii\we
 
 $this->params['share'] = [
 	'url' => Url::toRoute(['site/index', 'year' => Yii::$app->controller->yearModel->number], true),
-	'text' => $shares[0]->text, 
-	'title' => $shares[0]->title, 
-	'image' => $shares[0]->image, 
-	'twitter' => $shares[0]->twitter, 
+	'text' => $shares[0]->text,
+	'title' => $shares[0]->title,
+	'image' => $shares[0]->image,
+	'twitter' => $shares[0]->twitter,
 	'image_fb' => $shares[0]->image_fb,
 	'image_tw' => $shares[0]->image_tw,
 ];
@@ -68,12 +68,12 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 					<li><a href="<?=$cat->url;?>" <?=$category == $cat->alias ? 'class="active"' : '';?> data-category="<?=$cat->alias;?>"><?=$cat->title;?></a></li>
 					<?php endforeach;?>
 				</ul>
-				
+
 				<?php if(Yii::$app->controller->yearModel->partner_url && Yii::$app->controller->yearModel->partner_text):?>
 					<!-- для того что бы отобразить текст жирным добавляем к partner_refer класс bold, а чтобы сделать курсивом класс italic  -->
 					<div class="partner_refer m-t-30">
-                        <a href="<?=Yii::$app->controller->yearModel->partner_url;?>" style="background-image: url(<?=Yii::$app->image->getImageUrl(Yii::$app->controller->yearModel->partner_image_index);?>);"></a>
-                        <?=Yii::$app->controller->yearModel->partner_text;?>
+                        <a class="image" href="<?=Yii::$app->controller->yearModel->partner_url;?>" style="background-image: url(<?=Yii::$app->image->getImageUrl(Yii::$app->controller->yearModel->partner_image_index);?>);"></a>
+                        <a class="text" href=""><?=Yii::$app->controller->yearModel->partner_text;?></a>
 					</div>
 				<?php endif;?>
 			</aside>
