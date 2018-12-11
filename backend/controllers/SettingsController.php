@@ -16,13 +16,13 @@ use common\models\search\SettingsSearch;
  */
 class SettingsController extends CController
 {  
-    public function beforeAction($action) {
+    /*public function beforeAction($action) {
         if(!Yii::$app->user->identity->canAdmin()) {
             throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
         }
 
         return parent::beforeAction($action);
-    }
+    }*/
 
     public function actionIndex()
     {
