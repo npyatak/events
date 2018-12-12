@@ -1395,21 +1395,6 @@ header .desc {
 .general_share ul li a {
     color: #221FAA;
 }
-.general_share ul li:last-child a::after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 2;
-    background: url('../images/icons/telegram_blue.svg') no-repeat center;
-    -webkit-background-size: contain;
-    background-size: contain;
-    transform: translate(-50%,-50%);
-    width: 14px;
-    height: 14px;
-    margin-left: -1px;
-}
 .g-share-btn {
     position: relative;
     display: block;
@@ -2705,6 +2690,9 @@ footer p a {
 }
 .partner_refer .text {
     display: none;
+}
+.partner_refer .text > * {
+    margin-bottom: 0 !important;
 }
 /*.partner_img{*/
     /*min-height: 222px;*/

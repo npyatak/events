@@ -17,7 +17,7 @@ class AppAsset extends AssetBundle
         'css/owl.carousel.min.css',
         'css/owl.theme.default.min.css',
         'css/core.css?v=11122018',
-        'css/main.css?v=12122018',
+        'css/main.css?v=12122018_2',
     ];
     public $js = [
         'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js',

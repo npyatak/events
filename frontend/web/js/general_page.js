@@ -23,11 +23,11 @@ $(document).ready(function () {
         $(this).parent().toggleClass('visible');
     });
 
-    $('aside a').click(function (e) {
+    $('aside .categories a').click(function (e) {
         e.preventDefault();
         $('aside').removeClass('active');
         $('body').removeClass('overflow');
-        $('aside a').removeClass('active');
+        $('aside .categories a').removeClass('active');
         $(this).addClass('active');
     });
 
