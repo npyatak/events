@@ -30,7 +30,7 @@ class CropForm extends Model
     {
         return [
             [['imageWidth', 'imageHeight', 'x', 'y', 'width', 'height', 'attribute', 'imageFile', 'watermark'], 'safe'],
-            [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png'],
+            [['imageFile'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
         ];
     }
 

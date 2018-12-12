@@ -48,30 +48,13 @@ use common\models\Event;
         updateBlocksOrder();
     });
 
-    /*$('#blocks').sortable({
-        cursor: 'move',
-        handle: '.header',
-        classes: {
-            'ui-sortable': 'highlight'
-        },
-        update: function(event, ui) {
-            updateBlocksOrder();
-        },
-        start: function(event, ui) {
-            saveTextareas(ui.item.find('textarea'));
-        },
-        stop: function(event, ui) {
-            loadTextareas(ui.item.find('textarea'))
-        }
-    });*/
-
     $(document).on('click', '.block .move-up', function(e) {
         e.defaultPrevented;
         var block = $(this).closest('.block');
         if(block.find('.hidden-order').val() == 1) {
             return false;
         }
-        var textareas = block.find('textarea');
+        var textareas = block.find('textarea:hidden');
         saveTextareas(textareas);
 
         block.insertBefore(block.prev());
@@ -92,7 +75,7 @@ use common\models\Event;
         if(block.find('.hidden-order').val() == $('.block').length) {
             return false;
         }
-        var textareas = block.find('textarea');
+        var textareas = block.find('textarea:hidden');
         saveTextareas(textareas);
 
         block.insertAfter(block.next());
