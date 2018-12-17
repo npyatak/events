@@ -646,6 +646,7 @@
     display: block;
     max-width: 100%;
     margin: 0 auto;
+    width: 100%;
 }
 .big-image_inner {
     position: relative;
@@ -1275,15 +1276,20 @@ header .image {
     -ms-transition: all .4s;
     -o-transition: all .4s;
     transition: all .4s;
+    height: 100%;
+    background-color: #13106B;
 }
 header .image img {
     display: block;
     width: 150%;
-    -webkit-transform: translateX(-15%);
-    -moz-transform: translateX(-15%);
-    -ms-transform: translateX(-15%);
-    -o-transform: translateX(-15%);
-    transform: translateX(-15%);
+    -webkit-transform: translateX(-17%);
+    -moz-transform: translateX(-17%);
+    -ms-transform: translateX(-17%);
+    -o-transform: translateX(-17%);
+    transform: translateX(-17%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 /*header::after {*/
     /*content: '';*/
@@ -3720,11 +3726,11 @@ footer p a {
 @media (max-width: 500px) {
     header .image img {
         width: 235%;
-        -webkit-transform: translateX(-27%);
-        -moz-transform: translateX(-27%);
-        -ms-transform: translateX(-27%);
-        -o-transform: translateX(-27%);
-        transform: translateX(-27%);
+        -webkit-transform: translateX(-28.5%);
+        -moz-transform: translateX(-28.5%);
+        -ms-transform: translateX(-28.5%);
+        -o-transform: translateX(-28.5%);
+        transform: translateX(-28.5%);
     }
 }
 @media (max-width: 460px) {
@@ -3790,14 +3796,14 @@ footer p a {
     }
     p {
         line-height: 24px;
-    }
+    } 
     header .image img {
         width: 359%;
-        -webkit-transform: translateX(-23%);
-        -moz-transform: translateX(-23%);
-        -ms-transform: translateX(-23%);
-        -o-transform: translateX(-23%);
-        transform: translateX(-34%);
+        -webkit-transform: translateX(-35.3%);
+        -moz-transform: translateX(-35.3%);
+        -ms-transform: translateX(-35.3%);
+        -o-transform: translateX(-35.3%);
+        transform: translateX(-35.3%);
     }
 }
 @media (max-height:700px) {
