@@ -151,9 +151,9 @@ class SiteController extends Controller
         $event = \common\models\Event::findOne(76);
         $attribute = 'origin_image';
 
-        $content = file_get_contents('http://192.168.25.62/events/uploads/90_main_page_image_url_540x620.jpg');
+        //$content = file_get_contents('http://192.168.25.62/events/uploads/90_main_page_image_url_540x620.jpg');
         //Yii::$app->webdavFs->put('/events/test/123.jpg', $content);
-
+        Yii::$app->webdavFs->delete('/events/uploads/159_main_page_mobile_image_url_290x190.svg');
         // if(Yii::$app->webdavFs->delete('/events/test')) {
         //     print_r(Yii::$app->webdavFs->delete('events/test/'));
         // }

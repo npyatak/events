@@ -217,7 +217,6 @@ if($this->params['is_mobile']) {
         <div class="container">
             <div class="wrap-slider">
                 <?=Yii::$app->settings->get('smi2_code');?>
-                <div class="news-partners-nav"></div>
             </div>
         </div>
     </div>
