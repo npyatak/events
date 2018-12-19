@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'image',
-                    'header' => 'Изображение на главной',
+                    'header' => 'Изображение',
                     'format' => 'raw',
                     'value' => function($data) {
                         return $data->image ? Html::img(Yii::$app->image->getImageUrl($data->image), ['width' => '200']) : '';

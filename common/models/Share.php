@@ -39,7 +39,7 @@ class Share extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'image', 'text', 'twitter'], 'required'],
+            [['title', 'image', 'twitter'], 'required'],
             [['title', 'text', 'twitter'], 'string', 'max' => 255],
             [['image',  'year_id', 'watermark_type'], 'safe'],
             [['imageFile', 'imageFileTw', 'imageFileFb'], 'file', 'extensions'=>'jpg, png, jpeg, svg', 'maxSize'=>1024 * 1024 * 10, 'mimeTypes' => 'image/jpg, image/jpeg, image/png, image/svg+xml'],
