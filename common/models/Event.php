@@ -112,7 +112,7 @@ class Event extends \yii\db\ActiveRecord
 
     public function beforeValidate()
     {        
-        if(!$this->alias) {
+        if(!$this->alias && in_array(Yii::$app->controller->action->id, ['create', 'update'])) {
             $this->alias = TransliteratorHelper::process($this->title);
         }
 

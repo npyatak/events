@@ -77,10 +77,10 @@ $(document).on('click', '.showResult', function(e) {
 
     if(cropper.hasOwnProperty(i)) {
         var result = cropper[i].getCroppedCanvas({width: $('#cropform-'+i+'-imagewidth').val(), height: $('#cropform-'+i+'-imageheight').val()})
-        $('#viewResult').modal().find('.modal-body').html(result);
+        $('#viewResult').modal({backdrop: 'static'}).find('.modal-body').html(result);
     } else {
         src = $(this).closest('.imageWrapper').find('.preview').attr('data-image');
-        $('#viewResult').modal().find('.modal-body').html('<img src=\"'+src+'\">');
+        $('#viewResult').modal({backdrop: 'static'}).find('.modal-body').html('<img src=\"'+src+'\">');
     }
 
     return false;
@@ -91,7 +91,7 @@ $(document).on('shown.bs.modal', '#viewResult', function () {
 });
 
 $(document).on('click', '.showCrop', function(e) {
-    $(this).closest('.imageWrapper').find('.crop-modal').modal();
+    $(this).closest('.imageWrapper').find('.crop-modal').modal({backdrop: 'static'});
 
     return false;
 });
@@ -114,7 +114,7 @@ $('#event-imagefile').change(function(e) {
             $('.image').attr('src', reader.result);
 
             inputImage.onload = function() {
-                input.closest('.images-wrap').find('.crop-modal').modal();
+                input.closest('.images-wrap').find('.crop-modal').modal({backdrop: 'static'});
             }
         }
         reader.readAsDataURL(this.files[0]);
@@ -137,7 +137,7 @@ $(document).on('change', '.crop-image-input', function(e) {
 
             if(imageWrapper.find('.crop-modal').length && mimeType != 'image/svg+xml') {
                 inputImage.onload = function() {
-                    imageWrapper.find('.crop-modal').modal();
+                    imageWrapper.find('.crop-modal').modal({backdrop: 'static'});
                 }
             } else {
                 imageWrapper.find('.preview img').attr('src', reader.result);
