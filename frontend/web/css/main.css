@@ -1044,7 +1044,7 @@
     -ms-transition: margin .4s;
     -o-transition: margin .4s;
     transition: margin .4s;
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
 .general_content.transform {
     margin-top: 90px;
@@ -2388,7 +2388,7 @@ footer p a {
 }
 
 .other-years {
-    margin-bottom: 65px;
+    padding-bottom: 65px;
     padding-left: 80px;
 }
 .other-years a {
