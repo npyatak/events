@@ -319,6 +319,7 @@ function masonryInit() {
     // Инициализация Масонри, после загрузки изображений
     $container.masonry({
         itemSelector: '.grid-item',
+        transitionDuration: 0,
         percentPosition: true,
         columnWidth: columnWidth,
         gutter: 40
