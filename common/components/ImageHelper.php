@@ -34,34 +34,35 @@ class ImageHelper {
             mkdir(self::PATH_ROOT.self::PATH, 0775, true);
         }
     
-        $model->$attribute = self::PATH.$model->imageNamePrefix.'_'.$model->tableSchema->name.'_'.$attribute.'_'.$model->id.'.'.$imageFile->extension;
-        $imageFile->saveAs(self::PATH_ROOT.$model->$attribute);
+        $fileName = self::PATH.$model->imageNamePrefix.'_'.$model->tableSchema->name.'_'.$attribute.'_'.$model->id.'.'.$imageFile->extension;
+        $model->$attribute = $fileName.'?v='.date('d_m_Y_H:i:s', time());
+        $imageFile->saveAs(self::PATH_ROOT.$fileName);
 
         if($imageFile->type !== 'image/svg+xml') {
             if($cropForm) {
-                $imgWidth = getimagesize(self::PATH_ROOT.$model->$attribute)[0];
+                $imgWidth = getimagesize(self::PATH_ROOT.$fileName)[0];
                 
                 if($imgWidth < $cropForm['imageWidth']) {
-                    Image::getImagine()->open(self::PATH_ROOT.$model->$attribute)->resize(new \Imagine\Image\Box($cropForm['imageWidth'], $cropForm['imageHeight']))->save(self::PATH_ROOT.$model->$attribute);
+                    Image::getImagine()->open(self::PATH_ROOT.$fileName)->resize(new \Imagine\Image\Box($cropForm['imageWidth'], $cropForm['imageHeight']))->save(self::PATH_ROOT.$fileName);
                 } else {
-                    Image::crop(self::PATH_ROOT.$model->$attribute, $cropForm['width'], $cropForm['height'], [$cropForm['x'], $cropForm['y']])
-                        ->save(self::PATH_ROOT.$model->$attribute);
+                    Image::crop(self::PATH_ROOT.$fileName, $cropForm['width'], $cropForm['height'], [$cropForm['x'], $cropForm['y']])
+                        ->save(self::PATH_ROOT.$fileName);
 
-                    Image::thumbnail(self::PATH_ROOT.$model->$attribute, $cropForm['imageWidth'], $cropForm['imageHeight'])
-                        ->save(self::PATH_ROOT.$model->$attribute);
+                    Image::thumbnail(self::PATH_ROOT.$fileName, $cropForm['imageWidth'], $cropForm['imageHeight'])
+                        ->save(self::PATH_ROOT.$fileName);
                 }
             }
 
             if($watermark) {
-                self::drawWatermarks(self::PATH_ROOT.$model->$attribute, $watermark);
+                self::drawWatermarks(self::PATH_ROOT.$fileName, $watermark);
             }
         }
 
         if(isset(Yii::$app->webdavFs)) {                    
-            $content = file_get_contents(self::PATH_ROOT.$model->$attribute);
-            unlink(self::PATH_ROOT.$model->$attribute);
+            $content = file_get_contents(self::PATH_ROOT.$fileName);
+            unlink(self::PATH_ROOT.$fileName);
 
-            Yii::$app->webdavFs->put('events/'.$model->$attribute, $content);
+            Yii::$app->webdavFs->put('events/'.$fileName, $content);
         }
         
         Yii::$app->db->createCommand()

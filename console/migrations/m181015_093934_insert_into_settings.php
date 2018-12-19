@@ -12,7 +12,7 @@ class m181015_093934_insert_into_settings extends Migration {
         }
 
         $this->batchInsert('{{%settings}}', ['key', 'value', 'title', 'type'], [
-            ['socials', '["fb","tw","ok","vk","tg"]', 'Соц.сети для "поделиться"', 4],
+            ['socials', '["fb","tw","ok","vk","tg"]', 'Соц.сети для "поделиться"', 3],
             ['smi2_code', '
                 <h5>Новости партнеров</h5>
                 <div class="news-partners-els">

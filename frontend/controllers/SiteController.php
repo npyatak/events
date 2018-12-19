@@ -102,12 +102,17 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionEvent($alias, $year = null) {
-        $this->yearModel = $this->findYear($year);
-        
+    public function actionEvent($alias, $year = null) 
+    {      
         $event = $this->findEvent($alias);
         $nextEvent = null;
         $prevEvent = null;
+
+        $eventYear = date('Y', $event->date);
+        if($eventYear != $year) {
+            return $this->redirect(['event', 'alias' => $alias, 'year' => $eventYear]);
+        }
+        $this->yearModel = $this->findYear($year);
 
         if($event->redirect_url) {
             return $this->redirect($event->redirect_url);
