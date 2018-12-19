@@ -15,7 +15,7 @@ class TransliteratorHelper {
 	    return $string;
 	}
 
-	private function rus2translit($string) {
+	private static function rus2translit($string) {
 	    $converter = array(
 	        'а' => 'a',   'б' => 'b',   'в' => 'v',
 	        'г' => 'g',   'д' => 'd',   'е' => 'e',

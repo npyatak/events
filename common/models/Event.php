@@ -53,7 +53,7 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'size'], 'required'],
-            [['view_date_type', 'dateFormatted', 'alias'], 'required'],
+            [['view_date_type', 'dateFormatted'], 'required'],
             [['show_on_main', 'value_index', 'status', 'created_at', 'updated_at', 'view_date_type', 'size', 'date'], 'integer'],
             [['title', 'leading_text', 'socials_image_url', 'image_url', 'main_page_image_url', 'socials_text', 'image_copyright', 'socials_title', 'alias', 'twitter_text', 'mobile_image_url', 'small_image_url', 'short_title', 'meta_title', 'meta_description', 'redirect_url', 'origin_image', 'main_page_mobile_image_url', 'copyright_title', 'socials_image_url_fb', 'socials_image_url_tw'], 'string', 'max' => 255],
             [['categoryIds', 'similarIds', 'copyright', 'imageFile', 'watermark_type'], 'safe'],
@@ -110,15 +110,20 @@ class Event extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeValidate()
+    {        
+        if(!$this->alias) {
+            $this->alias = TransliteratorHelper::process($this->title);
+        }
+
+        return parent::beforeValidate();
+    }
+
     public function beforeSave($insert) {
         if($this->dateFormatted) {
             $this->date = \DateTime::createFromFormat('!d.m.Y', $this->dateFormatted)->format('U');
         }
         $this->similar = json_encode($this->similarIds);
-
-        if(!$this->alias) {
-            $this->alias = TransliteratorHelper::process($this->title);
-        }
 
         return parent::beforeSave($insert);
     }
