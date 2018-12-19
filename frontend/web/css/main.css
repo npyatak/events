@@ -3534,6 +3534,15 @@ footer p a {
         text-align: center;
         text-transform: uppercase;
     }
+
+
+    .grid-item.w540-h620 .grid-item_image, .grid-item.w540-h290 .grid-item_image, .grid-item.w250-h290 .grid-item_image{
+        height: 0;
+        padding-bottom: 60%
+    }
+
+
+
 }
 @media (max-width: 600px) {
     .event-content {
