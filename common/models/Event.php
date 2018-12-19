@@ -144,18 +144,6 @@ class Event extends \yii\db\ActiveRecord
             }
         }
 
-        /*if(isset($changedAttributes['alias'])) {
-            if(file_exists($this->imageSrcPath.'/images/'.$changedAttributes['alias'])) {
-                rename($this->imageSrcPath.'/images/'.$changedAttributes['alias'], $this->imageSrcPath.'/images/'.$this->alias);
-            }
-
-            if(isset(Yii::$app->webdavFs)) {
-                if(Yii::$app->webdavFs->has('events/images/'.$changedAttributes['alias'])) {
-                    Yii::$app->webdavFs->rename('events/images/'.$changedAttributes['alias'], 'events/images/'.$this->alias);
-                }
-            }
-        }*/
-
         return parent::afterSave($insert, $changedAttributes);
     }
 
@@ -172,18 +160,6 @@ class Event extends \yii\db\ActiveRecord
             if($this->$img) {
                 if(file_exists($this->imageSrcPath.$this->$img)) {
                     unlink($this->imageSrcPath.$this->$img);
-                    /*$it = new \RecursiveDirectoryIterator($this->imageSrcPath.$path.$img, \RecursiveDirectoryIterator::SKIP_DOTS);
-                    $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
-
-                    foreach($files as $file) {
-                        if ($file->isDir()){
-                            rmdir($file->getRealPath());
-                        } else {
-                            unlink($file->getRealPath());
-                        }
-                    }
-
-                    rmdir($this->imageSrcPath.$path);*/
                 }
 
                 if(isset(Yii::$app->webdavFs)) {

@@ -303,35 +303,35 @@ class EventController extends CController
 
         if($cropForm->imageFile) {
             $attribute = $cropForm->attribute;
-            $event->$attribute = $path.$event->id.'_'.$attribute.'_'.$cropForm->imageWidth.'x'.$cropForm->imageHeight.'.'.$cropForm->imageFile->extension;
+            $fileName = $path.$event->id.'_'.$attribute.'_'.$cropForm->imageWidth.'x'.$cropForm->imageHeight.'.'.$cropForm->imageFile->extension;
+            $event->$attribute = $fileName.'?v='.date('d_m_Y_H:i:s', time());
             $event->save(false, [$attribute]);
 
-            //Image::getImagine()->open($root.$originFileName)->save($root.$event->$attribute);
-            copy($root.$originFileName, $root.$event->$attribute);
+            copy($root.$originFileName, $root.$fileName);
 
             if($cropForm->imageFile->type !== 'image/svg+xml') {
-                $imgWidth = getimagesize($root.$event->$attribute)[0];
+                $imgWidth = getimagesize($root.$fileName)[0];
                 
                 if($imgWidth < $cropForm->imageWidth) {
-                    Image::getImagine()->open($root.$originFileName)->resize(new \Imagine\Image\Box($cropForm->imageWidth, $cropForm->imageHeight))->save($root.$event->$attribute);
+                    Image::getImagine()->open($root.$originFileName)->resize(new \Imagine\Image\Box($cropForm->imageWidth, $cropForm->imageHeight))->save($root.$fileName);
                 } else {
-                    Image::crop($root.$event->$attribute, $cropForm->width, $cropForm->height, [$cropForm->x, $cropForm->y])
-                        ->save($root.$event->$attribute);
+                    Image::crop($root.$fileName, $cropForm->width, $cropForm->height, [$cropForm->x, $cropForm->y])
+                        ->save($root.$fileName);
 
-                    Image::thumbnail($root.$event->$attribute, $cropForm->imageWidth, $cropForm->imageHeight)
-                        ->save($root.$event->$attribute);
+                    Image::thumbnail($root.$fileName, $cropForm->imageWidth, $cropForm->imageHeight)
+                        ->save($root.$fileName);
                 }
 
                 if(in_array($attribute, ['socials_image_url', 'socials_image_url_fb', 'socials_image_url_tw'])) {
-                    Yii::$app->image->drawWatermarks($root.$event->$attribute, $event->watermarkParams($cropForm));
+                    Yii::$app->image->drawWatermarks($root.$fileName, $event->watermarkParams($cropForm));
                 }
             }
 
             if(isset(Yii::$app->webdavFs)) {
-                $content = file_get_contents($root.$event->$attribute);
-                unlink($root.$event->$attribute);
+                $content = file_get_contents($root.$fileName);
+                unlink($root.$fileName);
                 
-                Yii::$app->webdavFs->put('events/'.$event->$attribute, $content);
+                Yii::$app->webdavFs->put('events/'.$fileName, $content);
             }
         }
     }
