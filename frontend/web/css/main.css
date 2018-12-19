@@ -3305,7 +3305,8 @@ footer p a {
     .grid-item.w540-h290,
     .grid-item.w540-h620,
     .grid-item.w250-h290 {
-        height: 310px;
+        /*height: 310px;*/
+        height: auto;
     }
     .grid-item_desc h2 {
         margin-bottom: 10px !important;
