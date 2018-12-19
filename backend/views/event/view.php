@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => 'Изображение на главной',
                 'format' => 'raw',
                 'value' => function($data) {
-                    return $data->main_page_image_url ? Html::img($data->getImageUrl($data->main_page_image_url, '200x200'), ['width' => '200']) : '';
+                    return $data->main_page_image_url ? Html::img(Yii::$app->image->getImageUrl($data->main_page_image_url), ['width' => '200']) : '';
                 },
             ],
             'value_index',

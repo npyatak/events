@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 $this->title = 'Изменить событие: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'События', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => $model->url];
 $this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="event-update">
