@@ -72,9 +72,9 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 				<?php if(Yii::$app->controller->yearModel->partner_url):?>
 					<!-- для того что бы отобразить текст жирным добавляем к partner_refer класс bold, а чтобы сделать курсивом класс italic  -->
 					<div class="partner_refer m-t-30">
-                        <a class="image" href="<?=Yii::$app->controller->yearModel->partner_url;?>" style="background-image: url(<?=Yii::$app->image->getImageUrl(Yii::$app->controller->yearModel->partner_image_index);?>);"></a>
+                        <a class="image" target="_blank" href="<?=Yii::$app->controller->yearModel->partner_url;?>" style="background-image: url(<?=Yii::$app->image->getImageUrl(Yii::$app->controller->yearModel->partner_image_index);?>);"></a>
                         <?php if(Yii::$app->controller->yearModel->partner_text):?>
-                            <a class="text" href="<?=Yii::$app->controller->yearModel->partner_url;?>"><?=Yii::$app->controller->yearModel->partner_text;?></a>
+                            <a class="text" target="_blank" href="<?=Yii::$app->controller->yearModel->partner_url;?>"><?=Yii::$app->controller->yearModel->partner_text;?></a>
                         <?php endif;?>
 					</div>
 				<?php endif;?>
