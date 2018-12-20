@@ -84,6 +84,9 @@ class SiteController extends Controller
     {
         $month = $id;
         $dateNow = new \DateTime();
+        if($year === null) {
+            $year = 2018;
+        }
         $this->yearModel = $this->findYear($year);
 
         $query = Event::find()
