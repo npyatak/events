@@ -28,7 +28,7 @@ $this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:ty
 </div>
 
 <?php $script = "
-    window.location.href = '".Url::home()."';
+    window.location.href = '".Url::toRoute(['site/index', 'year' => Yii::$app->controller->yearModel->number, 'month' => $month])."';
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
