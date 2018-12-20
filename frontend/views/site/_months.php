@@ -14,7 +14,7 @@ use common\models\Event;
 			<h2><?=StringHelper::ucfirst($m[0]);?></h2>
 			<div class="share-inline">
 				<span class="share-inline_btn"><i class="ion-android-share"></i></span>
-				<?php $shares[$monthNumber]['url'] = Url::toRoute(['site/month', 'month' => Yii::$app->controller->yearModel->number, 'id' => $monthNumber], true);
+				<?php $shares[$monthNumber]['url'] = Url::toRoute(['site/month', 'year' => Yii::$app->controller->yearModel->number, 'id' => $monthNumber], true);
 				$shares[$monthNumber]['image'] = Url::to(Yii::$app->image->getImageUrl($shares[$monthNumber]['image']), true);
 				?>
 	            <?= \frontend\widgets\share\ShareWidget::widget([
