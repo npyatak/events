@@ -305,3 +305,6 @@ ul.sortable li {
     color: #b87d2b;
     font-size: 12px;
 }
+.error {
+    border-color: rgb(255, 0, 0);
+}

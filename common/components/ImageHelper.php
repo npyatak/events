@@ -88,6 +88,7 @@ class ImageHelper {
     public static function watermarkTypes()
     {
         return [
+            0 => ['label' => '---'],
             1 => ['label' => 'Белый', 'color' => 'fff', 'logoImage' => '/images/logo/white/logo.png', 'gradientImage' => '/images/logo/white/gradient.png'],
             2 => ['label' => 'Синий', 'color' => '232372', 'logoImage' => '/images/logo/blue/logo.png', 'gradientImage' => '/images/logo/blue/gradient.png'],
         ];

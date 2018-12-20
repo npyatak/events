@@ -322,7 +322,7 @@ class EventController extends CController
                         ->save($root.$fileName);
                 }
 
-                if(in_array($attribute, ['socials_image_url', 'socials_image_url_fb', 'socials_image_url_tw'])) {
+                if($event->watermarkParams($cropForm) && in_array($attribute, ['socials_image_url', 'socials_image_url_fb', 'socials_image_url_tw'])) {
                     Yii::$app->image->drawWatermarks($root.$fileName, $event->watermarkParams($cropForm));
                 }
             }

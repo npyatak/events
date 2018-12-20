@@ -370,31 +370,34 @@ class Event extends \yii\db\ActiveRecord
     {
         $type = Yii::$app->image->watermarkTypes()[$this->watermark_type];
 
-        $exp = explode('.', $type['gradientImage']);
-        $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
+        $watermarkParams = false;
+        if(isset($type['color'])) {
+            $exp = explode('.', $type['gradientImage']);
+            $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
 
-        $watermarkParams = [
-            [
-                'type' => 'image',
-                'image' => $gradientImage,
-                'position' => [0, 0],
-            ],
-            [
-                'type' => 'image',
-                'image' => $type['logoImage'],
-                'position' => [100, 0],
-            ],
-        ];
-
-        $year = Year::find()->where(['number' => date('Y', $this->date)])->one();
-
-        if($year) {
-            $watermarkParams[] = [
-                'type' => 'text',
-                'text' => $year->title,
-                'style' => ['size' => 35, 'color' => $type['color']],
-                'position' => [240, 40],
+            $watermarkParams = [
+                [
+                    'type' => 'image',
+                    'image' => $gradientImage,
+                    'position' => [0, 0],
+                ],
+                [
+                    'type' => 'image',
+                    'image' => $type['logoImage'],
+                    'position' => [100, 0],
+                ],
             ];
+
+            $year = Year::find()->where(['number' => date('Y', $this->date)])->one();
+
+            if($year) {
+                $watermarkParams[] = [
+                    'type' => 'text',
+                    'text' => $year->title,
+                    'style' => ['size' => 35, 'color' => $type['color']],
+                    'position' => [240, 40],
+                ];
+            }
         }
 
         return $watermarkParams;

@@ -81,27 +81,30 @@ class Share extends \yii\db\ActiveRecord
                 if($this->$fileAttribute) {
                     $type = Yii::$app->image->watermarkTypes()[$this->watermark_type];
 
-                    $exp = explode('.', $type['gradientImage']);
-                    $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
+                    $watermark = false;
+                    if(isset($type['color'])) {
+                        $exp = explode('.', $type['gradientImage']);
+                        $gradientImage = $exp[0].'_'.$crop['imageWidth'].'.'.$exp[1];
 
-                    $watermark = [
-                        [
-                            'type' => 'image',
-                            'image' => $gradientImage,
-                            'position' => [0, 0],
-                        ],
-                        [
-                            'type' => 'text',
-                            'text' => $this->year->title,
-                            'style' => ['size' => 35, 'color' => $type['color']],
-                            'position' => [240, 40],
-                        ],
-                        [
-                            'type' => 'image',
-                            'image' => $type['logoImage'],
-                            'position' => [100, 0],
-                        ],
-                    ];
+                        $watermark = [
+                            [
+                                'type' => 'image',
+                                'image' => $gradientImage,
+                                'position' => [0, 0],
+                            ],
+                            [
+                                'type' => 'text',
+                                'text' => $this->year->title,
+                                'style' => ['size' => 35, 'color' => $type['color']],
+                                'position' => [240, 40],
+                            ],
+                            [
+                                'type' => 'image',
+                                'image' => $type['logoImage'],
+                                'position' => [100, 0],
+                            ],
+                        ];
+                    } 
                     
                     if(isset($crop)) {
                         Yii::$app->image->updateImageAttribute($this, $crop['attribute'], $this->$fileAttribute, $crop, $watermark);

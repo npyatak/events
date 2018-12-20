@@ -165,7 +165,7 @@ use common\models\Event;
     <?=$this->render('_blocks_list', ['blockModelsArray' => $blockModelsArray]);?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['id' => 'submitEventForm', 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -201,13 +201,24 @@ $script = "
         if(cropper.hasOwnProperty(i) && typeof inputImage !== 'undefined') {
             $('#sizeRelated .crop-modal').modal();
         } else {
-            $('#sizeRelated').closest('.image-row').css({'border-color': '#f00'});
+            $('#sizeRelated').closest('.image-row').addClass('error');
         }
     });
 
     $('#sizeRelated .crop-modal').on('shown.bs.modal', function () {
-        $('#sizeRelated').css({'border-color': ''});
+        $('#sizeRelated').closest('.image-row').removeClass('error');
     });
+
+    $('#submitEventForm').click(function(e) {
+        if($('.image-row.error').length) {
+            alert('Необходимо загрузуть новую картинку под этот размер карточки');
+            $('html, body').animate({
+                scrollTop: $('#sizeRelated').offset().top - 70
+            }, 500);
+
+            return false;
+        }
+    })
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
