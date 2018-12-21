@@ -2370,10 +2370,110 @@ footer p a {
 }
 
 #tw-inject .justify-content-end,
+#tw-inject-1 .justify-content-end,
+#tw-inject-2 .justify-content-end,
+#tw-inject-3 .justify-content-end,
+#tw-inject-4 .justify-content-end,
+#tw-inject-5 .justify-content-end,
+#tw-inject-6 .justify-content-end,
+#tw-inject-7 .justify-content-end,
+#tw-inject-8 .justify-content-end,
+#tw-inject-9 .justify-content-end,
+#tw-inject-10 .justify-content-end,
+#tw-inject-11 .justify-content-end,
+#tw-inject-12 .justify-content-end,
+#tw-inject-13 .justify-content-end,
+#tw-inject-14 .justify-content-end,
+#tw-inject-15 .justify-content-end,
+#tw-inject-16 .justify-content-end,
+#tw-inject-17 .justify-content-end,
+#tw-inject-18 .justify-content-end,
+#tw-inject-19 .justify-content-end,
+#tw-inject-20 .justify-content-end,
 #in-inject .justify-content-end,
+#in-inject-1 .justify-content-end,
+#in-inject-2 .justify-content-end,
+#in-inject-3 .justify-content-end,
+#in-inject-4 .justify-content-end,
+#in-inject-5 .justify-content-end,
+#in-inject-6 .justify-content-end,
+#in-inject-7 .justify-content-end,
+#in-inject-8 .justify-content-end,
+#in-inject-9 .justify-content-end,
+#in-inject-10 .justify-content-end,
+#in-inject-11 .justify-content-end,
+#in-inject-12 .justify-content-end,
+#in-inject-13 .justify-content-end,
+#in-inject-14 .justify-content-end,
+#in-inject-15 .justify-content-end,
+#in-inject-16 .justify-content-end,
+#in-inject-17 .justify-content-end,
+#in-inject-18 .justify-content-end,
+#in-inject-19 .justify-content-end,
+#in-inject-20 .justify-content-end,
 #fb-inject .justify-content-end,
+#fb-inject-1 .justify-content-end,
+#fb-inject-2 .justify-content-end,
+#fb-inject-3 .justify-content-end,
+#fb-inject-4 .justify-content-end,
+#fb-inject-5 .justify-content-end,
+#fb-inject-6 .justify-content-end,
+#fb-inject-7 .justify-content-end,
+#fb-inject-8 .justify-content-end,
+#fb-inject-9 .justify-content-end,
+#fb-inject-10 .justify-content-end,
+#fb-inject-11 .justify-content-end,
+#fb-inject-12 .justify-content-end,
+#fb-inject-13 .justify-content-end,
+#fb-inject-14 .justify-content-end,
+#fb-inject-15 .justify-content-end,
+#fb-inject-16 .justify-content-end,
+#fb-inject-17 .justify-content-end,
+#fb-inject-18 .justify-content-end,
+#fb-inject-19 .justify-content-end,
+#fb-inject-20 .justify-content-end,
 #vk-inject .justify-content-end,
+#vk-inject-1 .justify-content-end,
+#vk-inject-2 .justify-content-end,
+#vk-inject-3 .justify-content-end,
+#vk-inject-4 .justify-content-end,
+#vk-inject-5 .justify-content-end,
+#vk-inject-6 .justify-content-end,
+#vk-inject-7 .justify-content-end,
+#vk-inject-8 .justify-content-end,
+#vk-inject-9 .justify-content-end,
+#vk-inject-10 .justify-content-end,
+#vk-inject-11 .justify-content-end,
+#vk-inject-12 .justify-content-end,
+#vk-inject-13 .justify-content-end,
+#vk-inject-14 .justify-content-end,
+#vk-inject-15 .justify-content-end,
+#vk-inject-16 .justify-content-end,
+#vk-inject-17 .justify-content-end,
+#vk-inject-18 .justify-content-end,
+#vk-inject-19 .justify-content-end,
+#vk-inject-20 .justify-content-end,
 #ok-inject .justify-content-end,
+#ok-inject-1 .justify-content-end,
+#ok-inject-2 .justify-content-end,
+#ok-inject-3 .justify-content-end,
+#ok-inject-4 .justify-content-end,
+#ok-inject-5 .justify-content-end,
+#ok-inject-6 .justify-content-end,
+#ok-inject-7 .justify-content-end,
+#ok-inject-8 .justify-content-end,
+#ok-inject-9 .justify-content-end,
+#ok-inject-10 .justify-content-end,
+#ok-inject-11 .justify-content-end,
+#ok-inject-12 .justify-content-end,
+#ok-inject-13 .justify-content-end,
+#ok-inject-14 .justify-content-end,
+#ok-inject-15 .justify-content-end,
+#ok-inject-16 .justify-content-end,
+#ok-inject-17 .justify-content-end,
+#ok-inject-18 .justify-content-end,
+#ok-inject-19 .justify-content-end,
+#ok-inject-20 .justify-content-end,
 #instagram-inject .justify-content-end,
 #facebook-inject .justify-content-end,
 #vkontakte-inject .justify-content-end,
@@ -3260,8 +3360,7 @@ footer p a {
         padding-left: 0;
     }
     .table-wrap {
-        padding-left: 70px;
-        padding-right: 40px;
+        padding: 20px 40px 0 70px;
     }
     .table-wrap .container_inner {
         width: 100%;
@@ -3276,6 +3375,12 @@ footer p a {
     .table-wrap table {
         width: auto !important;
         max-width: none !important;
+    }
+    table tbody tr:last-child {
+        border-bottom: none !important;
+    }
+    .table-wrap .ckeditor table tbody tr td:not(:last-child) {
+        min-width: 200px;
     }
 }
 @media (max-width: 767px) {
