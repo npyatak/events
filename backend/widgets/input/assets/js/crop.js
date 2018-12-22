@@ -151,3 +151,10 @@ $(document).on('change', ':file', function() {
     var label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
     $(this).parents('.input-group').find(':text').val(label)
 });
+
+$(document).on('click', '.delete-file', function(e) {
+    $(this).closest('.imageWrapper').find('.attribute-input-group input[type=\"hidden\"]').val('delete');
+    $(this).closest('.imageWrapper').find('.preview').attr('style', '').find('img').attr('src', '').attr('style', '');
+
+    return false;
+});

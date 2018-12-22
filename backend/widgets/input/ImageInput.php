@@ -3,7 +3,7 @@ namespace backend\widgets\input;
 
 use Yii;
 use yii\helpers\Html;
-use common\component\ImageHelper;
+use common\components\ImageHelper;
 
 use backend\models\forms\CropForm;
 
@@ -14,6 +14,7 @@ class ImageInput extends \yii\base\Widget
     public $previewAttribute;
 	public $cropForm = false;
 	public $cropParams = [];
+    public $deleteButton = false;
 
     public function init()
     {
@@ -59,6 +60,7 @@ class ImageInput extends \yii\base\Widget
                 'cropForm' => $this->cropForm, 
                 'header' => $header ? $header : $this->cropForm->header,
                 'originImage' => $this->getOrigin(),
+                'deleteButton' => $this->deleteButton,
             ]);
         } else {
             return $this->getView()->renderFile(__DIR__ . '/views/image.php', [
@@ -67,6 +69,7 @@ class ImageInput extends \yii\base\Widget
                 'previewAttribute' => $this->previewAttribute,
                 'header' => $header,
                 'originImage' => $this->getOrigin(),
+                'deleteButton' => $this->deleteButton,
             ]);
         }
 
@@ -76,18 +79,28 @@ class ImageInput extends \yii\base\Widget
     {
         return false;
         /*$path =  ImageHelper::PATH_ROOT;
-        $modelClass = (new \ReflectionClass($model))->getShortName()
+        $modelClass = (new \ReflectionClass($this->model))->getShortName();
+        $originFileName = false;
         
-        if($model->$previewAttribute) {
-            $exp = explode('.', $model->$previewAttribute);
-            $extension = $exp[1];
+        $previewAttribute = $this->previewAttribute;
+        if($this->model->$previewAttribute) {
+            $exp = explode('.', $this->model->$previewAttribute);
+            $extension = explode('?', $exp[1])[0];
+            
             if($modelClass == 'Event') {
-                $originFileName = $path.$this->model->id.'_origin_'.$cropForm->attribute.'.'.$extension;
-                if(file_exists($originFileName)) {
-                    return 
+                $fileName = '/uploads/'.$this->model->id.'_origin_'.$this->cropForm->attribute.'.'.$extension;
+                if(isset(Yii::$app->webdavFs) && Yii::$app->webdavFs->has('/events'.$fileName)) {
+                    echo 1;
+                    return $fileName;
+                } elseif(file_exists($path.$originFileName)) {
+                    echo 2;
+                    return $fileName;
+                } else {
+                    echo 3;
+                    return $this->model->origin_image;
                 }
+            } else {
 
-                $originFileName = $this->model->origin_image;
             }
         }*/
     }

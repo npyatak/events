@@ -272,12 +272,12 @@ ul.sortable li {
 }
 .controls {
     display: inline-block;
-    width: 35%;
+    width: 130px;
     vertical-align: top;
 }
 .attribute-input-group {
     display: inline-block;
-    width: calc(65% - 4px);
+    width: calc(100% - 145px);
     vertical-align: top;
 }
 .fileinput {

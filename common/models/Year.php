@@ -93,22 +93,28 @@ class Year extends \yii\db\ActiveRecord
             }
         }
 
-        $this->partnerImageIndexFile = UploadedFile::getInstance($this, "partnerImageIndexFile");
+        $deleteFile = $this->partnerImageIndexFile == 'delete' ? true : false;
+        $this->partnerImageIndexFile = UploadedFile::getInstance($this, 'partnerImageIndexFile');
         if($this->partnerImageIndexFile) {
             if(isset($this->cropImage['partnerImageIndexFile'])) {
                 Yii::$app->image->updateImageAttribute($this, 'partner_image_index', $this->partnerImageIndexFile, $this->cropImage['partnerImageIndexFile']);
             } else {
                 Yii::$app->image->updateImageAttribute($this, 'partner_image_index', $this->partnerImageIndexFile);
             }
+        } elseif($deleteFile) {
+            Yii::$app->image->deleteImageAttribute($this, 'partner_image_index');
         }
 
-        $this->partnerImageEventFile = UploadedFile::getInstance($this, "partnerImageEventFile");
+        $deleteFile = $this->partnerImageEventFile == 'delete' ? true : false;
+        $this->partnerImageEventFile = UploadedFile::getInstance($this, 'partnerImageEventFile');
         if($this->partnerImageEventFile) {
             if(isset($this->cropImage['partnerImageEventFile'])) {
                 Yii::$app->image->updateImageAttribute($this, 'partner_image_event', $this->partnerImageEventFile, $this->cropImage['partnerImageEventFile']);
             } else {
                 Yii::$app->image->updateImageAttribute($this, 'partner_image_event', $this->partnerImageEventFile);
             }
+        } elseif($deleteFile) {
+            Yii::$app->image->deleteImageAttribute($this, 'partner_image_event');
         }
 
         return parent::afterSave($insert, $changedAttributes);

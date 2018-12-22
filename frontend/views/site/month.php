@@ -5,13 +5,20 @@ use common\helpers\StringHelper;
 
 use common\models\Event;
 
-$image = $share->image_fb ? $share->image_fb : $share->image;
+$this->params['share'] = [
+	'url' => Url::toRoute(['site/month', 'id' => $month, 'year' => Yii::$app->controller->yearModel->number], true),
+	'text' => $share->text,
+	'title' => $share->title,
+	'image' => $share->image,
+	'twitter' => $share->twitter,
+	'image_fb' => $share->image_fb,
+	'image_tw' => $share->image_tw,
+];
 
-$this->registerMetaTag(['property' => 'og:description', 'content' => $share->text], 'og:description');
-$this->registerMetaTag(['property' => 'og:title', 'content' => $share->title], 'og:title');
-$this->registerMetaTag(['property' => 'og:image', 'content' => Url::to(Yii::$app->image->getImageUrl($image), true)], 'og:image');
-$this->registerMetaTag(['property' => 'og:url', 'content' => Url::toRoute(['site/month', 'year' => Yii::$app->controller->yearModel->number], true)], 'og:url');
-$this->registerMetaTag(['property' => 'og:type', 'content' => 'website'], 'og:type');
+echo \frontend\widgets\share\ShareWidget::widget([
+    'share' => $this->params['share'],
+    'showButtons' => false,
+]);
 ?>
 
 <div class="month-items">

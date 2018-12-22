@@ -35,6 +35,9 @@ if($attrString == '') {
     <div class="controls">
         <a class="showCrop btn btn-default" title="Изменить"><span class="glyphicon glyphicon-pencil"></span></a>
         <a class="showResult btn btn-default" title="Результат"><span class="glyphicon glyphicon-eye-open"></span></a>
+        <?php if($deleteButton):?>
+            <a class="delete-file btn btn-default" title="Удалить"><span class="glyphicon glyphicon-trash"></span></a>
+        <?php endif;?>
     </div>
 
     <?php if($attribute):?>

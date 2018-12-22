@@ -104,6 +104,23 @@ class ImageHelper {
         return $wmList;
     }
 
+    public static function deleteImageAttribute($model, $attribute) 
+    {
+        if(isset(Yii::$app->webdavFs)) {                    
+            Yii::$app->webdavFs->delete('events/'.$model->$attribute);
+        } else {
+            if(file_exists(self::PATH_ROOT.$model->$attribute)) {
+                unlink(self::PATH_ROOT.$model->$attribute);
+            }
+        }
+        
+        $model->$attribute = null;
+        
+        Yii::$app->db->createCommand()
+            ->update($model->tableSchema->name, [$attribute => $model->$attribute], 'id = "'.$model->id.'"')
+            ->execute();
+    }
+
     public static function deleteFile($fileName)
     {        
         if(file_exists(self::PATH_ROOT.$fileName)) {

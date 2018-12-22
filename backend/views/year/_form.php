@@ -101,7 +101,8 @@ use backend\widgets\input\ImageInput;
                 'model' => $model, 
                 'attribute' => 'partnerImageIndexFile', 
                 'previewAttribute' => 'partner_image_index',
-                'cropParams' => $model->partnerImageIndexCropParams, 
+                'cropParams' => $model->partnerImageIndexCropParams,
+                'deleteButton' => true,
             ]);?>
         </div>
         <div class="col-sm-3">
@@ -109,7 +110,8 @@ use backend\widgets\input\ImageInput;
                 'model' => $model, 
                 'attribute' => 'partnerImageEventFile', 
                 'previewAttribute' => 'partner_image_event',
-                'cropParams' => $model->partnerImageEventCropParams, 
+                'cropParams' => $model->partnerImageEventCropParams,
+                'deleteButton' => true,
             ]);?>
         </div>
         <div class="col-sm-6">
