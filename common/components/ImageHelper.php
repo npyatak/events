@@ -106,11 +106,12 @@ class ImageHelper {
 
     public static function deleteImageAttribute($model, $attribute) 
     {
+        $fileName = explode('?', $model->$attribute)[0];
         if(isset(Yii::$app->webdavFs)) {                    
-            Yii::$app->webdavFs->delete('events/'.$model->$attribute);
+            Yii::$app->webdavFs->delete('events/'.$fileName);
         } else {
-            if(file_exists(self::PATH_ROOT.$model->$attribute)) {
-                unlink(self::PATH_ROOT.$model->$attribute);
+            if(file_exists(self::PATH_ROOT.$fileName)) {
+                unlink(self::PATH_ROOT.$fileName);
             }
         }
         
