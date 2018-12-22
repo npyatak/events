@@ -3859,7 +3859,16 @@ footer p a {
     .month-title .share-inline {
         display: none !important;
     }
-    .block_code_inner iframe {
+    #youtube-1 .block_code_inner iframe,
+    #youtube-2 .block_code_inner iframe,
+    #youtube-3 .block_code_inner iframe,
+    #youtube-4 .block_code_inner iframe,
+    #youtube-5 .block_code_inner iframe,
+    #youtube-6 .block_code_inner iframe,
+    #youtube-7 .block_code_inner iframe,
+    #youtube-8 .block_code_inner iframe,
+    #youtube-9 .block_code_inner iframe,
+    #youtube-10 .block_code_inner iframe {
         height: 300px !important;
     }
 /*    .news-partners-el {
@@ -3930,7 +3939,16 @@ footer p a {
         width: calc(100% + 30px);
         margin: 0 -15px;
     }*/
-    .block_code_inner iframe {
+    #youtube-1 .block_code_inner iframe,
+    #youtube-2 .block_code_inner iframe,
+    #youtube-3 .block_code_inner iframe,
+    #youtube-4 .block_code_inner iframe,
+    #youtube-5 .block_code_inner iframe,
+    #youtube-6 .block_code_inner iframe,
+    #youtube-7 .block_code_inner iframe,
+    #youtube-8 .block_code_inner iframe,
+    #youtube-9 .block_code_inner iframe,
+    #youtube-10 .block_code_inner iframe {
         height: 250px !important;
     }
     .lid {
