@@ -22,6 +22,7 @@ class ShareWidget extends \yii\base\Widget
 	    $share = $this->share;
 	    $share['image_fb'] = (isset($share['image_fb']) && $share['image_fb']) ? Url::to(Yii::$app->image->getImageUrl($share['image_fb']), true) : Url::to(Yii::$app->image->getImageUrl($share['image']), true);
 	    $share['image_tw'] = (isset($share['image_tw']) && $share['image_tw']) ? Url::to(Yii::$app->image->getImageUrl($share['image_tw']), true) : Url::to(Yii::$app->image->getImageUrl($share['image']), true);
+	    $share['text'] = $share['text'] == '' ? '&nbsp;' : $share['text'];
         
         $view = $this->getView();
         
