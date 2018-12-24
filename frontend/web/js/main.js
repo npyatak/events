@@ -167,22 +167,12 @@ $(document).ready(function () {
             monthId = 1
         }else if(sURLVariables == 0 && year == 2018){
             var prev = monthId -1;
-            $('body').css({'overflow':'hidden'});
-            $('#month_'+prev+'.month-items').prevAll().css({'display':'none'});
+            $('html, body').animate({'scrollTop':$('#month_'+prev+'.month-items').offset().top - 350},0);
             scrollToMonth('#month_'+monthId);
-            setTimeout(function () {
-                $('#month_'+prev+'.month-items').prevAll().css({'display':'block'});
-                $('body').css({'overflow':'visible'});
-            },2000);
         }else {
             var prev = monthId -1;
-            $('body').css({'overflow':'hidden'});
-            $('#month_'+prev+'.month-items').prevAll().css({'display':'none'});
+            $('html, body').animate({'scrollTop':$('#month_'+prev+'.month-items').offset().top - 350},0);
             scrollToMonth('#month_'+monthId);
-            setTimeout(function () {
-                $('#month_'+prev+'.month-items').prevAll().css({'display':'block'});
-                $('body').css({'overflow':'visible'});
-            },2000);
         }
         setTimeout(function () {
             $('.navigation').find('li.active').removeClass('active');
@@ -195,6 +185,7 @@ $(document).ready(function () {
                 var win_scr_top = $(window).scrollTop();
                 if(win_scr_top <= 30){
                     $('header, .general_content, .main-menu').removeClass('transform');
+                    $('.main-share_btn.rotate').click();
                 }else if(win_scr_top >= 0){
                     $('header, .general_content, .main-menu').addClass('transform');
                 }
