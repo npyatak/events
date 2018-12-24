@@ -34,8 +34,8 @@ class ImageHelper {
             mkdir(self::PATH_ROOT.self::PATH, 0775, true);
         }
     
-        $fileName = self::PATH.$model->imageNamePrefix.'_'.$model->tableSchema->name.'_'.$attribute.'_'.$model->id.'.'.$imageFile->extension;
-        $model->$attribute = $fileName.'?v='.date('d_m_Y_H:i:s', time());
+        $fileName = self::PATH.$model->imageNamePrefix.'_'.$model->tableSchema->name.'_'.$attribute.'_'.$model->id.'_'.date('d_m_Y_H:i:s', time()).'.'.$imageFile->extension;
+        $model->$attribute = $fileName;
         $imageFile->saveAs(self::PATH_ROOT.$fileName);
 
         if($imageFile->type !== 'image/svg+xml') {

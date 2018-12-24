@@ -128,7 +128,7 @@ AppAsset::register($this);
                                 <?=Yii::$app->controller->yearModel->additional;?>
                             </div>
                         <?php endif;?>
-                        <?php if(Yii::$app->controller->yearModel->partner_text):?>
+                        <?php if(Yii::$app->controller->yearModel->partner_text && isset($this->params['is_mobile']) && $this->params['is_mobile']):?>
                             <div class="block">
                                 <p>
                                     <?=Yii::$app->controller->yearModel->partner_url ? 

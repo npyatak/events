@@ -303,8 +303,8 @@ class EventController extends CController
 
         if($cropForm->imageFile) {
             $attribute = $cropForm->attribute;
-            $fileName = $path.$event->id.'_'.$attribute.'_'.$cropForm->imageWidth.'x'.$cropForm->imageHeight.'.'.$cropForm->imageFile->extension;
-            $event->$attribute = $fileName.'?v='.date('d_m_Y_H:i:s', time());
+            $fileName = $path.$event->id.'_'.$attribute.'_'.$cropForm->imageWidth.'x'.$cropForm->imageHeight.'_'.date('d_m_Y_H:i:s', time()).'.'.$cropForm->imageFile->extension;
+            $event->$attribute = $fileName;
             $event->save(false, [$attribute]);
 
             copy($root.$originFileName, $root.$fileName);
