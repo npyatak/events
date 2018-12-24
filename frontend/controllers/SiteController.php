@@ -99,7 +99,7 @@ class SiteController extends Controller
 
         return $this->render('month', [
             'events' => $events,
-            'share' => Share::find()->where(['month' => $month])->one(),
+            'share' => Share::find()->where(['month' => $month, 'year_id' => $this->yearModel->id])->one(),
             'category' => $category,
             'month' => $month,
         ]);
