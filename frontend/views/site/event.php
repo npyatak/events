@@ -12,7 +12,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $event->meta_descr
 $this->params['share'] = [
     'url' => Url::current([], true),
     'text' => $event->socials_text, 
-    'title' => $event->title, 
+    'title' => $event->socials_title ? $event->socials_title : $event->title, 
     'image' => $event->socials_image_url, 
     'twitter' => $event->twitter_text, 
     'image_fb' => $event->socials_image_url_fb,
