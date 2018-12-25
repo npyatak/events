@@ -8,6 +8,7 @@
         <a href="" class="big-image_btn"></a>
         <?php endif;?>
     </div>
+    <?php if($block->text):?>
     <div class="title-wrap">
         <div class="container_inner">
             <div class="row justify-content-end m-0">
@@ -15,4 +16,5 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
 </div>
