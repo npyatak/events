@@ -60,7 +60,7 @@ $(document).ready(function () {
     var table = $('.event-content').find('table');
     if(table){
         $(table).wrapAll('<div class="table-wrap"><div class="container_inner"><div class="ckeditor"></div></div></div>');
-        $('.table-wrap').append('<div class="table-btn"></div>');
+        $('.table-wrap').append('<div class="table-btn right"></div><div class="table-btn left"></div>');
     }
 
     $(window).resize(function () {
@@ -68,38 +68,64 @@ $(document).ready(function () {
         $('#info').css({top:owl_img_height});
 
         if($(this).width() > 768){
-            $('.table-wrap').find('.table-btn').css({'display':'none'})
+            $('.table-wrap').find('.table-btn.right').css({'display':'none'})
         }else{
-            $('.table-wrap').find('.table-btn').css({'display':'block'})
+            $('.table-wrap').find('.table-btn.right').css({'display':'block'})
         }
     });
     $(window).trigger('resize');
 
-    var count = 0,
-        u = 100;
-    $(document).on('click', '.table-btn', function () {
-       var el = $(this),
-           table = $(this).parent().find('.ckeditor'),
-           pos = table.find('table').width() - $(window).width();
-       count++;
-       $(table).animate({scrollLeft: count * u}, 200);
-       if(pos < table.scrollLeft()){
-           $(this).css({"display":'none'});
-       }else{
-           $(this).css({"display":'block'});
-       }
-    });
+    var u = 100;
+    window.count = 0;
+    $(document)
+        .on('click', '.table-btn.right', function () {
+            var el = $(this),
+               table = $(this).parent().find('.ckeditor'),
+               pos = table.find('table').width() - $(window).width();
+            window.count++;
+            console.log(window.count)
+            console.log(u)
+            $(table).animate({scrollLeft: window.count * u}, 200);
+            if(pos < table.scrollLeft()){
+               $(this).css({"display":'none'});
+            }else{
+               $(this).css({"display":'block'});
+            }
+        })
+        .on('click', '.table-btn.left', function () {
+            var el = $(this),
+                table = $(this).parent().find('.ckeditor'),
+                pos = table.find('table').width() - $(window).width();
+            window.count--;
+            console.log(window.count)
+            console.log(u)
+            $(table).animate({scrollLeft: window.count * u}, 200);
+            if(pos > table.scrollLeft()){
+                $(this).css({"display":'none'});
+            }else{
+                $(this).css({"display":'block'});
+            }
+        });
 
     $('.table-wrap .ckeditor').on('scroll', function () {
        var pos = $(this).find('table').offset().left,
            elWidth = $(this).find('table').width() - $(window).width(),
-           btn = $(this).parents().find('.table-btn');
-        if(elWidth < Math.abs(pos) + 50){
-            btn.addClass('none');
-            console.log('no')
+           btn_left = $(this).parents().find('.table-btn.left'),
+           btn_right = $(this).parents().find('.table-btn.right');
+        if (elWidth < Math.abs(pos) + 40) {
+            btn_right.addClass('none');
+        }else {
+            btn_right.removeClass('none');
+        }
+        if(Math.abs(pos) > 60) {
+            btn_left.css({'display':'block'});
+            btn_left.removeClass('none');
         }else{
-            btn.removeClass('none');
-            console.log('yes')
+            btn_left.addClass('none');
+        }
+        if(Math.abs(pos) === 35) {
+            window.count = 0;
+            console.log(window.count)
         }
     });
 
