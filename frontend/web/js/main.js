@@ -159,13 +159,11 @@ $(document).ready(function () {
             year = sPageURLPathname.substr(1);
 
         var currentYear = new Date().getFullYear();
-        if(currentYear == 2018){
-            // currentYear =
-        }
-        if(sURLVariables == 0 && year != 2018){
+        
+        if(sURLVariables == 0 && year != currentYear){
             scrollToMonth('#month_1');
             monthId = 1
-        }else if(sURLVariables == 0 && year == 2018){
+        }else if(sURLVariables == 0 && year == currentYear){
             var prev = monthId -1;
             $('html, body').animate({'scrollTop':$('#month_'+prev+'.month-items').offset().top - 350},0);
             scrollToMonth('#month_'+monthId);
@@ -238,7 +236,6 @@ $(document).ready(function () {
 
     function scrollToMonth(target, hasClass) {
         if($(window).width() >= 768) {
-            console.log(monthId)
             if(typeof hasClass == 'undefined'){
                 $(window).on('load',function () {
                     $('html, body').animate({scrollTop:($(target).offset().top - 360)},500);
@@ -251,7 +248,6 @@ $(document).ready(function () {
                 }
             }
         }else{
-            console.log(monthId)
             if(monthId === 1){
                 $(window).on('load',function () {
                     $('html, body').animate({scrollTop:($(target).offset().top - 200)},500);
@@ -279,8 +275,6 @@ $(document).ready(function () {
         var scrollSpy_el = $('aside');
         var a = window.pageYOffset + scrollSpy_el.height() + 200;
         var scrollSpy_wrap = $('.scrollSpy_wrap');
-        console.log(a)
-        console.log(footer_top)
         if(a >= footer_top){
             $(scrollSpy_wrap).find(scrollSpy_el).addClass('no-fixed');
         }else{

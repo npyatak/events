@@ -43,7 +43,7 @@ class SiteController extends Controller
             $month = $dateNow->format('n');
         }
 
-        $yearModel = $year ? $this->findYear($year) : $this->findYear();
+        $yearModel = $this->findYear($year);
         if($yearModel === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
