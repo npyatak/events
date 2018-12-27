@@ -179,21 +179,12 @@ $(document).ready(function () {
     });
 
     if(monthId) {
-        var sPageURL = window.location.search.substring(1),
-            sPageURLPathname = window.location.pathname,
-            sURLVariables = sPageURL.split('&'),
-            year = window.year;
-
         var currentYear = new Date().getFullYear();
 
-        if(sURLVariables == 0 && year != currentYear){
+        if(window.year != currentYear) {
             scrollToMonth('#month_1');
             monthId = 1
-        }else if(sURLVariables == 0 && year == currentYear){
-            var prev = monthId -1;
-            $('html, body').animate({'scrollTop':$('#month_'+prev+'.month-items').offset().top - 350},0);
-            scrollToMonth('#month_'+monthId);
-        }else {
+        } else {
             var prev = monthId -1;
             $('html, body').animate({'scrollTop':$('#month_'+prev+'.month-items').offset().top - 350},0);
             scrollToMonth('#month_'+monthId);
