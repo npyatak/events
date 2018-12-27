@@ -17,14 +17,14 @@ class AppAsset extends AssetBundle
         'css/owl.carousel.min.css',
         'css/owl.theme.default.min.css',
         'css/core.css?v=11122018',
-        'css/main.css?v=24122018_2',
+        'css/main.css?v=26122018',
     ];
     public $js = [
         'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js',
         'js/bootstrap.min.js',
         'js/masonry.pkgd.min.js',
         'js/owl.carousel.min.js',
-        'js/main.js?v=24122018_2',
+        'js/main.js?v=26122018',
         'js/jquery.lazyload.min.js',
     ];
     public $depends = [
