@@ -156,10 +156,10 @@ $(document).ready(function () {
         var sPageURL = window.location.search.substring(1),
             sPageURLPathname = window.location.pathname,
             sURLVariables = sPageURL.split('&'),
-            year = sPageURLPathname.substr(1);
+            year = window.year;
 
         var currentYear = new Date().getFullYear();
-        
+
         if(sURLVariables == 0 && year != currentYear){
             scrollToMonth('#month_1');
             monthId = 1

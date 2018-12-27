@@ -95,6 +95,7 @@ $this->params['is_mobile'] = preg_match('/(android|bb\d+|meego).+mobile|avantgo|
 
 <?php $script = "
 	window.monthId = ".$month.";
+	window.year = ".$Yii::$app->controller->yearModel->number.";
 ";
 
 $this->registerJs($script, yii\web\View::POS_END);?>
