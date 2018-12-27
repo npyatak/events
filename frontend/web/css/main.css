@@ -967,6 +967,9 @@
 .table-wrap .container_inner {
     width: 100%;
 }
+.table-wrap .ckeditor table {
+    height: auto !important;
+}
 .table-wrap .ckeditor table tbody tr:first-child {
     border-bottom: 4px solid #221faa !important;
 }
@@ -994,8 +997,10 @@
     vertical-align: top;
 }
 .table-wrap .ckeditor table tbody tr td {
-    min-width: 105px;
     line-height: 16px;
+}
+.table-wrap .ckeditor table tbody tr td:not(:first-child) {
+    min-width: 105px;
 }
 .table-wrap .ckeditor p {
     margin-bottom: 0 !important;
@@ -3405,9 +3410,6 @@ footer p a {
     }
     table tbody tr:last-child {
         border-bottom: none !important;
-    }
-    .table-wrap .ckeditor table tbody tr td:not(:last-child) {
-        min-width: 200px;
     }
 }
 @media (max-width: 767px) {
