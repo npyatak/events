@@ -157,7 +157,8 @@ use common\models\Event;
         <?= $form->field($model, 'copyright')->widget(CKEditor::className(), [
             'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
                 'allowedContent' => true,
-                'preset' => 'textEditor'
+                'preset' => 'textEditor',
+                'removeButtons' => 'Table',
             ])
         ]);?>
     </div>
