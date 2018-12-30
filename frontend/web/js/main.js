@@ -67,20 +67,14 @@ $(document).ready(function () {
         var owl_img_height = $('.owl-carousel .owl-item:first-child').find('.image').height();
         $('#info').css({top:owl_img_height});
 
-        if($(this).width() > 768){
+        if($(this).width() > 768) {
             $('.table-wrap').find('.table-btn.right').css({'display':'none'});
             $('.table-wrap').find('table').css({'min-width':'inherit'});
-        }else{
+        } else {
             $('.table-wrap').find('.table-btn.right').css({'display':'block'});
-            var tables = $('.table-wrap').find('table');
+            var tables = $('.table-wrap table');
             $.each(tables, function () {
-                var wth = $(this).attr('style').split(';');
-                for(var i=0; i<wth.length; i++){
-                    var r = wth[i].split(':');
-                    if(r[0] === 'width' || r[0] === ' width'){
-                        $(this).css({'min-width':wth[i].split(':')[1]})
-                    }
-                }
+                $(this).css({'min-width': $(this).css('width')});
             })
         }
     });
