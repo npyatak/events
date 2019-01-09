@@ -24,7 +24,7 @@ class AppAsset extends AssetBundle
         'js/bootstrap.min.js',
         'js/masonry.pkgd.min.js',
         'js/owl.carousel.min.js',
-        'js/main.js?v=30122018_2',
+        'js/main.js?v=09.01.2019',
         'js/jquery.lazyload.min.js',
     ];
     public $depends = [

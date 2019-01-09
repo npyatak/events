@@ -175,10 +175,12 @@ $(document).ready(function () {
         var currentYear = new Date().getFullYear();
 
         if(window.year != currentYear) {
-            scrollToMonth('#month_1');
-            monthId = 1
+            scrollToMonth('#month_'+monthId);
         } else {
-            var prev = monthId -1;
+            var prev = 1;
+            if(monthId != 1){
+                prev = monthId -1;
+            }
             $('html, body').animate({'scrollTop':$('#month_'+prev+'.month-items').offset().top - 350},0);
             scrollToMonth('#month_'+monthId);
         }
