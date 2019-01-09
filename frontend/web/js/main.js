@@ -179,7 +179,7 @@ $(document).ready(function () {
         } else {
             var prev = 1;
             if(monthId != 1){
-                prev = monthId -1;
+                prev = monthId - 1;
             }
             $('html, body').animate({'scrollTop':$('#month_'+prev+'.month-items').offset().top - 350},0);
             scrollToMonth('#month_'+monthId);
