@@ -59,73 +59,64 @@ $(document).ready(function () {
 
     var table = $('.event-content').find('table');
     if(table){
-        $(table).wrapAll('<div class="table-wrap"><div class="container_inner"><div class="ckeditor"></div></div></div>');
-        $('.table-wrap').append('<div class="table-btn right"></div><div class="table-btn left"></div>');
+        $.each(table, function () {
+            $(this).wrapAll('<div class="table-wrap"><div class="container_inner"><div class="ckeditor" data-count="1"></div></div></div>');
+            $(this).closest('.table-wrap').append('<div class="table-btn right"></div><div class="table-btn left"></div>');
+        })
     }
 
     $(window).resize(function () {
         var owl_img_height = $('.owl-carousel .owl-item:first-child').find('.image').height();
         $('#info').css({top:owl_img_height});
 
-        if($(this).width() > 768) {
-            $('.table-wrap').find('.table-btn.right').css({'display':'none'});
-            $('.table-wrap').find('table').css({'min-width':'inherit'});
-        } else {
-            $('.table-wrap').find('.table-btn.right').css({'display':'block'});
-            var tables = $('.table-wrap table');
-            $.each(tables, function () {
-                $(this).css({'min-width': $(this).css('width')});
-            })
-        }
+        $.each(table, function () {
+           var w = $(this).width();
+            if($(window).width() > w + 35) {
+                $(this).closest('.table-wrap').find('.table-btn.right').css({'display':'none'});
+                $(this).closest('.table-wrap').find('table').css({'min-width':'inherit'});
+            } else {
+                $(this).closest('.table-wrap').find('.table-btn.right').css({'display':'block'});
+            }
+        });
     });
     $(window).trigger('resize');
 
-    var u = 100;
-    window.count = 0;
     $(document)
         .on('click', '.table-btn.right', function () {
-            var el = $(this),
-               table = $(this).parent().find('.ckeditor'),
-               pos = table.find('table').width() - $(window).width();
-            window.count++;
-            $(table).animate({scrollLeft: window.count * u}, 200);
-            if(pos < table.scrollLeft()){
-               $(this).css({"display":'none'});
-            }else{
-               $(this).css({"display":'block'});
-            }
+            var table = $(this).parent().find('.ckeditor');
+            var u = 120;
+            var count = table.attr('data-count');
+            count++;
+            $(table).animate({scrollLeft: count * u}, 200);
+            table.attr({'data-count':count});
         })
         .on('click', '.table-btn.left', function () {
-            var el = $(this),
-                table = $(this).parent().find('.ckeditor'),
-                pos = table.find('table').width() - $(window).width();
-            window.count--;
-            $(table).animate({scrollLeft: window.count * u}, 200);
-            if(pos > table.scrollLeft()){
-                $(this).css({"display":'none'});
-            }else{
-                $(this).css({"display":'block'});
-            }
+            var table = $(this).parent().find('.ckeditor');
+            var u = 120;
+            var count = table.attr('data-count');
+            count--;
+            $(table).animate({scrollLeft: count * u}, 200);
+            table.attr({'data-count':count});
         });
 
     $('.table-wrap .ckeditor').on('scroll', function () {
        var pos = $(this).find('table').offset().left,
            elWidth = $(this).find('table').width() - $(window).width(),
-           btn_left = $(this).parents().find('.table-btn.left'),
-           btn_right = $(this).parents().find('.table-btn.right');
-        if (elWidth < Math.abs(pos) + 40) {
-            btn_right.addClass('none');
-        }else {
-            btn_right.removeClass('none');
-        }
-        if(Math.abs(pos) > 60) {
-            btn_left.css({'display':'block'});
-            btn_left.removeClass('none');
+           btn_left = $(this).closest('.table-wrap').find('.table-btn.left'),
+           btn_right = $(this).closest('.table-wrap').find('.table-btn.right');
+
+        if (elWidth < Math.abs(pos) + 5) {
+            btn_right.css({'display':'none'});
         }else{
-            btn_left.addClass('none');
+            btn_right.css({'display':'block'});
         }
+        if(Math.abs(pos) > 10) {
+            btn_left.css({'display':'block'});
+        }
+
         if(Math.abs(pos) === 35) {
-            window.count = 0;
+            $(this).attr({'data-count':'0'});
+            btn_left.css({'display':'none'});
         }
     });
 

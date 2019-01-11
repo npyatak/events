@@ -198,8 +198,17 @@ hr.blue {
     width: 100%;
 }
 table {
-    width: 100% !important;
     border: none !important;
+}
+@media (min-width: 768px) {
+    table {
+        width: 100% !important;
+    }
+}
+@media (max-width: 767px) {
+    table {
+        width: 670px;
+    }
 }
 table thead tr {
     border-bottom: 3px solid #221FAA !important;

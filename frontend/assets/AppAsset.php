@@ -16,15 +16,15 @@ class AppAsset extends AssetBundle
         'css/bootstrap.min.css',
         'css/owl.carousel.min.css',
         'css/owl.theme.default.min.css',
-        'css/core.css?v=11122018',
-        'css/main.css?v=27122018_2',
+        'css/core.css?v=10.01.2019',
+        'css/main.css?v=10.01.2019',
     ];
     public $js = [
         'js/popper.min.js',
         'js/bootstrap.min.js',
         'js/masonry.pkgd.min.js',
         'js/owl.carousel.min.js',
-        'js/main.js?v=09.01.2019',
+        'js/main.js?v=10.01.2019',
         'js/jquery.lazyload.min.js',
     ];
     public $depends = [
