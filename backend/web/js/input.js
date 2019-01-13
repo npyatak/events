@@ -10,3 +10,16 @@ $('input[type=text], textarea').bind('input propertychange', function() {
 		}
 	}
 });
+
+$(document).ready(function () {
+	CKEDITOR.on( 'dialogDefinition', function(ev) {
+		var dialogName = ev.data.name;
+	    var dialogDefinition = ev.data.definition;
+
+		if (dialogName == 'table'){
+			var infoTab = dialogDefinition.getContents('info');
+			txtWidth = infoTab.get('txtWidth');
+			txtWidth['default'] = 670;
+	    }
+	});
+});
