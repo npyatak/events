@@ -154,7 +154,8 @@ $(document).ready(function () {
 // SCRIPT ON GENERAL
 
 $(document).ready(function () {
-    var monthId = window.monthId;
+    var monthId = window.monthId,
+        search = window.location.search;
 
     $('.scroll-month').click(function (e) {
         e.preventDefault();
@@ -165,22 +166,30 @@ $(document).ready(function () {
     if(monthId) {
         var currentYear = new Date().getFullYear();
 
-        if(window.year != currentYear) {
+        if(window.year !== currentYear && !search) {
+            scrollToMonth('#month_1');
+            setTimeout(function () {
+                $('.navigation').find('li.active').removeClass('active');
+                $('.navigation').find('.month_1').parent().addClass('active');
+                $('#events').find('month_items.active').removeClass('active');
+                $('#events').find('#month_1').addClass('active');
+            },50);
+        }
+        if(window.year === currentYear || search){
             scrollToMonth('#month_'+monthId);
-        } else {
             var prev = 1;
-            if(monthId != 1){
+            if(monthId !== 1){
                 prev = monthId - 1;
             }
             $('html, body').animate({'scrollTop':$('#month_'+prev+'.month-items').offset().top - 350},0);
             scrollToMonth('#month_'+monthId);
+            setTimeout(function () {
+                $('.navigation').find('li.active').removeClass('active');
+                $('.navigation').find('.month_'+monthId).parent().addClass('active');
+                $('#events').find('month_items.active').removeClass('active');
+                $('#events').find('#month_'+monthId).addClass('active');
+            },50);
         }
-        setTimeout(function () {
-            $('.navigation').find('li.active').removeClass('active');
-            $('.navigation').find('.month_'+monthId).parent().addClass('active');
-            $('#events').find('month_items.active').removeClass('active');
-            $('#events').find('#month_'+monthId).addClass('active');
-        },50);
         setTimeout(function () {
             $(window).on('scroll', function () {
                 var win_scr_top = $(window).scrollTop();
